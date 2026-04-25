@@ -607,12 +607,12 @@ async function loadTestimonials() {
     
     grid.innerHTML = data.map(t => `
       <div class="tm-card">
-        <div class="tm-quote">"${esc(t.content)}"</div>
+        <div class="tm-quote">"${esc(t.quote)}"</div>
         <div class="tm-meta">
           <div class="tm-avatar">${(t.name || 'D').charAt(0).toUpperCase()}</div>
           <div class="tm-info">
             <div class="tm-name">${esc(t.name || 'Anonymous Doctor')}</div>
-            <div class="tm-specialty">${esc(t.specialty || 'Surgical Resident')}</div>
+            <div class="tm-specialty">${esc(t.role || t.specialty || 'Surgical Resident')}</div>
           </div>
         </div>
       </div>
