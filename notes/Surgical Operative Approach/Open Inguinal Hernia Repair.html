@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surgical Insight Hub — Open Inguinal Hernia 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:   #1A3050; /* Shifted primary to deep surgical blue for a distinct monograph */
+  --primary-dk:#0D1B2A;
+  --primary-lt:#E6EEF8;
+  --accent:    #3D5A80;
+  --accent2:   #98C1D9;
+  --gold:      #C9910A;
+  --gold-lt:   #FFF8E8;
+  --s1:        #1B4332;
+  --s2:        #2D6A4F;
+  --s3:        #40916C;
+  --s4:        #52B788;
+  --s5:        #1A3050;
+  --s1-lt:     #E6F2EE;
+  --s2-lt:     #ECF5F0;
+  --s3-lt:     #F0F8F4;
+  --s4-lt:     #F4FAF7;
+  --s5-lt:     #E6EEF8;
+  --red:       #8B1A1A;
+  --red-lt:    #FFF0F0;
+  --amber:     #7B4F00;
+  --amber-lt:  #FFF8E8;
+  --blue:      #1A3050;
+  --blue-lt:   #E6EEF8;
+  --bg:        #F8F9FA;
+  --bg2:       #EDF2F4;
+  --border:    #D3DCE6;
+  --text:      #121619;
+  --muted:     #4A5568;
+  --white:     #FFFFFF;
+  --sidebar-w: 300px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;}
+
+/* SIDEBAR */
+#sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;background:var(--primary-dk);color:#E0E1DD;display:flex;flex-direction:column;z-index:100;overflow:hidden;}
+#sidebar-header{padding:20px 20px 14px;border-bottom:1px solid rgba(255,255,255,0.1);flex-shrink:0;}
+#sidebar-header .logo{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--accent2);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+#sidebar-header .sub{font-size:10.5px;color:rgba(224,225,221,0.6);letter-spacing:0.04em;}
+#sidebar-search{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;}
+#sidebar-search input{width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#E0E1DD;padding:6px 10px;font-size:12px;font-family:'Source Serif 4',serif;outline:none;transition:border-color 0.2s;}
+#sidebar-search input::placeholder{color:rgba(224,225,221,0.4);}
+#sidebar-search input:focus{border-color:var(--accent2);}
+#sidebar-nav{flex:1;overflow-y:auto;padding:8px 0 20px;}
+#sidebar-nav::-webkit-scrollbar{width:4px;}
+#sidebar-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:2px;}
+.vol-label{font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent2);padding:14px 18px 4px;}
+.nav-item{display:block;padding:6px 18px 6px 22px;font-size:12px;color:rgba(224,225,221,0.75);text-decoration:none;border-left:2px solid transparent;transition:all 0.15s;line-height:1.4;}
+.nav-item:hover{color:#fff;background:rgba(255,255,255,0.05);border-left-color:rgba(152,193,217,0.5);}
+.nav-item.active{color:#fff;background:rgba(255,255,255,0.08);border-left-color:var(--accent2);font-weight:600;}
+.nav-item .num{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(224,225,221,0.4);margin-right:6px;}
+
+/* MAIN */
+#main{margin-left:var(--sidebar-w);min-height:100vh;}
+
+/* HERO */
+#hero{background:linear-gradient(135deg,var(--primary-dk) 0%,#1D2D44 60%,#0D1B2A 100%);color:white;padding:72px 72px 60px;position:relative;overflow:hidden;}
+#hero::before{content:'';position:absolute;top:-60px;right:-60px;width:380px;height:380px;background:radial-gradient(circle,rgba(152,193,217,0.18) 0%,transparent 70%);pointer-events:none;}
+#hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2),transparent);}
+#hero .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:var(--accent2);text-transform:uppercase;margin-bottom:14px;}
+#hero h1{font-family:'Playfair Display',serif;font-size:46px;font-weight:700;line-height:1.15;margin-bottom:10px;color:#fff;}
+#hero .subtitle{font-size:18px;color:rgba(255,255,255,0.65);font-style:italic;margin-bottom:28px;}
+#hero .badges{display:flex;gap:10px;flex-wrap:wrap;}
+#hero .badge{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:4px 14px;font-size:12px;color:rgba(255,255,255,0.8);font-family:'JetBrains Mono',monospace;}
+
+/* CONTENT */
+.content-wrap{max-width:900px;margin:0 auto;padding:0 48px 80px;}
+
+/* SECTION HEADER */
+.sec-header{margin-top:60px;margin-bottom:8px;padding:28px 36px;border-radius:10px;display:flex;align-items:center;gap:20px;}
+.sec-header.s1{background:linear-gradient(135deg,#1B433208,#1B433218);border-left:4px solid var(--s1);}
+.sec-header.s2{background:linear-gradient(135deg,#2D6A4F08,#2D6A4F18);border-left:4px solid var(--s2);}
+.sec-header.s3{background:linear-gradient(135deg,#40916C08,#40916C18);border-left:4px solid var(--s3);}
+.sec-header.s4{background:linear-gradient(135deg,#52B78808,#52B78818);border-left:4px solid var(--s4);}
+.sec-header.s5{background:linear-gradient(135deg,#1A305008,#1A305018);border-left:4px solid var(--s5);}
+.sec-badge{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;padding:4px 12px;border-radius:4px;white-space:nowrap;flex-shrink:0;}
+.s1 .sec-badge{background:var(--s1);color:white;}
+.s2 .sec-badge{background:var(--s2);color:white;}
+.s3 .sec-badge{background:var(--s3);color:white;}
+.s4 .sec-badge{background:var(--s4);color:white;}
+.s5 .sec-badge{background:var(--s5);color:white;}
+.sec-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
+.s1 .sec-title{color:var(--s1);}
+.s2 .sec-title{color:var(--s2);}
+.s3 .sec-title{color:var(--s3);}
+.s4 .sec-title{color:var(--s4);}
+.s5 .sec-title{color:var(--s5);}
+
+/* TOPIC */
+.topic{margin-top:48px;padding-top:48px;border-top:1px solid var(--border);}
+.topic:first-of-type{border-top:none;}
+.topic-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;}
+.topic-num{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;padding:3px 10px;border-radius:4px;margin-top:4px;flex-shrink:0;}
+.s1 .topic-num{background:var(--s1-lt);color:var(--s1);}
+.s2 .topic-num{background:var(--s2-lt);color:var(--s2);}
+.s3 .topic-num{background:var(--s3-lt);color:var(--s3);}
+.s4 .topic-num{background:var(--s4-lt);color:var(--s4);}
+.s5 .topic-num{background:var(--s5-lt);color:var(--s5);}
+.topic h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;line-height:1.2;}
+.s1 .topic h2{color:var(--s1);}
+.s2 .topic h2{color:var(--s2);}
+.s3 .topic h2{color:var(--s3);}
+.s4 .topic h2{color:var(--s4);}
+.s5 .topic h2{color:var(--s5);}
+.topic h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--muted);margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.topic h4{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin:18px 0 8px;font-family:'JetBrains Mono',monospace;}
+.topic p{margin-bottom:12px;color:var(--text);}
+.topic ul,.topic ol{margin:8px 0 14px 20px;color:var(--text);}
+.topic li{margin-bottom:6px;line-height:1.65;}
+.topic li::marker{color:var(--accent);}
+.topic strong{color:var(--text);font-weight:600;}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;margin:16px 0 20px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:white;}
+thead tr{background:var(--s1);}
+thead th{color:white;padding:10px 14px;text-align:left;font-family:'Source Serif 4',serif;font-weight:600;font-size:13px;}
+tbody tr:nth-child(even){background:var(--bg2);}
+tbody tr:hover{background:var(--s1-lt);transition:background 0.15s;}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
+.s2-tbl thead tr{background:var(--s2);}
+.s3-tbl thead tr{background:var(--s3);}
+.s4-tbl thead tr{background:var(--s4);}
+.s5-tbl thead tr{background:var(--s5);}
+
+/* CALLOUTS */
+.callout{margin:18px 0;padding:14px 18px;border-radius:0 8px 8px 0;border-left:4px solid;font-size:14px;line-height:1.65;}
+.callout .label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:4px;}
+.callout.pearl{background:var(--amber-lt);border-color:var(--amber);}
+.callout.pearl .label{color:var(--amber);}
+.callout.warn{background:var(--red-lt);border-color:var(--red);}
+.callout.warn .label{color:var(--red);}
+.callout.clin{background:var(--s1-lt);border-color:var(--s1);}
+.callout.clin .label{color:var(--s1);}
+.callout.exam{background:var(--blue-lt);border-color:var(--blue);}
+.callout.exam .label{color:var(--blue);}
+
+/* DIAGRAM */
+.diagram-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:18px;margin:20px 0;}
+.diagram-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--s1);margin-bottom:12px;}
+
+/* RAPID REFERENCE */
+.rapid-ref{background:var(--primary-dk);color:#E0E1DD;border-radius:10px;padding:28px 32px;margin:30px 0;}
+.rapid-ref h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--accent2);margin-bottom:16px;}
+.rapid-ref table{font-size:12.5px;}
+.rapid-ref thead tr{background:rgba(152,193,217,0.2);}
+.rapid-ref thead th{color:var(--accent2);padding:8px 12px;font-size:11px;}
+.rapid-ref tbody tr:nth-child(even){background:rgba(255,255,255,0.04);}
+.rapid-ref tbody tr:hover{background:rgba(255,255,255,0.07);}
+.rapid-ref tbody td{color:#E0E1DD;padding:7px 12px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.rapid-ref tbody td strong{color:var(--accent2);}
+
+/* PROGRESS */
+#progress-bar{position:fixed;top:0;left:var(--sidebar-w);right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;z-index:50;}
+
+/* TOP BTN */
+#top-btn{position:fixed;bottom:28px;right:28px;background:var(--primary);color:white;border:none;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:all 0.2s;opacity:0;pointer-events:none;}
+#top-btn.show{opacity:1;pointer-events:auto;}
+#top-btn:hover{background:var(--accent);transform:translateY(-2px);}
+
+/* ANIMATION */
+.topic{animation:fadeUp 0.4s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:900px){
+  :root{--sidebar-w:0px;}
+  #sidebar{transform:translateX(-300px);width:300px;}
+  #main{margin-left:0;}
+  .content-wrap{padding:0 20px 60px;}
+  #hero{padding:48px 20px 40px;}
+  #hero h1{font-size:30px;}
+  #progress-bar{left:0;}
+}
+@media print{
+  #sidebar,#top-btn,#progress-bar{display:none!important;}
+  #main{margin-left:0;}
+  .topic{page-break-inside:avoid;}
+  .sec-header{page-break-before:always;}
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='../operative_approach.html'" style="cursor: pointer;">
+      <div><div class="nav-brand-text">Operative Playbook</div><div class="nav-brand-sub">Inguinal Hernia</div></div>
+    </div>
+  </div>
+  <a href="../operative_approach.html" class="nav-btn">Back to Playbook</a>
+</nav>
+
+<nav id="sidebar" style="top: 80px; height: calc(100vh - 80px);">
+  <div id="sidebar-header">
+    <div class="logo">Playbook Navigation</div>
+    <div class="sub">Open Inguinal Hernia Repair</div>
+  </div>
+  <div id="sidebar-search">
+    <input type="text" id="search-input" placeholder="Search steps…" oninput="filterNav(this.value)">
+  </div>
+  <div id="sidebar-nav">
+    <div class="vol-label">Pillar 1 — Pre-Op</div>
+    <a class="nav-item" href="#p1a"><span class="num">1.1</span>Clinical Workup</a>
+    <a class="nav-item" href="#p1b"><span class="num">1.2</span>Risk Stratification</a>
+    <a class="nav-item" href="#p1c"><span class="num">1.3</span>Immediate Pre-Operative</a>
+    <div class="vol-label">Pillar 2 — Game Plan</div>
+    <a class="nav-item" href="#p2a"><span class="num">2.1</span>Setup &amp; Positioning</a>
+    <a class="nav-item" href="#p2b"><span class="num">2.2</span>Phase 1: Incision</a>
+    <a class="nav-item" href="#p2c"><span class="num">2.3</span>Phase 2: Nerve ID</a>
+    <a class="nav-item" href="#p2d"><span class="num">2.4</span>Phase 3 &amp; 4: Cord &amp; Sac</a>
+    <a class="nav-item" href="#p2e"><span class="num">2.5</span>Phase 5: Lichtenstein</a>
+    <a class="nav-item" href="#p2f"><span class="num">2.6</span>Shouldice Tissue Repair</a>
+    <div class="vol-label">Pillar 3 — Pearls</div>
+    <a class="nav-item" href="#p3a"><span class="num">3.1</span>Consultant Pearls</a>
+    <a class="nav-item" href="#p3b"><span class="num">3.2</span>The Bail-Out Point</a>
+    <div class="vol-label">Pillar 4 — Post-Op</div>
+    <a class="nav-item" href="#p4a"><span class="num">4.1</span>Immediate Recovery</a>
+    <a class="nav-item" href="#p4b"><span class="num">4.2</span>Clinic Follow-up</a>
+    <div class="vol-label">Pillar 5 — Complications</div>
+    <a class="nav-item" href="#p5a"><span class="num">5.1</span>Chronic Inguinodynia</a>
+    <a class="nav-item" href="#p5b"><span class="num">5.2</span>Ischemic Orchitis</a>
+    <a class="nav-item" href="#p5c"><span class="num">5.3</span>Mesh Infection</a>
+    <div class="vol-label">Reference</div>
+    <a class="nav-item" href="#rapid">High-Yield Board Facts</a>
+  </div>
+</nav>
+
+<main id="main">
+<section id="hero">
+  <div class="eyebrow">Surgical Insight Hub · Monograph Series · ABSITE · PGY-3 Framework</div>
+  <h1>Open Inguinal Hernia Repair</h1>
+  <p class="subtitle">Lichtenstein Tension-Free &amp; Bassini/Shouldice for the Anatomy-First Resident</p>
+  <div class="badges">
+    <span class="badge">EuraHS / HerniaSurge</span>
+    <span class="badge">Lichtenstein</span>
+    <span class="badge">Shouldice</span>
+    <span class="badge">NSQIP</span>
+  </div>
+</section>
+
+<div class="content-wrap">
+
+<div class="callout warn" style="margin-top: 40px;">
+  <span class="label">⚠ Read Before Proceeding</span>
+  Most residents think open inguinal hernia repair is a "simple" case. That assumption is what produces recurrences, nerve injuries, and ischemic orchitis. The inguinal canal is a compressed three-dimensional anatomy that you are reading in two dimensions on a flat dissection table. The gap between knowing the layers and executing them under tension, with bleeding, in a 70-year-old with a huge indirect sac — is significant. <strong>Respect this operation.</strong>
+</div>
+
+<div class="sec-header s1">
+  <span class="sec-badge">PILLAR 1</span>
+  <span class="sec-title">Pre-operative Optimization &amp; Preparation</span>
+</div>
+
+<section class="topic s1" id="p1a">
+  <div class="topic-header"><span class="topic-num">1.1</span><h2>Clinical Workup</h2></div>
+  
+  <h3>History — the details that actually change your plan</h3>
+  <ul>
+    <li><strong>Duration, reducibility, and recent change in symptoms:</strong> acute irreducibility = strangulation until proven otherwise.</li>
+    <li><strong>Prior ipsilateral or contralateral hernia repair:</strong> mesh in situ changes your dissection plane entirely.</li>
+    <li><strong>Prior pelvic/lower abdominal surgery:</strong> appendectomy, prostatectomy, pelvic lymph node dissection distorts tissue planes.</li>
+    <li><strong>Urinary symptoms in men:</strong> a large scrotal hernia with a sliding bladder component is a different operation than a simple indirect; missing this intraoperatively leads to bladder injury.</li>
+    <li><strong>Chronic cough, constipation, prostatism, ascites:</strong> these are the drivers of recurrence. If you repair the hernia without addressing these, you are setting the patient up to come back.</li>
+    <li><strong>Occupation and physical demands:</strong> directly informs return-to-work counseling and mesh choice discussion.</li>
+  </ul>
+
+  <h3>Physical Examination — what you must confirm before OR</h3>
+  <ul>
+    <li><strong>Examine standing and supine.</strong></li>
+    <li><strong>Cough impulse:</strong> present or absent.</li>
+    <li><strong>Reducibility:</strong> can you reduce it fully? If not, is it tender? Tender + irreducible = strangulation workup, not elective scheduling.</li>
+    <li><strong>Identify the internal ring:</strong> finger invagination of scrotal skin up the inguinal canal while the patient coughs — indirect hernias hit the fingertip, direct hernias push against the pulp.</li>
+    <li><strong>Contralateral side:</strong> always examine it. Document findings.</li>
+    <li><strong>Testicular exam:</strong> baseline testicular size and consistency documented in every male patient pre-op.</li>
+  </ul>
+
+  <h3>Labs &amp; Imaging</h3>
+  <div class="table-wrap s1-tbl"><table>
+    <thead><tr><th>Modality</th><th>Indication / Rationale</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Labs</strong></td><td>CBC, BMP, coagulation (standard pre-op panel). PSA if urinary symptoms present to document baseline. <em>No specific labs are mandatory for uncomplicated elective repair in a fit patient.</em></td></tr>
+      <tr><td><strong>Ultrasound</strong></td><td>First-line when diagnosis is uncertain (occult hernia, lipoma of the cord vs. hernia, lymph node vs. hernia).</td></tr>
+      <tr><td><strong>CT abd/pelvis</strong></td><td>For large/complex hernias, suspected sliding component, recurrent hernias with prior mesh, bilateral presentation where anatomy is unclear, or any suspicion of incarceration/strangulation.</td></tr>
+      <tr><td><strong>MRI pelvis</strong></td><td>Sports hernia/athletic pubalgia — when groin pain is the primary complaint and no clear hernia is demonstrable clinically.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="topic s1" id="p1b">
+  <div class="topic-header"><span class="topic-num">1.2</span><h2>Risk Stratification</h2></div>
+  <div class="table-wrap s1-tbl"><table>
+    <thead><tr><th>Score</th><th>Application</th><th>How it changes the plan</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ASA</strong></td><td>Global perioperative risk</td><td>ASA III-IV → optimize comorbidities; consider local anesthesia ± sedation to avoid GA entirely.</td></tr>
+      <tr><td><strong>NSQIP</strong></td><td>30-day morbidity estimate</td><td>High NSQIP risk → shorter operative target, avoid large mesh dissections.</td></tr>
+      <tr><td><strong>EuraHS / HerniaSurge</strong></td><td>Hernia-specific recurrence &amp; complication risk</td><td>Guides mesh selection and technique; obesity, smoking, and prior repair are major red flags.</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><strong>Smoking:</strong> Nicotine impairs fibroblast function and mesh integration. Ideally 6 weeks cessation pre-op. If they won't stop, document it — it directly affects recurrence risk and wound healing.</li>
+    <li><strong>Obesity (BMI &gt;35):</strong> Wound infection risk is substantially higher; tension on repair increases; consider laparoscopic approach if available and appropriate.</li>
+    <li><strong>Cirrhosis with ascites:</strong> Open repair in a cirrhotic with tense ascites is high risk — the ascites will drive recurrence regardless of what mesh you use. Manage the ascites first. Child-Pugh C = very high operative risk; involve hepatology.</li>
+    <li><strong>Anticoagulation:</strong> Stop warfarin 5 days pre-op; bridge if mechanical valve or high-risk AF. DOACs — follow standard hold protocols.</li>
+  </ul>
+</section>
+
+<section class="topic s1" id="p1c">
+  <div class="topic-header"><span class="topic-num">1.3</span><h2>Immediate Pre-operative Protocols</h2></div>
+  
+  <h3>Antibiotic Prophylaxis</h3>
+  <ul>
+    <li><strong>First-line:</strong> Cefazolin 1g IV (2g if &gt;80kg) within 60 minutes of incision.</li>
+    <li><strong>Penicillin allergy (non-severe):</strong> Cefazolin still — cross-reactivity risk is overstated.</li>
+    <li><strong>Severe allergy (anaphylaxis to beta-lactams):</strong> Clindamycin 900mg IV OR Vancomycin 15mg/kg IV (infuse over 60 min before incision — plan ahead).</li>
+    <li>A single prophylactic dose is sufficient for clean elective cases. <em>Do not skip prophylaxis for mesh repairs.</em></li>
+  </ul>
+
+  <h3>Consent — Must-Document Items</h3>
+  <ul>
+    <li>Recurrence (1-3% lifetime with mesh; higher with tissue repair or recurrent hernia repair).</li>
+    <li><strong>Chronic groin pain / inguinodynia</strong> (affects up to 10-12% of patients long-term).</li>
+    <li>Nerve injury (ilioinguinal, iliohypogastric, genitofemoral).</li>
+    <li>Vas deferens injury (rare but catastrophic in a young male).</li>
+    <li>Ischemic orchitis and testicular atrophy (particularly in large indirect hernias with extensive cord dissection).</li>
+    <li>Wound infection, hematoma, seroma.</li>
+    <li>Mesh-specific risks: infection requiring mesh excision, mesh migration.</li>
+  </ul>
+</section>
+
+<div class="sec-header s2">
+  <span class="sec-badge">PILLAR 2</span>
+  <span class="sec-title">The Operative Game Plan</span>
+</div>
+
+<section class="topic s2" id="p2a">
+  <div class="topic-header"><span class="topic-num">2.1</span><h2>Setup &amp; Positioning</h2></div>
+  <ul>
+    <li><strong>General anesthesia:</strong> most common, gives you a relaxed patient and unhurried field.</li>
+    <li><strong>Spinal anesthesia:</strong> excellent for high-risk cardiac/pulmonary patients; avoids airway manipulation.</li>
+    <li><strong>Local anesthesia ± sedation (LA/MAC):</strong> underused but entirely appropriate for uncomplicated unilateral hernias. Reduces PONV, faster discharge.
+      <ul><li><em>Local technique:</em> Ilioinguinal nerve block + field block with 0.5% bupivacaine ± 1% lidocaine mix; inject the external oblique aponeurosis, sub-Q tissue, and directly at the pubic tubercle.</li></ul>
+    </li>
+    <li><strong>Positioning:</strong> Supine, arms out. Slight Trendelenburg helps reduce intraperitoneal contents. Table flat — do not flex it; you need access from pubic tubercle to ASIS.</li>
+    <li><strong>Prep:</strong> Umbilicus to mid-thigh, including scrotum and genitalia (covered with a towel but prepped).</li>
+  </ul>
+</section>
+
+<section class="topic s2" id="p2b">
+  <div class="topic-header"><span class="topic-num">2.2</span><h2>Phase 1 — Incision and Access to External Oblique</h2></div>
+  <ul>
+    <li>Mark incision before draping: 2 fingerbreadths above the inguinal ligament, from pubic tubercle to a point 2cm medial to the ASIS.</li>
+    <li>Incise skin and Camper's fascia with a knife; Scarpa's fascia with cautery.</li>
+    <li>Identify the external oblique aponeurosis (shiny, diagonal fiber orientation).</li>
+    <li>Identify and protect the external inguinal ring before opening — the ilioinguinal nerve often exits here.</li>
+    <li>Open the external oblique aponeurosis with scissors along fibers. <em>Stay superficial to the cord.</em></li>
+    <li>Develop flaps: superior flap (toward internal oblique) and inferior flap (gives you the inguinal ligament).</li>
+  </ul>
+</section>
+
+<section class="topic s2" id="p2c">
+  <div class="topic-header"><span class="topic-num">2.3</span><h2>Phase 2 — Nerve Identification</h2></div>
+  <div class="callout warn">
+    <span class="label">Priority Check</span>
+    This step has no parallel in urgency. Injure a nerve here and the patient has chronic pain for life. Do this before anything else.
+  </div>
+  <ul>
+    <li><strong>Ilioinguinal nerve:</strong> Runs on the anterior surface of the cord, just beneath the external oblique. Identify it, mobilize it gently off the cord, and retract it superiorly.</li>
+    <li><strong>Iliohypogastric nerve:</strong> Runs parallel, 1-2cm superior to the ilioinguinal nerve, on the surface of the internal oblique.</li>
+    <li><strong>Genital branch of genitofemoral nerve:</strong> Runs within the cremasteric muscle layer around the cord. Trickiest to protect.</li>
+    <li><em>Note:</em> If a nerve is significantly damaged or trapped in scar, intentional neurectomy with proximal burial is preferable to leaving a damaged nerve in situ.</li>
+  </ul>
+</section>
+
+<section class="topic s2" id="p2d">
+  <div class="topic-header"><span class="topic-num">2.4</span><h2>Phase 3 &amp; 4: Cord Mobilization &amp; Sac Management</h2></div>
+  
+  <h3>Phase 3: Cord Mobilization</h3>
+  <ul>
+    <li>Encircle the spermatic cord at the pubic tubercle level with a Penrose drain.</li>
+    <li>Develop the space between the cord and the inguinal floor (transversalis fascia).</li>
+    <li>Lift the cord off the inguinal floor and assess:
+      <ul>
+        <li>Floor integrity (direct hernia = floor bulge medial to inferior epigastrics)</li>
+        <li>Indirect sac (exits through internal ring, lateral to inferior epigastrics)</li>
+        <li><em>Both can coexist (pantaloon hernia).</em></li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Phase 4: Hernia Sac Management</h3>
+  <ul>
+    <li><strong>Indirect sac:</strong> Open cremasteric fascia longitudinally. Dissect sac off cord structures (protect vas and vessels). For small/medium sacs: high ligation with 2-0 Vicryl at internal ring, then divide and excise. For large sacs extending into scrotum: <em>Do not strip the entire sac.</em> Divide at mid-canal, leave distal half in situ, ligate proximal at the ring.</li>
+    <li><strong>Direct sac:</strong> Reduce bulge by inverting the transversalis fascia (imbrication). Do not excise — it is peritoneum and unnecessary excision risks bladder injury.</li>
+    <li><strong>Sliding hernia:</strong> Suspect when large sac, medial location, elderly male (sigmoid or bladder may be part of sac wall). Reduce gently without excising visceral wall.</li>
+  </ul>
+</section>
+
+<section class="topic s2" id="p2e">
+  <div class="topic-header"><span class="topic-num">2.5</span><h2>Phase 5 — Lichtenstein Mesh Repair (Tension-Free)</h2></div>
+  <ul>
+    <li>Cut a keyhole in the lateral end of the mesh to accommodate the cord (creating a wider superior tail and a narrower inferior tail).</li>
+    <li><strong>Mesh Positioning:</strong>
+      <ul>
+        <li><strong>Medial edge:</strong> overlap the pubic tubercle by at least 1.5-2cm.</li>
+        <li><strong>Inferior edge:</strong> lies on the shelving edge of the inguinal ligament.</li>
+        <li><strong>Superior edge:</strong> overlaps the conjoint tendon/internal oblique by at least 2cm.</li>
+        <li><strong>Lateral edge:</strong> extends 3-4cm beyond the internal ring.</li>
+      </ul>
+    </li>
+    <li><strong>Fixation Sequence:</strong>
+      <ul>
+        <li>Start medially: continuous 2-0 Prolene anchoring inferior edge to inguinal ligament. <em>Do not incorporate shelving edge too deeply (femoral vessels posterior).</em></li>
+        <li>Superiorly: interrupted sutures fixing upper mesh edge to internal oblique. <em>Stay superficial to avoid inferior epigastric vessels.</em></li>
+        <li>Reconstitute the internal ring: cross tails behind the cord and suture to inguinal ligament. Must pass a closed hemostat through the ring alongside the cord.</li>
+      </ul>
+    </li>
+  </ul>
+  
+  <div class="diagram-wrap">
+    <div class="diagram-title">Lichtenstein Mesh Anatomy &amp; Overlap Requirements</div>
+    <svg width="100%" viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="680" height="320" fill="#EDF2F4" />
+      <path d="M 100 280 C 250 250, 450 150, 600 50" fill="none" stroke="#8B1A1A" stroke-width="8" stroke-linecap="round"/>
+      <text x="500" y="120" font-size="12" font-weight="bold" fill="#8B1A1A" transform="rotate(-23, 500, 120)">Inguinal Ligament</text>
+      <circle cx="120" cy="270" r="15" fill="#D3DCE6" stroke="#4A5568" stroke-width="2"/>
+      <text x="120" y="305" text-anchor="middle" font-size="12" font-weight="bold" fill="#4A5568">Pubic Tubercle</text>
+      <ellipse cx="460" cy="120" rx="15" ry="25" fill="#1A3050" transform="rotate(30, 460, 120)"/>
+      <text x="490" y="80" font-size="12" font-weight="bold" fill="#1A3050">Internal Ring</text>
+      <path d="M 460 120 Q 300 150, 150 260" fill="none" stroke="#40916C" stroke-width="12" stroke-linecap="round"/>
+      <text x="280" y="220" font-size="12" font-weight="bold" fill="#40916C" transform="rotate(-30, 280, 220)">Spermatic Cord</text>
+      
+      <path d="M 80 260 Q 150 180, 300 150 Q 500 100, 520 60 L 580 140 Q 400 250, 160 300 Z" fill="rgba(61, 90, 128, 0.3)" stroke="#3D5A80" stroke-width="2" stroke-dasharray="4 2"/>
+      <circle cx="450" cy="130" r="20" fill="#EDF2F4" stroke="#3D5A80" stroke-width="2" stroke-dasharray="2 2"/>
+      <line x1="80" y1="260" x2="120" y2="270" stroke="#1A3050" stroke-width="2" stroke-dasharray="2 2"/>
+      <text x="60" y="240" font-size="11" font-weight="bold" fill="#1A3050">1.5 - 2cm Medial Overlap</text>
+      <path d="M 520 120 C 490 140, 510 160, 540 140" fill="none" stroke="#C9910A" stroke-width="3" />
+      <text x="560" y="160" font-size="11" font-weight="bold" fill="#C9910A">Tails crossed &amp; secured</text>
+    </svg>
+  </div>
+</section>
+
+<section class="topic s2" id="p2f">
+  <div class="topic-header"><span class="topic-num">2.6</span><h2>Shouldice Repair (Tissue Repair — Know When and Why)</h2></div>
+  <p>The Lichtenstein is your default. But you must know the Shouldice because mesh is not always available, may be contraindicated (active infection), or for young patients with small indirect hernias.</p>
+  <ul>
+    <li>The inguinal floor (transversalis fascia) is incised longitudinally from internal ring to pubic tubercle, creating medial and lateral flaps.</li>
+    <li><strong>Four-layer continuous running repair (using Prolene):</strong>
+      <ol>
+        <li>Lateral flap (transversalis fascia) overlapped onto the undersurface of the medial flap (internal ring to pubic tubercle).</li>
+        <li>Same suture returns laterally, approximating the edge of the medial flap to the inguinal ligament.</li>
+        <li>Internal oblique/conjoint tendon to the inguinal ligament — running laterally.</li>
+        <li>Return pass, approximating internal oblique edge more superficially to the inguinal ligament.</li>
+      </ol>
+    </li>
+    <li><em>The tension must be distributed across all four layers.</em> If any single layer is under tension, the repair will fail.</li>
+  </ul>
+</section>
+
+<div class="sec-header s3">
+  <span class="sec-badge">PILLAR 3</span>
+  <span class="sec-title">Technical Pearls &amp; Bail-Out Strategies</span>
+</div>
+
+<section class="topic s3" id="p3a">
+  <div class="topic-header"><span class="topic-num">3.1</span><h2>Consultant Pearls</h2></div>
+  
+  <div class="callout pearl">
+    <span class="label">Consultant Pearl #1: The Pubic Tubercle is Your Non-Negotiable Anchor</span>
+    Every medial recurrence after Lichtenstein traces back to insufficient mesh overlap at the pubic tubercle. The mesh must wrap around the tubercle, not just reach it. Before you fix the first stitch, physically verify the mesh extends 1.5-2cm past the tubercle onto the body of the pubis. This adds 30 seconds and eliminates the most common technical cause of recurrence.
+  </div>
+
+  <div class="callout pearl">
+    <span class="label">Consultant Pearl #2: The Large Indirect Sac — Don't Be a Hero</span>
+    When encountering a large scrotal indirect sac, resist the instinct to dissect it fully. Aggressive dissection strips the investing tissue of the vas and testicular vessels, resulting in ischemic orchitis progressing to testicular atrophy. Divide the sac at mid-canal, leave the distal half open and in place, and ligate the proximal half at the ring.
+  </div>
+
+  <div class="callout pearl">
+    <span class="label">Consultant Pearl #3: Recurrent Hernia — Change Your Approach</span>
+    If operating on a recurrent hernia after a prior anterior repair, do not go back through the same scarred anterior approach unless you have no other option. The correct approach is laparoscopic (TEP/TAPP) through virgin preperitoneal tissue.
+  </div>
+</section>
+
+<section class="topic s3" id="p3b">
+  <div class="topic-header"><span class="topic-num">3.2</span><h2>The Bail-Out Point</h2></div>
+  <p>Call your senior or escalate immediately when:</p>
+  <ul>
+    <li><strong>Cannot identify the vas deferens:</strong> Stop dissecting until someone more experienced is present. Inadvertent division is catastrophic.</li>
+    <li><strong>See bladder in or adjacent to the sac:</strong> Do not attempt to reduce or ligate without senior input.</li>
+    <li><strong>Uncontrolled bleeding:</strong> Pressure first, then call.</li>
+    <li><strong>Obliterated planes in recurrent hernia:</strong> This is not a case to figure out independently.</li>
+    <li><strong>Hernia is not reducible:</strong> Suspect strangulation; may need to divide internal ring and inspect bowel viability.</li>
+    <li><strong>Bowel of questionable viability:</strong> If it doesn't pink up after 5 minutes of warm laps, it needs resection. This changes the case to clean-contaminated (consider biologic mesh or Shouldice).</li>
+  </ul>
+</section>
+
+<div class="sec-header s4">
+  <span class="sec-badge">PILLAR 4</span>
+  <span class="sec-title">Post-operative Care &amp; Longitudinal Follow-up</span>
+</div>
+
+<section class="topic s4" id="p4a">
+  <div class="topic-header"><span class="topic-num">4.1</span><h2>Immediate Post-op (First 24 Hours)</h2></div>
+  <ul>
+    <li><strong>Diet:</strong> Regular diet as tolerated. Nausea is common post-GA; give anti-emetics first.</li>
+    <li><strong>Pain management (ERAS-aligned):</strong>
+      <ul>
+        <li>Pre-op: acetaminophen 1g PO + celecoxib 400mg PO 1-2 hours before.</li>
+        <li>Intra-op: local infiltration with bupivacaine 0.25-0.5% at closure.</li>
+        <li>Post-op: scheduled acetaminophen 1g PO Q6H + NSAIDs. Short opioid course only.</li>
+      </ul>
+    </li>
+    <li><strong>Activity:</strong> Walking within 2-4 hours. No lifting &gt;5kg for 2 weeks. Driving at 48-72h. Scrotal support for male patients to limit dependent edema.</li>
+    <li><strong>Discharge criteria:</strong> Pain controlled on oral analgesia, voiding spontaneously, ambulant, written instructions given.</li>
+  </ul>
+</section>
+
+<section class="topic s4" id="p4b">
+  <div class="topic-header"><span class="topic-num">4.2</span><h2>Clinic Follow-up</h2></div>
+  <ul>
+    <li><strong>2-week visit:</strong> Inspect wound, assess for urinary retention, check for testicular swelling/pain (early sign of ischemic orchitis → urgent Doppler). Reinforce activity restrictions.</li>
+    <li><strong>6-week visit:</strong> Return to full activity clearance. Assess for early recurrence. Address ongoing groin pain (differentiate somatic vs. neuropathic).</li>
+    <li><strong>3-6 month visit (if chronic pain):</strong> Formal assessment for inguinodynia. Gabapentin trial, US-guided nerve block, or operative neurectomy.</li>
+  </ul>
+</section>
+
+<div class="sec-header s5">
+  <span class="sec-badge">PILLAR 5</span>
+  <span class="sec-title">Complication Management</span>
+</div>
+
+<section class="topic s5" id="p5a">
+  <div class="topic-header"><span class="topic-num">5.1</span><h2>Complication 1: Inguinodynia / Chronic Post-Herniorrhaphy Pain</h2></div>
+  <ul>
+    <li><strong>Recognition:</strong> Pain persisting beyond 3 months. Key distinction: somatic (localized) vs. neuropathic (burning, shooting, dermatomal). Affects up to 10-12% of patients.</li>
+    <li><strong>Immediate workup:</strong> Detailed pain history, map distribution, US/CT to rule out hematoma/seroma, diagnostic nerve block.</li>
+    <li><strong>Correction:</strong>
+      <ul>
+        <li><em>Conservative:</em> Reassurance, NSAIDs, gabapentin, physiotherapy.</li>
+        <li><em>Interventional:</em> Repeat nerve blocks with corticosteroid, pulsed radiofrequency ablation.</li>
+        <li><em>Operative:</em> Triple neurectomy (ilioinguinal, iliohypogastric, genital branch of genitofemoral); mesh excision if clearly the source (HPB-level center).</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section class="topic s5" id="p5b">
+  <div class="topic-header"><span class="topic-num">5.2</span><h2>Complication 2: Ischemic Orchitis / Testicular Atrophy</h2></div>
+  <ul>
+    <li><strong>Recognition:</strong> Onset 24-72h post-op. Painful, swollen, indurated testis. Risk factor: large indirect hernia with extensive cord dissection.</li>
+    <li><strong>Immediate workup:</strong> Scrotal Doppler ultrasound. <em>Do not delay imaging.</em></li>
+    <li><strong>Correction:</strong>
+      <ul>
+        <li><em>Ischemia (reduced flow):</em> Supportive (scrotal support, NSAIDs, ice then heat). Most resolve with some degree of atrophy.</li>
+        <li><em>Complete Ischemia (absent flow):</em> Operative re-exploration is theoretically possible but has poor data. Supportive management, counsel patient, and accept likely atrophy.</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section class="topic s5" id="p5c">
+  <div class="topic-header"><span class="topic-num">5.3</span><h2>Complication 3: Mesh Infection / Wound Infection</h2></div>
+  <ul>
+    <li><strong>Recognition:</strong> Superficial (POD 3-7) vs. Deep mesh infection (weeks to months; persistent sinus).</li>
+    <li><strong>Immediate workup:</strong> Wound swab for culture, US for fluid collection, CT abd/pelvis with IV contrast.</li>
+    <li><strong>Correction:</strong>
+      <ul>
+        <li><em>Superficial:</em> Wound opening, drainage, culture-directed abx. Mesh usually salvaged.</li>
+        <li><em>Deep Mesh Infection:</em> IV abx as a bridge. Definitive treatment requires <strong>mesh excision</strong>.</li>
+        <li><em>MRSA Mesh Infection:</em> Vanc/Daptomycin guided by ID. Excision is almost always required; do not use synthetic mesh in the future.</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<div class="rapid-ref" id="rapid">
+  <h3>Rapid Reference — High-Yield Board Facts</h3>
+  <table>
+    <thead><tr><th>Topic</th><th>Key Fact</th></tr></thead>
+    <tbody>
+      <tr><td>Incision Landmarks</td><td>2 fingerbreadths above inguinal ligament, pubic tubercle to 2cm medial to ASIS</td></tr>
+      <tr><td>Nerve running under external oblique</td><td><strong>Ilioinguinal nerve</strong> — identify immediately upon opening aponeurosis</td></tr>
+      <tr><td>Mesh overlap requirement (medial)</td><td><strong>1.5 - 2 cm</strong> past the pubic tubercle (most common site of recurrence if missed)</td></tr>
+      <tr><td>Large scrotal indirect sac</td><td><strong>Do NOT strip completely.</strong> Divide at mid-canal to prevent ischemic orchitis.</td></tr>
+      <tr><td>Sliding hernia rule</td><td>Elderly male + large medial sac. Do not excise visceral wall (bladder/sigmoid).</td></tr>
+      <tr><td>Shouldice layer tension</td><td>Must be distributed across <strong>all four layers</strong>; if one layer holds all tension, repair fails.</td></tr>
+      <tr><td>Chronic pain (Inguinodynia) incidence</td><td>Up to <strong>10-12%</strong> report some pain; 2-4% functionally limiting.</td></tr>
+      <tr><td>Diagnostic criteria for ischemic orchitis</td><td>Onset 24-72 hours post-op; confirmed by <strong>Scrotal Doppler Ultrasound</strong>.</td></tr>
+      <tr><td>MRSA mesh infection</td><td>Antibiotics will not clear it with a foreign body present; requires <strong>mesh excision</strong>.</td></tr>
+      <tr><td>Recurrent hernia post-anterior repair</td><td>Standard of care is <strong>Laparoscopic (TEP/TAPP)</strong> approach via virgin preperitoneal planes.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div></main>
+
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const progressBar = document.getElementById('progress-bar');
+const topBtn = document.getElementById('top-btn');
+const navItems = document.querySelectorAll('.nav-item');
+const sections = document.querySelectorAll('.topic[id], .rapid-ref[id]');
+
+window.addEventListener('scroll', () => {
+  const st = window.scrollY;
+  const dh = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.transform = `scaleX(${st / dh})`;
+  topBtn.classList.toggle('show', st > 400);
+  let current = '';
+  sections.forEach(s => { if (st >= s.offsetTop - 120) current = s.id; });
+  navItems.forEach(n => { n.classList.toggle('active', n.getAttribute('href') === '#' + current); });
+});
+
+function filterNav(query) {
+  const q = query.toLowerCase();
+  navItems.forEach(item => { item.style.display = (!q || item.textContent.toLowerCase().includes(q)) ? 'block' : 'none'; });
+  document.querySelectorAll('.vol-label').forEach(l => { l.style.display = 'block'; });
+}
+
+navItems.forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(item.getAttribute('href'));
+    if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+  });
+});
+
+document.querySelectorAll('.topic').forEach((el, i) => { el.style.animationDelay = `${i * 0.03}s`; });
+</script>
+</body>
+</html>
