@@ -56,6 +56,91 @@
     border-radius: 50%;
     flex-shrink: 0;
   }
+  /* ── SECTION TABS ── */
+  .section-tabs {
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto 32px;
+    padding: 0 1.5rem;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .section-tab {
+    flex: 1;
+    min-width: 220px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    background: var(--bg-card);
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    letter-spacing: -0.02em;
+  }
+  .section-tab:hover { border-color: var(--brand-gold); color: var(--text-primary); }
+  .section-tab.active {
+    background: var(--brand-burgundy);
+    border-color: var(--brand-burgundy);
+    color: #f0d080;
+  }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+  /* Operative Approach grid */
+  .op-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .op-card-sm {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  }
+  .op-card-sm:hover {
+    transform: translateY(-6px);
+    border-color: var(--brand-gold);
+    box-shadow: 0 16px 32px rgba(43,24,16,0.1);
+  }
+  .op-card-sm .op-kicker {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brand-gold);
+    margin-bottom: 10px;
+  }
+  .op-card-sm h3 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
+  .op-card-sm p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px; }
+  .op-card-sm .op-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  .op-card-sm .op-badge {
+    background: rgba(184,146,42,0.1);
+    color: var(--brand-gold);
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 0.65rem;
+  }
 </style>
 </head>
 <body>
@@ -117,23 +202,15 @@
   <span class="legend-item"><span class="legend-dot" style="background:#b8922a;"></span>Free PDF via Telegram</span>
 </div>
 
+<!-- ── SECTION TABS ── -->
+<div class="section-tabs">
+  <button class="section-tab active" id="tab-highjield" onclick="switchTab('highjield')">📚 Surgical High-Yield Notes</button>
+  <button class="section-tab" id="tab-operative" onclick="switchTab('operative')">🔪 Surgical Operative Approach</button>
+</div>
+
+<!-- ══ TAB 1: HIGH-YIELD NOTES ══ -->
+<div class="tab-pane active" id="pane-highjield">
 <div class="notes-body">
-    <div class="note-card web-card" style="border-top-color: var(--brand-burgundy) !important; background: linear-gradient(160deg, rgba(43,24,16,0.05) 0%, #fff 60%); grid-column: 1 / -1; margin-bottom: 20px;">
-      <div class="nc-top">
-        <div class="nc-kicker" style="color: var(--brand-burgundy);">Master Series <span class="nc-new">New Section</span></div>
-        <h3 style="font-size: 2rem;">Surgical Operative Approach</h3>
-        <p>The "Operative Playbook" for surgical residents. Systematic task analysis for major procedures covering Pre-op preparation, the Intra-op "Game Plan", Technical Pearls, and Complication management.</p>
-        <div class="nc-tags">
-          <span class="nc-tag" style="background: var(--brand-burgundy); color: #f0d080;">Cognitive Task Analysis</span>
-          <span class="nc-tag">Bail-out Strategies</span>
-          <span class="nc-tag">Technical Pearls</span>
-        </div>
-      </div>
-      <div class="nc-foot">
-        <span class="nc-pages">Comprehensive Playbook</span>
-        <a href="notes/operative_approach.html" class="nc-dl gold">Open Playbook →</a>
-      </div>
-    </div>
 
     <!-- ═══ WEB-ACCESSIBLE CARDS — Read directly on the site ═══ -->
 
@@ -365,7 +442,66 @@
       </div>
   </div>
 </div>
-</div>
+</div><!-- end notes-body -->
+</div><!-- end pane-highjield -->
+
+<!-- ══ TAB 2: OPERATIVE APPROACH ══ -->
+<div class="tab-pane" id="pane-operative">
+  <div class="op-grid">
+
+    <div class="op-card-sm" onclick="window.location.href='notes/Surgical Operative Approach/Open Inguinal Hernia Repair.html'">
+      <div>
+        <div class="op-kicker">General Surgery · Groin</div>
+        <h3>Open Inguinal Hernia Repair</h3>
+        <p>Lichtenstein & Shouldice repair. Nerve identification, sac management, mesh fixation, bail-out strategies.</p>
+      </div>
+      <div class="op-foot">
+        <span class="op-badge">Essential</span>
+        <span>Pillar 1-5 Monograph</span>
+      </div>
+    </div>
+
+    <div class="op-card-sm" onclick="window.location.href='notes/Surgical Operative Approach/Thyroidectomy.html'">
+      <div>
+        <div class="op-kicker">Head &amp; Neck · Endocrine</div>
+        <h3>Thyroidectomy</h3>
+        <p>Total, Hemi &amp; Completion thyroidectomy. RLN identification, parathyroid preservation, Berry's Ligament, post-op hematoma emergency.</p>
+      </div>
+      <div class="op-foot">
+        <span class="op-badge">Essential</span>
+        <span>ATA Guidelines · IONM</span>
+      </div>
+    </div>
+
+    <div class="op-card-sm" style="opacity:0.55; cursor:default;">
+      <div>
+        <div class="op-kicker">HPB · Laparoscopy</div>
+        <h3>Laparoscopic Cholecystectomy</h3>
+        <p>Critical View of Safety, Calot's dissection, and the bail-out algorithm for the difficult gallbladder.</p>
+      </div>
+      <div class="op-foot">
+        <span class="op-badge">Coming Soon</span>
+        <span>12 Technical Pearls</span>
+      </div>
+    </div>
+
+    <div class="op-card-sm" style="opacity:0.55; cursor:default;">
+      <div>
+        <div class="op-kicker">Emergency · GI</div>
+        <h3>Laparoscopic Appendectomy</h3>
+        <p>Systematic approach to the retrocaecal appendix and the bail-out for the perforated base.</p>
+      </div>
+      <div class="op-foot">
+        <span class="op-badge">Coming Soon</span>
+        <span>8 Technical Pearls</span>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align:center; margin: 48px 0 20px; color: var(--text-muted); font-size: 0.85rem;">
+    More procedures being added. <a href="notes/operative_approach.html" style="color:var(--brand-gold); font-weight:700;">View Full Playbook →</a>
+  </div>
+</div><!-- end pane-operative -->
 
 <!-- REQUEST TOPIC BOX -->
 <section class="request-box-section" style="margin: 80px auto; padding: 0 24px; width: 100%; box-sizing: border-box;">
@@ -419,9 +555,20 @@
 function filterNotes(cat,btn){
   document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.note-card').forEach(c=>{
-    c.style.display=(cat==='all'||c.dataset.cat.includes(cat))?'flex':'none';
+  document.querySelectorAll('#pane-highjield .note-card').forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.cat&&c.dataset.cat.includes(cat))?'flex':'none';
   });
+}
+function switchTab(id){
+  document.querySelectorAll('.section-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  document.getElementById('pane-'+id).classList.add('active');
+  // hide filter bar when operative tab is active
+  const fb = document.querySelector('.filter-bar');
+  const leg = document.querySelector('.notes-legend');
+  if(id==='operative'){ if(fb) fb.style.display='none'; if(leg) leg.style.display='none'; }
+  else { if(fb) fb.style.display=''; if(leg) leg.style.display=''; }
 }
 </script>
 
