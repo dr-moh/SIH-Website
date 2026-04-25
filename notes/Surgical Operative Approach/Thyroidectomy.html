@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surgical Insight Hub — Thyroidectomy Monograph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/shared.css">
+
+<script>
+  const savedTheme = localStorage.getItem('sih-theme') || 'light';
+  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+<style>
+:root {
+  /* Classic Archive Aesthetic: Burgundy, Slate, and Cream */
+  --primary:   #4A1525; 
+  --primary-dk:#2D0B15;
+  --primary-lt:#F4EAEF;
+  --accent:    #7A253F;
+  --accent2:   #A34160;
+  --gold:      #B8860B;
+  --gold-lt:   #FDF8ED;
+  --s1:        #4A1525;
+  --s2:        #3A2430;
+  --s3:        #2B3A42;
+  --s4:        #42362B;
+  --s5:        #1E293B;
+  --s1-lt:     #F4EAEF;
+  --s2-lt:     #EFECEE;
+  --s3-lt:     #EAF0F2;
+  --s4-lt:     #F2EFEA;
+  --s5-lt:     #E2E8F0;
+  --red:       #991B1B;
+  --red-lt:    #FEF2F2;
+  --amber:     #92400E;
+  --amber-lt:  #FFFBEB;
+  --blue:      #1E3A8A;
+  --blue-lt:   #EFF6FF;
+  --bg:        #FAFAF7;
+  --bg2:       #F2F2EE;
+  --border:    #E2E2D9;
+  --text:      #1C1917;
+  --muted:     #57534E;
+  --white:     #FFFFFF;
+  --sidebar-w: 300px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;}
+
+/* SIDEBAR */
+#sidebar{position:fixed;top:70px;left:0;width:var(--sidebar-w);height:calc(100vh - 70px);background:var(--primary-dk);color:#EBE5E7;display:flex;flex-direction:column;z-index:100;overflow:hidden;}
+#sidebar-header{padding:20px 20px 14px;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;}
+#sidebar-header .logo{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#D8A5B8;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+#sidebar-header .sub{font-size:10.5px;color:rgba(235,229,231,0.6);letter-spacing:0.04em;}
+#sidebar-search{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0;}
+#sidebar-search input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:#EBE5E7;padding:6px 10px;font-size:12px;font-family:'Source Serif 4',serif;outline:none;transition:border-color 0.2s;}
+#sidebar-search input::placeholder{color:rgba(235,229,231,0.4);}
+#sidebar-search input:focus{border-color:#D8A5B8;}
+#sidebar-nav{flex:1;overflow-y:auto;padding:8px 0 20px;}
+#sidebar-nav::-webkit-scrollbar{width:4px;}
+#sidebar-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:2px;}
+.vol-label{font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#D8A5B8;padding:14px 18px 4px;}
+.nav-item{display:block;padding:6px 18px 6px 22px;font-size:12px;color:rgba(235,229,231,0.75);text-decoration:none;border-left:2px solid transparent;transition:all 0.15s;line-height:1.4;}
+.nav-item:hover{color:#fff;background:rgba(255,255,255,0.03);border-left-color:rgba(216,165,184,0.5);}
+.nav-item.active{color:#fff;background:rgba(255,255,255,0.06);border-left-color:#D8A5B8;font-weight:600;}
+.nav-item .num{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(235,229,231,0.3);margin-right:6px;}
+
+/* MAIN */
+#main{margin-left:var(--sidebar-w);min-height:100vh;padding-top:70px;}
+
+/* HERO */
+#hero{background:linear-gradient(135deg,var(--primary-dk) 0%,#4A1525 60%,#3A0E1A 100%);color:white;padding:72px 72px 60px;position:relative;overflow:hidden;}
+#hero::before{content:'';position:absolute;top:-60px;right:-60px;width:380px;height:380px;background:radial-gradient(circle,rgba(216,165,184,0.15) 0%,transparent 70%);pointer-events:none;}
+#hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent2),var(--gold),transparent);}
+#hero .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#D8A5B8;text-transform:uppercase;margin-bottom:14px;}
+#hero h1{font-family:'Playfair Display',serif;font-size:46px;font-weight:700;line-height:1.15;margin-bottom:10px;color:#fff;}
+#hero .subtitle{font-size:18px;color:rgba(255,255,255,0.7);font-style:italic;margin-bottom:28px;}
+#hero .badges{display:flex;gap:10px;flex-wrap:wrap;}
+#hero .badge{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:4px 14px;font-size:12px;color:rgba(255,255,255,0.9);font-family:'JetBrains Mono',monospace;}
+
+/* CONTENT */
+.content-wrap{max-width:900px;margin:0 auto;padding:0 48px 80px;}
+
+/* SECTION HEADER */
+.sec-header{margin-top:60px;margin-bottom:8px;padding:28px 36px;border-radius:10px;display:flex;align-items:center;gap:20px;}
+.sec-header.s1{background:linear-gradient(135deg,#4A152508,#4A152515);border-left:4px solid var(--s1);}
+.sec-header.s2{background:linear-gradient(135deg,#3A243008,#3A243015);border-left:4px solid var(--s2);}
+.sec-header.s3{background:linear-gradient(135deg,#2B3A4208,#2B3A4215);border-left:4px solid var(--s3);}
+.sec-header.s4{background:linear-gradient(135deg,#42362B08,#42362B15);border-left:4px solid var(--s4);}
+.sec-header.s5{background:linear-gradient(135deg,#1E293B08,#1E293B15);border-left:4px solid var(--s5);}
+.sec-badge{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;padding:4px 12px;border-radius:4px;white-space:nowrap;flex-shrink:0;}
+.s1 .sec-badge{background:var(--s1);color:white;}
+.s2 .sec-badge{background:var(--s2);color:white;}
+.s3 .sec-badge{background:var(--s3);color:white;}
+.s4 .sec-badge{background:var(--s4);color:white;}
+.s5 .sec-badge{background:var(--s5);color:white;}
+.sec-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
+.s1 .sec-title{color:var(--s1);}
+.s2 .sec-title{color:var(--s2);}
+.s3 .sec-title{color:var(--s3);}
+.s4 .sec-title{color:var(--s4);}
+.s5 .sec-title{color:var(--s5);}
+
+/* TOPIC */
+.topic{margin-top:48px;padding-top:48px;border-top:1px solid var(--border);}
+.topic:first-of-type{border-top:none;}
+.topic-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;}
+.topic-num{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;padding:3px 10px;border-radius:4px;margin-top:4px;flex-shrink:0;}
+.s1 .topic-num{background:var(--s1-lt);color:var(--s1);}
+.s2 .topic-num{background:var(--s2-lt);color:var(--s2);}
+.s3 .topic-num{background:var(--s3-lt);color:var(--s3);}
+.s4 .topic-num{background:var(--s4-lt);color:var(--s4);}
+.s5 .topic-num{background:var(--s5-lt);color:var(--s5);}
+.topic h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;line-height:1.2;}
+.s1 .topic h2{color:var(--s1);}
+.s2 .topic h2{color:var(--s2);}
+.s3 .topic h2{color:var(--s3);}
+.s4 .topic h2{color:var(--s4);}
+.s5 .topic h2{color:var(--s5);}
+.topic h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--muted);margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.topic h4{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin:18px 0 8px;font-family:'JetBrains Mono',monospace;}
+.topic p{margin-bottom:12px;color:var(--text);}
+.topic ul,.topic ol{margin:8px 0 14px 20px;color:var(--text);}
+.topic li{margin-bottom:6px;line-height:1.65;}
+.topic li::marker{color:var(--accent2);}
+.topic strong{color:var(--text);font-weight:600;}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;margin:16px 0 20px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:white;}
+thead tr{background:var(--s1);}
+thead th{color:white;padding:10px 14px;text-align:left;font-family:'Source Serif 4',serif;font-weight:600;font-size:13px;}
+tbody tr:nth-child(even){background:var(--bg2);}
+tbody tr:hover{background:var(--s1-lt);transition:background 0.15s;}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
+.s2-tbl thead tr{background:var(--s2);}
+.s3-tbl thead tr{background:var(--s3);}
+.s4-tbl thead tr{background:var(--s4);}
+.s5-tbl thead tr{background:var(--s5);}
+
+/* CALLOUTS */
+.callout{margin:18px 0;padding:14px 18px;border-radius:0 8px 8px 0;border-left:4px solid;font-size:14px;line-height:1.65;}
+.callout .label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:4px;}
+.callout.pearl{background:var(--amber-lt);border-color:var(--amber);}
+.callout.pearl .label{color:var(--amber);}
+.callout.warn{background:var(--red-lt);border-color:var(--red);}
+.callout.warn .label{color:var(--red);}
+.callout.clin{background:var(--s1-lt);border-color:var(--s1);}
+.callout.clin .label{color:var(--s1);}
+.callout.exam{background:var(--blue-lt);border-color:var(--blue);}
+.callout.exam .label{color:var(--blue);}
+
+/* DIAGRAM */
+.diagram-wrap{background:white;border:1px solid var(--border);border-radius:8px;padding:18px;margin:20px 0;box-shadow:0 1px 4px rgba(0,0,0,0.03);}
+.diagram-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--s1);margin-bottom:12px;}
+
+/* RAPID REFERENCE */
+.rapid-ref{background:var(--primary-dk);color:#EBE5E7;border-radius:10px;padding:28px 32px;margin:30px 0;}
+.rapid-ref h3{font-family:'Playfair Display',serif;font-size:20px;color:#D8A5B8;margin-bottom:16px;}
+.rapid-ref table{font-size:12.5px; background: transparent;} /* Fix added here */
+.rapid-ref thead tr{background:rgba(216,165,184,0.15);}
+.rapid-ref thead th{color:#D8A5B8;padding:8px 12px;font-size:11px;}
+.rapid-ref tbody tr:nth-child(even){background:rgba(255,255,255,0.03);}
+.rapid-ref tbody tr:hover{background:rgba(255,255,255,0.06);}
+.rapid-ref tbody td{color:#EBE5E7;padding:7px 12px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.rapid-ref tbody td strong{color:var(--gold);}
+
+/* PROGRESS */
+#progress-bar{position:fixed;top:70px;left:var(--sidebar-w);right:0;height:3px;background:linear-gradient(90deg,var(--accent2),var(--gold));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;z-index:50;}
+
+/* TOP BTN */
+#top-btn{position:fixed;bottom:28px;right:28px;background:var(--primary);color:white;border:none;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:all 0.2s;opacity:0;pointer-events:none;}
+#top-btn.show{opacity:1;pointer-events:auto;}
+#top-btn:hover{background:var(--accent2);transform:translateY(-2px);}
+
+/* ANIMATION */
+.topic{animation:fadeUp 0.4s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:900px){
+  :root{--sidebar-w:0px;}
+  #sidebar{transform:translateX(-300px);width:300px;top:70px;height:calc(100vh - 70px);}
+  #main{margin-left:0;}
+  .content-wrap{padding:0 20px 60px;}
+  #hero{padding:48px 20px 40px;}
+  #hero h1{font-size:30px;}
+  #progress-bar{left:0;}
+}
+@media print{
+  .nav,.mob-nav-overlay,.mob-nav-sheet,#top-btn,#progress-bar{display:none!important;}
+  #main{margin-left:0;}
+  .topic{page-break-inside:avoid;}
+  .sec-header{page-break-before:always;}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='../../index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="../../assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">@surgicalInsightHub</div></div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 19.07l1.41-1.41M17.66 6.34l1.41-1.41M12 7a5 5 0 100 10m0 0a5 5 0 100-10z"/></svg>
+      <svg class="moon-icon" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+    <div class="nav-links-pill">
+      <a href="../../notes.html" class="active">Notes</a>
+      <a href="../../podcast.html">Podcast</a>
+      <a href="../../review.html">Review</a>
+      <a href="../../mcq.html">MCQ Arena</a>
+      <a href="../../about.html">About</a>
+    </div>
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-btn">Get Notes →</a>
+    <button class="mob-nav-toggle" id="hamburgerMenu" aria-label="Open menu">☰ Menu</button>
+  </div>
+</nav>
+
+<!-- Mobile Navigation Sheet -->
+<div class="mob-nav-overlay" id="mobOverlay"></div>
+<div class="mob-nav-sheet" id="mobSheet">
+  <div class="mob-nav-handle" id="mobClose"></div>
+  <a href="../../index.html">Home</a>
+  <a href="../../notes.html" class="active">Notes</a>
+  <a href="../../podcast.html">Podcast</a>
+  <a href="../../review.html">Review</a>
+  <a href="../../mcq.html">MCQ Arena</a>
+  <a href="../../about.html">About</a>
+  <a href="https://t.me/sugicalInsightHub" target="_blank" style="margin-top:20px;display:block;text-align:center;background:var(--brand-gold);color:#1a1208;padding:12px;border-radius:100px;">Join Telegram</a>
+</div>
+
+<script src="../../js/nav-pill.js"></script>
+<script>
+  const themeToggle = document.getElementById('themeToggle');
+  const sunIcon = document.querySelector('.sun-icon');
+  const moonIcon = document.querySelector('.moon-icon');
+  function updateIcons(theme) {
+    if (theme === 'dark') { if(sunIcon) sunIcon.style.display='none'; if(moonIcon) moonIcon.style.display='block'; }
+    else { if(sunIcon) sunIcon.style.display='block'; if(moonIcon) moonIcon.style.display='none'; }
+  }
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  updateIcons(currentTheme);
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const root = document.documentElement;
+      let newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', newTheme);
+      localStorage.setItem('sih-theme', newTheme);
+      updateIcons(newTheme);
+    });
+  }
+  const mobToggle = document.getElementById('hamburgerMenu');
+  const mobOverlay = document.getElementById('mobOverlay');
+  const mobSheet = document.getElementById('mobSheet');
+  const mobClose = document.getElementById('mobClose');
+  if(mobToggle) mobToggle.addEventListener('click', () => { mobOverlay.style.display='block'; setTimeout(()=>mobSheet.classList.add('open'),10); });
+  function closeNav() { mobSheet.classList.remove('open'); setTimeout(()=>mobOverlay.style.display='none',300); }
+  if(mobOverlay) mobOverlay.addEventListener('click', closeNav);
+  if(mobClose) mobClose.addEventListener('click', closeNav);
+</script>
+
+<div id="progress-bar"></div>
+
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <div class="logo">Surgical Insight Hub</div>
+    <div class="sub">Thyroidectomy · Monograph Series</div>
+  </div>
+  <div id="sidebar-search">
+    <input type="text" id="search-input" placeholder="Search topics…" oninput="filterNav(this.value)">
+  </div>
+  <div id="sidebar-nav">
+    <div class="vol-label">Pillar 1 — Pre-Op Optimization</div>
+    <a class="nav-item" href="#p1a"><span class="num">1.1</span>Clinical Workup</a>
+    <a class="nav-item" href="#p1b"><span class="num">1.2</span>Risk Stratification</a>
+    <a class="nav-item" href="#p1c"><span class="num">1.3</span>Immediate Pre-Op</a>
+    <div class="vol-label">Pillar 2 — The Operative Game Plan</div>
+    <a class="nav-item" href="#p2a"><span class="num">2.1</span>Setup &amp; Positioning</a>
+    <a class="nav-item" href="#p2b"><span class="num">2.2</span>Phase 1-4: Access to Inferior Pole</a>
+    <a class="nav-item" href="#p2c"><span class="num">2.3</span>Phase 5-8: RLN to Closure</a>
+    <a class="nav-item" href="#p2d"><span class="num">2.4</span>The Critical View</a>
+    <div class="vol-label">Pillar 3 — Pearls &amp; Bail-Outs</div>
+    <a class="nav-item" href="#p3a"><span class="num">3.1</span>Consultant Pearls</a>
+    <a class="nav-item" href="#p3b"><span class="num">3.2</span>The Bail-Out Point</a>
+    <div class="vol-label">Pillar 4 — Post-Op Care</div>
+    <a class="nav-item" href="#p4a"><span class="num">4.1</span>Immediate Recovery (24h)</a>
+    <a class="nav-item" href="#p4b"><span class="num">4.2</span>Clinic Follow-up</a>
+    <div class="vol-label">Pillar 5 — Complications</div>
+    <a class="nav-item" href="#p5a"><span class="num">5.1</span>Post-op Hematoma</a>
+    <a class="nav-item" href="#p5b"><span class="num">5.2</span>Hypocalcaemia</a>
+    <a class="nav-item" href="#p5c"><span class="num">5.3</span>RLN Injury</a>
+    <div class="vol-label">Quick Reference</div>
+    <a class="nav-item" href="#rapid">High-Yield Board Facts</a>
+  </div>
+</nav>
+
+<main id="main">
+<section id="hero">
+  <div class="eyebrow">Surgical Insight Hub · Monograph Series · ABSITE · PGY-3 Framework</div>
+  <h1>Thyroidectomy</h1>
+  <p class="subtitle">Total, Hemithyroidectomy &amp; Completion</p>
+  <div class="badges">
+    <span class="badge">ATA Guidelines</span>
+    <span class="badge">Bethesda System</span>
+    <span class="badge">IONM Standard</span>
+  </div>
+</section>
+
+<div class="content-wrap">
+
+<div class="callout warn" style="margin-top: 40px;">
+  <span class="label">⚠ Read Before Proceeding</span>
+  One thing upfront: thyroid surgery has a deceptively forgiving reputation. It sits in the neck, it's "superficial," and most patients are young and fit. That reputation is wrong. The recurrent laryngeal nerve runs in millimeters of your dissection plane. The parathyroids are invisible until they're not there. A post-op hematoma kills in 20 minutes. This operation demands the same discipline as any major visceral case, arguably more, because the consequences of inattention are immediate and permanent.
+</div>
+
+<div class="sec-header s1">
+  <span class="sec-badge">PILLAR 1</span>
+  <span class="sec-title">Pre-operative Optimization &amp; Preparation</span>
+</div>
+
+<section class="topic s1" id="p1a">
+  <div class="topic-header"><span class="topic-num">1.1</span><h2>Clinical Workup</h2></div>
+  
+  <h3>History: what actually changes your operative plan</h3>
+  <ul>
+    <li><strong>Prior neck surgery or radiation:</strong> distorts tissue planes, increases RLN risk dramatically.</li>
+    <li><strong>Voice change pre-operatively:</strong> document it precisely. If the voice is already abnormal, you need pre-op laryngoscopy to establish baseline RLN function before you go anywhere near that nerve.</li>
+    <li><strong>Dysphagia or dyspnea:</strong> suggests substernal extension or tracheal compression; changes your approach.</li>
+    <li><strong>Symptoms of hyper/hypothyroidism:</strong> need to be controlled before elective surgery. Tachycardia, tremor, heat intolerance = not ready.</li>
+    <li><strong>Family history:</strong> MEN2, familial medullary thyroid carcinoma, or hyperparathyroidism changes your workup and possibly your operative scope.</li>
+    <li><strong>Lithium, amiodarone use:</strong> both affect thyroid function. Amiodarone-induced thyrotoxicosis requires specific pre-op management.</li>
+  </ul>
+
+  <h3>Biochemistry: the mandatory panel</h3>
+  <ul>
+    <li><strong>TSH:</strong> always, first. A suppressed TSH in a patient with a nodule means hyperfunctioning tissue; a toxic goitre needs medical optimization before elective surgery.</li>
+    <li><strong>Free T3 and Free T4:</strong> if TSH is abnormal.</li>
+    <li><strong>Serum calcium and PTH:</strong> baseline parathyroid function before you operate. If post-op calcium drops, you need to know where it started.</li>
+    <li><strong>Calcitonin:</strong> if medullary thyroid carcinoma is suspected. Elevated calcitonin mandates pre-op adrenal workup.</li>
+    <li><strong>Catecholamines / metanephrines:</strong> if MEN2 is on the differential. Operate on phaeochromocytoma first, always, or you will kill the patient on induction.</li>
+    <li><strong>Anti-TPO, anti-thyroglobulin antibodies:</strong> if Hashimoto's suspected. These patients have firmer, more vascular glands.</li>
+    <li><strong>Thyroglobulin:</strong> baseline for differentiated thyroid carcinoma; post-op surveillance marker.</li>
+  </ul>
+
+  <h3>Imaging &amp; Diagnostics</h3>
+  <ul>
+    <li><strong>Ultrasound neck:</strong> mandatory for every thyroid case.
+      <ul>
+        <li>Nodule characteristics: size, composition, echogenicity, margins, calcifications (microcalcifications = higher malignancy risk), vascularity.</li>
+        <li>Lymph node mapping: central and lateral compartments. Any suspicious node changes your operative scope.</li>
+        <li>Contralateral lobe: always assess. You may find pathology that changes total vs. hemi decision.</li>
+      </ul>
+    </li>
+    <li><strong>CT neck and chest:</strong> indicated for substernal goitre, suspected tracheal deviation/compression, locally advanced/invasive malignancy, or lateral neck lymphadenopathy requiring compartment dissection. <em>Do not give IV contrast if radioiodine is planned within 2 months.</em></li>
+    <li><strong>Laryngoscopy (nasopharyngoscopy):</strong> mandatory if pre-existing voice change, prior neck surgery or radiation, large/invasive goitre, or recurrent thyroid surgery.</li>
+  </ul>
+
+  <div class="table-wrap s1-tbl"><table>
+    <thead><tr><th>Bethesda Category</th><th>Interpretation</th><th>Clinical Action</th></tr></thead>
+    <tbody>
+      <tr><td><strong>I</strong></td><td>Non-diagnostic</td><td>Repeat FNAC</td></tr>
+      <tr><td><strong>II</strong></td><td>Benign</td><td>Surveillance unless symptomatic</td></tr>
+      <tr><td><strong>III-IV</strong></td><td>AUS/FLUS, Follicular Neoplasm</td><td>Molecular testing or diagnostic hemithyroidectomy</td></tr>
+      <tr><td><strong>V-VI</strong></td><td>Suspicious / Malignant</td><td>Total thyroidectomy in most cases</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="topic s1" id="p1b">
+  <div class="topic-header"><span class="topic-num">1.2</span><h2>Risk Stratification</h2></div>
+  <div class="table-wrap s1-tbl"><table>
+    <thead><tr><th>Score/Tool</th><th>Application</th><th>Impact on Plan</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ASA</strong></td><td>Global operative risk</td><td>ASA III+ dictates strict pre-op optimization; consider regional anesthesia input.</td></tr>
+      <tr><td><strong>ATA Risk</strong></td><td>Malignancy recurrence risk</td><td>Determines extent of surgery, central neck dissection need, RAI candidacy.</td></tr>
+      <tr><td><strong>MACIS / TNM</strong></td><td>Prognosis for differentiated cancer</td><td>Guides post-op adjuvant planning; informs consent.</td></tr>
+      <tr><td><strong>NSQIP</strong></td><td>30-day morbidity</td><td>High BMI, prior radiation, age &gt;70 raise neck hematoma and hypocalcemia risk.</td></tr>
+    </tbody>
+  </table></div>
+  
+  <h3>Controlling Hyperthyroidism</h3>
+  <ul>
+    <li>Must be controlled before elective surgery. A patient with a resting HR &gt;100 and tremor is not ready for the operating room.</li>
+    <li><strong>Graves' disease:</strong> anti-thyroid drugs (carbimazole or PTU) until euthyroid. Beta-blockers for symptom control. Lugol's iodine 10 drops TDS for 10 days pre-op to reduce vascularity. <em>Do not use without anti-thyroid drugs due to risk of thyroid storm.</em></li>
+  </ul>
+</section>
+
+<section class="topic s1" id="p1c">
+  <div class="topic-header"><span class="topic-num">1.3</span><h2>Immediate Pre-operative Protocols</h2></div>
+  
+  <ul>
+    <li><strong>Antibiotic Prophylaxis:</strong> Evidence for clean cases is weak but widely practiced. If given: Cefazolin 1g IV within 60 minutes of incision. <em>Always give for completion thyroidectomy, re-operative surgery, or if a neck dissection is added.</em></li>
+    <li><strong>DVT Prophylaxis:</strong> Mechanical compression devices pre-induction. Pharmacological LMWH for intermediate/high-risk patients.</li>
+    <li><strong>Consent Non-Negotiables:</strong>
+      <ul>
+        <li><strong>RLN injury:</strong> temporary (5-10%) vs. permanent (&lt;1% unilateral, &lt;0.5% bilateral). Bilateral permanent injury = tracheostomy. State this plainly.</li>
+        <li><strong>Hypoparathyroidism:</strong> temporary (up to 30% transient hypocalcaemia) vs. permanent (&lt;2%). Lifelong calcium and vitamin D supplementation.</li>
+        <li><strong>Post-operative hematoma:</strong> 1-2%; can be life-threatening and may require emergency bedside wound opening.</li>
+        <li><strong>Hypothyroidism:</strong> certain after total thyroidectomy. Lifelong levothyroxine.</li>
+        <li><strong>Voice change / hoarseness:</strong> can happen even without RLN injury.</li>
+        <li><strong>SLN injury:</strong> external branch injury causes loss of high-pitch voice. Distressful for singers/public speakers.</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<div class="sec-header s2">
+  <span class="sec-badge">PILLAR 2</span>
+  <span class="sec-title">The Operative Game Plan</span>
+</div>
+
+<section class="topic s2" id="p2a">
+  <div class="topic-header"><span class="topic-num">2.1</span><h2>Setup &amp; Positioning</h2></div>
+  <ul>
+    <li><strong>Positioning:</strong> Supine with a sandbag or gel roll placed horizontally between the shoulder blades to extend the neck and elevate the thyroid gland into the wound. Avoid excessive extension in elderly patients with cervical spondylosis. Table in 15-20° reverse Trendelenburg to reduce venous engorgement.</li>
+    <li><strong>Prep and drape:</strong> Chin to nipples, laterally to both anterior axillary lines.</li>
+    <li><strong>Instruments:</strong> Bipolar diathermy (monopolar is too imprecise near nerves). Harmonic scalpel or LigaSure for vessel sealing. Fine right-angle clamps. Small self-retaining retractor (Joll's).</li>
+    <li><strong>Intraoperative Neuromonitoring (IONM):</strong> EMG endotracheal tube. Conduct a signal check (L1) before dissection begins. Loss of signal means immediate reassessment; consider a staged second side to protect the contralateral cord if unilateral signal is lost.</li>
+  </ul>
+</section>
+
+<section class="topic s2" id="p2b">
+  <div class="topic-header"><span class="topic-num">2.2</span><h2>Phase 1-4: Access to the Inferior Pole</h2></div>
+  
+  <h3>Phase 1: Incision and Subplatysmal Flap Elevation</h3>
+  <p>Mark your incision pre-operatively with the patient sitting upright in a skin crease 1-2 fingerbreadths above the sternal notch. Elevate subplatysmal flaps superiorly to the thyroid cartilage and inferiorly to the sternal notch. Stay in the plane between platysma and the anterior jugular veins.</p>
+  
+  <h3>Phase 2: Midline Strap Muscle Division</h3>
+  <p>Identify the avascular midline raphe between the strap muscles. Separate them laterally off the thyroid capsule. Stay on the capsule. Bleeding here usually means you've gone lateral into the pretracheal fascia.</p>
+
+  <h3>Phase 3: Identification and Ligation of Superior Pole Vessels</h3>
+  <p>The external branch of the superior laryngeal nerve (EBSLN) is at risk here. Rotate the gland medially. The EBSLN runs on the inferior pharyngeal constrictor. If not visible, ligate the superior pole vessels individually and close to the capsule. <em>Do not mass-ligate the superior pole.</em></p>
+
+  <h3>Phase 4: Inferior Pole and Middle Thyroid Vein</h3>
+  <p>Ligate the short, fragile middle thyroid vein early. Mobilize the inferior pole off the trachea. The inferior parathyroids are frequently found here embedded in fat.</p>
+</section>
+
+<section class="topic s2" id="p2c">
+  <div class="topic-header"><span class="topic-num">2.3</span><h2>Phase 5-8: RLN to Closure</h2></div>
+
+  <div class="callout warn">
+    <span class="label">The Core of the Operation</span>
+    Identify the RLN before you ligate anything in the central compartment. There is no acceptable alternative.
+  </div>
+  
+  <h3>Phase 5: RLN Identification</h3>
+  <ul>
+    <li><strong>Right RLN:</strong> approaches larynx obliquely from lateral to medial.</li>
+    <li><strong>Left RLN:</strong> more vertical course in the tracheoesophageal groove.</li>
+    <li>Dissect bluntly, parallel to the nerve. Use the nerve stimulator at 1mA. Once identified, trace it from the inferior thyroid artery to the cricothyroid joint.</li>
+    <li><strong>Berry's ligament:</strong> Divide this dense fibrous attachment under direct vision. The nerve passes through or immediately adjacent to it. This is the highest-risk point in the entire operation.</li>
+  </ul>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title">Anatomy of the Danger Zone: RLN and Inferior Thyroid Artery</div>
+    <svg width="100%" viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="680" height="320" fill="#FAFAF7" />
+      
+      <path d="M 280 50 L 280 300 M 400 50 L 400 300" stroke="#D1D5DB" stroke-width="4"/>
+      <path d="M 280 80 Q 340 100, 400 80 M 280 140 Q 340 160, 400 140 M 280 200 Q 340 220, 400 200 M 280 260 Q 340 280, 400 260" fill="none" stroke="#D1D5DB" stroke-width="12" stroke-linecap="round"/>
+      <text x="340" y="240" text-anchor="middle" font-size="14" font-weight="bold" fill="#9CA3AF">Trachea</text>
+
+      <path d="M 120 70 C 220 50, 260 150, 260 250 C 200 290, 100 240, 120 70 Z" fill="#8B3A3A" opacity="0.8"/>
+      <text x="180" y="160" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFFFFF">Retracted</text>
+      <text x="180" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFFFFF">Right Lobe</text>
+
+      <path d="M 20 220 C 100 220, 120 180, 200 180" fill="none" stroke="#DC2626" stroke-width="8"/>
+      <path d="M 200 180 L 230 150 M 200 180 L 230 200" fill="none" stroke="#DC2626" stroke-width="6"/>
+      <text x="80" y="210" font-size="11" font-weight="bold" fill="#991B1B">Inferior Thyroid Artery</text>
+
+      <path d="M 200 320 C 210 250, 220 180, 230 80" fill="none" stroke="#FBBF24" stroke-width="6" stroke-dasharray="8 4"/>
+      <text x="240" y="100" font-size="11" font-weight="bold" fill="#B45309">Recurrent Laryngeal Nerve</text>
+
+      <circle cx="215" cy="130" r="12" fill="#D97706" stroke="#92400E" stroke-width="2"/>
+      <text x="140" y="125" font-size="10" font-weight="bold" fill="#92400E">Superior</text>
+      <text x="140" y="140" font-size="10" font-weight="bold" fill="#92400E">Parathyroid</text>
+
+      <circle cx="230" cy="80" r="16" fill="none" stroke="#4A1525" stroke-width="2" stroke-dasharray="2 2"/>
+      <text x="80" y="85" font-size="11" font-weight="bold" fill="#4A1525">Berry's Ligament</text>
+      <line x1="170" y1="80" x2="210" y2="80" stroke="#4A1525" stroke-width="1"/>
+
+    </svg>
+  </div>
+
+  <h3>Phase 6: Parathyroid Identification and Preservation</h3>
+  <ul>
+    <li>Identify all four parathyroids. Preserve their vascular supply entering from a single pedicle. Do not dissect circumferentially around the gland.</li>
+    <li>If devascularized: mince into 1mm³ fragments and autotransplant into a pocket in the sternocleidomastoid muscle. Close and mark with a clip. Document it.</li>
+  </ul>
+
+  <h3>Phase 7: Gland Removal and Hemostasis</h3>
+  <p>Detach the lobe. For a total thyroidectomy, repeat the sequence. Meticulous hemostasis before closure using bipolar. Irrigate and inspect with the table tilted to Trendelenburg.</p>
+
+  <h3>Phase 8: Closure</h3>
+  <p>Approximate the strap muscles with continuous 2-0 Vicryl (do not over-tighten). Close platysma and skin. Drain placement is controversial but consider it for completion cases, significant dissections, or hypervascular glands.</p>
+</section>
+
+<section class="topic s2" id="p2d">
+  <div class="topic-header"><span class="topic-num">2.4</span><h2>The Critical View in Thyroid Surgery</h2></div>
+  <p>There is no single "critical view" analogous to laparoscopic cholecystectomy, but the non-negotiable confirmations before any ligature or division are:</p>
+  <ul>
+    <li><strong>RLN is identified</strong> and traced along its entire course.</li>
+    <li><strong>IONM signal is confirmed</strong> (if available).</li>
+    <li><strong>Parathyroids are identified</strong> and accounted for with intact or autotransplanted blood supply.</li>
+    <li><strong>Berry's ligament is divided under direct vision</strong> with the nerve seen and protected.</li>
+  </ul>
+</section>
+
+<div class="sec-header s3">
+  <span class="sec-badge">PILLAR 3</span>
+  <span class="sec-title">Technical Pearls &amp; Bail-Out Strategies</span>
+</div>
+
+<section class="topic s3" id="p3a">
+  <div class="topic-header"><span class="topic-num">3.1</span><h2>Consultant Pearls</h2></div>
+  
+  <div class="callout pearl">
+    <span class="label">Consultant Pearl #1: Lateral-to-Medial vs. Medial-to-Lateral</span>
+    In a large, firm, or re-operative gland, the standard superior-to-medial approach puts you in trouble. Switch to a lateral approach: find the RLN first in the inferior tracheoesophageal groove, trace it superiorly under direct vision, and dissect the gland off the nerve from below upward. The nerve is your guide, not an obstacle.
+  </div>
+
+  <div class="callout pearl">
+    <span class="label">Consultant Pearl #2: The Parathyroid You Think Is Gone</span>
+    When closing, search the removed thyroid capsule and attached fat for a tan, 4-6mm oval structure ex vivo. An inadvertently removed parathyroid found on the back table can be autotransplanted. This 60-second check prevents permanent hypoparathyroidism.
+  </div>
+
+  <div class="callout pearl">
+    <span class="label">Consultant Pearl #3: The Substernal Goitre</span>
+    Ninety-five percent of substernal goitres can be delivered through the cervical incision because the blood supply is superior. The 5% that cannot require a sternotomy. Know this pre-operatively from your CT. Do not attempt to yank a substernal goitre out blindly.
+  </div>
+</section>
+
+<section class="topic s3" id="p3b">
+  <div class="topic-header"><span class="topic-num">3.2</span><h2>The Bail-Out Point</h2></div>
+  <p>Stop and call your senior when:</p>
+  <ul>
+    <li><strong>Cannot find the RLN</strong> after appropriate dissection. Use IONM to guide.</li>
+    <li><strong>IONM signal is lost on one side.</strong> Do not proceed to the contralateral side until investigated. Stage the second side if necessary.</li>
+    <li><strong>Structure looks wrong.</strong> If you've divided something and it looks wrong, stop immediately.</li>
+    <li><strong>Active bleeding in central compartment.</strong> Compress and call. Blind clamping near the RLN is more dangerous than the bleeding.</li>
+    <li><strong>Unexpected invasive malignancy</strong> firmly adherent to trachea/carotid.</li>
+    <li><strong>Hemodynamic instability in a hyperthyroid patient.</strong> Think thyroid storm. Call anesthesia urgently.</li>
+  </ul>
+</section>
+
+<div class="sec-header s4">
+  <span class="sec-badge">PILLAR 4</span>
+  <span class="sec-title">Post-operative Care &amp; Longitudinal Follow-up</span>
+</div>
+
+<section class="topic s4" id="p4a">
+  <div class="topic-header"><span class="topic-num">4.1</span><h2>Immediate Post-op (First 24 Hours)</h2></div>
+  
+  <h3>Recovery Room</h3>
+  <ul>
+    <li><strong>Airway assessment:</strong> Check hoarseness post-extubation. Stridor is a surgical emergency. Have re-intubation equipment available. Bilateral RLN palsy presents as acute respiratory distress.</li>
+    <li><strong>Hematoma surveillance:</strong> Check wound every 15-30 minutes. Signs include neck fullness, tracheal deviation, progressive dysphagia. <em>It can kill faster than the wound size suggests due to venous laryngeal engorgement.</em></li>
+  </ul>
+
+  <h3>Floor Orders</h3>
+  <ul>
+    <li><strong>Calcium monitoring:</strong> Serum calcium and PTH at 4-6 hours post-op and at 24 hours. PTH &lt;10pg/mL at 4-6 hours means high risk of significant hypocalcaemia.</li>
+    <li><strong>Supplementation:</strong> Calcium carbonate 500mg TDS + calcitriol 0.25mcg BD starting POD1 is a reasonable default. Ask specifically about perioral tingling and Chvostek's/Trousseau's signs on rounds.</li>
+    <li><strong>Pain &amp; Diet:</strong> Acetaminophen 1g Q6H scheduled. Soft diet same day, regular diet POD1.</li>
+    <li><strong>Levothyroxine:</strong> Start morning of POD1. 1.6mcg/kg ideal body weight.</li>
+  </ul>
+</section>
+
+<section class="topic s4" id="p4b">
+  <div class="topic-header"><span class="topic-num">4.2</span><h2>Clinic Follow-up</h2></div>
+  <ul>
+    <li><strong>2-week visit:</strong> Wound inspection, suture removal. Review voice; formal laryngoscopy if hoarse. Check calcium and adjust supplements.</li>
+    <li><strong>6-8 week visit:</strong> TSH and free T4. For cancer, target TSH suppression. Laryngoscopy if voice has not normalized. Pathology review.</li>
+    <li><strong>3-6 month visit (malignancy):</strong> Thyroglobulin baseline. RAI discussion if indicated. Neck ultrasound to check central compartment.</li>
+    <li><strong>Annual follow-up (malignancy):</strong> Thyroglobulin + ultrasound.</li>
+  </ul>
+</section>
+
+<div class="sec-header s5">
+  <span class="sec-badge">PILLAR 5</span>
+  <span class="sec-title">Complication Management</span>
+</div>
+
+<section class="topic s5" id="p5a">
+  <div class="topic-header"><span class="topic-num">5.1</span><h2>Complication 1: Post-operative Neck Hematoma</h2></div>
+  <ul>
+    <li><strong>Recognition:</strong> 90% occur within 24 hours. Swelling, disproportionate neck pain, dysphagia, anxiety, stridor (late sign).</li>
+    <li><strong>Immediate workup:</strong> Clinical diagnosis. <em>Do not waste time on imaging.</em> Inspect the wound immediately.</li>
+    <li><strong>Correction (Airway Compromise):</strong> Open the wound immediately at the bedside. Open all layers down to the strap muscles to release the hematoma and decompress venous laryngeal engorgement. Take to OR for formal exploration.</li>
+  </ul>
+</section>
+
+<section class="topic s5" id="p5b">
+  <div class="topic-header"><span class="topic-num">5.2</span><h2>Complication 2: Hypocalcaemia / Hypoparathyroidism</h2></div>
+  <ul>
+    <li><strong>Recognition:</strong> Transient cases peak at 24-48 hours. Mild symptoms: perioral tingling. Moderate: Chvostek's/Trousseau's positive. Severe: tetany, laryngospasm.</li>
+    <li><strong>Workup:</strong> Serum calcium, albumin, magnesium, phosphate, PTH. ECG for QTc prolongation.</li>
+    <li><strong>Correction:</strong>
+      <ul>
+        <li><em>Mild:</em> Oral calcium carbonate 1-2g TDS + Calcitriol.</li>
+        <li><em>Moderate:</em> IV calcium gluconate 10ml of 10% solution over 10 minutes, followed by continuous infusion.</li>
+        <li><em>Severe:</em> Immediate IV calcium gluconate bolus 20ml over 10 minutes. ICU monitoring.</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section class="topic s5" id="p5c">
+  <div class="topic-header"><span class="topic-num">5.3</span><h2>Complication 3: Recurrent Laryngeal Nerve Injury</h2></div>
+  <ul>
+    <li><strong>Recognition:</strong> Immediate post-extubation hoarseness, breathy voice, ineffective cough. Bilateral injury causes acute post-extubation respiratory distress.</li>
+    <li><strong>Immediate workup:</strong> Laryngoscopy is mandatory for any post-op hoarseness.</li>
+    <li><strong>Correction:</strong>
+      <ul>
+        <li><em>Unilateral temporary:</em> Speech therapy. No operative intervention during the 6-12 month waiting period.</li>
+        <li><em>Unilateral permanent:</em> Injection medialization (temporary) or Thyroplasty (permanent).</li>
+        <li><em>Bilateral acute:</em> Re-intubate immediately. Tracheostomy likely required.</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<div class="rapid-ref" id="rapid">
+  <h3>Rapid Reference — High-Yield Board Facts</h3>
+  <table>
+    <thead><tr><th>Topic</th><th>Key Fact</th></tr></thead>
+    <tbody>
+      <tr><td>EBSLN Anatomy</td><td>Runs on the inferior pharyngeal constrictor; parallel/medial to superior thyroid artery.</td></tr>
+      <tr><td>Right RLN Location</td><td>Loops around subclavian artery; oblique path from lateral to medial.</td></tr>
+      <tr><td>Left RLN Location</td><td>Loops around aortic arch; more vertical path in tracheoesophageal groove.</td></tr>
+      <tr><td>Berry's Ligament</td><td>Highest risk point; the RLN passes through or immediately adjacent to it.</td></tr>
+      <tr><td>Parathyroid devascularization</td><td>If blood supply is lost, mince into 1mm³ pieces and autotransplant into SCM muscle.</td></tr>
+      <tr><td>Post-op Hematoma</td><td>Airway compromise? <strong>Open wound at the bedside immediately</strong> down to strap muscles.</td></tr>
+      <tr><td>Hypocalcemia earliest symptom</td><td>Perioral tingling and fingertip numbness.</td></tr>
+      <tr><td>Hypocalcemia severe sign</td><td>Prolonged QTc on ECG, Tetany, Laryngospasm.</td></tr>
+      <tr><td>Bilateral RLN Injury</td><td>Cords adduct at midline; causes acute post-extubation respiratory distress.</td></tr>
+      <tr><td>Differentiated Cancer Target</td><td>Requires TSH suppression (0.1-0.5 or &lt;0.1), not just replacement dosing.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div></main>
+
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const progressBar = document.getElementById('progress-bar');
+const topBtn = document.getElementById('top-btn');
+const navItems = document.querySelectorAll('.nav-item');
+const sections = document.querySelectorAll('.topic[id], .rapid-ref[id]');
+
+window.addEventListener('scroll', () => {
+  const st = window.scrollY;
+  const dh = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.transform = `scaleX(${st / dh})`;
+  topBtn.classList.toggle('show', st > 400);
+  let current = '';
+  sections.forEach(s => { if (st >= s.offsetTop - 120) current = s.id; });
+  navItems.forEach(n => { n.classList.toggle('active', n.getAttribute('href') === '#' + current); });
+});
+
+function filterNav(query) {
+  const q = query.toLowerCase();
+  navItems.forEach(item => { item.style.display = (!q || item.textContent.toLowerCase().includes(q)) ? 'block' : 'none'; });
+  document.querySelectorAll('.vol-label').forEach(l => { l.style.display = 'block'; });
+}
+
+navItems.forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(item.getAttribute('href'));
+    if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+  });
+});
+
+document.querySelectorAll('.topic').forEach((el, i) => { el.style.animationDelay = `${i * 0.03}s`; });
+</script>
+</body>
+</html>
