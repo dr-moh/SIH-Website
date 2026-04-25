@@ -1,22 +1,5 @@
 /* shared.css - Shared styles for secondary pages (Notes, Podcast, etc) */
 
-.global-watermark {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 54px;
-  height: 54px;
-  opacity: 0.12;
-  z-index: 9999;
-  pointer-events: none;
-  filter: grayscale(1) drop-shadow(0 0 10px rgba(0,0,0,0.1));
-  transition: opacity 0.5s ease;
-}
-[data-theme="dark"] .global-watermark {
-  filter: invert(0.8) grayscale(1);
-  opacity: 0.08;
-}
-
 
 /* Hero Section */
 .page-hero {
