@@ -145,6 +145,28 @@
     </div>
   </div>
 
+  <!-- REQUEST PODCAST BOX -->
+  <section class="request-box-section" style="margin-top: 80px; padding: 0 24px;">
+    <div style="max-width: 800px; margin: 0 auto; background: var(--bg-secondary); border: 2px dashed var(--border-color); border-radius: 24px; padding: 40px; text-align: center; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -20px; right: -20px; font-size: 80px; opacity: 0.05; pointer-events: none;">🎙️</div>
+      <div class="ph-kicker">Listener Feedback</div>
+      <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--text-primary); margin-bottom: 12px;">Want to hear a specific Episode?</h2>
+      <p style="font-size: 0.9rem; color: var(--text-secondary); max-width: 450px; margin: 0 auto 24px;">Tell us which surgical topic or controversy we should cover in our next podcast episode.</p>
+      
+      <div id="requestForm" style="display: flex; gap: 10px; max-width: 500px; margin: 0 auto;">
+        <input type="text" id="topicInput" placeholder="e.g. Management of SBO, ERAS Protocols..." 
+               style="flex: 1; padding: 12px 20px; border-radius: 100px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary); font-family: inherit; outline: none;">
+        <button onclick="submitRequest('Podcast')" 
+                style="background: var(--brand-burgundy); color: #f0d080; border: none; border-radius: 100px; padding: 12px 24px; font-weight: 700; cursor: pointer; transition: transform 0.2s;">
+          Request Episode
+        </button>
+      </div>
+      <div id="requestSuccess" style="display: none; color: var(--brand-green); font-weight: 700; margin-top: 10px;">
+        ✓ Topic submitted! Keep an eye on your podcast feed.
+      </div>
+    </div>
+  </section>
+
   <div class="cta-strip">
     <div><h3>Never miss an episode.</h3><p>New episodes drop on Telegram first. Join the channel now.</p></div>
     <a href="https://t.me/sugicalInsightHub" target="_blank" class="cta-btn">Join Telegram →</a>
@@ -210,6 +232,37 @@ themeToggle.addEventListener('click', () => {
   applyTheme(newTheme);
   localStorage.setItem('sih-theme', newTheme);
 });
+
+// REQUEST LOGIC
+const SUPA_KEY = 'sb_publishable_Kl4RNEOxvmBewUToRv7HHw_2epulGkp';
+async function submitRequest(type) {
+  const input = document.getElementById('topicInput');
+  const success = document.getElementById('requestSuccess');
+  const form = document.getElementById('requestForm');
+  const topic = input.value.trim();
+  if (!topic) return;
+  try {
+    const res = await fetch('https://sxushsvvmyokoknnsbuj.supabase.co/rest/v1/testimonials', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: '[REQUEST] ' + type,
+        quote: topic,
+        role: 'Topic Request',
+        institution: window.location.pathname,
+        approved: false
+      })
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }
+  } catch(e) { console.error(e); }
+}
 </script>
 
 <script src="js/nav-pill.js"></script>
