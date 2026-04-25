@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCQ Arena — Surgical Insight Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',-apple-system,sans-serif;background:#faf7f2;color:#1a1208;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+.nav{position:fixed;top:14px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:200;pointer-events:none;}
+.nav-left,.nav-right{pointer-events:all;display:flex;align-items:center;gap:10px;}
+.nav-logo-pill{display:flex;align-items:center;gap:10px;background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid rgba(184,146,42,0.25);border-radius:100px;padding:6px 16px 6px 6px;box-shadow:0 2px 10px rgba(43,24,16,0.1);}
+.nav-logo-img{width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid #b8922a;background:#2b1810;flex-shrink:0;}
+.nav-logo-img img{width:100%;height:100%;object-fit:cover;}
+.nav-brand-text{font-size:.82rem;font-weight:800;color:#1a1208;letter-spacing:-.02em;line-height:1.1;}
+.nav-brand-sub{font-size:.58rem;font-weight:500;color:#b8922a;letter-spacing:.08em;text-transform:uppercase;}
+.nav-back{background:#2b1810;color:#f0d080;border-radius:100px;padding:8px 18px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid rgba(184,146,42,0.3);transition:opacity .15s;}
+.nav-back:hover{opacity:.82;}
+
+/* HERO */
+.mcq-hero{min-height:100vh;background:linear-gradient(160deg,#f5ede0 0%,#faf7f2 45%,#f0e8d8 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 24px 60px;text-align:center;position:relative;overflow:hidden;}
+.hero-blob{position:absolute;border-radius:50%;pointer-events:none;filter:blur(85px);}
+.hb1{width:600px;height:600px;top:-150px;left:-150px;background:radial-gradient(circle,#e8d5b0 0%,transparent 65%);opacity:.5;}
+.hb2{width:500px;height:500px;bottom:-100px;right:-100px;background:radial-gradient(circle,#dcc89a 0%,transparent 65%);opacity:.4;}
+.hero-kicker{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#b8922a;margin-bottom:16px;}
+.hero-title{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:900;color:#1a1208;letter-spacing:-.04em;line-height:1.0;margin-bottom:14px;}
+.hero-title span{color:#b8922a;}
+.hero-sub{font-size:.95rem;color:#6b5a40;max-width:480px;margin:0 auto 40px;line-height:1.65;}
+.hero-stats{display:flex;gap:24px;justify-content:center;margin-bottom:48px;flex-wrap:wrap;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-size:1.8rem;font-weight:900;color:#2b1810;letter-spacing:-.03em;line-height:1;}
+.hero-stat-label{font-size:.65rem;color:#a3927a;text-transform:uppercase;letter-spacing:.08em;margin-top:3px;}
+
+/* SETUP CARD */
+.setup-card{background:#fff;border:1px solid rgba(184,146,42,0.2);border-radius:20px;padding:36px;max-width:640px;width:100%;box-shadow:0 8px 32px rgba(43,24,16,0.08);position:relative;z-index:2;}
+.setup-title{font-size:1.1rem;font-weight:800;color:#1a1208;margin-bottom:6px;letter-spacing:-.02em;}
+.setup-sub{font-size:.8rem;color:#6b5a40;margin-bottom:24px;}
+.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.setup-field{display:flex;flex-direction:column;gap:5px;}
+.setup-field label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;}
+.setup-field input,.setup-field select{font-family:inherit;font-size:.82rem;color:#1a1208;background:#faf7f2;border:1px solid rgba(184,146,42,0.25);border-radius:10px;padding:10px 12px;outline:none;transition:border-color .15s;width:100%;}
+.setup-field input:focus,.setup-field select:focus{border-color:#b8922a;background:#fff;}
+.setup-field select option{background:#fff;}
+.setup-section-title{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;margin:16px 0 8px;}
+.specialty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;margin-bottom:16px;max-height:160px;overflow-y:auto;padding-right:4px;}
+.spec-chip{padding:7px 12px;border-radius:8px;border:1px solid rgba(184,146,42,0.25);background:#faf7f2;font-size:.75rem;font-weight:600;color:#6b5a40;cursor:pointer;transition:all .15s;text-align:center;}
+.spec-chip:hover{border-color:#b8922a;color:#1a1208;}
+.spec-chip.active{background:#2b1810;color:#f0d080;border-color:#2b1810;}
+.qcount-row{display:flex;gap:8px;margin-bottom:20px;}
+.qcount-btn{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(184,146,42,0.25);background:#faf7f2;font-size:.8rem;font-weight:700;color:#6b5a40;cursor:pointer;transition:all .15s;text-align:center;}
+.qcount-btn.active{background:#2b1810;color:#f0d080;border-color:#2b1810;}
+.start-btn{width:100%;background:#2b1810;color:#f0d080;border:none;border-radius:12px;padding:14px;font-family:inherit;font-size:.9rem;font-weight:800;cursor:pointer;transition:opacity .15s;letter-spacing:-.01em;}
+.start-btn:hover{opacity:.85;}
+.start-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* ARENA */
+.arena{display:none;min-height:100vh;padding:80px 16px 40px;background:#faf7f2;}
+.arena-inner{max-width:760px;margin:0 auto;}
+
+/* PROGRESS BAR */
+.prog-wrap{margin-bottom:20px;}
+.prog-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.prog-label{font-size:.72rem;font-weight:700;color:#b8922a;letter-spacing:.06em;text-transform:uppercase;}
+.prog-score{font-size:.72rem;font-weight:700;color:#1a1208;font-family:monospace;}
+.prog-bar{height:4px;background:rgba(184,146,42,0.15);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,#2b1810,#b8922a);border-radius:2px;transition:width .4s ease;}
+.q-steps{display:flex;gap:4px;margin-top:8px;}
+.q-step{flex:1;height:4px;border-radius:2px;background:rgba(184,146,42,0.15);}
+.q-step.done-correct{background:#16a34a;}
+.q-step.done-wrong{background:#a31515;}
+.q-step.current{background:#b8922a;}
+
+/* QUESTION CARD */
+.q-card{background:#fff;border:1px solid rgba(184,146,42,0.18);border-radius:20px;padding:28px;margin-bottom:16px;box-shadow:0 4px 16px rgba(43,24,16,0.06);}
+.q-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.q-badge{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f0d080;background:#2b1810;border-radius:6px;padding:4px 10px;}
+.q-topic-badge{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;background:rgba(184,146,42,0.1);border-radius:6px;padding:4px 10px;}
+.q-num{font-size:.7rem;font-family:monospace;color:#a3927a;}
+.q-text{font-size:.95rem;font-weight:600;color:#1a1208;line-height:1.65;margin-bottom:20px;}
+
+/* OPTIONS */
+.options{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:#faf7f2;border:1.5px solid rgba(184,146,42,0.18);border-radius:12px;cursor:pointer;transition:all .18s;user-select:none;}
+.opt:hover:not(.locked){border-color:#b8922a;background:rgba(184,146,42,0.06);}
+.opt-letter{width:26px;height:26px;border-radius:50%;background:#fff;border:1.5px solid rgba(184,146,42,0.3);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:#6b5a40;flex-shrink:0;margin-top:1px;transition:all .18s;}
+.opt-text{font-size:.85rem;color:#1a1208;line-height:1.5;padding-top:2px;}
+.opt.selected{border-color:#b8922a;background:rgba(184,146,42,0.08);}
+.opt.selected .opt-letter{background:#b8922a;color:#2b1810;border-color:#b8922a;}
+.opt.correct{border-color:#16a34a;background:#f0fdf4;}
+.opt.correct .opt-letter{background:#16a34a;color:#fff;border-color:#16a34a;}
+.opt.wrong{border-color:#a31515;background:#fff0f0;}
+.opt.wrong .opt-letter{background:#a31515;color:#fff;border-color:#a31515;}
+.opt.locked{cursor:default;}
+.opt.dimmed{opacity:.55;}
+
+/* SUBMIT */
+.submit-btn{width:100%;background:#2b1810;color:#f0d080;border:none;border-radius:12px;padding:13px;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;transition:opacity .15s;margin-top:12px;letter-spacing:-.01em;}
+.submit-btn:hover{opacity:.85;}
+.submit-btn:disabled{opacity:.35;cursor:not-allowed;}
+
+/* SHARP DEBRIEF */
+.sharp-card{background:#2b1810;border-radius:20px;padding:24px;margin-top:12px;display:none;border:1px solid rgba(184,146,42,0.25);}
+.sharp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.sharp-title{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#b8922a;}
+.sharp-result{display:flex;align-items:center;gap:6px;font-size:.75rem;font-weight:700;}
+.sharp-result.correct{color:#4ade80;}
+.sharp-result.wrong{color:#f87171;}
+.sharp-rows{display:flex;flex-direction:column;gap:12px;}
+.sharp-row{display:flex;gap:10px;align-items:flex-start;}
+.sharp-badge{width:22px;height:22px;border-radius:5px;background:#b8922a;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#2b1810;flex-shrink:0;margin-top:1px;}
+.sharp-content{}
+.sharp-row-title{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(184,146,42,0.7);margin-bottom:3px;}
+.sharp-row-text{font-size:.8rem;color:rgba(255,255,255,0.8);line-height:1.6;}
+.sharp-divider{height:1px;background:rgba(184,146,42,0.15);margin:6px 0;}
+.opt-explanations{margin-top:10px;}
+.opt-exp{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid rgba(184,146,42,0.1);}
+.opt-exp:last-child{border-bottom:none;}
+.opt-exp-letter{font-size:.65rem;font-weight:800;color:#b8922a;width:16px;flex-shrink:0;margin-top:2px;}
+.opt-exp-text{font-size:.77rem;color:rgba(255,255,255,0.65);line-height:1.5;}
+.guideline-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(184,146,42,0.1);border:1px solid rgba(184,146,42,0.25);border-radius:6px;padding:5px 10px;font-size:.65rem;color:#b8922a;font-weight:600;margin-top:10px;}
+.takehome{background:rgba(184,146,42,0.12);border-left:3px solid #b8922a;padding:10px 14px;border-radius:0 8px 8px 0;margin-top:12px;}
+.takehome-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;margin-bottom:4px;}
+.takehome-text{font-size:.8rem;color:#f0d080;font-weight:600;line-height:1.5;}
+.next-btn{width:100%;background:#b8922a;color:#2b1810;border:none;border-radius:12px;padding:13px;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;transition:opacity .15s;margin-top:16px;}
+.next-btn:hover{opacity:.85;}
+
+/* RESULTS */
+.results{display:none;min-height:100vh;padding:80px 16px 60px;background:#faf7f2;}
+.results-inner{max-width:720px;margin:0 auto;}
+.results-card{background:#fff;border:1px solid rgba(184,146,42,0.2);border-radius:24px;padding:40px;text-align:center;box-shadow:0 8px 32px rgba(43,24,16,0.08);margin-bottom:24px;}
+.results-icon{font-size:3rem;margin-bottom:16px;}
+.results-title{font-size:1.8rem;font-weight:900;color:#1a1208;letter-spacing:-.03em;margin-bottom:6px;}
+.results-name{font-size:1rem;color:#b8922a;font-weight:700;margin-bottom:20px;}
+.score-ring{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#2b1810,#b8922a);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(43,24,16,0.2);}
+.score-num{font-size:2.2rem;font-weight:900;color:#f0d080;line-height:1;}
+.score-total{font-size:.7rem;color:rgba(240,208,128,0.6);letter-spacing:.06em;}
+.results-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
+.results-meta-card{background:#faf7f2;border-radius:12px;padding:14px;text-align:center;}
+.results-meta-num{font-size:1.4rem;font-weight:900;color:#2b1810;line-height:1;}
+.results-meta-label{font-size:.6rem;color:#a3927a;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;}
+.results-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.results-btn{flex:1;min-width:140px;padding:13px;border-radius:12px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;transition:opacity .15s;border:none;}
+.results-btn-primary{background:#2b1810;color:#f0d080;}
+.results-btn-secondary{background:rgba(184,146,42,0.1);color:#2b1810;border:1px solid rgba(184,146,42,0.3)!important;}
+.results-btn:hover{opacity:.82;}
+
+/* LEADERBOARD */
+.lb-card{background:#fff;border:1px solid rgba(184,146,42,0.2);border-radius:20px;overflow:hidden;box-shadow:0 4px 16px rgba(43,24,16,0.06);}
+.lb-header{background:#2b1810;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;}
+.lb-title{font-size:.8rem;font-weight:700;color:#f0d080;}
+.lb-sub{font-size:.65rem;color:rgba(255,255,255,0.4);}
+.lb-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid rgba(184,146,42,0.08);}
+.lb-row:last-child{border-bottom:none;}
+.lb-row.highlight{background:rgba(184,146,42,0.06);}
+.lb-rank{font-size:.75rem;font-weight:800;color:#b8922a;width:20px;text-align:center;font-family:monospace;}
+.lb-rank.gold{color:#f0d080;}
+.lb-rank.silver{color:#a3927a;}
+.lb-avatar{width:34px;height:34px;border-radius:50%;background:#2b1810;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#f0d080;flex-shrink:0;border:1.5px solid rgba(184,146,42,0.3);}
+.lb-info{flex:1;min-width:0;}
+.lb-name{font-size:.82rem;font-weight:700;color:#1a1208;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lb-detail{font-size:.65rem;color:#a3927a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lb-score{text-align:right;}
+.lb-pct{font-size:.9rem;font-weight:800;color:#2b1810;font-family:monospace;}
+.lb-qcount{font-size:.62rem;color:#a3927a;}
+.lb-loading{padding:24px;text-align:center;font-size:.8rem;color:#a3927a;}
+.lb-empty{padding:24px;text-align:center;font-size:.8rem;color:#a3927a;}
+
+/* MOBILE */
+@media(max-width:600px){
+  .setup-grid{grid-template-columns:1fr;}
+  .specialty-grid{grid-template-columns:repeat(2,1fr);}
+  .results-meta-grid{grid-template-columns:repeat(2,1fr);}
+  .q-card{padding:18px;}
+  .sharp-card{padding:18px;}
+  .results-card{padding:24px;}
+  .hero-stats{gap:16px;}
+}
+
+
+
+
+
+.mob-back-btn{
+  display:none;
+  align-items:center;
+  gap:6px;
+  background:#2b1810;
+  border:1.5px solid #b8922a;
+  color:#f0d080;
+  border-radius:8px;
+  padding:7px 13px;
+  font-size:.75rem;
+  font-weight:700;
+  text-decoration:none;
+  font-family:inherit;
+  white-space:nowrap;
+}
+.mob-back-btn:hover{opacity:.85;}
+@media(max-width:620px){
+  .mob-back-btn{display:flex;}
+  .nav-links-pill,.nav-pill{display:none!important;}
+  .mob-nav-toggle{display:none!important;}
+}
+
+
+/* ── UNIFIED NAV ── */
+.nav{position:fixed;top:14px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:200;pointer-events:none;}
+.nav-left,.nav-right{pointer-events:all;display:flex;align-items:center;gap:10px;}
+.nav-logo-pill{display:flex;align-items:center;gap:10px;background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid rgba(184,146,42,0.25);border-radius:100px;padding:6px 16px 6px 6px;box-shadow:0 2px 10px rgba(43,24,16,0.1);}
+.nav-logo-img{width:46px;height:46px;border-radius:50%;overflow:hidden;border:2px solid #b8922a;background:#2b1810;flex-shrink:0;box-shadow:0 0 12px rgba(184,146,42,0.3);}
+.nav-logo-img img{width:100%;height:100%;object-fit:cover;}
+.nav-brand-text{font-size:.82rem;font-weight:800;color:#1a1208;letter-spacing:-.02em;line-height:1.1;}
+.nav-brand-sub{font-size:.58rem;font-weight:500;color:#b8922a;letter-spacing:.08em;text-transform:uppercase;}
+.nav-links-pill{display:flex;align-items:center;gap:2px;background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid rgba(184,146,42,0.22);border-radius:100px;padding:5px;box-shadow:0 2px 8px rgba(43,24,16,0.07);}
+.nav-links-pill a{font-size:.75rem;font-weight:600;color:#6b5a40;text-decoration:none;padding:5px 13px;border-radius:100px;transition:all .15s;white-space:nowrap;}
+.nav-links-pill a:hover,.nav-links-pill a.active{color:#1a1208;background:rgba(184,146,42,0.12);}
+.nav-tg-btn{background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid rgba(184,146,42,0.22);border-radius:100px;padding:9px 18px;font-size:.75rem;font-weight:600;color:#1a1208;text-decoration:none;box-shadow:0 2px 6px rgba(43,24,16,0.07);transition:all .15s;}
+.nav-tg-btn:hover{background:rgba(184,146,42,0.1);}
+.nav-cta-btn{background:#2b1810;color:#f0d080;border-radius:100px;padding:9px 20px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid rgba(184,146,42,0.3);transition:opacity .15s;}
+.nav-cta-btn:hover{opacity:.82;}
+.mob-back-btn{display:none;align-items:center;gap:6px;background:#2b1810;border:1.5px solid #b8922a;color:#f0d080;border-radius:8px;padding:7px 13px;font-size:.75rem;font-weight:700;text-decoration:none;white-space:nowrap;pointer-events:all;}
+.mob-back-btn:hover{opacity:.85;}
+@media(max-width:900px){.nav-links-pill{display:none!important;}.mob-back-btn{display:flex!important;}}
+
+.site-footer{border-top:1px solid rgba(184,146,42,0.2);padding:48px 24px 32px;max-width:1040px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;margin-bottom:40px;}
+.ft-brand-name{font-size:.92rem;font-weight:800;color:#1a1208;letter-spacing:-.02em;margin-bottom:5px;}
+.ft-brand p{font-size:.75rem;color:#a3927a;line-height:1.55;max-width:220px;margin-top:4px;}
+.ft-col h5{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;margin-bottom:12px;}
+.ft-col a{display:block;font-size:.78rem;color:#6b5a40;text-decoration:none;margin-bottom:7px;transition:color .15s;}
+.ft-col a:hover{color:#1a1208;}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding-top:24px;border-top:1px solid rgba(184,146,42,0.12);}
+.ft-bottom p{font-size:.68rem;color:#a3927a;}
+.ft-handle{font-size:.68rem;font-weight:700;color:#2b1810;}
+@media(max-width:700px){.ft-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" style="text-decoration:none;">
+      <div class="nav-logo-pill">
+        <div class="nav-logo-img"><img loading="lazy" src="Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+        <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">@sugicalInsightHub</div></div>
+      </div>
+    </a>
+    <div class="nav-links-pill">
+      <a href="index.html">Home</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="notes.html">Notes</a>
+      <a href="mcq.html" class="active" style="background:rgba(163,21,21,0.1);color:#a31515;font-weight:700;">MCQ Arena</a>
+      <a href="review.html" style="background:rgba(184,146,42,0.1);color:#7a5c00;font-weight:700;">AI Review</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <a href="index.html" class="mob-back-btn">&#8592; Home</a>
+  <div class="nav-right">
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-tg-btn">Telegram</a>
+    <a href="notes.html" class="nav-cta-btn">Get Notes &#8594;</a>
+  </div>
+</nav>
+
+<!-- SETUP SCREEN -->
+<div class="mcq-hero" id="setupScreen">
+  <div class="hero-blob hb1"></div>
+  <div class="hero-blob hb2"></div>
+  <div style="position:relative;z-index:2;width:100%;max-width:640px;">
+    <div class="hero-kicker">Surgical Insight Hub</div>
+    <h1 class="hero-title">MCQ <span>Practice</span><br>Arena</h1>
+    <p class="hero-sub">Board-style questions with SHARP debriefing after each answer. Your score goes on the global leaderboard.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num" id="totalQCount">20</div><div class="hero-stat-label">Questions</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label">Specialties</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">Global</div><div class="hero-stat-label">Leaderboard</div></div>
+    </div>
+
+    <div class="setup-card">
+      <div class="setup-title">Set up your session</div>
+      <div class="setup-sub">Fill in your details — your score will appear on the global leaderboard.</div>
+      <div class="setup-grid">
+        <div class="setup-field">
+          <label>Your Name</label>
+          <input type="text" id="setupName" placeholder="Dr. ..." autocomplete="off">
+        </div>
+        <div class="setup-field">
+          <label>School / Hospital</label>
+          <input type="text" id="setupSchool" placeholder="University / Hospital" autocomplete="off">
+        </div>
+      </div>
+      <div class="setup-section-title">Specialty</div>
+      <div class="specialty-grid" id="specialtyGrid"></div>
+      <div class="setup-section-title">Number of Questions</div>
+      <div class="qcount-row" id="qcountRow">
+        <button class="qcount-btn active" data-count="5">5</button>
+        <button class="qcount-btn" data-count="10">10</button>
+        <button class="qcount-btn" data-count="20">20</button>
+        <button class="qcount-btn" data-count="all">All</button>
+      </div>
+      <button class="start-btn" id="startBtn" onclick="startSession()">Start Session →</button>
+    </div>
+
+    <!-- LEADERBOARD BELOW SETUP -->
+    <div style="max-width:640px;width:100%;margin-top:24px;position:relative;z-index:2;">
+      <div style="background:#2b1810;border-radius:16px;overflow:hidden;border:1px solid rgba(184,146,42,0.25);">
+        <div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(184,146,42,0.2);">
+          <div>
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(184,146,42,0.7);margin-bottom:2px;">Global Rankings</div>
+            <div style="font-size:.9rem;font-weight:800;color:#f0d080;letter-spacing:-.02em;">Top Performers</div>
+          </div>
+          <div style="font-size:.65rem;color:rgba(255,255,255,0.3);">Live · All specialties</div>
+        </div>
+        <div id="setupLbRows" style="padding:4px 0;">
+          <div style="padding:20px;text-align:center;font-size:.78rem;color:rgba(255,255,255,0.25);">Loading rankings...</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ARENA SCREEN -->
+<div class="arena" id="arenaScreen">
+  <div class="arena-inner">
+    <div class="prog-wrap">
+      <div class="prog-meta">
+        <span class="prog-label" id="progLabel">Question 1 of 10</span>
+        <span class="prog-score" id="progScore">Score: 0</span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+      <div class="q-steps" id="qSteps"></div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-meta">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="q-badge" id="qSpecialty">General Surgery</span>
+          <span class="q-topic-badge" id="qTopic">Critical Care</span>
+        </div>
+        <span class="q-num" id="qNum">Q1</span>
+      </div>
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="optionsWrap"></div>
+      <button class="submit-btn" id="submitBtn" onclick="submitAnswer()" disabled>Submit Answer</button>
+    </div>
+
+    <div class="sharp-card" id="sharpCard">
+      <div class="sharp-header">
+        <div class="sharp-title">SHARP Debrief</div>
+        <div class="sharp-result" id="sharpResult"></div>
+      </div>
+      <div class="sharp-rows">
+        <div class="sharp-row">
+          <div class="sharp-badge">S</div>
+          <div class="sharp-content">
+            <div class="sharp-row-title">Set the Stage</div>
+            <div class="sharp-row-text" id="sharpS"></div>
+          </div>
+        </div>
+        <div class="sharp-divider"></div>
+        <div class="sharp-row">
+          <div class="sharp-badge">H</div>
+          <div class="sharp-content">
+            <div class="sharp-row-title">Highlight Excellence</div>
+            <div class="sharp-row-text" id="sharpH"></div>
+          </div>
+        </div>
+        <div class="sharp-divider"></div>
+        <div class="sharp-row">
+          <div class="sharp-badge">A</div>
+          <div class="sharp-content">
+            <div class="sharp-row-title">Address the Gaps</div>
+            <div class="opt-explanations" id="sharpA"></div>
+          </div>
+        </div>
+        <div class="sharp-divider"></div>
+        <div class="sharp-row">
+          <div class="sharp-badge">R</div>
+          <div class="sharp-content">
+            <div class="sharp-row-title">Review — 2026 Guidelines</div>
+            <div class="sharp-row-text" id="sharpR"></div>
+            <div class="guideline-tag" id="sharpRTag">📋 Guideline Reference</div>
+          </div>
+        </div>
+        <div class="sharp-divider"></div>
+        <div class="sharp-row">
+          <div class="sharp-badge">P</div>
+          <div class="sharp-content">
+            <div class="sharp-row-title">Plan — Take-Home</div>
+            <div class="takehome"><div class="takehome-label">For your next shift</div><div class="takehome-text" id="sharpP"></div></div>
+          </div>
+        </div>
+      </div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div class="results" id="resultsScreen">
+  <div class="results-inner">
+    <div class="results-card">
+      <div class="results-icon" id="resultsIcon">🎯</div>
+      <div class="results-title" id="resultsTitle">Session Complete</div>
+      <div class="results-name" id="resultsName"></div>
+      <div class="score-ring">
+        <div class="score-num" id="scoreNum">0</div>
+        <div class="score-total" id="scoreTotal">/ 0</div>
+      </div>
+      <div class="results-meta-grid">
+        <div class="results-meta-card"><div class="results-meta-num" id="resPct">0%</div><div class="results-meta-label">Accuracy</div></div>
+        <div class="results-meta-card"><div class="results-meta-num" id="resCorrect">0</div><div class="results-meta-label">Correct</div></div>
+        <div class="results-meta-card"><div class="results-meta-num" id="resWrong">0</div><div class="results-meta-label">Wrong</div></div>
+      </div>
+      <div class="results-btns">
+        <button class="results-btn results-btn-primary" onclick="restartSession()">Try Again</button>
+        <button class="results-btn results-btn-secondary" onclick="goHome()">Back to Home</button>
+      </div>
+    </div>
+
+    <div class="lb-card">
+      <div class="lb-header">
+        <div class="lb-title">Global Leaderboard</div>
+        <div class="lb-sub" id="lbSub">All sessions · All specialties</div>
+      </div>
+      <div id="lbContent"><div class="lb-loading">Loading leaderboard...</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── QUESTION BANK ──
+var QUESTIONS = [{"id": 1, "specialty": "General Surgery", "topic": "Critical Care", "question": "A 56-year-old female is admitted to the ICU with a diffuse axonal injury after a motor vehicle crash. Coffee ground material is coming from her orogastric tube. What is the best intervention to prevent stress gastritis in a patient who cannot take enteral feeds?", "options": {"A": "Enteral feeding", "B": "Oral sucralfate", "C": "Oral proton pump inhibitor (PPI)", "D": "Intravenous H₂ blocker", "E": "IV PPI drip"}, "answer": "D", "explanation": {"correct": "IV H₂ blocker is preferred when enteral access is not feasible. IV PPIs are costly so most centres favour IV H₂ antagonist as first line when the patient cannot take oral medications.", "A": "Enteral feeding is the best option when enteral access IS possible — but this patient cannot take enteral feeds.", "B": "Sucralfate is effective but interferes with absorption of antibiotics, warfarin, and phenytoin — a major disadvantage in ICU patients.", "C": "Oral PPI is ideal when enteral access is available, not in this case.", "E": "IV PPI drip is an alternative but is significantly more expensive than H₂ blockers with no proven superiority."}, "guideline": "ASHP Stress Ulcer Prophylaxis Guidelines 2022 — IV H₂ antagonist is preferred when enteral access is not available.", "takeaway": "Oral PPI is best when gut works. IV H₂ blocker when it doesn't. IV PPI only if H₂ fails or contraindicated."}, {"id": 2, "specialty": "General Surgery", "topic": "Critical Care", "question": "A 64-year-old male with severe pancreatitis develops tense abdomen and anuria despite large-volume resuscitation. BP 120/60, HR 127. You suspect abdominal compartment syndrome. What is the primary mechanism of oliguria?", "options": {"A": "Extrinsic compression of kidneys reducing GFR", "B": "Elevated renal venous pressure reducing GFR", "C": "Decreased arterial flow to the kidney", "D": "Extrinsic compression of ureters causing obstructive renal failure", "E": "Compression of the bladder causing obstruction"}, "answer": "B", "explanation": {"correct": "ACS reduces GFR primarily via elevated renal venous pressure — not arterial compression or ureteric obstruction.", "A": "Direct parenchymal compression is not the primary mechanism — venous hypertension is.", "C": "Arterial flow reduction plays a minor role. Venous pressure elevation is the dominant mechanism.", "D": "Ureteric compression is not the mechanism in ACS — this is a common distractor.", "E": "Bladder compression may affect pressure measurement but does not cause the oliguria."}, "guideline": "WSACS Abdominal Compartment Syndrome Consensus 2013 — decompressive laparotomy indicated when end-organ dysfunction confirmed.", "takeaway": "ACS oliguria = elevated renal venous pressure. Decompressive laparotomy only when end-organ dysfunction present — not just elevated IAP."}, {"id": 3, "specialty": "General Surgery", "topic": "Critical Care", "question": "An obese patient (BMI 50) underwent an 8-hour laparoscopic gastric bypass. 4 hours post-op, the nurse notes dark brown urine and rising creatinine (1.0 → 1.5). Which test confirms the diagnosis?", "options": {"A": "Renal ultrasound", "B": "Haptoglobin", "C": "Serum creatinine kinase", "D": "Complete blood count", "E": "Urine electrolytes"}, "answer": "C", "explanation": {"correct": "Serum CK is the diagnostic test for rhabdomyolysis — the cause here is prolonged compression of muscle against the operating table in a morbidly obese patient.", "A": "Renal ultrasound looks for obstruction, not rhabdomyolysis.", "B": "Haptoglobin detects haemolysis, not myoglobinuria.", "D": "CBC doesn't diagnose rhabdomyolysis.", "E": "Urine electrolytes assess pre-renal vs intrinsic renal failure — not rhabdomyolysis specifically."}, "guideline": "ACS Bariatric Surgery Guidelines — high suspicion for rhabdomyolysis in obese patients after prolonged procedures; CK should be checked if dark urine or oliguria develops.", "takeaway": "Obese patient + long procedure + dark urine = rhabdomyolysis until proven otherwise. Check CK immediately."}, {"id": 4, "specialty": "General Surgery", "topic": "Critical Care", "question": "Treatment for rhabdomyolysis-induced acute renal failure includes all of the following EXCEPT:", "options": {"A": "Loop diuretics", "B": "Mannitol", "C": "Aggressive IV fluid resuscitation", "D": "Sodium bicarbonate (urine alkalinisation)", "E": "Serial basic metabolic panels"}, "answer": "A", "explanation": {"correct": "Loop diuretics acidify the urine — the opposite of what is needed. Alkaline urine prevents cast precipitation in nephrons.", "B": "Mannitol acts as an osmotic diuretic and free radical scavenger — appropriate in rhabdomyolysis.", "C": "Aggressive IV fluids to achieve 1.5–2 mL/kg/h urine output is the cornerstone of treatment.", "D": "Sodium bicarbonate alkalinises urine (target pH >6.5) to prevent myoglobin cast obstruction.", "E": "Serial BMPs monitor electrolytes, creatinine, and response to treatment — essential."}, "guideline": "KDIGO AKI Guidelines 2012 — maintain urine output >1–2 mL/kg/h; alkalinise urine; avoid loop diuretics as first line.", "takeaway": "Loop diuretics acidify urine — contraindicated in rhabdomyolysis. Use fluids, mannitol, and bicarb."}, {"id": 5, "specialty": "General Surgery", "topic": "Critical Care", "question": "Contrast-induced AKI (CIAKI) — which of the following is TRUE?", "options": {"A": "It is the most common form of iatrogenic AKI in hospitalised patients", "B": "CIAKI is characterised by oliguria", "C": "Evidence of CIAKI occurs within 6–24h of contrast administration", "D": "Creatinine returns to normal within 1 month for most patients", "E": "1-year mortality associated with CIAKI is <5%"}, "answer": "A", "explanation": {"correct": "CIAKI is the most common cause of iatrogenic AKI in hospitalised patients — important exam fact.", "B": "CIAKI is a NON-oliguric injury — a key differentiator from other AKI causes.", "C": "Creatinine rise occurs at 48–72h, not 6–24h — another common distractor.", "D": "Creatinine returns to baseline in 7–10 days, not 1 month.", "E": "1-year mortality is 30% — NOT <5%. This is a high-stakes complication."}, "guideline": "ESUR Contrast Media Guidelines 2018 — hydration with 0.9% NaCl for 12h before and after is the only proven prevention.", "takeaway": "CIAKI = non-oliguric, creatinine rises at 48–72h, 30% 1-year mortality. Prevent with 0.9% saline 12h before and after."}, {"id": 6, "specialty": "General Surgery", "topic": "Critical Care", "question": "Which intervention REDUCES the likelihood of contrast-induced AKI?", "options": {"A": "N-acetylcysteine administration before dye load", "B": "One-time prednisone 40mg before contrast", "C": "0.9% normal saline for 12h before and after contrast", "D": "0.45% normal saline for 12h before and after contrast", "E": "1L bolus of 0.9% saline at time of contrast"}, "answer": "C", "explanation": {"correct": "0.9% saline for 12h before and after contrast is the only proven intervention. RCTs confirm superiority over 0.45% saline and single bolus.", "A": "N-acetylcysteine has mixed evidence. Low cost and side-effect profile keep it in use by some authors but it is not definitively proven.", "B": "Steroids have no role in CIAKI prevention.", "D": "0.45% saline is inferior to 0.9% saline in RCTs.", "E": "A single bolus is inferior to prolonged 12h hydration before and after."}, "guideline": "ESUR 2018 — 0.9% NaCl 1mL/kg/h for 12h pre- and post-contrast is the standard of care.", "takeaway": "Hydration is the ONLY proven CIAKI prevention. Use 0.9% saline — not 0.45%, not a single bolus."}, {"id": 7, "specialty": "General Surgery", "topic": "Bowel Obstruction", "question": "A 35-year-old man presents with a 3-day history of colicky abdominal pain now becoming constant. CT shows a closed-loop small bowel obstruction with no free gas. What is the most appropriate immediate management?", "options": {"A": "IV fluids and NG decompression, reassess in 24 hours", "B": "Emergency surgical exploration", "C": "Gastrografin follow-through and reassess", "D": "CT angiography to assess bowel vascularity", "E": "Colonoscopic decompression"}, "answer": "B", "explanation": {"correct": "Closed-loop obstruction is a surgical emergency. The isolated bowel segment has no decompressive outlet — ischaemia and perforation are imminent. Operate immediately.", "A": "Conservative management has NO role in closed-loop obstruction. Every hour increases ischaemia risk.", "C": "Gastrografin is used in adhesive SBO to predict resolution — not in closed-loop which needs surgery.", "D": "CT angiography delays surgery and is not the next step when clinical and CT diagnosis is already clear.", "E": "Colonoscopic decompression is for large bowel obstruction, not small bowel."}, "guideline": "WSES Small Bowel Obstruction Guidelines 2017 — closed-loop SBO is an absolute indication for emergency surgery.", "takeaway": "Closed-loop SBO = emergency laparotomy. No trial of conservative management. Every hour = more dead bowel."}, {"id": 8, "specialty": "General Surgery", "topic": "Bowel Obstruction", "question": "A 70-year-old woman presents with adhesive small bowel obstruction, first episode, no signs of strangulation. CT confirms partial SBO. The MOST appropriate initial management is:", "options": {"A": "Immediate laparotomy", "B": "Gastrografin (water-soluble contrast) challenge and reassess at 24 hours", "C": "NG tube, IV fluids and observation for 72 hours", "D": "Laparoscopic adhesiolysis immediately", "E": "TPN and bowel rest for 5 days"}, "answer": "B", "explanation": {"correct": "Gastrografin challenge in adhesive partial SBO is both diagnostic and therapeutic. If contrast reaches colon within 24h, surgery can be avoided in 90% of cases.", "A": "Immediate laparotomy is not indicated in uncomplicated partial adhesive SBO — conservative management is first line.", "C": "Plain NG/fluids without a Gastrografin challenge delays diagnosis and prolongs hospital stay.", "D": "Laparoscopic adhesiolysis is an option if conservative management fails — not as first-line.", "E": "TPN and bowel rest for 5 days has no evidence base and delays decision-making."}, "guideline": "WSES 2017 — Gastrografin challenge recommended in adhesive SBO; reduces need for surgery and hospital stay.", "takeaway": "Adhesive partial SBO without strangulation = Gastrografin challenge first. Surgery only if it fails at 24h."}, {"id": 9, "specialty": "HPB", "topic": "Choledocholithiasis", "question": "According to ASGE 2019 criteria, which of the following constitutes HIGH probability of choledocholithiasis and warrants direct ERCP without further imaging?", "options": {"A": "Dilated CBD on USS with bilirubin <4 μmol/L", "B": "CBD stone on USS AND bilirubin >4 mg/dL AND cholangitis", "C": "Elevated ALP with normal USS", "D": "Clinical cholangitis alone without USS confirmation", "E": "Gallstone pancreatitis with normal LFTs"}, "answer": "B", "explanation": {"correct": "ASGE HIGH probability criteria: CBD stone on USS OR bilirubin >4 mg/dL + dilated CBD + cholangitis OR ascending cholangitis. All three criteria = go directly to ERCP.", "A": "Dilated CBD alone without stone and bilirubin <4 is intermediate probability — needs EUS or MRCP first.", "C": "Elevated ALP alone is low probability — does not warrant direct ERCP.", "D": "Cholangitis is a strong predictor but USS confirmation or bilirubin >4 is also needed to meet HIGH probability criteria.", "E": "Gallstone pancreatitis with normal LFTs is intermediate — MRCP or EUS recommended first."}, "guideline": "ASGE 2019 Choledocholithiasis Guideline — HIGH probability: direct ERCP. Intermediate: EUS or MRCP. Low: no further biliary imaging.", "takeaway": "ASGE HIGH = CBD stone on USS + bilirubin >4 + dilated CBD or cholangitis → straight to ERCP. Do not delay."}, {"id": 10, "specialty": "HPB", "topic": "Gallbladder", "question": "A 45-year-old woman undergoes laparoscopic cholecystectomy for symptomatic gallstones. Intraoperatively, the critical view of safety cannot be achieved. What is the safest next step?", "options": {"A": "Continue dissection aggressively until structures are identified", "B": "Convert to open cholecystectomy", "C": "Perform a fundus-first (top-down) dissection", "D": "Clip and divide what appears to be the cystic duct", "E": "Perform a subtotal cholecystectomy"}, "answer": "E", "explanation": {"correct": "When the critical view of safety cannot be achieved, subtotal cholecystectomy (leaving the posterior wall attached to the liver) is the safest bailout — avoids bile duct injury.", "A": "Aggressive dissection when planes are unclear is the leading cause of bile duct injury — never do this.", "B": "Open conversion does not guarantee clearer anatomy — subtotal cholecystectomy may still be needed.", "C": "Fundus-first dissection is a useful technique but still requires identifying the cystic duct-GB junction.", "D": "Clipping and dividing unidentified structures is the mechanism of most bile duct injuries."}, "guideline": "SAGES Safe Cholecystectomy Guidelines 2023 — if CVS not achieved: stop, get help, subtotal cholecystectomy, or convert.", "takeaway": "Cannot achieve CVS = STOP. Subtotal cholecystectomy is safer than pushing through unclear anatomy."}, {"id": 11, "specialty": "Colorectal", "topic": "Colorectal Cancer", "question": "A 58-year-old presents with rectal bleeding for 3 months. Colonoscopy shows a 3cm polyp at 12cm from the anal verge. Histology: Haggitt level 4 malignant polyp. What is the recommended management?", "options": {"A": "Surveillance colonoscopy in 3 months", "B": "Formal oncological resection", "C": "Repeat endoscopic mucosal resection at 6 weeks", "D": "Adjuvant chemotherapy alone", "E": "Watch and wait with MRI surveillance"}, "answer": "B", "explanation": {"correct": "Haggitt level 4 = cancer invades the submucosa of the bowel wall (not just the stalk). LN metastasis risk up to 27% — endoscopic resection is inadequate. Formal resection mandatory.", "A": "Surveillance alone is not appropriate for Haggitt level 4 with high LN metastasis risk.", "C": "Repeat EMR has no role when Haggitt level 4 confirms deep submucosal invasion.", "D": "Chemotherapy alone without resection is not standard of care for resectable rectal cancer.", "E": "Watch and wait is only used in complete clinical response after neoadjuvant chemoradiotherapy in rectal cancer."}, "guideline": "ESGE 2017, SAGES 2025 — Haggitt level 4 with adverse histological features mandates formal surgical resection.", "takeaway": "Haggitt level 4 = surgery. Level 1–3 with clear margins = endoscopic resection may suffice. Know the levels."}, {"id": 12, "specialty": "Colorectal", "topic": "Anorectal", "question": "A 35-year-old presents with severe perianal pain, swelling, and fever for 2 days. Examination reveals a tense, fluctuant, erythematous mass at the right anal verge. What is the correct management?", "options": {"A": "IV antibiotics for 5 days and review", "B": "MRI pelvis to map the abscess before treatment", "C": "Incision and drainage under local anaesthetic", "D": "Examination under anaesthesia and drainage", "E": "Seton insertion"}, "answer": "D", "explanation": {"correct": "Perianal abscess requires surgical drainage. EUA is preferred to adequately assess for fistula, supralevator extension, or horseshoe component — all missed under local.", "A": "Antibiotics alone do not drain an abscess — no role in primary treatment without drainage.", "B": "MRI is useful in complex/recurrent cases — not as first-line in a simple acute abscess with clear clinical diagnosis.", "C": "Local anaesthetic drainage is inadequate — inadequate relaxation, cannot assess fistula-in-ano.", "E": "Seton is for high fistula management — not for acute abscess drainage."}, "guideline": "ACPGBI/ASCRS 2023 — EUA and drainage is gold standard for perianal abscess. Assess for fistula-in-ano simultaneously.", "takeaway": "Perianal abscess = EUA and drain. Do not give antibiotics alone. Always look for fistula at the same sitting."}, {"id": 13, "specialty": "Colorectal", "topic": "Fournier's Gangrene", "question": "A 62-year-old diabetic man presents with a 3-day history of scrotal pain, fever 39.2°C, and crepitus over the perineum. CT confirms gas tracking along fascial planes. FGSI score is 7. What is the MOST important immediate step?", "options": {"A": "IV broad-spectrum antibiotics and observe for 24 hours", "B": "Urgent urology referral for cystoscopy", "C": "Emergency surgical debridement", "D": "CT-guided drainage of the collection", "E": "Hyperbaric oxygen therapy"}, "answer": "C", "explanation": {"correct": "Fournier's Gangrene is a life-threatening necrotising fasciitis requiring emergency surgical debridement within hours. Antibiotics alone are insufficient — dead tissue must be excised.", "A": "Antibiotics are adjunctive but NOT the primary treatment. Delay to surgery = increased mortality.", "B": "Cystoscopy has no role in acute Fournier's management.", "D": "CT-guided drainage is completely inadequate — the necrotic fascial planes must be debrided widely.", "E": "Hyperbaric oxygen is an adjunct in specialist centres — not the immediate priority."}, "guideline": "WSES/SIS-E Necrotising Soft Tissue Infection Guidelines 2020 — emergency surgical debridement within 6-12 hours of diagnosis.", "takeaway": "Fournier's = emergency debridement NOW. FGSI >9 = >75% mortality. Every hour without surgery increases mortality."}, {"id": 14, "specialty": "General Surgery", "topic": "PUD Perforation", "question": "A 45-year-old male presents with sudden-onset severe epigastric pain radiating to the back. Erect CXR shows free air under the diaphragm. He is haemodynamically stable. What is the definitive management?", "options": {"A": "IV PPI and NG drainage, observe for 24 hours", "B": "Emergency laparotomy with oversewing of the perforation and omental patch", "C": "Laparoscopic repair with omental patch", "D": "H. pylori eradication and serial abdominal X-rays", "E": "CT-guided drainage of peritoneal collection"}, "answer": "C", "explanation": {"correct": "Laparoscopic repair is now the standard of care for perforated PUD in haemodynamically stable patients — equivalent outcomes to open with faster recovery.", "A": "Conservative (Taylor) management is only considered in highly selected stable patients with sealed perforation — free air means active leak, needs surgery.", "B": "Open repair is appropriate when laparoscopic expertise is unavailable or patient is unstable.", "D": "H. pylori eradication is important AFTER repair — not the acute management.", "E": "CT-guided drainage is for contained collections — free perforation requires operative repair."}, "guideline": "WSES Perforated PUD Guidelines 2020 — laparoscopic repair is first-line in stable patients. Open repair when laparoscopic not available.", "takeaway": "Perforated PUD + stable = laparoscopic repair. Add H. pylori eradication postoperatively. Omental patch is standard."}, {"id": 15, "specialty": "General Surgery", "topic": "Appendicitis", "question": "A 28-year-old male presents with a 24-hour history of RIF pain, fever 38.4°C, and guarding. WBC 16, CRP 95. Alvarado score 8. CT shows inflamed appendix 9mm diameter, no perforation, no abscess. Best management:", "options": {"A": "Antibiotics alone (non-operative management)", "B": "Emergency laparoscopic appendicectomy", "C": "Interval appendicectomy in 6 weeks", "D": "CT-guided drainage and interval appendicectomy", "E": "Open appendicectomy via Lanz incision"}, "answer": "B", "explanation": {"correct": "Alvarado ≥7 with CT confirmation of uncomplicated appendicitis — laparoscopic appendicectomy is the gold standard. Safe, effective, shorter recovery, less wound infection.", "A": "Antibiotic-only management is an option in uncomplicated appendicitis but has 20-40% failure and recurrence — surgery remains gold standard especially with Alvarado 8.", "C": "Interval appendicectomy is for appendiceal mass/abscess that settles with antibiotics — not acute uncomplicated appendicitis.", "D": "CT drainage is for perforation with organised abscess — not for this presentation.", "E": "Open approach is appropriate if laparoscopy not available — but laparoscopic is preferred in 2026."}, "guideline": "WSES Acute Appendicitis Guidelines 2023 — laparoscopic appendicectomy is first-line for uncomplicated appendicitis.", "takeaway": "Alvarado ≥7 + CT confirmation = laparoscopic appendicectomy. Know the Alvarado score. Antibiotics alone = 40% recurrence risk."}, {"id": 16, "specialty": "Anesthesia", "topic": "Perioperative Care", "question": "A 24-year-old woman scheduled for elective cholecystectomy. Which is the BEST method for identifying a potential perioperative bleeding risk?", "options": {"A": "Platelet count", "B": "Complete history and physical examination", "C": "Bleeding time", "D": "Lee-White clotting time", "E": "Prothrombin time (PT)"}, "answer": "B", "explanation": {"correct": "A thorough history and physical examination remains the most sensitive and cost-effective screening tool for bleeding disorders — superior to any single laboratory test.", "A": "Platelet count alone misses platelet function disorders (e.g. von Willebrand disease).", "C": "Bleeding time is non-standardised and poor predictor of surgical bleeding — largely abandoned.", "D": "Lee-White clotting time is obsolete and non-specific.", "E": "PT alone misses platelet disorders and von Willebrand disease — inadequate as sole screening test."}, "guideline": "NICE/BSH Preoperative Testing Guidelines — routine coagulation screening is NOT recommended; targeted testing based on history.", "takeaway": "Bleeding risk = history first. Ask about: easy bruising, prolonged bleeding, family history, anticoagulant use. Then test selectively."}, {"id": 17, "specialty": "Anesthesia", "topic": "Perioperative Care", "question": "A 24-year-old man in the ICU after severe head injury develops seizures on day 4. Urine output 500mL/24h. Na 115 mEq/L, serum osmolality 250 mOsm, urine osmolality 800 mOsm. The most likely cause is:", "options": {"A": "Administration of D5W and 0.33% normal saline", "B": "Syndrome of inappropriate ADH secretion (SIADH)", "C": "Decreased ADH secretion", "D": "Nasogastric suction", "E": "Renal insufficiency"}, "answer": "B", "explanation": {"correct": "SIADH: low serum Na + low serum osmolality + inappropriately high urine osmolality (>100 mOsm/kg) + normal renal/adrenal/thyroid function. Head injury is a classic cause.", "A": "Hypotonic fluid administration causes dilutional hyponatraemia — urine osmolality would be low, not 800.", "C": "Decreased ADH (DI) causes hypernatraemia and dilute urine — opposite picture.", "D": "NG suction causes hypokalaemic metabolic alkalosis — not hyponatraemia with high urine osmolality.", "E": "Renal insufficiency causes hypernatraemia with poor urine concentration — not this picture."}, "guideline": "Endocrine Society SIADH Guidelines 2022 — fluid restriction is first-line. Hypertonic saline for severe symptomatic hyponatraemia.", "takeaway": "SIADH = low Na + low serum osmolality + HIGH urine osmolality. Head injury = always think SIADH. Treat with fluid restriction."}, {"id": 18, "specialty": "General Surgery", "topic": "Critical Care", "question": "An 82-year-old female with multiple prior abdominal surgeries undergoes 7-hour lysis of adhesions. Next day creatinine rises by 0.6 mg/dL and urine output is 10mL/h. All of the following are appropriate except:", "options": {"A": "Rule out outflow obstruction", "B": "Recheck haemoglobin", "C": "Calculate FeNa", "D": "Give IV fluid bolus", "E": "Start vasopressors for MAP goal 65 mmHg"}, "answer": "E", "explanation": {"correct": "Vasopressors are harmful in hypovolaemic AKI — they cause renal vasoconstriction and worsen ischaemic injury. IV fluids are the treatment, not vasopressors.", "A": "Urinary catheter blockage must be ruled out before assuming AKI — simple and important step.", "B": "Occult bleeding from the long case may be causing hypovolaemia — check Hb.", "C": "FeNa <1% confirms pre-renal AKI — the likely cause here; guides management.", "D": "IV fluid bolus is the primary treatment for hypovolaemic post-op AKI."}, "guideline": "KDIGO AKI Guidelines 2012 — IV fluid resuscitation is first-line for pre-renal AKI. Vasopressors only in septic shock context with adequate filling.", "takeaway": "Post-op AKI = fluids first, always. Vasopressors are not the treatment for hypovolaemic AKI — they make it worse."}, {"id": 19, "specialty": "HPB", "topic": "Pancreatitis", "question": "A 55-year-old presents with acute pancreatitis. CT severity index is 6. What does this score indicate and what is the recommended management?", "options": {"A": "Mild pancreatitis — discharge with oral analgesia", "B": "Moderate-severe pancreatitis — early ERCP within 24 hours", "C": "Moderate-severe pancreatitis — aggressive IV resuscitation, HDU monitoring, nutrition support", "D": "Severe pancreatitis — immediate surgical necrosectomy", "E": "Severe pancreatitis — prophylactic antibiotics and CT-guided drainage"}, "answer": "C", "explanation": {"correct": "CT Severity Index 6 = moderate-severe pancreatitis (score 4-6). Management: aggressive fluid resuscitation (Ringer's lactate preferred), HDU monitoring, early enteral nutrition within 48h.", "A": "CTSI <3 = mild. Score 6 requires higher-level care.", "B": "ERCP is only indicated in pancreatitis with confirmed cholangitis or persistent biliary obstruction — not routinely.", "D": "Surgical necrosectomy is for infected necrosis that fails step-up drainage — not at diagnosis.", "E": "Prophylactic antibiotics are NOT recommended in acute pancreatitis per IAP/APA 2024 guidelines."}, "guideline": "IAP/APA Acute Pancreatitis Guidelines 2024 — Ringer's lactate 250–500mL/h initial resuscitation; early enteral nutrition; no prophylactic antibiotics.", "takeaway": "Acute pancreatitis = Ringer's lactate (not normal saline), early enteral nutrition, no prophylactic antibiotics. CTSI guides severity."}, {"id": 20, "specialty": "General Surgery", "topic": "Hernias", "question": "A 67-year-old man presents to A&E with a painful, irreducible right inguinal hernia for 6 hours. He is vomiting and has a distended abdomen. What is the correct management?", "options": {"A": "Attempt manual reduction (taxis) and observe", "B": "IV morphine, head-down tilt and attempt taxis — if successful observe for 24 hours", "C": "Emergency inguinal hernia repair", "D": "CT abdomen to confirm content of hernia sac", "E": "NG decompression and IV fluids, then elective repair in 48 hours"}, "answer": "C", "explanation": {"correct": "Strangulated inguinal hernia with signs of obstruction (6 hours, vomiting, distension) requires emergency surgical repair. The bowel may already be ischaemic.", "A": "Taxis is contraindicated when there are signs of strangulation — you may reduce gangrenous bowel into the abdomen.", "B": "Taxis contraindicated in suspected strangulation regardless of analgesia technique.", "D": "CT may confirm contents but delays surgery — clinical diagnosis is sufficient in this scenario.", "E": "Conservative management is not appropriate when strangulation is suspected."}, "guideline": "EHS Hernia Guidelines 2018 — strangulated hernia with systemic signs = emergency surgery. Taxis contraindicated in strangulation.", "takeaway": "Irreducible hernia + systemic signs = strangulation = emergency surgery. Never attempt taxis when strangulation suspected."}];
+
+// ── SUPABASE ──
+var SUPA_URL = 'https://sxushsvvmyokoknnsbuj.supabase.co';
+var SUPA_KEY = 'sb_publishable_Kl4RNEOxvmBewUToRv7HHw_2epulGkp';
+
+// ── STATE ──
+var state = {
+  name: '', school: '', specialty: 'All', qCount: 5,
+  questions: [], current: 0, score: 0,
+  answers: [], startTime: null
+};
+
+// ── INIT ──
+var SPECIALTIES = ['All', 'General Surgery', 'HPB', 'Colorectal', 'Anesthesia', 'Vascular', 'Trauma', 'Urology', 'Cardiothoracic', 'Pediatric Surgery', 'Orthopedic', 'Neurosurgery', 'Breast & Endocrine'];
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadSetupLeaderboard();
+  // Update question count
+  document.getElementById('totalQCount').textContent = QUESTIONS.length;
+
+  // Build specialty chips
+  var sg = document.getElementById('specialtyGrid');
+  SPECIALTIES.forEach(function(s) {
+    var chip = document.createElement('div');
+    chip.className = 'spec-chip' + (s === 'All' ? ' active' : '');
+    chip.textContent = s;
+    chip.onclick = function() {
+      document.querySelectorAll('.spec-chip').forEach(function(c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      state.specialty = s;
+    };
+    sg.appendChild(chip);
+  });
+
+  // Q count buttons
+  document.querySelectorAll('.qcount-btn').forEach(function(btn) {
+    btn.onclick = function() {
+      document.querySelectorAll('.qcount-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      state.qCount = btn.dataset.count;
+    };
+  });
+});
+
+function startSession() {
+  var name = document.getElementById('setupName').value.trim();
+  var school = document.getElementById('setupSchool').value.trim();
+  if (!name || !school) { alert('Please enter your name and school/hospital.'); return; }
+
+  state.name = name;
+  state.school = school;
+  state.startTime = Date.now();
+
+  // Filter questions
+  var pool = state.specialty === 'All' ? QUESTIONS : QUESTIONS.filter(function(q) { return q.specialty === state.specialty; });
+  if (pool.length === 0) { alert('No questions found for this specialty. Choose "All" or another specialty.'); return; }
+
+  // Shuffle
+  pool = pool.slice().sort(function() { return Math.random() - 0.5; });
+
+  // Count
+  var count = state.qCount === 'all' ? pool.length : Math.min(parseInt(state.qCount), pool.length);
+  state.questions = pool.slice(0, count);
+  state.current = 0;
+  state.score = 0;
+  state.answers = [];
+
+  // Build step indicators
+  var steps = document.getElementById('qSteps');
+  steps.innerHTML = '';
+  state.questions.forEach(function(_, i) {
+    var s = document.createElement('div');
+    s.className = 'q-step' + (i === 0 ? ' current' : '');
+    s.id = 'step-' + i;
+    steps.appendChild(s);
+  });
+
+  document.getElementById('setupScreen').style.display = 'none';
+  document.getElementById('arenaScreen').style.display = 'block';
+  window.scrollTo(0, 0);
+  renderQuestion();
+}
+
+function renderQuestion() {
+  var q = state.questions[state.current];
+  var total = state.questions.length;
+  var idx = state.current;
+
+  // Meta
+  document.getElementById('progLabel').textContent = 'Question ' + (idx + 1) + ' of ' + total;
+  document.getElementById('progScore').textContent = 'Score: ' + state.score + ' / ' + idx;
+  document.getElementById('progFill').style.width = ((idx / total) * 100) + '%';
+  document.getElementById('qSpecialty').textContent = q.specialty;
+  document.getElementById('qTopic').textContent = q.topic;
+  document.getElementById('qNum').textContent = 'Q' + (idx + 1);
+  document.getElementById('qText').textContent = q.question;
+
+  // Options
+  var wrap = document.getElementById('optionsWrap');
+  wrap.innerHTML = '';
+  ['A','B','C','D','E'].forEach(function(letter) {
+    if (!q.options[letter]) return;
+    var opt = document.createElement('div');
+    opt.className = 'opt';
+    opt.id = 'opt-' + letter;
+    opt.innerHTML = '<div class="opt-letter">' + letter + '</div><div class="opt-text">' + q.options[letter] + '</div>';
+    opt.onclick = function() { selectOpt(letter); };
+    wrap.appendChild(opt);
+  });
+
+  // Reset
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('sharpCard').style.display = 'none';
+  state.selectedOpt = null;
+
+  // Next button text
+  document.getElementById('nextBtn').textContent = idx + 1 < total ? 'Next Question →' : 'See Results →';
+}
+
+function selectOpt(letter) {
+  // Allow free reselection before submit — no lock
+  document.querySelectorAll('.opt').forEach(function(o) { o.classList.remove('selected'); });
+  document.getElementById('opt-' + letter).classList.add('selected');
+  state.selectedOpt = letter;
+  document.getElementById('submitBtn').disabled = false;
+}
+
+function submitAnswer() {
+  if (state.selectedOpt === null) return;
+  var q = state.questions[state.current];
+  var selected = state.selectedOpt;
+  var correct = q.answer;
+  var isCorrect = selected === correct;
+
+  if (isCorrect) state.score++;
+  state.answers.push({ q: state.current, selected: selected, correct: correct, isCorrect: isCorrect });
+
+  // Lock options
+  document.querySelectorAll('.opt').forEach(function(o) {
+    o.classList.add('locked');
+    var letter = o.querySelector('.opt-letter').textContent;
+    if (letter === correct) { o.classList.add('correct'); o.classList.remove('selected','dimmed'); }
+    else if (letter === selected && !isCorrect) { o.classList.add('wrong'); }
+    else { o.classList.add('dimmed'); }
+  });
+
+  // Update step indicator
+  var step = document.getElementById('step-' + state.current);
+  step.classList.remove('current');
+  step.classList.add(isCorrect ? 'done-correct' : 'done-wrong');
+  if (state.current + 1 < state.questions.length) {
+    document.getElementById('step-' + (state.current + 1)).classList.add('current');
+  }
+
+  // Hide submit
+  document.getElementById('submitBtn').style.display = 'none';
+
+  // Show SHARP debrief
+  showSharp(q, selected, isCorrect);
+}
+
+function showSharp(q, selected, isCorrect) {
+  var card = document.getElementById('sharpCard');
+  card.style.display = 'block';
+
+  // S - Set the stage
+  var accuracy = Math.round((state.score / (state.answers.length)) * 100);
+  document.getElementById('sharpS').textContent =
+    (isCorrect ? '✓ Correct — ' : '✗ Incorrect — ') +
+    'The correct answer is ' + q.answer + '. ' + q.options[q.answer] + '. ' +
+    'Your session accuracy: ' + accuracy + '%.';
+
+  // H - Highlight Excellence
+  document.getElementById('sharpH').textContent = q.explanation.correct;
+
+  // A - Address the Gaps
+  var aWrap = document.getElementById('sharpA');
+  aWrap.innerHTML = '';
+  ['A','B','C','D','E'].forEach(function(letter) {
+    if (!q.options[letter] || letter === q.answer) return;
+    var row = document.createElement('div');
+    row.className = 'opt-exp';
+    row.innerHTML = '<div class="opt-exp-letter">' + letter + '</div><div class="opt-exp-text">' + q.explanation[letter] + '</div>';
+    aWrap.appendChild(row);
+  });
+
+  // R - Review Guidelines
+  document.getElementById('sharpR').textContent = '';
+  document.getElementById('sharpRTag').textContent = '📋 ' + q.guideline;
+
+  // P - Plan / Take-home
+  document.getElementById('sharpP').textContent = q.takeaway;
+
+  // Result badge
+  var res = document.getElementById('sharpResult');
+  if (isCorrect) { res.className = 'sharp-result correct'; res.textContent = '✓ Correct'; }
+  else { res.className = 'sharp-result wrong'; res.textContent = '✗ You selected ' + selected + ' — Answer is ' + q.answer; }
+
+  // Scroll to debrief
+  setTimeout(function() { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+}
+
+function nextQuestion() {
+  state.current++;
+  document.getElementById('submitBtn').style.display = 'block';
+  document.getElementById('submitBtn').disabled = true;
+  state.selectedOpt = null;
+
+  if (state.current >= state.questions.length) {
+    showResults();
+  } else {
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+async function showResults() {
+  var timeTaken = Math.round((Date.now() - state.startTime) / 1000);
+  var total = state.questions.length;
+  var pct = Math.round((state.score / total) * 100);
+
+  document.getElementById('arenaScreen').style.display = 'none';
+  document.getElementById('resultsScreen').style.display = 'block';
+  window.scrollTo(0, 0);
+
+  // Icon and title
+  var icon = pct >= 80 ? '🏆' : pct >= 60 ? '🎯' : '📚';
+  var title = pct >= 80 ? 'Outstanding!' : pct >= 60 ? 'Good Work!' : 'Keep Studying!';
+  document.getElementById('resultsIcon').textContent = icon;
+  document.getElementById('resultsTitle').textContent = title;
+  document.getElementById('resultsName').textContent = state.name + ' · ' + state.school;
+  document.getElementById('scoreNum').textContent = state.score;
+  document.getElementById('scoreTotal').textContent = '/ ' + total;
+  document.getElementById('resPct').textContent = pct + '%';
+  document.getElementById('resCorrect').textContent = state.score;
+  document.getElementById('resWrong').textContent = total - state.score;
+
+  // Save to Supabase
+  try {
+    await fetch(SUPA_URL + '/rest/v1/mcq_scores', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: state.name,
+        school: state.school,
+        specialty: state.specialty,
+        topic: 'Mixed',
+        score: state.score,
+        total: total,
+        time_taken: timeTaken
+      })
+    });
+  } catch(e) { console.log('Score save error:', e); }
+
+  // Load leaderboard
+  loadLeaderboard();
+}
+
+async function loadSetupLeaderboard() {
+  var container = document.getElementById('setupLbRows');
+  if (!container) return;
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/mcq_scores?order=percentage.desc,score.desc&limit=8', {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    var data = await res.json();
+    if (!data || !data.length) {
+      container.innerHTML = '<div style="padding:16px;text-align:center;font-size:.75rem;color:rgba(255,255,255,0.25);">No scores yet — be first!</div>';
+      return;
+    }
+    var html = '';
+    data.forEach(function(row, i) {
+      var initials = (row.name||'?').split(' ').filter(Boolean).map(function(n){return n[0];}).join('').slice(0,2).toUpperCase();
+      var pct = row.percentage !== undefined ? row.percentage : Math.round((row.score/row.total)*100);
+      var medal = i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
+      var rankColor = i===0?'#f0d080':i===1?'rgba(240,208,128,0.6)':'rgba(184,146,42,0.5)';
+      html += '<div style="display:flex;align-items:center;gap:10px;padding:9px 20px;border-bottom:1px solid rgba(184,146,42,0.08);">' +
+        '<div style="font-size:.75rem;font-weight:800;color:'+rankColor+';width:20px;text-align:center;font-family:monospace;">'+(i+1)+'</div>' +
+        '<div style="width:28px;height:28px;border-radius:50%;background:rgba(184,146,42,0.2);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;color:#f0d080;flex-shrink:0;">'+initials+'</div>' +
+        '<div style="flex:1;min-width:0;">' +
+          '<div style="font-size:.78rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+( row.name||'Anonymous')+medal+'</div>' +
+          '<div style="font-size:.62rem;color:rgba(255,255,255,0.3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+(row.school||'')+' · '+(row.specialty||'Mixed')+'</div>' +
+        '</div>' +
+        '<div style="font-size:.82rem;font-weight:800;color:#f0d080;font-family:monospace;">'+pct+'%<span style="font-size:.58rem;color:rgba(240,208,128,0.4);margin-left:3px;">'+row.score+'/'+row.total+'</span></div>' +
+        '</div>';
+    });
+    container.innerHTML = html;
+  } catch(e) {
+    container.innerHTML = '<div style="padding:16px;text-align:center;font-size:.75rem;color:rgba(255,255,255,0.25);">Leaderboard unavailable.</div>';
+  }
+}
+
+async function loadLeaderboard() {
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/mcq_scores?order=percentage.desc,score.desc&limit=20', {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    var data = await res.json();
+    renderLeaderboard(data);
+  } catch(e) {
+    document.getElementById('lbContent').innerHTML = '<div class="lb-empty">Could not load leaderboard.</div>';
+  }
+}
+
+function renderLeaderboard(data) {
+  if (!data || !data.length) {
+    document.getElementById('lbContent').innerHTML = '<div class="lb-empty">No scores yet. You are first!</div>';
+    return;
+  }
+  var html = '';
+  data.forEach(function(row, i) {
+    var isMe = row.name === state.name && row.school === state.school;
+    var rankColor = i === 0 ? 'gold' : i === 1 ? 'silver' : '';
+    var initials = (row.name || '?').split(' ').map(function(n) { return n[0]; }).join('').slice(0,2).toUpperCase();
+    var pct = row.percentage !== undefined ? row.percentage : Math.round((row.score/row.total)*100);
+    html += '<div class="lb-row' + (isMe ? ' highlight' : '') + '">' +
+      '<div class="lb-rank ' + rankColor + '">' + (i + 1) + '</div>' +
+      '<div class="lb-avatar">' + initials + '</div>' +
+      '<div class="lb-info"><div class="lb-name">' + (row.name || 'Anonymous') + (isMe ? ' (You)' : '') + '</div>' +
+      '<div class="lb-detail">' + (row.school || '') + ' · ' + (row.specialty || 'Mixed') + '</div></div>' +
+      '<div class="lb-score"><div class="lb-pct">' + pct + '%</div>' +
+      '<div class="lb-qcount">' + row.score + '/' + row.total + '</div></div></div>';
+  });
+  document.getElementById('lbContent').innerHTML = html;
+}
+
+function restartSession() {
+  state = { name: state.name, school: state.school, specialty: 'All', qCount: 5, questions: [], current: 0, score: 0, answers: [], startTime: null };
+  document.getElementById('resultsScreen').style.display = 'none';
+  document.getElementById('arenaScreen').style.display = 'none';
+  document.getElementById('setupScreen').style.display = 'flex';
+  document.getElementById('setupName').value = state.name;
+  document.getElementById('setupSchool').value = state.school;
+  window.scrollTo(0, 0);
+}
+
+function goHome() { window.location.href = 'index.html'; }
+</script>
+
+
+<footer class="site-footer">
+  <div class="ft-grid">
+    <div class="ft-brand"><div class="ft-brand-name">Surgical Insight Hub</div><p>High-yield surgical education for residents. Built by Dr. Abdulmalik Moh.</p></div>
+    <div class="ft-col"><h5>Resources</h5><a href="notes.html">All Notes</a><a href="podcast.html">Podcast</a><a href="mcq.html">MCQ Arena</a><a href="https://t.me/sugicalInsightHub" target="_blank">Telegram</a></div>
+    <div class="ft-col"><h5>Topics</h5><a href="notes.html">Bowel Obstruction</a><a href="notes.html">PUD Perforation</a><a href="notes.html">HPB Surgery</a></div>
+    <div class="ft-col"><h5>Connect</h5><a href="https://t.me/sugicalInsightHub" target="_blank">Telegram</a><a href="https://www.youtube.com/@YeSurgeryBett" target="_blank">YouTube</a><a href="about.html">About</a></div>
+  </div>
+  <div class="ft-bottom">
+    <p>&#169; 2025 Surgical Insight Hub &#183; Dr. Abdulmalik Moh</p>
+    <span class="ft-handle">@sugicalInsightHub</span>
+    <p>Not a substitute for clinical judgment</p>
+  </div>
+</footer>
+
+</body>
+</html>

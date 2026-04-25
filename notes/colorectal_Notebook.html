@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surgical Insight Hub — Colorectal Monograph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/shared.css">
+
+<script>
+  const savedTheme = localStorage.getItem('sih-theme') || 'light';
+  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+<style>
+  @media print {
+    body { margin: 0; }
+    .page-break { page-break-before: always; }
+    .no-print { display: none; }
+    #sideNav { display: none; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Georgia, serif;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #1a1208;
+    background: #f5f0e8;
+    padding: 0;
+  }
+
+  /* ── TOGGLE BUTTON ── */
+  #navToggle {
+    position: fixed;
+    top: 82px; left: 12px;
+    z-index: 9999;
+    background: #2b1810;
+    border: 1.5px solid #b8922a;
+    color: #f0d080;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  #navToggle:hover { opacity: 0.88; }
+
+  /* ── OVERLAY ── */
+  #navOverlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 8888;
+  }
+
+  /* ── SIDEBAR ── */
+  #sideNav {
+    position: fixed;
+    top: 70px; left: -260px;
+    width: 240px;
+    height: calc(100vh - 70px);
+    background: #2b1810;
+    z-index: 9998;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: left 0.28s ease;
+    border-right: 2px solid #b8922a;
+    padding: 16px 14px 40px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+  }
+  #sideNav.open { left: 0; }
+
+  #navClose {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+  }
+  #navClose button {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(184,146,42,0.3);
+    color: #b8922a;
+    border-radius: 6px;
+    width: 26px; height: 26px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+  }
+
+  #sideNav .nav-brand {
+    font-size: 12px;
+    color: #f0d080;
+    font-weight: bold;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(184,146,42,0.3);
+    line-height: 1.4;
+  }
+  #sideNav h2 {
+    font-size: 10px;
+    color: #b8922a;
+    margin-bottom: 4px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 0;
+  }
+  #sideNav a {
+    display: block;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color .15s;
+  }
+  #sideNav a:hover { color: #b8922a; }
+  #sideNav .nav-section {
+    color: #b8922a;
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 3px;
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  /* ── SURGICAL ART inside sidebar ── */
+  .nav-art {
+    position: relative;
+    margin-top: 24px;
+    height: 200px;
+    opacity: 0.18;
+    overflow: hidden;
+  }
+  .nav-art svg { width: 100%; height: 100%; }
+
+  /* ── MAIN CONTENT ── */
+  .main-content {
+    padding: 100px 24px 40px 24px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  /* ── WATERMARK ── */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(540px, 75vw);
+    height: min(540px, 75vw);
+    background-image: url('Surgical_Insight_Hub_Logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: -1;
+    filter: sepia(1) saturate(0.3) brightness(0.45);
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: #2b1810;
+    color: #fff;
+    padding: 60px 50px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    text-align: center;
+    border: 1px solid rgba(184,146,42,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(to bottom, transparent 0, transparent 39px, rgba(184,146,42,0.04) 39px, rgba(184,146,42,0.04) 40px);
+    pointer-events: none;
+  }
+  .cover h1 { font-size: 28px; font-weight: bold; color: #f0d080; margin-bottom: 10px; position: relative; }
+  .cover p { font-size: 14px; color: rgba(255,255,255,0.6); position: relative; }
+  .cover .subtitle { font-size: 16px; margin: 10px 0; color: #fff; position: relative; }
+  .cover .meta { margin-top: 20px; font-size: 12px; color: #b8922a; position: relative; }
+  .cover .monograph-number { font-size: 11px; color: #b8922a; text-transform: uppercase; letter-spacing: 1.5px; font-family: Arial, sans-serif; margin-bottom: 12px; position: relative; }
+
+  /* ── TOC ── */
+  .toc { background: #fff; border-radius: 8px; padding: 30px; margin-bottom: 30px; border-left: 5px solid #2b1810; box-shadow: 0 1px 4px rgba(43,24,16,0.07); }
+  .toc h2 { font-size: 18px; color: #2b1810; margin-bottom: 16px; font-family: Arial, sans-serif; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin-bottom: 6px; }
+  .toc a { color: #2b1810; text-decoration: none; font-family: Arial, sans-serif; font-size: 13px; }
+  .toc a:hover { color: #b8922a; text-decoration: underline; }
+  .toc .toc-sub { padding-left: 20px; list-style: disc; }
+  .toc .toc-sub li { font-size: 12px; color: #6b5a40; margin-bottom: 3px; }
+
+  /* ── MONOGRAPH ── */
+  .monograph {
+    background: #fff;
+    border-radius: 8px;
+    padding: 36px 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 4px rgba(43,24,16,0.07);
+    border: 1px solid rgba(184,146,42,0.15);
+  }
+  .monograph-header { border-bottom: 3px solid #b8922a; padding-bottom: 14px; margin-bottom: 24px; }
+  .monograph-number { font-size: 11px; color: #b8922a; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif; }
+  .monograph-title { font-size: 22px; font-weight: bold; color: #2b1810; margin: 6px 0 4px; }
+  .monograph-subtitle { font-size: 13px; color: #6b5a40; font-family: Arial, sans-serif; }
+
+  h2.section {
+    font-size: 15px; font-family: Arial, sans-serif; font-weight: bold;
+    color: #fff; background: #2b1810; padding: 8px 14px;
+    border-radius: 4px; margin: 28px 0 14px;
+    border-left: 4px solid #b8922a;
+  }
+  h3.subsection {
+    font-size: 13px; font-family: Arial, sans-serif; font-weight: bold;
+    color: #2b1810; border-left: 4px solid #b8922a;
+    padding-left: 10px; margin: 20px 0 10px;
+  }
+  h4.sub2 {
+    font-size: 12px; font-family: Arial, sans-serif; font-weight: bold;
+    color: #2b1810; margin: 14px 0 6px;
+    text-decoration: underline; text-decoration-color: #b8922a;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; font-size: 12px; font-family: Arial, sans-serif; }
+  th { background: #2b1810; color: #f0d080; padding: 7px 10px; text-align: left; font-weight: bold; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; }
+  td { padding: 6px 10px; border-bottom: 1px solid rgba(184,146,42,0.15); vertical-align: top; color: #1a1208; }
+  tr:nth-child(even) td { background: rgba(184,146,42,0.04); }
+  tr:hover td { background: rgba(184,146,42,0.08); }
+
+  .callout { border-radius: 6px; padding: 12px 16px; margin: 14px 0; font-family: Arial, sans-serif; font-size: 12px; }
+  .callout-danger { background: #fff0f0; border-left: 4px solid #a31515; }
+  .callout-danger strong { color: #a31515; }
+  .callout-pearl { background: rgba(184,146,42,0.07); border-left: 4px solid #b8922a; }
+  .callout-pearl strong { color: #96740e; }
+  .callout-exam { background: #fffbea; border-left: 4px solid #b8922a; }
+  .callout-exam strong { color: #7a5c00; }
+  .callout-green { background: #f0fdf4; border-left: 4px solid #16a34a; }
+  .callout-green strong { color: #15803d; }
+
+  .viva { margin: 10px 0; padding: 12px 16px; background: rgba(43,24,16,0.04); border-radius: 6px; font-family: Arial, sans-serif; font-size: 12px; border: 1px solid rgba(184,146,42,0.15); }
+  .viva .q { font-weight: bold; color: #2b1810; margin-bottom: 6px; }
+  .viva .a { color: #3d2a18; }
+
+  .formula { background: #faf7f2; border: 1px solid rgba(184,146,42,0.25); border-radius: 4px; padding: 10px 14px; font-family: 'Courier New', monospace; font-size: 12px; margin: 10px 0; color: #1a1208; }
+
+  .diagram-wrapper { background: #faf7f2; border: 1px solid rgba(184,146,42,0.2); border-radius: 8px; padding: 16px; margin: 18px 0; overflow-x: auto; }
+  .diagram-title { font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; color: #b8922a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  svg text { font-family: Arial, sans-serif; }
+
+  .summary-card { background: #2b1810; color: #fff; border-radius: 8px; padding: 20px 24px; margin: 20px 0; font-family: Arial, sans-serif; font-size: 12px; border: 1px solid rgba(184,146,42,0.3); }
+  .summary-card h3 { color: #f0d080; font-size: 14px; margin-bottom: 12px; }
+  .summary-card ul { padding-left: 18px; }
+  .summary-card li { margin-bottom: 5px; color: rgba(255,255,255,0.8); }
+  .summary-card strong { color: #b8922a; }
+
+  .trial { background: rgba(184,146,42,0.06); border: 1px solid rgba(184,146,42,0.25); border-radius: 6px; padding: 10px 14px; margin: 8px 0; font-family: Arial, sans-serif; font-size: 12px; }
+  .trial strong { color: #7a5c00; }
+
+  ul.body-list { padding-left: 20px; margin: 8px 0 12px; font-family: Arial, sans-serif; font-size: 12px; }
+  ul.body-list li { margin-bottom: 5px; }
+  p.body { font-family: Arial, sans-serif; font-size: 12px; margin: 8px 0; line-height: 1.6; }
+  .page-break { page-break-before: always; }
+  .spacer { height: 16px; }
+  .master-table th { background: #2b1810; font-size: 11px; color: #f0d080; }
+  .master-table td { font-size: 11px; }
+
+  .sih-footer { margin-top: 40px; padding: 14px 20px; background: #2b1810; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-family: Arial, sans-serif; font-size: 11px; color: rgba(255,255,255,0.45); border-top: 2px solid #b8922a; flex-wrap: wrap; gap: 6px; }
+  .sih-footer span { color: #b8922a; font-weight: 700; }
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:768px){
+  body{
+    background:#f7f3ec;
+    padding:0;
+    display:block;
+  }
+  .page{
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    padding:14px !important;
+    box-shadow:none !important;
+    border:none !important;
+    border-radius:0 !important;
+    margin:0 !important;
+    page-break-after:auto !important;
+  }
+  .body{
+    overflow:visible !important;
+    flex:none !important;
+  }
+  .grid,.two-col,.col-2,.columns{
+    grid-template-columns:1fr !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+  table{
+    font-size:11px !important;
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  th,td{
+    padding:5px 8px !important;
+    font-size:11px !important;
+  }
+  .tab-strip,.tabs{
+    overflow-x:auto;
+    white-space:nowrap;
+    -webkit-overflow-scrolling:touch;
+  }
+  .tab-strip .tab,.tabs .tab{
+    font-size:9px !important;
+    padding:6px 10px !important;
+  }
+  h1,.title{font-size:1.1rem !important;}
+  h2,.section-title{font-size:.95rem !important;}
+  h3{font-size:.85rem !important;}
+  .foot,.footer{margin-top:16px !important;}
+  .brutal-rule,.callout,.description{
+    font-size:.78rem !important;
+    line-height:1.6 !important;
+  }
+  li{font-size:.78rem !important;}
+  .badge{font-size:9px !important;}
+}
+
+</style>
+</head>
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="../assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">@sugicalInsightHub</div></div>
+    </div>
+  </div>
+  
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 19.07l1.41-1.41M17.66 6.34l1.41-1.41M12 7a5 5 0 100 10m0 0a5 5 0 100-10z"/></svg>
+      <svg class="moon-icon" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+    <div class="nav-links-pill">
+      <a href="../notes.html" class="active">Notes</a>
+      <a href="../podcast.html">Podcast</a>
+      <a href="../review.html">Review</a>
+      <a href="../mcq.html">MCQ Arena</a>
+      <a href="../about.html">About</a>
+    </div>
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-btn-sih" style="background:var(--brand-gold);color:#1a1208;padding:8px 16px;border-radius:100px;text-decoration:none;font-size:13px;font-weight:700;margin-left:15px;display:inline-block;">Get Notes →</a>
+
+    <button class="mob-nav-toggle" id="hamburgerMenu" aria-label="Open menu">
+      ☰ Menu
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Navigation Sheet -->
+<div class="mob-nav-overlay-sih" id="mobOverlaySih"></div>
+<div class="mob-nav-sheet-sih" id="mobSheetSih">
+  <div class="mob-nav-handle" id="mobCloseSih"></div>
+  <a href="../index.html">Home</a>
+  <a href="../notes.html" class="active">Notes</a>
+  <a href="../podcast.html">Podcast</a>
+  <a href="../review.html">Review</a>
+  <a href="../mcq.html">MCQ Arena</a>
+  <a href="../about.html">About</a>
+  <a href="https://t.me/sugicalInsightHub" target="_blank" class="mob-nav-cta" style="margin-top:20px;display:block;text-align:center;background:var(--brand-gold);color:#1a1208;padding:12px;border-radius:100px;">Join Telegram</a>
+</div>
+
+<script src="../js/nav-pill.js"></script>
+<script>
+  // SIH Global Logic
+  (function(){
+    const themeToggle = document.getElementById('themeToggle');
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
+
+    function updateIcons(theme) {
+      if (theme === 'dark') {
+        if(sunIcon) sunIcon.style.display = 'none';
+        if(moonIcon) moonIcon.style.display = 'block';
+      } else {
+        if(sunIcon) sunIcon.style.display = 'block';
+        if(moonIcon) moonIcon.style.display = 'none';
+      }
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    updateIcons(currentTheme);
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const root = document.documentElement;
+        let newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', newTheme);
+        localStorage.setItem('sih-theme', newTheme);
+        updateIcons(newTheme);
+      });
+    }
+
+    // Mobile Nav Logic
+    const mobToggle = document.getElementById('hamburgerMenu');
+    const mobOverlay = document.getElementById('mobOverlaySih');
+    const mobSheet = document.getElementById('mobSheetSih');
+    const mobClose = document.getElementById('mobCloseSih');
+
+    if(mobToggle) {
+      mobToggle.addEventListener('click', () => {
+        mobOverlay.style.display = 'block';
+        setTimeout(() => mobSheet.classList.add('open'), 10);
+      });
+    }
+    
+    function closeNavSih() {
+      mobSheet.classList.remove('open');
+      setTimeout(() => mobOverlay.style.display = 'none', 300);
+    }
+
+    if(mobOverlay) mobOverlay.addEventListener('click', closeNavSih);
+    if(mobClose) mobClose.addEventListener('click', closeNavSih);
+  })();
+</script>
+
+<div id="navOverlay" onclick="closeNav()"></div>
+
+<button id="navToggle" onclick="openNav()">☰ Contents</button>
+
+<div id="sideNav">
+  <div id="navClose"><button onclick="closeNav()">✕</button></div>
+  <div class="nav-brand">Surgical Insight Hub<br>Monograph Series</div>
+  <h2>Colorectal &amp; Anal Surgery</h2>
+  <div class="nav-section">Notebook</div>
+  <a href="#cover" onclick="closeNav()">Cover</a>
+  <a href="#toc" onclick="closeNav()">Contents</a>
+  <div class="nav-section">Monograph 1</div>
+  <a href="#m1" onclick="closeNav()">Benign Polyps / FAP / Lynch</a>
+  <div class="nav-section">Monograph 2</div>
+  <a href="#m2" onclick="closeNav()">Colon Cancer (CRC)</a>
+  <div class="nav-section">Monograph 3</div>
+  <a href="#m3" onclick="closeNav()">Rectal Cancer</a>
+  <div class="nav-section">Monograph 4</div>
+  <a href="#m4" onclick="closeNav()">CRLM &amp; Peritoneal</a>
+  <div class="nav-section">Monograph 5</div>
+  <a href="#m5" onclick="closeNav()">Anal Canal Tumors</a>
+  <div class="nav-section">Monograph 6</div>
+  <a href="#m6" onclick="closeNav()">Fournier's Gangrene</a>
+  <div class="nav-section">Reference</div>
+  <a href="#master" onclick="closeNav()">Master Exam Table</a>
+  <div class="nav-art">
+    <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(20,30) rotate(-25)">
+        <rect x="0" y="6" width="80" height="8" rx="4" fill="#b8922a"/>
+        <polygon points="80,0 108,10 80,20" fill="#f0d080"/>
+        <rect x="0" y="8" width="80" height="3" fill="rgba(255,255,255,0.3)" rx="1"/>
+      </g>
+      <path d="M 20 120 Q 55 85 90 115 Q 125 145 155 108" fill="none" stroke="#b8922a" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="155" cy="108" r="3" fill="#f0d080"/>
+      <path d="M 155 108 Q 175 98 170 78" fill="none" stroke="#b8922a" stroke-width="1.2" stroke-dasharray="4,3" stroke-linecap="round"/>
+      <g transform="translate(150,30) rotate(40)">
+        <rect x="0" y="0" width="3" height="50" rx="1.5" fill="#b8922a"/>
+        <rect x="8" y="0" width="3" height="50" rx="1.5" fill="#b8922a"/>
+        <path d="M 1.5 50 Q 5.5 60 5.5 65" fill="none" stroke="#b8922a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 9.5 50 Q 5.5 60 5.5 65" fill="none" stroke="#b8922a" stroke-width="2" stroke-linecap="round"/>
+        <rect x="0" y="20" width="11" height="3" rx="1" fill="#f0d080"/>
+        <rect x="0" y="25" width="11" height="3" rx="1" fill="#f0d080"/>
+      </g>
+      <g transform="translate(20,140)">
+        <circle cx="45" cy="45" r="16" fill="none" stroke="#b8922a" stroke-width="2.5"/>
+        <circle cx="45" cy="45" r="9" fill="rgba(184,146,42,0.25)"/>
+        <path d="M 29 45 Q 8 45 8 28 Q 8 10 20 10" fill="none" stroke="#b8922a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 61 45 Q 82 45 82 28 Q 82 10 70 10" fill="none" stroke="#b8922a" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="20" cy="8" r="4" fill="#f0d080" stroke="#b8922a" stroke-width="1.5"/>
+        <circle cx="70" cy="8" r="4" fill="#f0d080" stroke="#b8922a" stroke-width="1.5"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<div class="main-content">
+<div class="cover" id="cover">
+  <div class="monograph-number">Surgical Insight Hub Monograph</div>
+  <h1>Colorectal & Anal Surgery</h1>
+  <div class="subtitle">Comprehensive Exam Notebook</div>
+  <p>ABSITE · MRCS · FRCS Board Review</p>
+  <div class="meta">
+    6 Monographs &nbsp;·&nbsp; All Sections &nbsp;·&nbsp; Integrated Visualizations<br>
+    Benign Tumors → CRC → Rectal Cancer → CRLM → Anal Tumors → Fournier's
+  </div>
+</div>
+
+<div class="toc" id="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li><a href="#m1">Benign Colorectal Tumors — Polyps, FAP, Lynch Syndrome</a>
+      <ul class="toc-sub">
+        <li>Operative atlas · Paris/Haggitt/Kikuchi classification · Polyposis syndromes table · Lynch testing algorithm · Surveillance intervals · Viva scenarios</li>
+      </ul>
+    </li>
+    <li><a href="#m2">Colon Cancer (CRC)</a>
+      <ul class="toc-sub">
+        <li>CME/D3 anatomy · TNM 8th Ed staging · Molecular profiling · Adjuvant chemotherapy by stage · IDEA/KEYNOTE-177/BEACON trials · Viva scenarios</li>
+      </ul>
+    </li>
+    <li><a href="#m3">Rectal Cancer</a>
+      <ul class="toc-sub">
+        <li>TME holy plane · CRM/EMVI · Risk stratification · RAPIDO/PRODIGE 23/OPRA trials · Watch-and-Wait criteria · LPND debate · Viva scenarios</li>
+      </ul>
+    </li>
+    <li><a href="#m4">Colorectal Liver Metastases & Peritoneal Disease</a>
+      <ul class="toc-sub">
+        <li>Resectability criteria · FLR calculation · EORTC 40983 · PRODIGE 7/HIPEC · CRS/PCI · HAI pump · Viva scenarios</li>
+      </ul>
+    </li>
+    <li><a href="#m5">Anal Canal Tumors</a>
+      <ul class="toc-sub">
+        <li>Anatomy/lymphatics · Anal SCC/Nigro protocol · AIN/HSIL · Anorectal melanoma · ACT II/ACCORD-03/ANCHOR trials · Viva scenarios</li>
+      </ul>
+    </li>
+    <li><a href="#m6">Fournier's Gangrene</a>
+      <ul class="toc-sub">
+        <li>Fascial planes · Debridement steps · Microbiology · FGSI scoring · Antibiotic protocol · ICU management · Visualizations</li>
+      </ul>
+    </li>
+    <li><a href="#master">Master Exam Summary Table</a></li>
+  </ol>
+</div>
+
+<div class="monograph page-break" id="m1">
+  <div class="monograph-header">
+    <div class="monograph-number">Monograph 1 of 6</div>
+    <div class="monograph-title">Benign Colorectal Tumors</div>
+    <div class="monograph-subtitle">Polyps · Polyposis Syndromes · Lynch Syndrome</div>
+  </div>
+
+  <h2 class="section">Section 1 — Operative Atlas</h2>
+
+  <h3 class="subsection">Endoscopic Resection Techniques</h3>
+  <table>
+    <tr><th>Technique</th><th>Indication</th><th>Key Technical Points</th></tr>
+    <tr><td>Cold snare polypectomy (CSP)</td><td>Polyps ≤10 mm</td><td>No submucosal injection; en bloc preferred</td></tr>
+    <tr><td>Hot snare polypectomy</td><td>10–20 mm pedunculated</td><td>Coagulation current; Endoloop for thick stalks &gt;10 mm</td></tr>
+    <tr><td>EMR</td><td>Flat/sessile 10–20 mm</td><td>Submucosal lift saline + methylene blue; piecemeal acceptable</td></tr>
+    <tr><td>ESD</td><td>&gt;20 mm, scarred, LST-NG</td><td>En bloc; higher perforation risk; expert centres only</td></tr>
+    <tr><td>TAMIS/TEM</td><td>T1 rectal cancer ≤3 cm, uN0</td><td>Full-thickness excision; 1 cm margin; close defect</td></tr>
+  </table>
+
+  <h3 class="subsection">Malignant Polyp — Decision</h3>
+  <div class="callout callout-danger">
+    <strong>Adverse features mandating surgery:</strong> Haggitt level 4 · Kikuchi Sm3 · lymphovascular invasion · poor differentiation · margin &lt;1 mm
+  </div>
+  <div class="callout callout-pearl">
+    <strong>No adverse features + clear margin:</strong> Surveillance colonoscopy at 3 months — no surgery required
+  </div>
+
+  <h3 class="subsection">Surgical Resection — When Endoscopy Fails</h3>
+  <ul class="body-list">
+    <li><strong>Laparoscopic right hemicolectomy:</strong> ileocolic, right colic, right middle colic divided; CME with D3 for malignant polyps</li>
+    <li><strong>Proctocolectomy + IPAA (J-pouch):</strong> definitive FAP operation age 15–25; staged 2 or 3-step</li>
+    <li><strong>IRA (ileorectal anastomosis):</strong> AFAP with &lt;20 rectal polyps; lifelong rectal surveillance q6–12 months</li>
+    <li><strong>Subtotal colectomy:</strong> Lynch syndrome with synchronous lesions or young patient</li>
+  </ul>
+
+  <h2 class="section">Section 2 — Classifications & Pathology</h2>
+
+  <h3 class="subsection">Paris Classification</h3>
+  <table>
+    <tr><th>Class</th><th>Description</th><th>Malignant Risk</th></tr>
+    <tr><td>Ip</td><td>Pedunculated</td><td>Low–moderate</td></tr>
+    <tr><td>Is</td><td>Sessile</td><td>Moderate</td></tr>
+    <tr><td>IIa</td><td>Superficial elevated</td><td>Low</td></tr>
+    <tr><td>IIb</td><td>Flat</td><td>Moderate</td></tr>
+    <tr><td>IIc</td><td>Depressed</td><td>High</td></tr>
+    <tr><td>IIa+IIc</td><td>Mixed</td><td>High</td></tr>
+    <tr><td>III</td><td>Excavated/ulcerated</td><td>Very high</td></tr>
+  </table>
+
+  <h3 class="subsection">Histological Subtypes</h3>
+  <table>
+    <tr><th>Type</th><th>Villous %</th><th>Malignant Risk</th></tr>
+    <tr><td>Tubular adenoma</td><td>&lt;25%</td><td>~5%</td></tr>
+    <tr><td>Tubulovillous</td><td>25–75%</td><td>~20%</td></tr>
+    <tr><td>Villous adenoma</td><td>&gt;75%</td><td>~40%</td></tr>
+    <tr><td>SSL (sessile serrated lesion)</td><td>None (serrated crypts)</td><td>Via BRAF/MLH1 methylation</td></tr>
+    <tr><td>TSA (traditional serrated)</td><td>Serrated + dysplasia</td><td>Intermediate</td></tr>
+  </table>
+
+  <h3 class="subsection">Haggitt & Kikuchi Classifications</h3>
+  <table>
+    <tr><th>System</th><th>Levels</th><th>Exam Rule</th></tr>
+    <tr><td>Haggitt (pedunculated T1)</td><td>1: head · 2: neck · 3: stalk · 4: into bowel wall submucosa</td><td>Level 4 = surgery</td></tr>
+    <tr><td>Kikuchi (sessile T1)</td><td>Sm1 &lt;1/3 · Sm2 mid · Sm3 &gt;2/3 submucosa</td><td>Sm3 = surgery; Sm1 + clear margin = surveillance</td></tr>
+  </table>
+
+  <h3 class="subsection">Molecular Pathways</h3>
+  <table>
+    <tr><th>Pathway</th><th>Key Mutation</th><th>Polyp Type</th><th>Syndrome</th><th>CRC Features</th></tr>
+    <tr><td>CIN</td><td>APC → KRAS → TP53</td><td>Tubular/villous adenoma</td><td>FAP, sporadic</td><td>MSS, left-sided</td></tr>
+    <tr><td>dMMR</td><td>MLH1, MSH2, MSH6, PMS2</td><td>Flat, right-sided</td><td>Lynch</td><td>MSI-H, mucinous, right-sided</td></tr>
+    <tr><td>Serrated</td><td>BRAF V600E + MLH1 methylation</td><td>SSL/HP</td><td>Sporadic serrated</td><td>MSI-H or MSS</td></tr>
+    <tr><td>MUTYH</td><td>MUTYH (biallelic)</td><td>Multiple adenomas</td><td>MAP</td><td>G:C→T:A transversion</td></tr>
+  </table>
+
+  <h3 class="subsection">Polyposis Syndromes Master Table</h3>
+  <table>
+    <tr><th>Syndrome</th><th>Gene</th><th>Inheritance</th><th>Cancer Risk</th><th>Extraintestinal</th><th>Surgery</th></tr>
+    <tr><td>FAP</td><td>APC (5q21)</td><td>AD</td><td>~100% CRC by 40</td><td>CHRPE, desmoid, osteoma, thyroid</td><td>Proctocolectomy + IPAA age 15–25</td></tr>
+    <tr><td>AFAP</td><td>APC (5'/3' end)</td><td>AD</td><td>~70% CRC</td><td>Fewer extracolonic</td><td>IRA if &lt;20 rectal polyps; else IPAA</td></tr>
+    <tr><td>Gardner</td><td>APC</td><td>AD</td><td>Same as FAP</td><td>Epidermoid cysts, desmoids, osteomas</td><td>Same as FAP</td></tr>
+    <tr><td>Turcot</td><td>APC or MMR</td><td>AD</td><td>High</td><td>CNS tumours (medulloblastoma/glioblastoma)</td><td>Context-dependent</td></tr>
+    <tr><td>MAP</td><td>MUTYH (biallelic)</td><td>AR</td><td>~80% CRC</td><td>Sebaceous lesions, duodenal polyps</td><td>Surveillance; surgery when unmanageable</td></tr>
+    <tr><td>PJS</td><td>STK11/LKB1</td><td>AD</td><td>39% CRC; 36% breast; 13% gastric</td><td>Mucocutaneous melanosis, sex cord tumours</td><td>Baseline scope age 8; MR enterography</td></tr>
+    <tr><td>JPS</td><td>SMAD4/BMPR1A</td><td>AD</td><td>39–68% GI cancer</td><td>SMAD4: HHT features</td><td>Colectomy when &gt;5 polyps/HGD</td></tr>
+    <tr><td>Cowden/PHTS</td><td>PTEN</td><td>AD</td><td>Moderate CRC</td><td>Macrocephaly, thyroid/breast/endometrial Ca</td><td>Annual surveillance</td></tr>
+  </table>
+
+  <h3 class="subsection">Lynch Syndrome — Exam Essentials</h3>
+  <div class="callout callout-exam">
+    <strong>Amsterdam II (3-2-1 rule):</strong> ≥3 relatives with Lynch-associated cancer · ≥2 generations · ≥1 diagnosed &lt;50 years · FAP excluded · pathologically confirmed
+  </div>
+  <table>
+    <tr><th>Gene</th><th>CRC Lifetime Risk</th><th>Associated Extra-Colonic Cancers</th></tr>
+    <tr><td>MLH1</td><td>40–80%</td><td>Endometrial 40–60%, ovary, stomach, urinary tract</td></tr>
+    <tr><td>MSH2</td><td>40–80%</td><td>Endometrial, ovary, urinary tract, sebaceous (Muir-Torre)</td></tr>
+    <tr><td>MSH6</td><td>10–22%</td><td>Endometrial predominant</td></tr>
+    <tr><td>PMS2</td><td>15–20%</td><td>Lower penetrance</td></tr>
+    <tr><td>EPCAM</td><td>MSH2 silencing</td><td>Urinary tract prominent</td></tr>
+  </table>
+
+  <h3 class="subsection">Surveillance Intervals — MSTF 2020 / BSG 2020</h3>
+  <table>
+    <tr><th>Finding</th><th>Next Colonoscopy</th></tr>
+    <tr><td>1–2 tubular adenomas &lt;10 mm, LGD</td><td>7–10 years</td></tr>
+    <tr><td>3–4 adenomas OR any 10–19 mm OR any HGD</td><td>3 years</td></tr>
+    <tr><td>≥5 adenomas OR any ≥20 mm</td><td>1 year</td></tr>
+    <tr><td>SSL &lt;10 mm, no dysplasia</td><td>5 years</td></tr>
+    <tr><td>SSL ≥10 mm OR SSL with dysplasia</td><td>1 year</td></tr>
+    <tr><td>Piecemeal resection ≥20 mm</td><td>3–6 months (scar check)</td></tr>
+    <tr><td>FAP post-IRA (rectal remnant)</td><td>Every 6–12 months</td></tr>
+    <tr><td>Lynch syndrome</td><td>Annual from age 25 (or 5 yrs before youngest affected relative)</td></tr>
+  </table>
+
+  <h2 class="section">Section 3 — Board Review / Viva</h2>
+
+  <div class="viva">
+    <div class="q">Q1. T1 adenocarcinoma, Kikuchi Sm2, moderate differentiation, no LVI, margin 1.5 mm. Operate or surveil?</div>
+    <div class="a">A: Low-risk T1 — Sm2 with clear margin (&gt;1 mm), no LVI, moderate differentiation. ESGE/BSG support surveillance: colonoscopy at 3 months, then 1 year.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q2. 16-year-old, APC mutation, 200+ adenomas, 12 rectal polyps. What operation?</div>
+    <div class="a">A: Proctocolectomy + IPAA. IRA acceptable only if &lt;20 rectal polyps and patient strongly prefers; requires 6-monthly flexible sigmoidoscopy for life. IPAA is oncologically superior here.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q3. 22-year-old FAP patient develops 8 cm intra-abdominal mass. No CRC. Diagnosis and management?</div>
+    <div class="a">A: Desmoid tumour (mesenteric fibromatosis) — leading cause of death in FAP post-colectomy. Treat with sulindac + tamoxifen first-line; imatinib/sorafenib for progression. Avoid surgery unless obstruction/life-threatening — trauma triggers growth.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q4. 35 adenomas, APC negative. Next test?</div>
+    <div class="a">A: MUTYH-associated polyposis (MAP). Test biallelic MUTYH mutation. Autosomal recessive. CRC lifetime risk ~80%.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q5. MSI-H Stage II T2N0M0 sigmoid cancer. Adjuvant chemotherapy?</div>
+    <div class="a">A: No adjuvant therapy. MSI-H Stage II has favourable prognosis; 5-FU is potentially harmful in dMMR tumours. Pembrolizumab not approved in adjuvant Stage II setting.</div>
+  </div>
+
+  <div class="callout callout-exam">
+    <strong>CAPP2 trial (Burn, Lancet 2011):</strong> Aspirin 600 mg/day significantly reduced Lynch-associated CRC (HR 0.63) after 4+ years. CAPP3 evaluating optimal dose (100 vs 300 vs 600 mg).
+  </div>
+
+  <h2 class="section">Section 4 — Visualization</h2>
+  <div class="diagram-wrapper">
+    <div class="diagram-title">CRC Molecular Pathways & Lynch Tumour Testing Algorithm</div>
+    <svg width="100%" viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <text x="120" y="24" text-anchor="middle" font-weight="bold" font-size="13" fill="#712B13">CIN pathway (70%)</text>
+      <rect x="30" y="34" width="180" height="36" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+      <text x="120" y="57" text-anchor="middle" font-size="12" fill="#712B13">Normal mucosa</text>
+      <line x1="120" y1="70" x2="120" y2="88" stroke="#993C1D" stroke-width="1" marker-end="url(#arr1)"/>
+      <text x="160" y="83" font-size="10" fill="#555">APC loss</text>
+      <rect x="30" y="90" width="180" height="36" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+      <text x="120" y="113" text-anchor="middle" font-size="12" fill="#712B13">Aberrant crypt / microadenoma</text>
+      <line x1="120" y1="126" x2="120" y2="144" stroke="#993C1D" stroke-width="1" marker-end="url(#arr1)"/>
+      <text x="160" y="139" font-size="10" fill="#555">KRAS</text>
+      <rect x="30" y="146" width="180" height="36" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+      <text x="120" y="169" text-anchor="middle" font-size="12" fill="#712B13">Early adenoma</text>
+      <line x1="120" y1="182" x2="120" y2="200" stroke="#993C1D" stroke-width="1" marker-end="url(#arr1)"/>
+      <text x="160" y="195" font-size="10" fill="#555">SMAD4, DCC</text>
+      <rect x="30" y="202" width="180" height="36" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+      <text x="120" y="225" text-anchor="middle" font-size="12" fill="#712B13">Late adenoma (HGD)</text>
+      <line x1="120" y1="238" x2="120" y2="256" stroke="#993C1D" stroke-width="1" marker-end="url(#arr1)"/>
+      <text x="160" y="251" font-size="10" fill="#555">TP53</text>
+      <rect x="30" y="258" width="180" height="36" rx="6" fill="#F7C1C1" stroke="#A32D2D" stroke-width="1"/>
+      <text x="120" y="281" text-anchor="middle" font-size="12" font-weight="bold" fill="#501313">Invasive CRC (MSS)</text>
+
+      <text x="340" y="24" text-anchor="middle" font-weight="bold" font-size="13" fill="#085041">Serrated pathway (15–20%)</text>
+      <rect x="250" y="34" width="180" height="36" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="340" y="57" text-anchor="middle" font-size="12" fill="#085041">Normal mucosa</text>
+      <line x1="340" y1="70" x2="340" y2="88" stroke="#0F6E56" stroke-width="1" marker-end="url(#arr1)"/>
+      <text x="380" y="83" font-size="10" fill="#555">BRAF V600E</text>
+      <rect x="250" y="90" width="180" height="36" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="340" y="113" text-anchor="middle" font-size="12" fill="#085041">Hyperplastic polyp / SSL</text>
+      <line x1="340" y1="126" x2="340" y2="144" stroke="#0F6E56" stroke-width="1" marker-end="url(#arr1)"/>
+      <text x="380" y="139" font-size="10" fill="#555">MLH1 methylation</text>
+      <rect x="250" y="146" width="180" height="36" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="340" y="169" text-anchor="middle" font-size="12" fill="#085041">SSL with dysplasia</text>
+      <line x1="340" y1="182" x2="340" y2="200" stroke="#0F6E56" stroke-width="1" marker-end="url(#arr1)"/>
+      <rect x="250" y="202" width="180" height="36" rx="6" fill="#F7C1C1" stroke="#A32D2D" stroke-width="1"/>
+      <text x="340" y="225" text-anchor="middle" font-size="12" font-weight="bold" fill="#501313">MSI-H CRC (sporadic)</text>
+
+      <text x="560" y="24" text-anchor="middle" font-weight="bold" font-size="13" fill="#3C3489">Lynch / dMMR (3–5%)</text>
+      <rect x="470" y="34" width="180" height="36" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+      <text x="560" y="57" text-anchor="middle" font-size="12" fill="#3C3489">Germline MMR mutation</text>
+      <line x1="560" y1="70" x2="560" y2="88" stroke="#534AB7" stroke-width="1" marker-end="url(#arr1)"/>
+      <text x="610" y="83" font-size="10" fill="#555">LOH (2nd hit)</text>
+      <rect x="470" y="90" width="180" height="36" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+      <text x="560" y="113" text-anchor="middle" font-size="12" fill="#3C3489">Flat right-sided adenoma</text>
+      <line x1="560" y1="126" x2="560" y2="144" stroke="#534AB7" stroke-width="1" marker-end="url(#arr1)"/>
+      <text x="610" y="139" font-size="10" fill="#555">Rapid progression</text>
+      <rect x="470" y="146" width="180" height="36" rx="6" fill="#F7C1C1" stroke="#A32D2D" stroke-width="1"/>
+      <text x="560" y="169" text-anchor="middle" font-size="12" font-weight="bold" fill="#501313">MSI-H CRC (Lynch)</text>
+
+      <text x="340" y="345" text-anchor="middle" font-weight="bold" font-size="13" fill="#1a1a1a">Lynch tumour testing algorithm</text>
+      <rect x="180" y="356" width="300" height="36" rx="6" fill="#D3D1C7" stroke="#5F5E5A" stroke-width="0.5"/>
+      <text x="330" y="379" text-anchor="middle" font-size="12" fill="#2C2C2A">CRC diagnosed — IHC for MMR proteins</text>
+      <line x1="280" y1="392" x2="200" y2="420" stroke="#555" stroke-width="1" marker-end="url(#arr1)"/>
+      <line x1="400" y1="392" x2="480" y2="420" stroke="#555" stroke-width="1" marker-end="url(#arr1)"/>
+      <text x="190" y="416" font-size="10" fill="#333">MLH1 absent</text>
+      <text x="410" y="416" font-size="10" fill="#333">Other MMR absent</text>
+      <rect x="100" y="422" width="190" height="36" rx="6" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+      <text x="195" y="445" text-anchor="middle" font-size="11" fill="#633806">BRAF V600E + MLH1 methylation</text>
+      <rect x="400" y="422" width="190" height="36" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+      <text x="495" y="445" text-anchor="middle" font-size="11" fill="#3C3489">Germline MMR testing</text>
+      <line x1="195" y1="458" x2="195" y2="476" stroke="#555" stroke-width="1" marker-end="url(#arr1)"/>
+      <line x1="495" y1="458" x2="495" y2="476" stroke="#555" stroke-width="1" marker-end="url(#arr1)"/>
+      <rect x="100" y="478" width="190" height="36" rx="6" fill="#D3D1C7" stroke="#5F5E5A" stroke-width="0.5"/>
+      <text x="195" y="501" text-anchor="middle" font-size="11" fill="#2C2C2A">If +ve: sporadic (not Lynch)</text>
+      <rect x="400" y="478" width="190" height="36" rx="6" fill="#F7C1C1" stroke="#A32D2D" stroke-width="1"/>
+      <text x="495" y="501" text-anchor="middle" font-size="12" font-weight="bold" fill="#501313">Lynch confirmed</text>
+    </svg>
+  </div>
+</div>
+
+<div class="monograph page-break" id="m2">
+  <div class="monograph-header">
+    <div class="monograph-number">Monograph 2 of 6</div>
+    <div class="monograph-title">Colon Cancer (CRC)</div>
+    <div class="monograph-subtitle">Right-sided · Left-sided · Sigmoid · CME/D3 · Adjuvant Therapy</div>
+  </div>
+
+  <h2 class="section">Section 1 — Operative Atlas</h2>
+  <h3 class="subsection">Key Anatomical Landmarks</h3>
+  <ul class="body-list">
+    <li><strong>Toldt's fascia:</strong> embryological fusion plane — the correct CME dissection plane; avascular, preserves ureter and gonadal vessels</li>
+    <li><strong>Right ureter:</strong> crosses right iliac vessels at pelvic brim, lateral to ileocolic pedicle; lift mesentery medially to identify</li>
+    <li><strong>SMV:</strong> medial landmark for right hemicolectomy; ileocolic vein defines vascular pedicle</li>
+    <li><strong>Left ureter:</strong> posterior to IMA origin — always identify before IMA ligation</li>
+    <li><strong>IMV:</strong> ligated at inferior pancreatic border in left hemicolectomy for tension-free anastomosis</li>
+    <li><strong>Hypogastric nerves:</strong> arise at IMA origin; injured during high IMA ligation if dissection goes posterior to pre-aortic fascia → ejaculatory dysfunction</li>
+  </ul>
+
+  <div class="callout callout-pearl">
+    <strong>CME principle (Hohenberger 2009):</strong> Sharp dissection in embryological fascial planes + central vascular ligation at mesenteric root (D3) + intact mesocolic envelope. RELARC trial 2024 confirmed DFS benefit of CME vs D2.
+  </div>
+
+  <h2 class="section">Section 2 — TNM Staging & Molecular Profiling</h2>
+  <h3 class="subsection">TNM 8th Edition — Colon Cancer</h3>
+  <table>
+    <tr><th>T Stage</th><th>Definition</th><th>N Stage</th><th>Definition</th></tr>
+    <tr><td>Tis</td><td>Carcinoma in situ (intramucosal)</td><td>N0</td><td>No regional nodes</td></tr>
+    <tr><td>T1</td><td>Into submucosa</td><td>N1a</td><td>1 positive node</td></tr>
+    <tr><td>T2</td><td>Into muscularis propria</td><td>N1b</td><td>2–3 positive nodes</td></tr>
+    <tr><td>T3</td><td>Through MP into pericolorectal tissue</td><td>N1c</td><td>Tumour deposit(s), no positive node</td></tr>
+    <tr><td>T4a</td><td>Penetrates visceral peritoneum</td><td>N2a</td><td>4–6 positive nodes</td></tr>
+    <tr><td>T4b</td><td>Invades/adheres to adjacent organ</td><td>N2b</td><td>≥7 positive nodes</td></tr>
+  </table>
+
+  <h3 class="subsection">AJCC Stage Grouping & Survival</h3>
+  <table>
+    <tr><th>Stage</th><th>TNM</th><th>5-Year Survival</th></tr>
+    <tr><td>I</td><td>T1–2 N0 M0</td><td>~92%</td></tr>
+    <tr><td>IIA</td><td>T3 N0 M0</td><td>~87%</td></tr>
+    <tr><td>IIB</td><td>T4a N0 M0</td><td>~65%</td></tr>
+    <tr><td>IIC</td><td>T4b N0 M0</td><td>~58%</td></tr>
+    <tr><td>IIIA</td><td>T1–2 N1 / T1 N2a</td><td>~90%</td></tr>
+    <tr><td>IIIB</td><td>T3–4a N1 / T2–3 N2a / T1–2 N2b</td><td>~72%</td></tr>
+    <tr><td>IIIC</td><td>T4a N2a / T3–4a N2b / T4b N1–2</td><td>~53%</td></tr>
+    <tr><td>IV</td><td>Any T, any N, M1</td><td>~14%</td></tr>
+  </table>
+
+  <div class="callout callout-danger">
+    <strong>High-risk Stage II features (adjuvant chemo indicated):</strong> T4 · bowel obstruction/perforation · &lt;12 nodes examined · LVI/PNI · poor differentiation · positive margins
+  </div>
+  <div class="callout callout-danger">
+    <strong>MSI-H Stage II exam trap:</strong> Do NOT give 5-FU monotherapy — may be harmful in dMMR tumours
+  </div>
+
+  <h3 class="subsection">Molecular Profiling</h3>
+  <table>
+    <tr><th>Biomarker</th><th>Clinical Impact</th></tr>
+    <tr><td>RAS (KRAS/NRAS) mutant</td><td>Anti-EGFR (cetuximab/panitumumab) CONTRAINDICATED</td></tr>
+    <tr><td>BRAF V600E</td><td>Poor prognosis; BEACON triplet (encorafenib + binimetinib + cetuximab) for metastatic</td></tr>
+    <tr><td>MSI-H/dMMR</td><td>Stage II: avoid 5-FU alone; metastatic: pembrolizumab 1st line (KEYNOTE-177)</td></tr>
+    <tr><td>HER2 amplified</td><td>RAS/BRAF WT: trastuzumab + pertuzumab (MOUNTAINEER)</td></tr>
+    <tr><td>NTRK fusion</td><td>Larotrectinib/entrectinib regardless of histology</td></tr>
+  </table>
+
+  <h3 class="subsection">Adjuvant Chemotherapy by Stage</h3>
+  <table>
+    <tr><th>Stage</th><th>Regimen</th><th>Key Trial</th></tr>
+    <tr><td>Stage I</td><td>No adjuvant</td><td>Surgery curative</td></tr>
+    <tr><td>Stage II low-risk</td><td>No adjuvant (or discuss)</td><td>No RCT benefit</td></tr>
+    <tr><td>Stage II high-risk</td><td>CAPOX × 3 months (preferred)</td><td>IDEA collaboration</td></tr>
+    <tr><td>Stage III low-risk (T1–3, N1)</td><td>CAPOX × 3 months</td><td>IDEA: 3-month CAPOX non-inferior</td></tr>
+    <tr><td>Stage III high-risk (T4 or N2)</td><td>FOLFOX × 6 months</td><td>IDEA: 6 months superior</td></tr>
+    <tr><td>Metastatic 1st line</td><td>FOLFOX + bevacizumab / FOLFIRI + bev</td><td>TREE, FOLFOX4 vs IFL</td></tr>
+    <tr><td>Metastatic MSI-H</td><td>Pembrolizumab (KEYNOTE-177)</td><td>PFS HR 0.60; OS benefit confirmed</td></tr>
+    <tr><td>Metastatic BRAF V600E</td><td>BEACON triplet</td><td>ORR 26%; OS 9.0 vs 5.4 months</td></tr>
+  </table>
+
+  <div class="callout callout-danger">
+    <strong>EPOC trial exam trap:</strong> FOLFOX + cetuximab perioperatively in RAS WT CRLM — cetuximab WORSENED outcomes. Never give anti-EGFR perioperatively.
+  </div>
+
+  <h2 class="section">Section 3 — Board Review / Viva</h2>
+  <div class="viva">
+    <div class="q">Q1. Right-sided obstructing CRC, no perforation, no metastases. Management?</div>
+    <div class="a">A: Right-sided obstruction — primary resection and anastomosis safe. Laparoscopic right hemicolectomy. No role for SEMS right of hepatic flexure (technically difficult, high perforation risk).</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q2. T3N1a MSS, KRAS mutant, CEA normalised. Adjuvant therapy?</div>
+    <div class="a">A: Stage IIIA. FOLFOX × 6 months or CAPOX × 3–6 months. MSS excludes pembrolizumab. KRAS excludes anti-EGFR. Adjuvant bevacizumab not proven (AVANT, QUASAR 2 — negative).</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q3. Post-op day 4 fever + abdominal pain after left hemicolectomy. CT shows pneumoperitoneum. Clavien-Dindo grade?</div>
+    <div class="a">A: Anastomotic leak requiring laparotomy = Clavien-Dindo IIIb.</div>
+  </div>
+
+  <h2 class="section">Section 4 — ERAS 2025 Protocol</h2>
+  <table>
+    <tr><th>Phase</th><th>Key Interventions</th></tr>
+    <tr><td>Pre-op</td><td>MBP + oral antibiotics (metronidazole + neomycin) · carbohydrate loading 2 hrs pre-op · IV iron if Hb &lt;110 g/L with iron deficiency · LMWH 12 hrs pre-op</td></tr>
+    <tr><td>Intra-op</td><td>Laparoscopic default · GDFT (oesophageal Doppler/LiDCO) · no routine NGT · TAP block + intrathecal morphine · cefuroxime + metronidazole at induction</td></tr>
+    <tr><td>Post-op D0</td><td>Oral fluids 4 hrs post-op · mobilise same day · catheter removal at 24 hrs</td></tr>
+    <tr><td>Post-op D1–2</td><td>Low-residue diet · stop IV fluids when tolerating orally · paracetamol + NSAIDs + PRN opioid · chewing gum · laxatives</td></tr>
+    <tr><td>Discharge</td><td>Tolerating diet · pain VAS &lt;3 · passing flatus · independent mobility · LOS: lap right hemi 2–3 days; proctocolectomy 4–5 days</td></tr>
+  </table>
+</div>
+
+<div class="monograph page-break" id="m3">
+  <div class="monograph-header">
+    <div class="monograph-number">Monograph 3 of 6</div>
+    <div class="monograph-title">Rectal Cancer</div>
+    <div class="monograph-subtitle">TME · Neoadjuvant Therapy · Watch-and-Wait · LPND</div>
+  </div>
+
+  <h2 class="section">Section 1 — Operative Atlas</h2>
+  <h3 class="subsection">The TME Plane — Key Anatomical Points</h3>
+  <table>
+    <tr><th>Structure</th><th>Definition</th><th>Surgical Significance</th></tr>
+    <tr><td>Holy plane (Heald)</td><td>Areolar tissue between visceral mesorectal fascia and parietal sacral fascia</td><td>Avascular; preserves autonomic nerves; complete mesorectal excision</td></tr>
+    <tr><td>Waldeyer's fascia</td><td>Presacral fascia thickening at S4</td><td>Must be divided sharply at S4–5 to complete posterior dissection</td></tr>
+    <tr><td>Denonvilliers' fascia</td><td>Between posterior prostate/seminal vesicles and anterior mesorectum</td><td>For anterior T3+ tumours: dissect anterior to this fascia for R0 CRM</td></tr>
+    <tr><td>Hypogastric nerves</td><td>Paired nerves lateral to mesorectum at sacral promontory</td><td>Injury → retrograde ejaculation; stay medial in holy plane</td></tr>
+    <tr><td>Pelvic nerves (S2–4)</td><td>Parasympathetics joining pelvic plexus lateral to mid-low rectum</td><td>Injury → erectile dysfunction + bladder dysfunction; at risk during lateral dissection</td></tr>
+    <tr><td>CRM</td><td>Tumour ≤1 mm from cut lateral surface of TME specimen</td><td>CRM+ = independent predictor of local recurrence (HR 3.5) and OS</td></tr>
+  </table>
+
+  <div class="formula">CRM threatened on MRI = tumour signal ≤1 mm from mesorectal fascia → neoadjuvant mandatory</div>
+
+  <h3 class="subsection">Operative Approaches</h3>
+  <table>
+    <tr><th>Approach</th><th>Indication</th><th>Key Points</th></tr>
+    <tr><td>Laparoscopic TME (LAR)</td><td>Upper/mid rectum, T1–3</td><td>5-port; medial-to-lateral; mandatory splenic flexure mobilisation</td></tr>
+    <tr><td>Robotic TME</td><td>Mid/low rectum, narrow pelvis</td><td>ROLARR: no difference in CRM+ vs laparoscopic</td></tr>
+    <tr><td>TaTME</td><td>Low rectum, high BMI, narrow pelvis</td><td>Simultaneous transabdominal + transanal dissection</td></tr>
+    <tr><td>ELAPE/Cylindrical APR</td><td>Ultra-low tumour, sphincter involved</td><td>Reduces CRM+ from ~30% (standard APR) to ~10%; prone perineal phase</td></tr>
+    <tr><td>ISR (intersphincteric resection)</td><td>T1–2, 1–3 cm from dentate, good sphincter</td><td>Pre-op anorectal manometry; risk of major LARS</td></tr>
+  </table>
+
+  <h2 class="section">Section 2 — Risk Stratification & Neoadjuvant Therapy</h2>
+  <h3 class="subsection">MRI Staging Parameters</h3>
+  <table>
+    <tr><th>Parameter</th><th>Definition</th><th>Clinical Impact</th></tr>
+    <tr><td>CRM</td><td>Tumour ≤1 mm from mesorectal fascia</td><td>CRM+ → neoadjuvant mandatory</td></tr>
+    <tr><td>EMVI</td><td>Tumour in extramural veins</td><td>Systemic recurrence risk; worse OS</td></tr>
+    <tr><td>T3 subclassification</td><td>T3a &lt;1mm · T3b 1–5mm · T3c 5–15mm · T3d &gt;15mm</td><td>T3c/d = high-risk; neoadjuvant considered</td></tr>
+    <tr><td>TRG (Mandard)</td><td>1 = complete response · 5 = no response</td><td>TRG 1–2 = consider watch-and-wait</td></tr>
+    <tr><td>Lateral pelvic nodes</td><td>Internal iliac/obturator territory</td><td>≥7mm pre-CRT or ≥4mm post-CRT = positive</td></tr>
+  </table>
+
+  <h3 class="subsection">ESMO Risk Stratification & Treatment</h3>
+  <table>
+    <tr><th>Risk Group</th><th>MRI Features</th><th>Treatment</th></tr>
+    <tr><td>Very low / low</td><td>T1–2 N0, CRM clear</td><td>Primary surgery</td></tr>
+    <tr><td>Intermediate</td><td>T3c/d, N1–2, CRM clear</td><td>SCRT + CAPOX (RAPIDO) or LCRT</td></tr>
+    <tr><td>High / LARC</td><td>Threatened CRM, T4, LPN+</td><td>LCRT + induction FOLFOX (TNT) → surgery</td></tr>
+    <tr><td>Unresectable</td><td>Fixed tumour, bilateral ureteric obstruction</td><td>TNT → reassess → multivisceral ± exenteration</td></tr>
+  </table>
+
+  <h3 class="subsection">Key TNT Trials</h3>
+  <div class="trial"><strong>RAPIDO (Lancet Oncol 2021):</strong> SCRT 25Gy/5fx + 18wks CAPOX/FOLFOX → surgery vs LCRT → surgery. TNT reduced disease-related treatment failure (23.7% vs 30.4%, HR 0.75). pCR 28% vs 14%.</div>
+  <div class="trial"><strong>PRODIGE 23 (NEJM 2021):</strong> mFOLFIRINOX 6 cycles → LCRT → surgery vs LCRT → surgery. 3-yr DFS 75.7% vs 68.5%. pCR 27.5% vs 12%.</div>
+  <div class="trial"><strong>OPRA (JCO 2022):</strong> Consolidation chemotherapy after LCRT → higher cCR and organ preservation rates (58% vs 43%) at 3 years.</div>
+
+  <h3 class="subsection">Watch-and-Wait — Exam Essentials</h3>
+  <table>
+    <tr><th>Element</th><th>Detail</th></tr>
+    <tr><td>cCR definition</td><td>No residual tumour on MRI (TRG 1, fibrosis only) + no ulceration/mass on endoscopy + normal CEA</td></tr>
+    <tr><td>Surveillance</td><td>DRE + flexible sigmoidoscopy Q3M × 2 years, then 6-monthly; MRI pelvis Q6M</td></tr>
+    <tr><td>Regrowth rate</td><td>~25–30% at 2 years; ~95% of regrowths are local (salvageable by TME)</td></tr>
+    <tr><td>Outcomes (IWWD)</td><td>5-yr OS 85%; LR 25%; DFS 94% in those without regrowth (van der Valk, Lancet 2018)</td></tr>
+  </table>
+
+  <div class="callout callout-exam">
+    <strong>Exam trap:</strong> cCR ≠ pCR. 15–20% of apparent cCR have residual tumour at histology. Discuss both W&W and surgery options at MDT with shared patient decision-making.
+  </div>
+
+  <h3 class="subsection">LPND — Eastern vs Western</h3>
+  <table>
+    <tr><th>Approach</th><th>Practice</th><th>Evidence</th></tr>
+    <tr><td>Eastern (Japan)</td><td>Routine bilateral LPND for T3–4 below peritoneal reflection</td><td>JCOG0212: LPND reduces lateral LR (7.4% vs 12.6%); no OS difference</td></tr>
+    <tr><td>Western</td><td>LPND only if nodes ≥7mm pre-CRT remain ≥4mm post-CRT</td><td>Long-course CRT sterilises lateral nodes; LPND adds urinary/sexual morbidity</td></tr>
+  </table>
+
+  <h2 class="section">Section 3 — Board Review / Viva</h2>
+  <div class="viva">
+    <div class="q">Q1. T2N0 low rectal cancer 2 cm from dentate, CRM clear 8 mm. Operation?</div>
+    <div class="a">A: Options: APR (sphincter sacrifice) or ISR (intersphincteric resection) with ultra-low hand-sewn coloanal anastomosis. Decision: sphincter bulk on anorectal manometry, continence baseline, patient preference. No neoadjuvant for T2N0 CRM-clear.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q2. CRM 0.5 mm anteriorly on MRI, T3c. What before surgery?</div>
+    <div class="a">A: Threatened CRM — neoadjuvant CRT mandatory (LCRT or SCRT + consolidation). Reimage 8–12 weeks post-CRT. If still threatened — consider pelvic exenteration or ELAPE.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q3. cCR after TNT. At 18-month surveillance, nodular irregularity at tumour site on sigmoidoscopy. What next?</div>
+    <div class="a">A: Local regrowth (~25%). Biopsy to confirm viable tumour. If positive → salvage TME. Achieves similar R0 rates to primary surgery; sphincter preservation possible in ~60%.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q4. LARS score &gt;29 (major LARS) at 6 months post-ileostomy closure. Management pathway?</div>
+    <div class="a">A: Dietary modification → loperamide → transanal irrigation (highest evidence) → biofeedback → sacral neuromodulation (SNM) for refractory major LARS.</div>
+  </div>
+
+  <h2 class="section">Section 4 — Visualization</h2>
+  <div class="diagram-wrapper">
+    <div class="diagram-title">Rectal Cancer: Staging-to-Treatment Algorithm</div>
+    <svg width="100%" viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <rect x="215" y="20" width="250" height="44" rx="8" fill="#D3D1C7" stroke="#5F5E5A" stroke-width="0.5"/>
+      <text x="340" y="38" text-anchor="middle" font-size="13" font-weight="bold" fill="#2C2C2A">MRI pelvis staging</text>
+      <text x="340" y="56" text-anchor="middle" font-size="11" fill="#444">T stage, CRM, EMVI, lateral nodes</text>
+      <line x1="280" y1="64" x2="120" y2="100" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <line x1="340" y1="64" x2="340" y2="100" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <line x1="400" y1="64" x2="560" y2="100" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <rect x="30" y="100" width="180" height="52" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="120" y="120" text-anchor="middle" font-size="12" font-weight="bold" fill="#085041">Very low / low</text>
+      <text x="120" y="136" text-anchor="middle" font-size="11" fill="#0F6E56">T1–2 N0, CRM clear</text>
+      <line x1="120" y1="152" x2="120" y2="178" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <rect x="30" y="178" width="180" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="120" y="196" text-anchor="middle" font-size="12" font-weight="bold" fill="#085041">Primary surgery</text>
+      <text x="120" y="212" text-anchor="middle" font-size="11" fill="#0F6E56">LAR / TaTME / APR</text>
+      <rect x="250" y="100" width="180" height="52" rx="6" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+      <text x="340" y="120" text-anchor="middle" font-size="12" font-weight="bold" fill="#633806">Intermediate</text>
+      <text x="340" y="136" text-anchor="middle" font-size="11" fill="#854F0B">T3c/d, N1–2, CRM clear</text>
+      <line x1="340" y1="152" x2="340" y2="178" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <rect x="250" y="178" width="180" height="52" rx="6" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+      <text x="340" y="197" text-anchor="middle" font-size="12" font-weight="bold" fill="#633806">SCRT + CAPOX (RAPIDO)</text>
+      <text x="340" y="213" text-anchor="middle" font-size="11" fill="#854F0B">25 Gy/5fx then 6 cycles</text>
+      <line x1="340" y1="230" x2="340" y2="254" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <rect x="250" y="254" width="180" height="38" rx="6" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+      <text x="340" y="278" text-anchor="middle" font-size="11" fill="#633806">Surgery 8–10 wks post-TNT</text>
+      <rect x="470" y="100" width="180" height="52" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+      <text x="560" y="120" text-anchor="middle" font-size="12" font-weight="bold" fill="#712B13">High risk / LARC</text>
+      <text x="560" y="136" text-anchor="middle" font-size="11" fill="#993C1D">Threatened CRM, T4, LPN+</text>
+      <line x1="560" y1="152" x2="560" y2="178" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <rect x="470" y="178" width="180" height="52" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+      <text x="560" y="197" text-anchor="middle" font-size="12" font-weight="bold" fill="#712B13">LCRT + induction FOLFOX</text>
+      <text x="560" y="213" text-anchor="middle" font-size="11" fill="#993C1D">45–50 Gy + capecitabine</text>
+      <line x1="560" y1="230" x2="560" y2="254" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <rect x="470" y="254" width="180" height="38" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+      <text x="560" y="278" text-anchor="middle" font-size="11" fill="#712B13">Re-stage MRI 8–12 wks</text>
+      <line x1="340" y1="292" x2="340" y2="318" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <line x1="560" y1="292" x2="360" y2="318" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <rect x="215" y="318" width="250" height="44" rx="8" fill="#D3D1C7" stroke="#5F5E5A" stroke-width="0.5"/>
+      <text x="340" y="336" text-anchor="middle" font-size="13" font-weight="bold" fill="#2C2C2A">Post-TNT assessment</text>
+      <text x="340" y="352" text-anchor="middle" font-size="11" fill="#444">MRI + endoscopy ± CEA</text>
+      <line x1="290" y1="362" x2="150" y2="396" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <line x1="390" y1="362" x2="530" y2="396" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <text x="175" y="388" font-size="10" fill="#333">cCR (TRG1)</text>
+      <text x="435" y="388" font-size="10" fill="#333">Residual tumour</text>
+      <rect x="40" y="396" width="210" height="52" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="145" y="416" text-anchor="middle" font-size="12" font-weight="bold" fill="#085041">Watch-and-wait (NOM)</text>
+      <text x="145" y="432" text-anchor="middle" font-size="11" fill="#0F6E56">Q3M flexi + MRI; ~25% regrowth</text>
+      <line x1="145" y1="448" x2="145" y2="472" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <rect x="40" y="472" width="210" height="38" rx="6" fill="#F7C1C1" stroke="#A32D2D" stroke-width="1"/>
+      <text x="145" y="496" text-anchor="middle" font-size="12" font-weight="bold" fill="#501313">Regrowth → salvage TME</text>
+      <rect x="430" y="396" width="210" height="52" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+      <text x="535" y="416" text-anchor="middle" font-size="12" font-weight="bold" fill="#712B13">Proceed to surgery</text>
+      <text x="535" y="432" text-anchor="middle" font-size="11" fill="#993C1D">LAR / ELAPE / exenteration</text>
+      <line x1="535" y1="448" x2="535" y2="472" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+      <rect x="430" y="472" width="210" height="38" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+      <text x="535" y="496" text-anchor="middle" font-size="11" fill="#3C3489">± LPND if nodes ≥4mm post-CRT</text>
+      <rect x="30" y="530" width="10" height="10" rx="2" fill="#9FE1CB"/>
+      <text x="46" y="539" font-size="10" fill="#333">Surgery first / NOM</text>
+      <rect x="180" y="530" width="10" height="10" rx="2" fill="#EF9F27"/>
+      <text x="196" y="539" font-size="10" fill="#333">Intermediate (RAPIDO)</text>
+      <rect x="350" y="530" width="10" height="10" rx="2" fill="#F0997B"/>
+      <text x="366" y="539" font-size="10" fill="#333">LARC / threatened CRM</text>
+      <rect x="540" y="530" width="10" height="10" rx="2" fill="#AFA9EC"/>
+      <text x="556" y="539" font-size="10" fill="#333">LPND</text>
+    </svg>
+  </div>
+</div>
+
+<div class="monograph page-break" id="m4">
+  <div class="monograph-header">
+    <div class="monograph-number">Monograph 4 of 6</div>
+    <div class="monograph-title">Colorectal Liver Metastases & Peritoneal Disease</div>
+    <div class="monograph-subtitle">CRLM · FLR · CRS/HIPEC · PCI · HAI Pump</div>
+  </div>
+
+  <h2 class="section">Section 1 — Resectability & Surgical Planning</h2>
+  <h3 class="subsection">Resectability Criteria</h3>
+  <ul class="body-list">
+    <li>Adequate FLR: ≥20–25% normal liver; ≥30–40% post-chemotherapy/cirrhotic liver</li>
+    <li>Clear surgical margin (R0, ≥1 mm)</li>
+    <li>Preserve ≥2 contiguous hepatic segments with adequate inflow, outflow, and biliary drainage</li>
+    <li>No unresectable extrahepatic disease</li>
+  </ul>
+
+  <div class="formula">FLR% = (FLR volume) / (Total functional liver volume − tumour volume) × 100</div>
+  <div class="formula">Target FLR: ≥20% (normal liver) · ≥30% (post-chemotherapy) · ≥40% (cirrhosis)</div>
+
+  <h3 class="subsection">FLR Augmentation Strategies</h3>
+  <table>
+    <tr><th>Strategy</th><th>Method</th><th>Timeline</th></tr>
+    <tr><td>Portal vein embolisation (PVE)</td><td>Embolise portal vein to tumour-bearing lobe → contralateral hypertrophy</td><td>4–6 weeks</td></tr>
+    <tr><td>ALPPS</td><td>Liver partition + PVL in single stage → rapid hypertrophy</td><td>7–14 days (higher morbidity)</td></tr>
+    <tr><td>Two-stage hepatectomy</td><td>Resect smaller burden first, PVE, then second hepatectomy</td><td>4–8 weeks between stages</td></tr>
+  </table>
+
+  <h2 class="section">Section 2 — Molecular Profiling & Trials</h2>
+  <h3 class="subsection">Biomarkers Relevant to CRLM</h3>
+  <table>
+    <tr><th>Biomarker</th><th>Finding</th><th>Clinical Impact</th></tr>
+    <tr><td>RAS mutant</td><td>~55%</td><td>Anti-EGFR contraindicated; bevacizumab-based regimens</td></tr>
+    <tr><td>BRAF V600E</td><td>~8–10%</td><td>Poor prognosis; aggressive biology; encorafenib triplet for metastatic</td></tr>
+    <tr><td>MSI-H/dMMR</td><td>~5% metastatic</td><td>Pembrolizumab 1st line; may achieve complete responses avoiding surgery</td></tr>
+    <tr><td>RAS/BRAF WT, left-sided</td><td>~35%</td><td>Anti-EGFR superior to bevacizumab in 1st line (FIRE-3, PEAK)</td></tr>
+    <tr><td>HER2 amplified</td><td>~3–5% RAS/BRAF WT</td><td>Trastuzumab + pertuzumab (MOUNTAINEER)</td></tr>
+  </table>
+
+  <h3 class="subsection">Key Trials</h3>
+  <div class="trial"><strong>EORTC 40983 (Nordlinger, Lancet 2008):</strong> Perioperative FOLFOX4 (6 pre + 6 post cycles) significantly improved 3-yr PFS. Established perioperative chemotherapy standard.</div>
+  <div class="trial"><strong>EPOC trial (Primrose, Lancet Oncol 2014):</strong> FOLFOX + cetuximab vs FOLFOX alone perioperatively in RAS WT — cetuximab WORSENED outcomes. Avoid anti-EGFR perioperatively.</div>
+  <div class="trial"><strong>PUMP trial (Goéré, Lancet Oncol 2023):</strong> HAI pump + systemic FOLFIRI improved 2-yr OS (61% vs 50%) in liver-dominant metastatic CRC.</div>
+
+  <h2 class="section">Section 3 — CRS/HIPEC for Peritoneal Disease</h2>
+  <h3 class="subsection">Key Concepts</h3>
+  <table>
+    <tr><th>Concept</th><th>Detail</th></tr>
+    <tr><td>CRS (cytoreductive surgery)</td><td>Remove all visible peritoneal disease; quality measured by CC score</td></tr>
+    <tr><td>CC score</td><td>CC-0: no visible residual; CC-1: &lt;2.5mm; CC-2: 2.5–25mm; CC-3: &gt;25mm</td></tr>
+    <tr><td>HIPEC</td><td>Mitomycin C 38mg/m² over 90min at 42°C; or oxaliplatin</td></tr>
+    <tr><td>Patient selection</td><td>PCI ≤15–20 for CRC; no extra-abdominal disease; limited hepatic involvement</td></tr>
+  </table>
+
+  <div class="formula">PCI = Sum of lesion size scores (0–3) in each of 13 abdominal regions (max 39)</div>
+
+  <div class="callout callout-danger">
+    <strong>PRODIGE 7 (Lancet Oncol 2021):</strong> CRS alone vs CRS + HIPEC (oxaliplatin) — HIPEC did NOT improve OS (41.2 vs 41.7 months). However, CRS itself significantly improves survival vs systemic chemo alone. Most centres continue to offer CRS ± HIPEC within MDT decisions.
+  </div>
+
+  <h2 class="section">Section 4 — Board Review / Viva</h2>
+  <div class="viva">
+    <div class="q">Q1. Synchronous sigmoid cancer + 6 bilobar hepatic lesions, RAS mutant. FOLFOX + bevacizumab proposed. Surgical strategy?</div>
+    <div class="a">A: Assess resectability at baseline and after 2–4 cycles. Options: primary-first then restage; liver-first if primary asymptomatic; simultaneous if low-risk. Cease bevacizumab ≥6 weeks before hepatectomy. PVE if FLR &lt;25% post-chemotherapy.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q2. PCI 18 peritoneal disease, no hepatic/extrahepatic disease, good PS. Patient asks about CRS/HIPEC.</div>
+    <div class="a">A: PRODIGE 7 showed oxaliplatin HIPEC did not improve OS over CRS alone. CRS with CC-0 improves survival vs chemotherapy (median OS 40+ months vs ~16 months). Refer to specialist centre; discuss HIPEC on trial; PCI 18 is borderline for CC-0. Realistic expectations essential.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q3. HAI pump — technique and rationale?</div>
+    <div class="a">A: Catheter placed in the gastroduodenal artery (GDA) at takeoff from proper hepatic artery; pump buried in right lower quadrant subcutaneous fat. Delivers floxuridine (FUDR) — 80–90% first-pass hepatic extraction, high intratumoral concentration, minimal systemic toxicity. Collateral vessel ligation prevents extrahepatic perfusion (biliary sclerosis risk if extrahepatic).</div>
+  </div>
+
+  <h2 class="section">Section 5 — Pre-Hepatectomy Protocol</h2>
+  <table>
+    <tr><th>Element</th><th>Detail</th></tr>
+    <tr><td>Cease bevacizumab</td><td>≥6 weeks before hepatectomy (wound healing)</td></tr>
+    <tr><td>Cease oxaliplatin</td><td>≥4 weeks; assess for SOS (sinusoidal obstruction syndrome) via LFTs</td></tr>
+    <tr><td>CT volumetry</td><td>FLR calculation; if &lt;25% → PVE 4–6 weeks pre-op</td></tr>
+    <tr><td>ERAS hepatectomy</td><td>No prolonged fasting · epidural for open · no drain unless biliary anastomosis · mobilise day 1 · LOS: 3–5 days lap; 5–7 days open major hepatectomy</td></tr>
+    <tr><td>Post-hepatectomy liver failure</td><td>50–50 criteria: bilirubin &gt;50 µmol/L + INR &gt;1.5 at day 5 → supportive; MARS for severe</td></tr>
+  </table>
+</div>
+
+<div class="monograph page-break" id="m5">
+  <div class="monograph-header">
+    <div class="monograph-number">Monograph 5 of 6</div>
+    <div class="monograph-title">Anal Canal Tumors</div>
+    <div class="monograph-subtitle">SCC · AIN/HSIL · Anorectal Melanoma · Nigro Protocol</div>
+  </div>
+
+  <h2 class="section">Section 1 — Anatomy & Lymphatics</h2>
+  <table>
+    <tr><th>Structure</th><th>Location</th><th>Surgical Significance</th></tr>
+    <tr><td>Dentate line</td><td>Junction columnar/squamous epithelium</td><td>Above → internal iliac nodes; Below → inguinal nodes</td></tr>
+    <tr><td>Anal transition zone (ATZ)</td><td>1–2 cm above dentate</td><td>Cloacogenic/basaloid SCC origin</td></tr>
+    <tr><td>Internal anal sphincter</td><td>Inner circular smooth muscle</td><td>Preserved in ISR; usually spared in Fournier's</td></tr>
+    <tr><td>External anal sphincter</td><td>Striated muscle, 3 loops</td><td>Voluntary continence; sacrificed in APR</td></tr>
+    <tr><td>Intersphincteric plane</td><td>Between IAS and EAS</td><td>Surgical plane for ISR; ELAPE lateral extent</td></tr>
+    <tr><td>Ischiorectal fossa</td><td>Lateral to levators</td><td>Routes fistula spread; lateral extent of anal SCC</td></tr>
+  </table>
+
+  <h2 class="section">Section 2 — Anal SCC</h2>
+  <h3 class="subsection">TNM Staging — Anal Canal (AJCC 8th Ed)</h3>
+  <table>
+    <tr><th>T Stage</th><th>Definition</th><th>N Stage</th><th>Definition</th></tr>
+    <tr><td>T1</td><td>≤2 cm</td><td>N0</td><td>No nodes</td></tr>
+    <tr><td>T2</td><td>&gt;2 cm and ≤5 cm</td><td>N1a</td><td>Inguinal, mesorectal, or internal iliac</td></tr>
+    <tr><td>T3</td><td>&gt;5 cm</td><td>N1b</td><td>External iliac</td></tr>
+    <tr><td>T4</td><td>Invades adjacent organ (vagina, urethra, bladder)</td><td>N1c</td><td>External iliac + any N1a</td></tr>
+  </table>
+
+  <h3 class="subsection">Nigro Protocol — Exam Essentials</h3>
+  <div class="callout callout-pearl">
+    <strong>Current standard:</strong> 50.4 Gy (± boost to 54–59 Gy for T3–4/N+) + continuous 5-FU + mitomycin C (MMC)
+  </div>
+  <table>
+    <tr><th>Trial</th><th>Key Result</th></tr>
+    <tr><td>ACT II (Lancet Oncol 2013)</td><td>MMC + 5-FU + RT vs cisplatin + 5-FU + RT — MMC non-inferior (3-yr PFS 74% vs 73%); maintenance cisplatin no benefit. MMC remains standard.</td></tr>
+    <tr><td>ACCORD-03 (JCO 2012)</td><td>Induction chemo before CRT: no benefit. Higher RT dose (60 Gy): no colostomy-free survival benefit over 45 Gy in complete responders.</td></tr>
+  </table>
+
+  <div class="callout callout-danger">
+    <strong>Exam trap — response assessment:</strong> Do NOT biopsy before 26 weeks post-CRT. Radiation necrosis mimics tumour on MRI/endoscopy up to 6 months. Salvage APR only for persistent disease confirmed at 26 weeks or biopsy-proven recurrence.
+  </div>
+
+  <h2 class="section">Section 3 — AIN / HSIL</h2>
+  <table>
+    <tr><th>Grade</th><th>Old Term</th><th>WHO Term</th><th>Management</th></tr>
+    <tr><td>AIN I</td><td>Low-grade</td><td>LSIL</td><td>Observation; no treatment required</td></tr>
+    <tr><td>AIN II</td><td>High-grade</td><td>HSIL</td><td>Treat if symptomatic or immunocompromised</td></tr>
+    <tr><td>AIN III</td><td>High-grade (severe/CIS)</td><td>HSIL</td><td>Active treatment: WLE or ablation</td></tr>
+  </table>
+
+  <div class="trial"><strong>ANCHOR trial (NEJM 2022):</strong> Treatment of HSIL in HIV+ patients reduces progression to invasive anal SCC by 73% (HR 0.27). Establishes treatment of HSIL in HIV+ as evidence-based standard of care.</div>
+
+  <h2 class="section">Section 4 — Anorectal Melanoma</h2>
+  <ul class="body-list">
+    <li>&lt;1% of anorectal tumours; 5-yr OS ~10–20%; often amelanotic (misdiagnosed as haemorrhoid)</li>
+    <li><strong>Surgery:</strong> WLE (R0, 1 cm margin) vs APR — multiple series show no OS difference; WLE preferred for QoL</li>
+    <li><strong>Systemic:</strong> Pembrolizumab/nivolumab for metastatic (ORR ~20–25%); BRAF V600E (~30–40%) → encorafenib + binimetinib</li>
+    <li>APR reserved for local control of large lesions or inability to achieve R0 with WLE</li>
+  </ul>
+
+  <h2 class="section">Section 5 — Board Review / Viva</h2>
+  <div class="viva">
+    <div class="q">Q1. T2N1 anal SCC (right inguinal node). Treatment plan?</div>
+    <div class="a">A: Nigro protocol (50.4 Gy + 5-FU + MMC). Inguinal node included in elective nodal irradiation field (bilateral groins for T2+ or N1). No upfront surgery. Assess response at 8–12 weeks. Biopsy at 26 weeks if residual. Salvage APR if confirmed persistent.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q2. Renal transplant patient on tacrolimus with AIN III perianal. Management?</div>
+    <div class="a">A: High-risk — up to 10%/year progression in immunosuppressed. ANCHOR trial supports active treatment. HRA-guided ablation (IRC/laser) or WLE if localised. Staged ablation if &gt;30% circumference (prevent stricture). Annual HRA post-treatment. Discuss tacrolimus reduction with transplant team if feasible.</div>
+  </div>
+  <div class="viva">
+    <div class="q">Q3. How to distinguish cloacogenic carcinoma from rectal adenocarcinoma histologically?</div>
+    <div class="a">A: Cloacogenic: p63+, CK5/6+, CEA−/low (SCC markers); HPV-associated; treated as anal SCC (Nigro protocol). Rectal adenocarcinoma: CK20+, CDX2+, CEA+ (glandular markers); treated as rectal cancer (surgery ± neoadjuvant CRT).</div>
+  </div>
+
+  <h2 class="section">Section 6 — Perioperative Protocol (Anal SCC)</h2>
+  <table>
+    <tr><th>Phase</th><th>Detail</th></tr>
+    <tr><td>Pre-CRT workup</td><td>HIV testing; CD4 if HIV+; EUA + mapping biopsies; MRI pelvis + CT C/A/P; PET-CT for T3–4 or N+</td></tr>
+    <tr><td>CRT delivery</td><td>50.4 Gy/28 fractions; 5-FU 1000 mg/m²/day D1–4 + D29–32; MMC 12 mg/m² D1 + D29</td></tr>
+    <tr><td>Acute toxicities</td><td>Radiation dermatitis Grade 3–4 in 50%; proctitis; mucositis → emollient creams, sitz baths, low-residue diet</td></tr>
+    <tr><td>Response assessment</td><td>Clinical exam + MRI at 8–12 weeks; do NOT biopsy before 26 weeks</td></tr>
+    <tr><td>Salvage APR reconstruction</td><td>VRAM or gracilis flap for irradiated field (reduces wound breakdown from ~50% to ~15%)</td></tr>
+  </table>
+</div>
+
+<div class="monograph page-break" id="m6">
+  <div class="monograph-header">
+    <div class="monograph-number">Monograph 6 of 6</div>
+    <div class="monograph-title">Fournier's Gangrene</div>
+    <div class="monograph-subtitle">Necrotising Fasciitis · Polymicrobial · FGSI · Radical Debridement</div>
+  </div>
+
+  <h2 class="section">Section 1 — Operative Atlas</h2>
+  <h3 class="subsection">Fascial Planes & Spread</h3>
+  <table>
+    <tr><th>Fascia</th><th>Location</th><th>Relevance</th></tr>
+    <tr><td>Colles' fascia</td><td>Superficial perineal fascia (male)</td><td>Continuous with Scarpa's (abdomen) + dartos (scrotum) — primary spread plane</td></tr>
+    <tr><td>Dartos fascia</td><td>Subcutaneous scrotal layer</td><td>First plane invaded; avascular scrotal skin necrosis</td></tr>
+    <tr><td>Buck's fascia</td><td>Deep penile fascia</td><td>Limits spread to penis — penis often spared despite total scrotal loss</td></tr>
+    <tr><td>Scarpa's fascia</td><td>Abdominal wall</td><td>Continuous with Colles' → infection tracks to abdominal wall and medial thighs; NOT posterior (fascia terminates at inguinal ligament)</td></tr>
+  </table>
+
+  <div class="callout callout-pearl">
+    <strong>Testes are usually spared:</strong> Gonadal vessels arise from the aorta — anatomically separate from scrotal fascial planes. Even with total scrotal loss, testes are often viable. Place in bilateral thigh pouches if scrotal skin fully debrided.
+  </div>
+
+  <h3 class="subsection">Debridement — Step-by-Step</h3>
+  <table>
+    <tr><th>Step</th><th>Technical Detail</th></tr>
+    <tr><td>Positioning</td><td>Lloyd-Davies (lithotomy). Urethral catheter first. Betadine prep including lower abdomen and thighs.</td></tr>
+    <tr><td>Skin incision</td><td>Incise all necrotic skin; brown/black discolouration, no bleeding = necrotic</td></tr>
+    <tr><td>Finger test</td><td>If tissue separates with minimal resistance → necrotic → remove. Viable tissue resists.</td></tr>
+    <tr><td>Debride to bleeding margins</td><td>All necrotic skin, fat, fascia removed. Always more extensive than external appearance suggests.</td></tr>
+    <tr><td>Testicular assessment</td><td>Incise tunica albuginea — if bleeds → viable → thigh pouches. If necrotic → orchiectomy.</td></tr>
+    <tr><td>Penile/abdominal wall</td><td>Assess Buck's fascia; follow Scarpa's superiorly for abdominal wall extension</td></tr>
+    <tr><td>Wound care</td><td>Pack open. Betadine-soaked gauze. Do NOT close at first operation.</td></tr>
+    <tr><td>Return to theatre</td><td>Mandatory at 24–48 hours — disease always underestimated at first debridement</td></tr>
+  </table>
+
+  <h3 class="subsection">Diverting Colostomy — Indications</h3>
+  <div class="callout callout-exam">
+    <strong>Colostomy is NOT automatic.</strong> Indicated only when: rectal/anal source of infection (fistula, perforation) · extensive perianal involvement threatening sphincter · faecal contamination of wound compromising healing
+  </div>
+
+  <h2 class="section">Section 2 — Microbiology & Classification</h2>
+  <h3 class="subsection">Polymicrobial Organisms</h3>
+  <table>
+    <tr><th>Category</th><th>Common Organisms</th><th>Role</th></tr>
+    <tr><td>Gram+ aerobes</td><td>Group A Strep, S. aureus (MRSA)</td><td>Primary invasion; exotoxin production</td></tr>
+    <tr><td>Gram− aerobes</td><td>E. coli, Klebsiella, Pseudomonas</td><td>Consume O₂; lower redox potential for anaerobes</td></tr>
+    <tr><td>Anaerobes</td><td>Bacteroides fragilis, Clostridium spp, Peptostreptococcus</td><td>Hyaluronidase + collagenase → fascial destruction; gas production</td></tr>
+    <tr><td>Fungi</td><td>Candida spp</td><td>Diabetic/immunocompromised patients; worse outcomes</td></tr>
+  </table>
+
+  <h3 class="subsection">FGSI — Fournier's Gangrene Severity Index</h3>
+  <div class="formula">FGSI = Sum of deviation scores for 9 physiological parameters (adapted APACHE II)</div>
+  <div class="formula">FGSI &gt; 9 → mortality ~75% | FGSI ≤ 9 → mortality ~9%</div>
+  <p class="body">Parameters: Temperature · Heart rate · Respiratory rate · Sodium · Potassium · Creatinine · Haematocrit · WBC · Bicarbonate</p>
+
+  <h2 class="section">Section 3 — Emergency Protocol</h2>
+  <h3 class="subsection">Pre-operative (Actions Within 1–2 Hours)</h3>
+  <table>
+    <tr><th>Action</th><th>Detail</th></tr>
+    <tr><td>Resuscitation</td><td>2 large-bore IV; 500 mL crystalloid bolus; noradrenaline if MAP &lt;65 despite 1–2 L</td></tr>
+    <tr><td>Blood cultures</td><td>Before antibiotics — but do not delay antibiotics by &gt;1 hour</td></tr>
+    <tr><td>CT pelvis</td><td>Only if haemodynamically stable. Gas tracking along fascial planes is diagnostic.</td></tr>
+    <tr><td>Urethral catheter</td><td>Identifies urethra intraoperatively + monitors output</td></tr>
+    <tr><td>Consent</td><td>Wide debridement · possible colostomy · thigh pouches · skin grafting · testicular loss</td></tr>
+    <tr><td>ITU liaison</td><td>All Fournier's require ITU/HDU post-operatively</td></tr>
+  </table>
+
+  <h3 class="subsection">Empirical Antibiotic Regimen</h3>
+  <table>
+    <tr><th>Drug</th><th>Coverage</th><th>Dose</th></tr>
+    <tr><td>Piperacillin/tazobactam</td><td>Gram+, Gram−, anaerobes, Pseudomonas</td><td>4.5 g IV 8-hourly</td></tr>
+    <tr><td>+ Metronidazole</td><td>Enhanced anaerobic cover</td><td>500 mg IV 8-hourly</td></tr>
+    <tr><td>+ Vancomycin</td><td>MRSA (if risk factors)</td><td>25 mg/kg loading, TDM-guided</td></tr>
+    <tr><td>+ Micafungin</td><td>Fungal (diabetic/immunocompromised)</td><td>100 mg IV daily</td></tr>
+    <tr><td>Alternative</td><td>Severe sepsis/high-resistance risk</td><td>Meropenem 1 g IV 8-hrly + vancomycin</td></tr>
+  </table>
+
+  <h3 class="subsection">Post-operative ICU Management</h3>
+  <table>
+    <tr><th>Element</th><th>Detail</th></tr>
+    <tr><td>Wound care</td><td>Daily dressing changes under analgesia; betadine packing → Manuka honey/silver when clean</td></tr>
+    <tr><td>Return to theatre</td><td>Planned 24–48 hrs; often 2–3 total debridements needed</td></tr>
+    <tr><td>Nutrition</td><td>Early enteral via NG; 25–30 kcal/kg/day; 1.5 g/kg/day protein</td></tr>
+    <tr><td>Glycaemic control</td><td>Target 6–10 mmol/L; insulin infusion; hyperglycaemia impairs healing + immunity</td></tr>
+    <tr><td>VAC therapy</td><td>Once wound clean and granulating (~2–3 debridements); accelerates granulation</td></tr>
+    <tr><td>STSG</td><td>Split-thickness skin graft at 2–4 weeks when granulation complete</td></tr>
+    <tr><td>HBO</td><td>Adjunctive only at centres with availability; Level III evidence; never delays surgery</td></tr>
+    <tr><td>Mortality</td><td>Overall 15–40%; FGSI &gt;9 → ~75%. Surgery is the single most time-sensitive intervention.</td></tr>
+  </table>
+
+  <h2 class="section">Section 4 — Visualizations</h2>
+  <div class="diagram-wrapper">
+    <div class="diagram-title">Fournier's Gangrene — Fascial Spread Zones</div>
+    <svg width="100%" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#993C1D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <rect x="160" y="20" width="360" height="50" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+      <text x="340" y="40" text-anchor="middle" font-size="13" font-weight="bold" fill="#633806">Anterior abdominal wall</text>
+      <text x="340" y="58" text-anchor="middle" font-size="11" fill="#854F0B">Spread via Scarpa's fascia</text>
+      <line x1="160" y1="86" x2="520" y2="86" stroke="#888" stroke-width="1" stroke-dasharray="6 3"/>
+      <text x="340" y="82" text-anchor="middle" font-size="10" fill="#555">inguinal ligament (infection stops here posteriorly)</text>
+      <rect x="210" y="94" width="260" height="52" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+      <text x="340" y="114" text-anchor="middle" font-size="13" font-weight="bold" fill="#712B13">Scrotum / perineum</text>
+      <text x="340" y="132" text-anchor="middle" font-size="11" fill="#993C1D">Primary zone — Colles' and dartos fascia</text>
+      <line x1="340" y1="70" x2="340" y2="94" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arr3)"/>
+      <line x1="210" y1="120" x2="100" y2="120" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arr3)"/>
+      <line x1="470" y1="120" x2="580" y2="120" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arr3)"/>
+      <line x1="340" y1="146" x2="340" y2="180" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arr3)"/>
+      <rect x="28" y="96" width="164" height="48" rx="6" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+      <text x="110" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#633806">Left medial thigh</text>
+      <text x="110" y="132" text-anchor="middle" font-size="11" fill="#854F0B">Via Colles' fascia</text>
+      <rect x="490" y="96" width="160" height="48" rx="6" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+      <text x="570" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#633806">Right medial thigh</text>
+      <text x="570" y="132" text-anchor="middle" font-size="11" fill="#854F0B">Via Colles' fascia</text>
+      <rect x="215" y="180" width="250" height="52" rx="8" fill="#F7C1C1" stroke="#A32D2D" stroke-width="1"/>
+      <text x="340" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="#501313">Ischioanal fossa / pelvis</text>
+      <text x="340" y="218" text-anchor="middle" font-size="11" fill="#A32D2D">Levator disruption required — severe variant</text>
+      <rect x="28" y="278" width="180" height="52" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="118" y="298" text-anchor="middle" font-size="12" font-weight="bold" fill="#085041">Testes</text>
+      <text x="118" y="316" text-anchor="middle" font-size="11" fill="#0F6E56">Usually spared — gonadal vessels</text>
+      <rect x="250" y="278" width="180" height="52" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="340" y="298" text-anchor="middle" font-size="12" font-weight="bold" fill="#085041">Penis / Buck's fascia</text>
+      <text x="340" y="316" text-anchor="middle" font-size="11" fill="#0F6E56">Often spared if Buck's intact</text>
+      <rect x="472" y="278" width="180" height="52" rx="6" fill="#F7C1C1" stroke="#A32D2D" stroke-width="0.5"/>
+      <text x="562" y="298" text-anchor="middle" font-size="12" font-weight="bold" fill="#501313">External sphincter</text>
+      <text x="562" y="316" text-anchor="middle" font-size="11" fill="#A32D2D">At risk in perianal disease</text>
+      <rect x="28" y="370" width="12" height="12" rx="2" fill="#F0997B"/>
+      <text x="46" y="380" font-size="11" fill="#333">Primary spread</text>
+      <rect x="178" y="370" width="12" height="12" rx="2" fill="#EF9F27"/>
+      <text x="196" y="380" font-size="11" fill="#333">Secondary extension</text>
+      <rect x="358" y="370" width="12" height="12" rx="2" fill="#E24B4A"/>
+      <text x="376" y="380" font-size="11" fill="#333">Severe / deep variant</text>
+      <rect x="518" y="370" width="12" height="12" rx="2" fill="#9FE1CB"/>
+      <text x="536" y="380" font-size="11" fill="#333">Usually spared</text>
+      <text x="340" y="416" text-anchor="middle" font-size="10" fill="#555">Posterior spread to buttock is uncommon — Colles' fascia does not communicate posteriorly</text>
+      <text x="340" y="432" text-anchor="middle" font-size="10" fill="#555">Pelvic extension (above levators) mandates colostomy and CT assessment</text>
+    </svg>
+  </div>
+
+  <div class="diagram-wrapper">
+    <div class="diagram-title">Fournier's Gangrene — Emergency Management Pathway</div>
+    <svg width="100%" viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <rect x="215" y="16" width="250" height="44" rx="8" fill="#D3D1C7" stroke="#5F5E5A" stroke-width="0.5"/>
+      <text x="340" y="34" text-anchor="middle" font-size="13" font-weight="bold" fill="#2C2C2A">Presentation</text>
+      <text x="340" y="50" text-anchor="middle" font-size="11" fill="#444">Perineal pain, erythema, crepitus, sepsis</text>
+      <line x1="340" y1="60" x2="340" y2="80" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <rect x="215" y="80" width="250" height="44" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+      <text x="340" y="98" text-anchor="middle" font-size="13" font-weight="bold" fill="#633806">Clinical diagnosis</text>
+      <text x="340" y="114" text-anchor="middle" font-size="11" fill="#854F0B">Do not wait for imaging to treat</text>
+      <line x1="300" y1="124" x2="148" y2="155" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <line x1="380" y1="124" x2="532" y2="155" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <text x="185" y="150" font-size="10" fill="#333">haemodynamically stable</text>
+      <text x="420" y="150" font-size="10" fill="#333">shocked / unstable</text>
+      <rect x="40" y="155" width="200" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="140" y="173" text-anchor="middle" font-size="12" font-weight="bold" fill="#085041">CT pelvis and perineum</text>
+      <text x="140" y="189" text-anchor="middle" font-size="11" fill="#0F6E56">Map extent; identify source</text>
+      <line x1="140" y1="199" x2="140" y2="225" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <line x1="140" y1="225" x2="230" y2="248" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <rect x="440" y="155" width="200" height="44" rx="6" fill="#F7C1C1" stroke="#A32D2D" stroke-width="1"/>
+      <text x="540" y="173" text-anchor="middle" font-size="12" font-weight="bold" fill="#501313">Direct to theatre</text>
+      <text x="540" y="189" text-anchor="middle" font-size="11" fill="#A32D2D">Resuscitate en route</text>
+      <line x1="540" y1="199" x2="540" y2="225" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <line x1="540" y1="225" x2="450" y2="248" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <rect x="215" y="248" width="250" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+      <text x="340" y="268" text-anchor="middle" font-size="12" font-weight="bold" fill="#3C3489">Simultaneous resus + antibiotics</text>
+      <text x="340" y="284" text-anchor="middle" font-size="11" fill="#534AB7">Pip/tazo + metro ± vancomycin</text>
+      <text x="340" y="298" text-anchor="middle" font-size="11" fill="#534AB7">Cultures · catheter · ITU liaison</text>
+      <line x1="340" y1="304" x2="340" y2="326" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <rect x="215" y="326" width="250" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+      <text x="340" y="346" text-anchor="middle" font-size="12" font-weight="bold" fill="#712B13">Radical surgical debridement</text>
+      <text x="340" y="362" text-anchor="middle" font-size="11" fill="#993C1D">Lloyd-Davies; debride to bleeding margins</text>
+      <text x="340" y="378" text-anchor="middle" font-size="11" fill="#993C1D">Assess testes; thigh pouches if viable</text>
+      <line x1="340" y1="382" x2="340" y2="404" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <rect x="215" y="404" width="250" height="44" rx="8" fill="#D3D1C7" stroke="#5F5E5A" stroke-width="0.5"/>
+      <text x="340" y="422" text-anchor="middle" font-size="12" font-weight="bold" fill="#2C2C2A">ITU post-op</text>
+      <text x="340" y="438" text-anchor="middle" font-size="11" fill="#444">2nd look at 24–48 hrs mandatory</text>
+      <line x1="295" y1="448" x2="148" y2="484" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <line x1="385" y1="448" x2="532" y2="484" stroke="#555" stroke-width="1" marker-end="url(#arr4)"/>
+      <rect x="40" y="484" width="216" height="52" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="148" y="504" text-anchor="middle" font-size="12" font-weight="bold" fill="#085041">Clean wound</text>
+      <text x="148" y="520" text-anchor="middle" font-size="11" fill="#0F6E56">VAC → STSG; testis reconstruction</text>
+      <rect x="424" y="484" width="216" height="52" rx="6" fill="#F7C1C1" stroke="#A32D2D" stroke-width="1"/>
+      <text x="532" y="504" text-anchor="middle" font-size="12" font-weight="bold" fill="#501313">Ongoing necrosis</text>
+      <text x="532" y="520" text-anchor="middle" font-size="11" fill="#A32D2D">Return to theatre; extend debridement</text>
+      <text x="340" y="556" text-anchor="middle" font-size="11" fill="#333">FGSI &gt;9 = ~75% mortality · ≤9 = ~9% mortality</text>
+      <text x="340" y="572" text-anchor="middle" font-size="11" fill="#A32D2D">Surgery is the single most time-sensitive intervention</text>
+    </svg>
+  </div>
+</div>
+
+<div class="monograph page-break" id="master">
+  <div class="monograph-header">
+    <div class="monograph-number">Quick Reference</div>
+    <div class="monograph-title">Master Exam Summary</div>
+    <div class="monograph-subtitle">One-page rapid revision — all six monographs</div>
+  </div>
+
+  <table class="master-table">
+    <tr>
+      <th>Domain</th>
+      <th>Must-Know Trial</th>
+      <th>Key Classification</th>
+      <th>Exam Trap</th>
+    </tr>
+    <tr>
+      <td><strong>Benign Polyps / FAP / Lynch</strong></td>
+      <td>CAPP2 (aspirin in Lynch, HR 0.63); Amsterdam II criteria</td>
+      <td>Haggitt (L4 = surgery); Kikuchi Sm1/2/3; Paris classification; Polyposis gene table</td>
+      <td>MSI-H Stage II: do NOT give 5-FU alone. MAP is autosomal recessive.</td>
+    </tr>
+    <tr>
+      <td><strong>Colon Cancer (CRC)</strong></td>
+      <td>IDEA (3 vs 6 months adjuvant); KEYNOTE-177 (pembrolizumab 1st line MSI-H); BEACON (BRAF V600E triplet)</td>
+      <td>TNM 8th Ed; Clavien-Dindo; AJCC stage grouping</td>
+      <td>EPOC trial: anti-EGFR perioperatively WORSENS outcomes (even in RAS WT). Adjuvant bevacizumab not proven.</td>
+    </tr>
+    <tr>
+      <td><strong>Rectal Cancer</strong></td>
+      <td>RAPIDO (TNT with SCRT); PRODIGE 23 (FOLFOX + LCRT); OPRA (organ preservation); IWWD (W&amp;W database)</td>
+      <td>TRG Mandard 1–5; CRM definition (≤1mm); T3 subclassification; ESMO risk groups</td>
+      <td>cCR ≠ pCR (15–20% residual tumour). W&amp;W regrowth ~25% at 2 yrs. ROLARR: robotic = laparoscopic CRM+.</td>
+    </tr>
+    <tr>
+      <td><strong>CRLM &amp; Peritoneal</strong></td>
+      <td>EORTC 40983 (perioperative FOLFOX); PRODIGE 7 (HIPEC no OS benefit); PUMP (HAI pump OS benefit)</td>
+      <td>FLR% formula; PCI (0–39); CC score (0–3)</td>
+      <td>PRODIGE 7: oxaliplatin HIPEC did NOT improve OS. EPOC: no anti-EGFR perioperatively. Cease bevacizumab ≥6 weeks pre-hepatectomy.</td>
+    </tr>
+    <tr>
+      <td><strong>Anal Canal Tumors</strong></td>
+      <td>ACT II (MMC vs cisplatin — MMC non-inferior); ACCORD-03 (no benefit from induction chemo/dose escalation); ANCHOR (HSIL Rx reduces SCC in HIV+, HR 0.27)</td>
+      <td>AJCC 8th anal SCC TNM; AIN grading (LSIL/HSIL); lymphatic drainage (dentate line landmark)</td>
+      <td>Do NOT biopsy for response before 26 weeks post-CRT. Cloacogenic = anal SCC (Nigro), NOT rectal adenocarcinoma. Anorectal melanoma: WLE = APR for OS.</td>
+    </tr>
+    <tr>
+      <td><strong>Fournier's Gangrene</strong></td>
+      <td>Surviving Sepsis 2021 (vasopressor guidance); FGSI validation studies</td>
+      <td>FGSI &gt;9 = ~75% mortality; Clavien-Dindo for complications</td>
+      <td>Colostomy not automatic — only if colorectal source/faecal contamination. Testes usually spared (gonadal vessels independent). Posterior spread uncommon. 2nd look at 24–48 hrs is mandatory.</td>
+    </tr>
+  </table>
+
+  <div class="spacer"></div>
+
+  <div class="summary-card">
+    <h3>High-yield exam facts — rapid fire</h3>
+    <ul>
+      <li><strong>Haggitt level 4 / Kikuchi Sm3 / LVI / margin &lt;1mm</strong> → surgery for malignant polyp</li>
+      <li><strong>Amsterdam II 3-2-1 rule:</strong> ≥3 relatives, ≥2 generations, ≥1 &lt;50 yrs</li>
+      <li><strong>MSI-H Stage II:</strong> no 5-FU; <strong>Stage III:</strong> FOLFOX × 6 months; <strong>Metastatic:</strong> pembrolizumab 1st line</li>
+      <li><strong>CRM threatened (≤1mm):</strong> neoadjuvant mandatory before surgery</li>
+      <li><strong>W&amp;W regrowth:</strong> ~25–30% at 2 years; 95% are local and salvageable by TME</li>
+      <li><strong>FLR target:</strong> ≥20% normal; ≥30% post-chemotherapy; ≥40% cirrhotic</li>
+      <li><strong>PRODIGE 7:</strong> CRS ± HIPEC — HIPEC (oxaliplatin) did NOT improve OS</li>
+      <li><strong>Anal SCC response assessment:</strong> do NOT biopsy before 26 weeks post-CRT</li>
+      <li><strong>ANCHOR trial:</strong> treating HSIL in HIV+ reduces anal SCC risk by 73%</li>
+      <li><strong>Fournier's FGSI &gt;9:</strong> ~75% mortality; surgery is the single most time-sensitive factor</li>
+      <li><strong>Testes in Fournier's:</strong> usually spared (gonadal vessels from aorta, not scrotal fascia)</li>
+      <li><strong>Fournier's colostomy:</strong> only if colorectal source or faecal wound contamination</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+<script>
+function openNav() {
+  document.getElementById('sideNav').classList.add('open');
+  document.getElementById('navOverlay').style.display = 'block';
+}
+function closeNav() {
+  document.getElementById('sideNav').classList.remove('open');
+  document.getElementById('navOverlay').style.display = 'none';
+}
+</script>
+
+<script src="nav-pill.js"></script>
+</body>
+</html>

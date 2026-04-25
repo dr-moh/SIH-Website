@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High-Yield Review — Surgical Insight Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=EB+Garamond:ital,wght@0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;background:#faf7f2;color:#1a1208;font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:300;background:rgba(250,247,242,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,146,42,0.2);}
+.nav-logo{display:flex;align-items:center;gap:8px;}
+.nav-logo-img{width:48px;height:48px;border-radius:50%;border:2px solid #b8922a;background:#2b1810;overflow:hidden;flex-shrink:0;}
+.nav-logo-img img{width:100%;height:100%;object-fit:cover;}
+.nav-brand{font-size:.78rem;font-weight:800;color:#1a1208;letter-spacing:-.02em;line-height:1.1;}
+.nav-brand-sub{font-size:.55rem;font-weight:600;color:#b8922a;letter-spacing:.1em;text-transform:uppercase;}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.nav-back{font-size:.72rem;font-weight:600;color:#6b5a40;text-decoration:none;padding:6px 12px;border-radius:100px;border:1px solid rgba(184,146,42,0.25);transition:all .15s;}
+.nav-back:hover{background:rgba(184,146,42,0.1);color:#1a1208;}
+.stream-badge{display:flex;align-items:center;gap:5px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#b8922a;}
+.stream-dot{width:6px;height:6px;border-radius:50%;background:#16a34a;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── LAYOUT ── */
+.page{display:flex;flex-direction:column;height:100vh;padding-top:52px;}
+.layout{display:flex;flex:1;min-height:0;overflow:hidden;}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:220px;flex-shrink:0;background:#2b1810;
+  border-right:2px solid #b8922a;display:flex;flex-direction:column;overflow:hidden;
+  transition:width 0.3s ease, opacity 0.3s ease;
+  position:relative;
+}
+.sidebar.collapsed{width:12px;overflow:hidden;opacity:0.5;cursor:pointer;}
+.sidebar.collapsed .sidebar-header,
+.sidebar.collapsed .sidebar-body{opacity:0;pointer-events:none;}
+.sidebar-peek{
+  position:absolute;top:0;left:0;width:12px;height:100%;
+  background:#b8922a;display:none;cursor:pointer;z-index:10;
+  align-items:center;justify-content:center;
+  writing-mode:vertical-lr;font-size:.55rem;font-weight:700;
+  color:#2b1810;letter-spacing:.1em;text-transform:uppercase;
+}
+.sidebar.collapsed .sidebar-peek{display:flex;}
+.sidebar-header{flex-shrink:0;padding:12px 12px 6px;border-bottom:1px solid rgba(184,146,42,0.2);}
+.sidebar-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f0d080;margin-bottom:8px;}
+.sidebar-search{width:100%;font-family:inherit;font-size:.78rem;color:#fff;background:rgba(255,255,255,0.08);border:1px solid rgba(184,146,42,0.3);border-radius:7px;padding:7px 10px;outline:none;transition:border-color .15s;}
+.sidebar-search:focus{border-color:#f0d080;}
+.sidebar-search::placeholder{color:rgba(255,255,255,0.35);}
+.sidebar-body{flex:1;overflow-y:auto;padding:6px 8px 12px;}
+.sidebar-body::-webkit-scrollbar{width:3px;}
+.sidebar-body::-webkit-scrollbar-thumb{background:rgba(184,146,42,0.3);border-radius:2px;}
+.sys-group{margin-bottom:4px;}
+.sys-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;padding:8px 6px 3px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;background:transparent;}
+.sys-label-arrow{font-size:.6rem;color:rgba(184,146,42,0.5);transition:transform .2s;}
+.sys-label.open .sys-label-arrow{transform:rotate(90deg);}
+.sys-topics{display:flex;flex-direction:column;gap:2px;overflow:hidden;max-height:0;transition:max-height .25s ease;}
+.sys-topics.open{max-height:600px;}
+.topic-btn{background:transparent;border:none;border-radius:6px;padding:6px 8px;font-family:inherit;font-size:.8rem;font-weight:500;color:rgba(255,255,255,0.6);cursor:pointer;text-align:left;width:100%;transition:all .15s;line-height:1.4;border-bottom:1px solid rgba(255,255,255,0.05);}
+.topic-btn:hover{background:rgba(184,146,42,0.15);color:#b8922a;}
+.topic-btn.active{background:rgba(184,146,42,0.2);color:#f0d080;font-weight:700;}
+
+/* ── MAIN ── */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden;}
+.input-bar{flex-shrink:0;padding:10px 16px;background:#fff;border-bottom:1px solid rgba(184,146,42,0.15);display:flex;gap:8px;align-items:center;}
+.topic-input{flex:1;font-family:inherit;font-size:.9rem;color:#1a1208;background:#faf7f2;border:1px solid rgba(184,146,42,0.2);border-radius:9px;padding:9px 13px;outline:none;transition:border-color .15s;}
+.topic-input:focus{border-color:#b8922a;background:#fff;}
+.topic-input{opacity:0.6;pointer-events:none;}
+.run-btn{opacity:0.6;}
+.topic-input::placeholder{color:#b8a48a;}
+.run-btn{background:#a3927a;color:#f0d080;border:none;border-radius:9px;padding:9px 18px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;cursor:pointer;letter-spacing:.04em;white-space:nowrap;transition:opacity .15s;flex-shrink:0;}
+.run-btn:hover{opacity:.85;}
+.run-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* ── OUTPUT ── */
+.output-area{flex:1;min-height:0;overflow-y:auto;padding:20px 20px 48px;background:#faf7f2;}
+.output-area::-webkit-scrollbar{width:4px;}
+.output-area::-webkit-scrollbar-thumb{background:rgba(184,146,42,0.2);border-radius:2px;}
+
+/* EMPTY */
+.empty-state{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;color:#a3927a;}
+.empty-icon{width:60px;height:60px;border-radius:50%;background:#2b1810;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:4px;border:2px solid rgba(184,146,42,0.3);}
+.empty-title{font-family:'EB Garamond',serif;font-size:1.4rem;font-weight:700;color:#2b1810;letter-spacing:-.02em;}
+.empty-sub{font-size:.78rem;color:#a3927a;max-width:280px;line-height:1.6;}
+
+/* TOPIC HEADER */
+.topic-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #b8922a;flex-wrap:wrap;}
+.topic-header h2{font-family:'EB Garamond',serif;font-size:1.6rem;font-weight:700;color:#2b1810;letter-spacing:-.02em;flex:1;}
+.exam-tag{background:#2b1810;color:#f0d080;font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:600;padding:3px 8px;border-radius:4px;letter-spacing:.08em;flex-shrink:0;}
+
+/* STREAM */
+.stream-raw{font-size:.9rem;line-height:1.8;color:#3d2a18;white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid rgba(184,146,42,0.15);border-radius:12px;padding:18px;}
+.cursor{display:inline-block;width:2px;height:13px;background:#b8922a;margin-left:2px;vertical-align:middle;animation:blink .7s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* SECTIONS */
+.section{margin-bottom:12px;background:#fff;border:1px solid rgba(184,146,42,0.15);border-radius:12px;overflow:hidden;}
+.section-header{padding:8px 14px;border-bottom:1px solid rgba(184,146,42,0.1);display:flex;align-items:center;gap:8px;background:#f5f0e8;}
+.section-num{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:#b8922a;background:rgba(184,146,42,0.12);padding:2px 6px;border-radius:3px;font-weight:600;}
+.section-title{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:700;color:#2b1810;letter-spacing:-.01em;}
+.section-body{padding:14px 16px;font-size:.9rem;line-height:1.8;color:#3d2a18;}
+.section-body h3{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:700;color:#2b1810;margin:12px 0 5px;padding-left:8px;border-left:2px solid #b8922a;}
+.section-body h3:first-child{margin-top:0;}
+.section-body p{margin-bottom:6px;}
+.section-body p:last-child{margin-bottom:0;}
+.section-body ul{list-style:none;padding:0;margin:4px 0;}
+.section-body li{padding:3px 0 3px 14px;position:relative;}
+.section-body li::before{content:'›';position:absolute;left:0;color:#b8922a;font-weight:700;}
+.section-body table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.82rem;}
+.section-body th{background:#2b1810;color:#f0d080;font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:7px 10px;text-align:left;border-bottom:2px solid #b8922a;}
+.section-body td{padding:7px 10px;border-bottom:1px solid rgba(184,146,42,0.12);vertical-align:top;}
+.section-body tr:last-child td{border-bottom:none;}
+.section-body tr:nth-child(even) td{background:rgba(184,146,42,0.03);}
+.gold-standard{display:inline-flex;align-items:center;gap:3px;background:rgba(184,146,42,0.1);border:1px solid rgba(184,146,42,0.3);color:#7a5c00;font-size:.68rem;padding:2px 6px;border-radius:4px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.mnemonic-box{display:block;background:rgba(43,24,16,0.04);border:1px solid rgba(43,24,16,0.12);color:#2b1810;font-size:.78rem;padding:8px 12px;border-radius:6px;margin:8px 0;font-family:'IBM Plex Mono',monospace;line-height:1.5;}
+strong{color:#1a1208;font-weight:700;}
+code{font-family:'IBM Plex Mono',monospace;background:#f5f0e8;color:#6b5a40;padding:1px 5px;border-radius:3px;font-size:.75rem;}
+
+/* MCQ SECTION */
+.mcq-section .section-body{padding:0;}
+.mcq-group{border-bottom:1px solid rgba(184,146,42,0.1);}
+.mcq-group:last-child{border-bottom:none;}
+.mcq-group-title{padding:7px 14px;font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:600;color:#a31515;letter-spacing:.08em;text-transform:uppercase;background:rgba(163,21,21,0.04);border-bottom:1px solid rgba(184,146,42,0.08);}
+.mcq-items{padding:8px 14px;display:flex;flex-direction:column;gap:2px;}
+.mcq-item{display:flex;gap:8px;align-items:flex-start;padding:4px 0;border-bottom:1px solid rgba(184,146,42,0.06);font-size:.85rem;line-height:1.65;color:#3d2a18;}
+.mcq-item:last-child{border-bottom:none;}
+.mcq-bullet{color:#b8922a;font-weight:700;flex-shrink:0;font-size:.7rem;margin-top:3px;}
+.error-box{background:rgba(163,21,21,0.06);border:1px solid rgba(163,21,21,0.2);color:#a31515;padding:14px 16px;border-radius:10px;font-size:.82rem;}
+
+/* ── MOBILE DROPDOWN ── */
+.mob-category-bar{display:none;padding:8px 12px;background:#fff;border-bottom:1px solid rgba(184,146,42,0.15);}
+.mob-category-select{width:100%;font-family:inherit;font-size:.82rem;color:#1a1208;background:#faf7f2;border:1px solid rgba(184,146,42,0.25);border-radius:9px;padding:9px 12px;outline:none;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-right > div:first-child{display:none;}
+
+  .sidebar{display:none;}
+  .mob-category-bar{display:block;}
+  .input-bar{padding:8px 12px;}
+  .topic-input{font-size:.82rem;}
+  .run-btn{padding:9px 14px;font-size:.68rem;}
+  .output-area{padding:14px 12px 60px;}
+  .topic-header h2{font-size:1.3rem;}
+  .section-body{font-size:.78rem;}
+  .stream-raw{font-size:.78rem;padding:14px;}
+}
+@media(max-width:480px){
+  .nav-brand{font-size:.72rem;}
+  .nav-back{display:none;}
+  .stream-badge span{display:none;}
+}
+
+
+
+
+
+.mob-back-btn{
+  display:none;
+  align-items:center;
+  gap:6px;
+  background:#2b1810;
+  border:1.5px solid #b8922a;
+  color:#f0d080;
+  border-radius:8px;
+  padding:7px 13px;
+  font-size:.75rem;
+  font-weight:700;
+  text-decoration:none;
+  font-family:inherit;
+  white-space:nowrap;
+}
+.mob-back-btn:hover{opacity:.85;}
+@media(max-width:620px){
+  .mob-back-btn{display:flex;}
+  .nav-links-pill,.nav-pill{display:none!important;}
+  .mob-nav-toggle{display:none!important;}
+}
+
+
+
+
+@media(max-width:620px){
+  .nav-right > div:first-child{display:none!important;}
+  .stream-badge{display:none!important;}
+  .mob-back-btn-rv{display:flex!important;}
+}
+.mob-back-btn-rv{
+  display:none;
+  align-items:center;
+  gap:5px;
+  background:transparent;
+  border:none;
+  color:#2b1810;
+  font-size:.82rem;
+  font-weight:700;
+  font-family:inherit;
+  cursor:pointer;
+  padding:6px 0;
+  text-decoration:none;
+}
+
+
+/* ── UNIFIED NAV ── */
+.nav{position:fixed;top:14px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:200;pointer-events:none;}
+.nav-left,.nav-right{pointer-events:all;display:flex;align-items:center;gap:10px;}
+.nav-logo-pill{display:flex;align-items:center;gap:10px;background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid rgba(184,146,42,0.25);border-radius:100px;padding:6px 16px 6px 6px;box-shadow:0 2px 10px rgba(43,24,16,0.1);}
+.nav-logo-img{width:46px;height:46px;border-radius:50%;overflow:hidden;border:2px solid #b8922a;background:#2b1810;flex-shrink:0;box-shadow:0 0 12px rgba(184,146,42,0.3);}
+.nav-logo-img img{width:100%;height:100%;object-fit:cover;}
+.nav-brand-text{font-size:.82rem;font-weight:800;color:#1a1208;letter-spacing:-.02em;line-height:1.1;}
+.nav-brand-sub{font-size:.58rem;font-weight:500;color:#b8922a;letter-spacing:.08em;text-transform:uppercase;}
+.nav-links-pill{display:flex;align-items:center;gap:2px;background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid rgba(184,146,42,0.22);border-radius:100px;padding:5px;box-shadow:0 2px 8px rgba(43,24,16,0.07);}
+.nav-links-pill a{font-size:.75rem;font-weight:600;color:#6b5a40;text-decoration:none;padding:5px 13px;border-radius:100px;transition:all .15s;white-space:nowrap;}
+.nav-links-pill a:hover,.nav-links-pill a.active{color:#1a1208;background:rgba(184,146,42,0.12);}
+.nav-tg-btn{background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid rgba(184,146,42,0.22);border-radius:100px;padding:9px 18px;font-size:.75rem;font-weight:600;color:#1a1208;text-decoration:none;box-shadow:0 2px 6px rgba(43,24,16,0.07);transition:all .15s;}
+.nav-tg-btn:hover{background:rgba(184,146,42,0.1);}
+.nav-cta-btn{background:#2b1810;color:#f0d080;border-radius:100px;padding:9px 20px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid rgba(184,146,42,0.3);transition:opacity .15s;}
+.nav-cta-btn:hover{opacity:.82;}
+.mob-back-btn{display:none;align-items:center;gap:6px;background:#2b1810;border:1.5px solid #b8922a;color:#f0d080;border-radius:8px;padding:7px 13px;font-size:.75rem;font-weight:700;text-decoration:none;white-space:nowrap;pointer-events:all;}
+.mob-back-btn:hover{opacity:.85;}
+@media(max-width:900px){.nav-links-pill{display:none!important;}.mob-back-btn{display:flex!important;}}
+
+.site-footer{border-top:1px solid rgba(184,146,42,0.2);padding:48px 24px 32px;max-width:1040px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;margin-bottom:40px;}
+.ft-brand-name{font-size:.92rem;font-weight:800;color:#1a1208;letter-spacing:-.02em;margin-bottom:5px;}
+.ft-brand p{font-size:.75rem;color:#a3927a;line-height:1.55;max-width:220px;margin-top:4px;}
+.ft-col h5{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;margin-bottom:12px;}
+.ft-col a{display:block;font-size:.78rem;color:#6b5a40;text-decoration:none;margin-bottom:7px;transition:color .15s;}
+.ft-col a:hover{color:#1a1208;}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding-top:24px;border-top:1px solid rgba(184,146,42,0.12);}
+.ft-bottom p{font-size:.68rem;color:#a3927a;}
+.ft-handle{font-size:.68rem;font-weight:700;color:#2b1810;}
+@media(max-width:700px){.ft-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" style="text-decoration:none;">
+      <div class="nav-logo-pill">
+        <div class="nav-logo-img"><img loading="lazy" src="Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+        <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">@sugicalInsightHub</div></div>
+      </div>
+    </a>
+    <div class="nav-links-pill">
+      <a href="index.html">Home</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="notes.html">Notes</a>
+      <a href="mcq.html" style="background:rgba(163,21,21,0.1);color:#a31515;font-weight:700;">MCQ Arena</a>
+      <a href="review.html" class="active" style="background:rgba(184,146,42,0.1);color:#7a5c00;font-weight:700;">AI Review</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <a href="index.html" class="mob-back-btn">&#8592; Home</a>
+  <div class="nav-right">
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-tg-btn">Telegram</a>
+    <a href="notes.html" class="nav-cta-btn">Get Notes &#8594;</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="layout">
+
+    <!-- DESKTOP SIDEBAR -->
+    <aside class="sidebar" id="desktopSidebar">
+      <div class="sidebar-peek" onclick="expandSidebar()">Topics</div>
+      <div class="sidebar-header">
+        <div class="sidebar-title">Surgical Systems</div>
+        <input type="text" class="sidebar-search" id="sidebarSearch" placeholder="Filter topics..." oninput="filterTopics(this.value)">
+      </div>
+      <div class="sidebar-body" id="sidebarBody"></div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- MOBILE CATEGORY DROPDOWN -->
+      <div class="mob-category-bar" id="mobCategoryBar">
+        <select class="mob-category-select" id="mobCategorySelect" onchange="onMobCategoryChange(this.value)">
+          <option value="">— Select a system or topic —</option>
+        </select>
+      </div>
+      <!-- INPUT BAR -->
+      <div class="input-bar">
+        <input type="text" class="topic-input" id="topicInput" placeholder="Type any surgical topic or pick from the list..." autocomplete="off">
+        <button class="run-btn" id="runBtn" onclick="runQuery()">RUN ↵</button>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="output-area" id="outputArea">
+        <div class="empty-state">
+          <div class="empty-icon" style="background:rgba(184,146,42,0.12);border:2px solid rgba(184,146,42,0.3);font-size:1.8rem;">⚡</div>
+          <div class="empty-title" style="font-size:1.5rem;">Coming Soon</div>
+          <div class="empty-sub" style="max-width:340px;font-size:.85rem;line-height:1.7;color:#6b5a40;">
+            The AI High-Yield Review feature is currently being set up.<br><br>
+            <strong style="color:#2b1810;">What it will do:</strong><br>
+            Stream a full structured surgical review — Definition, Pathophysiology, Classifications, Management, and MCQ bullets — for any topic in seconds.<br><br>
+            <span style="color:#b8922a;font-weight:700;">Back soon. Stay sharp.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ── TOPIC DATA ──
+const SYSTEMS = [
+  {
+    name: 'Upper GI',
+    topics: ['Peptic Ulcer Disease & Complications','Upper GI Bleeding','Gastric Cancer','Esophageal Cancer']
+  },
+  {
+    name: 'Hepatobiliary',
+    topics: ['Gallstone Disease & Cholelithiasis','Acute Cholecystitis','Choledocholithiasis & Cholangitis','Hepatocellular Carcinoma','Hepatic Abscess (Amoebic & Pyogenic)','Hydatid Cyst of the Liver','Portal Hypertension & Varices']
+  },
+  {
+    name: 'Pancreas',
+    topics: ['Acute Pancreatitis','Chronic Pancreatitis']
+  },
+  {
+    name: 'Lower GI',
+    topics: ['Acute Appendicitis','Intestinal Obstruction','Colorectal Cancer','Diverticular Disease','Lower GI Bleeding','Intestinal Volvulus','Intussusception']
+  },
+  {
+    name: 'Anorectal',
+    topics: ['Anorectal Disorders (Hemorrhoids, Fissure, Fistula)']
+  },
+  {
+    name: 'Hernia',
+    topics: ['Hernia (Inguinal, Ventral, Hiatal)']
+  },
+  {
+    name: 'Endocrine & Breast',
+    topics: ['Thyroid Nodule & Goiter','Thyroid Cancer','Breast Cancer']
+  },
+  {
+    name: 'Trauma',
+    topics: ['Trauma — Primary & Secondary Survey','Splenic Injuries','Burns']
+  },
+  {
+    name: 'Urology',
+    topics: ['Renal & Ureteric Calculi']
+  },
+  {
+    name: 'Infections',
+    topics: ['Soft Tissue Infections (Necrotizing Fasciitis)']
+  }
+];
+
+const SYSTEM_PROMPT = `You are a surgical residency exam preparation assistant. When the user drops a topic, provide a full structured surgical discussion immediately. No preamble, no clarifying questions.
+
+Use these exact ## section headers in order:
+
+## 1. DEFINITION
+## 2. PATHOPHYSIOLOGY
+## 3. ETIOLOGY & RISK FACTORS
+## 4. CLINICAL PRESENTATION
+## 5. TYPES, SUBTYPES & CLASSIFICATIONS
+## 6. PATIENT APPROACH & INVESTIGATIONS
+## 7. MANAGEMENT
+## 8. POSTOPERATIVE CARE & FOLLOW-UP
+## 9. HIGH-YIELD MCQ REVISION
+
+Within section 9 use ### subheaders to group bullets by theme.
+
+CONTENT RULES:
+- Specific numbers always: doses, durations, thresholds, timings, percentages
+- Mark gold standard: ⭐ GOLD STANDARD
+- All named classifications as full markdown tables
+- Bold key terms, eponyms, numbers with **text**
+- Add mnemonics where they add real recall value (not forced): 🧠 **Mnemonic:** ...
+- No history, no filler — clinical and exam content only
+- Section 9: short punchy bullets grouped by ### theme headers
+- Reference 2024–2026 guidelines where applicable
+- Tone: concise, precise, exam-oriented`;
+
+// ── BUILD SIDEBAR ──
+const sidebarBody = document.getElementById('sidebarBody');
+const mobSelect = document.getElementById('mobCategorySelect');
+
+SYSTEMS.forEach((sys, si) => {
+  // Desktop
+  const group = document.createElement('div');
+  group.className = 'sys-group';
+  group.dataset.system = sys.name;
+
+  const label = document.createElement('div');
+  label.className = 'sys-label' + (si === 0 ? ' open' : '');
+  label.innerHTML = `<span>${sys.name}</span><span class="sys-label-arrow">›</span>`;
+  label.onclick = function() {
+    const isOpen = label.classList.contains('open');
+    label.classList.toggle('open');
+    topicsDiv.classList.toggle('open');
+  };
+  group.appendChild(label);
+
+  const topicsDiv = document.createElement('div');
+  topicsDiv.className = 'sys-topics' + (si === 0 ? ' open' : '');
+  topicsDiv.dataset.systemTopics = sys.name;
+
+  sys.topics.forEach(topic => {
+    const btn = document.createElement('button');
+    btn.className = 'topic-btn';
+    btn.textContent = topic;
+    btn.dataset.topic = topic;
+    btn.onclick = function() { selectTopic(topic, btn); };
+    topicsDiv.appendChild(btn);
+  });
+
+  group.appendChild(topicsDiv);
+  sidebarBody.appendChild(group);
+
+  // Mobile dropdown — system group
+  const optGroup = document.createElement('optgroup');
+  optGroup.label = sys.name;
+  sys.topics.forEach(topic => {
+    const opt = document.createElement('option');
+    opt.value = topic;
+    opt.textContent = topic;
+    optGroup.appendChild(opt);
+  });
+  mobSelect.appendChild(optGroup);
+});
+
+// ── FILTER ──
+function filterTopics(val) {
+  const q = val.toLowerCase();
+  document.querySelectorAll('.sys-group').forEach(group => {
+    let anyVisible = false;
+    group.querySelectorAll('.topic-btn').forEach(btn => {
+      const match = !q || btn.textContent.toLowerCase().includes(q);
+      btn.style.display = match ? '' : 'none';
+      if (match) anyVisible = true;
+    });
+    group.style.display = anyVisible ? '' : 'none';
+    if (q && anyVisible) {
+      group.querySelector('.sys-label').classList.add('open');
+      group.querySelector('.sys-topics').classList.add('open');
+    }
+  });
+}
+
+// ── SELECT TOPIC ──
+let activeBtn = null;
+function selectTopic(topic, btn) {
+  if (activeBtn) activeBtn.classList.remove('active');
+  if (btn) { btn.classList.add('active'); activeBtn = btn; }
+  document.getElementById('topicInput').value = topic;
+  if (window.innerWidth <= 768) {
+    document.getElementById('mobCategoryBar').style.display = 'none';
+  } else {
+    // Collapse sidebar after short delay so user sees active state
+    setTimeout(collapseSidebar, 300);
+  }
+  runQuery();
+}
+
+function onMobCategoryChange(val) {
+  if (!val) return;
+  selectTopic(val, null);
+}
+
+// ── KEYBOARD ──
+document.getElementById('topicInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') runQuery();
+});
+
+// ── RUN ──
+let isRunning = false;
+
+async function runQuery() {
+  // Coming Soon — API not active yet
+  const outputArea = document.getElementById('outputArea');
+  outputArea.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;text-align:center;padding:40px 24px;">
+    <div style="font-size:2.5rem;">⚡</div>
+    <div style="font-family:'EB Garamond',serif;font-size:1.4rem;font-weight:700;color:#2b1810;">Coming Soon</div>
+    <div style="font-size:.85rem;color:#6b5a40;max-width:320px;line-height:1.7;">The AI Review feature is being set up. Check back shortly.</div>
+  </div>`;
+  return;
+  const topic = document.getElementById('topicInput').value.trim();
+  if (!topic || isRunning) return;
+
+
+  isRunning = true;
+  const runBtn = document.getElementById('runBtn');
+  const outputArea = document.getElementById('outputArea');
+  runBtn.disabled = true;
+  runBtn.textContent = 'LOADING...';
+
+  outputArea.innerHTML = `
+    <div class="topic-header">
+      <h2>${esc(topic)}</h2>
+      <span class="exam-tag">STREAMING</span>
+    </div>
+    <div class="stream-raw" id="rawEl"></div>`;
+
+  const rawEl = document.getElementById('rawEl');
+  const cursorEl = document.createElement('span');
+  cursorEl.className = 'cursor';
+  rawEl.appendChild(cursorEl);
+
+  let fullText = '';
+
+  try {
+    // Gemini — try models in order, fallback on quota
+    const _k = ['AIzaSyAsB8crh','TBaDERrEz-V7v','gxo33xIxDl9u4'].join('');
+    const _models = ['gemini-1.5-flash','gemini-1.5-flash-8b','gemini-1.0-pro'];
+    let res = null, lastErr = '';
+    for (const _m of _models) {
+      const _url = `https://generativelanguage.googleapis.com/v1beta/models/${_m}:streamGenerateContent?key=${_k}&alt=sse`;
+      const attempt = await fetch(_url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          contents: [{ role: 'user', parts: [{ text: topic }] }],
+          generationConfig: { maxOutputTokens: 4000, temperature: 0.3 }
+        })
+      });
+      if (attempt.ok) { res = attempt; break; }
+      const errJson = await attempt.json().catch(() => ({}));
+      lastErr = errJson?.error?.message || ('HTTP ' + attempt.status);
+      if (!lastErr.includes('quota') && !lastErr.includes('RESOURCE_EXHAUSTED')) break;
+    }
+    if (!res) throw new Error(lastErr || 'Quota exceeded on all models. Please try again in a few minutes.');
+
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const d = line.slice(6).trim();
+        if (d === '[DONE]') continue;
+        try {
+          const p = JSON.parse(d);
+          // Gemini SSE format
+          const chunk = p?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (chunk) {
+            fullText += chunk;
+            rawEl.textContent = fullText;
+            rawEl.appendChild(cursorEl);
+            outputArea.scrollTop = outputArea.scrollHeight;
+          }
+        } catch {}
+      }
+    }
+
+    renderFinal(topic, fullText, outputArea);
+
+  } catch (err) {
+    outputArea.innerHTML = `<div class="error-box">Error: ${esc(err.message)}</div>`;
+  } finally {
+    isRunning = false;
+    runBtn.disabled = false;
+    runBtn.textContent = 'RUN ↵';
+  }
+}
+
+// ── RENDER ──
+function renderFinal(topic, text, container) {
+  container.innerHTML = '';
+
+  const topicHdr = document.createElement('div');
+  topicHdr.className = 'topic-header';
+  topicHdr.innerHTML = `<h2>${esc(topic)}</h2><span class="exam-tag">EXAM READY</span>`;
+  container.appendChild(topicHdr);
+
+  const numMap = {
+    'DEFINITION':'01','PATHOPHYSIOLOGY':'02','ETIOLOGY':'03','RISK':'03',
+    'CLINICAL':'04','PRESENTATION':'04','TYPES':'05','CLASSIFICATIONS':'05','SUBTYPES':'05',
+    'PATIENT':'06','INVESTIGATIONS':'06','APPROACH':'06',
+    'MANAGEMENT':'07','POSTOPERATIVE':'08','POST-OP':'08',
+    'HIGH-YIELD':'09','MCQ':'09'
+  };
+
+  const lines = text.split('\n');
+  const sections = [];
+  let cur = null;
+  for (const line of lines) {
+    const m = line.match(/^##\s+(.+)/);
+    if (m) {
+      if (cur) sections.push(cur);
+      cur = { title: m[1].replace(/\*\*/g,'').replace(/^\d+\.\s*/,'').trim(), lines: [] };
+    } else if (cur) {
+      cur.lines.push(line);
+    }
+  }
+  if (cur) sections.push(cur);
+
+  if (!sections.length) {
+    const div = document.createElement('div');
+    div.className = 'section';
+    const body = document.createElement('div');
+    body.className = 'section-body';
+    body.innerHTML = mdToHtml(text);
+    div.appendChild(body);
+    container.appendChild(div);
+    container.scrollTop = 0;
+    return;
+  }
+
+  sections.forEach((sec, idx) => {
+    const bodyText = sec.lines.join('\n').trim();
+    if (!bodyText) return;
+
+    const isMCQ = /MCQ|HIGH.YIELD/i.test(sec.title);
+    const el = document.createElement('div');
+    el.className = 'section' + (isMCQ ? ' mcq-section' : '');
+
+    let num = String(idx + 1).padStart(2,'0');
+    const up = sec.title.toUpperCase();
+    for (const [k,v] of Object.entries(numMap)) {
+      if (up.includes(k)) { num = v; break; }
+    }
+
+    const hdr = document.createElement('div');
+    hdr.className = 'section-header';
+    hdr.innerHTML = `<span class="section-num">${num}</span><span class="section-title">${esc(sec.title)}</span>`;
+    el.appendChild(hdr);
+
+    const body = document.createElement('div');
+    body.className = 'section-body';
+    if (isMCQ) body.appendChild(buildMCQ(bodyText));
+    else body.innerHTML = mdToHtml(bodyText);
+
+    el.appendChild(body);
+    container.appendChild(el);
+  });
+
+  container.scrollTop = 0;
+}
+
+function buildMCQ(text) {
+  const wrap = document.createElement('div');
+  const lines = text.split('\n');
+  let items = null;
+
+  function newGroup(title) {
+    const g = document.createElement('div');
+    g.className = 'mcq-group';
+    if (title) {
+      const t = document.createElement('div');
+      t.className = 'mcq-group-title';
+      t.textContent = title;
+      g.appendChild(t);
+    }
+    items = document.createElement('div');
+    items.className = 'mcq-items';
+    g.appendChild(items);
+    wrap.appendChild(g);
+  }
+
+  for (const line of lines) {
+    const tr = line.trim();
+    if (!tr) continue;
+    if (/^###\s/.test(line)) {
+      newGroup(tr.replace(/^###\s*/,'').replace(/\*\*/g,''));
+    } else if (/^\*\*[^*]+\*\*:?\s*$/.test(tr)) {
+      newGroup(tr.replace(/\*\*/g,'').replace(/:$/,''));
+    } else if (/^[-*•]\s/.test(tr)) {
+      if (!items) newGroup('');
+      const item = document.createElement('div');
+      item.className = 'mcq-item';
+      item.innerHTML = `<span class="mcq-bullet">★</span><span>${inlineHtml(tr.replace(/^[-*•]\s+/,''))}</span>`;
+      items.appendChild(item);
+    }
+  }
+  return wrap;
+}
+
+function mdToHtml(raw) {
+  let s = esc(raw);
+
+  // Tables
+  s = s.replace(/((?:\|[^\n]+\|\n?)+)/g, match => {
+    const rows = match.trim().split('\n');
+    let html = '<table>';
+    rows.forEach((row, i) => {
+      if (/^\|[-:\s|]+\|$/.test(row.trim())) return;
+      const isHdr = i === 0 && rows[1] && /^\|[-:\s|]+\|$/.test(rows[1].trim());
+      const tag = isHdr ? 'th' : 'td';
+      const cells = row.split('|').slice(1,-1);
+      html += '<tr>' + cells.map(c => `<${tag}>${inlineHtml(c.trim())}</${tag}>`).join('') + '</tr>';
+    });
+    return html + '</table>';
+  });
+
+  // Mnemonics
+  s = s.replace(/🧠\s*\*\*Mnemonic:\*\*\s*([^\n]+)/g,
+    (_, content) => `<div class="mnemonic-box">🧠 <strong>Mnemonic:</strong> ${inlineHtml(content)}</div>`);
+
+  // Headers
+  s = s.replace(/^####\s+(.+)$/gm, '<h3>$1</h3>');
+  s = s.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
+
+  // Bullets
+  s = s.replace(/^[-*•]\s+(.+)$/gm, '<li>$1</li>');
+  s = s.replace(/(<li>[\s\S]*?<\/li>\n?)+/g, m => `<ul>${m}</ul>`);
+
+  // Inline
+  s = s.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+  s = s.replace(/⭐\s*GOLD STANDARD/gi, '<span class="gold-standard">⭐ GOLD STANDARD</span>');
+
+  // Paragraphs
+  s = s.split(/\n{2,}/).map(chunk => {
+    chunk = chunk.trim();
+    if (!chunk) return '';
+    if (/^<(h3|ul|table|div)/.test(chunk)) return chunk;
+    return `<p>${chunk.replace(/\n/g,' ')}</p>`;
+  }).filter(Boolean).join('\n');
+
+  return s;
+}
+
+function inlineHtml(raw) {
+  return esc(raw)
+    .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+    .replace(/⭐\s*GOLD STANDARD/gi, '<span class="gold-standard">⭐ GOLD STANDARD</span>');
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+
+// ── SIDEBAR COLLAPSE ──
+var sidebarEl = document.getElementById('desktopSidebar');
+var sidebarCollapsed = false;
+
+function collapseSidebar() {
+  if (window.innerWidth <= 768) return;
+  sidebarCollapsed = true;
+  sidebarEl.classList.add('collapsed');
+}
+
+function expandSidebar() {
+  sidebarCollapsed = false;
+  sidebarEl.classList.remove('collapsed');
+}
+
+// Hover to expand on desktop
+sidebarEl.addEventListener('mouseenter', function() {
+  if (sidebarCollapsed) expandSidebar();
+});
+
+sidebarEl.addEventListener('mouseleave', function() {
+  // Only collapse if a topic was already selected (content is showing)
+  if (!sidebarCollapsed && document.querySelector('.topic-btn.active')) {
+    collapseSidebar();
+  }
+});
+
+// Touch to toggle on tablet
+sidebarEl.addEventListener('touchstart', function(e) {
+  if (sidebarCollapsed) { expandSidebar(); e.preventDefault(); }
+}, { passive: false });
+
+
+
+// ── MOBILE: Show dropdown again when input cleared ──
+document.getElementById('topicInput').addEventListener('input', function() {
+  if (!this.value && window.innerWidth <= 768) {
+    document.getElementById('mobCategoryBar').style.display = 'block';
+    document.getElementById('mobCategorySelect').value = '';
+  }
+});
+</script>
+
+
+<footer class="site-footer">
+  <div class="ft-grid">
+    <div class="ft-brand"><div class="ft-brand-name">Surgical Insight Hub</div><p>High-yield surgical education for residents. Built by Dr. Abdulmalik Moh.</p></div>
+    <div class="ft-col"><h5>Resources</h5><a href="notes.html">All Notes</a><a href="podcast.html">Podcast</a><a href="mcq.html">MCQ Arena</a><a href="https://t.me/sugicalInsightHub" target="_blank">Telegram</a></div>
+    <div class="ft-col"><h5>Topics</h5><a href="notes.html">Bowel Obstruction</a><a href="notes.html">PUD Perforation</a><a href="notes.html">HPB Surgery</a></div>
+    <div class="ft-col"><h5>Connect</h5><a href="https://t.me/sugicalInsightHub" target="_blank">Telegram</a><a href="https://www.youtube.com/@YeSurgeryBett" target="_blank">YouTube</a><a href="about.html">About</a></div>
+  </div>
+  <div class="ft-bottom">
+    <p>&#169; 2025 Surgical Insight Hub &#183; Dr. Abdulmalik Moh</p>
+    <span class="ft-handle">@sugicalInsightHub</span>
+    <p>Not a substitute for clinical judgment</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes — Surgical Insight Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--black:#0a0a0a;--white:#fff;--grey-50:#f9f9f8;--grey-100:#f2f2f0;--grey-200:#e5e4e0;--grey-400:#a3a39e;--grey-600:#6b6b66;--burgundy:#2b1810;--red:#a31515;--gold:#b8922a;}
+body{background:var(--white);font-family:'Inter',sans-serif;color:var(--black);overflow-x:hidden;-webkit-font-smoothing:antialiased;letter-spacing:-.02em;}
+nav{position:fixed;top:12px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:100;}
+.nav-left{display:flex;align-items:center;gap:8px;}
+.nav-logo-wrap{width:48px;height:48px;border-radius:50%;overflow:hidden;border:1.5px solid var(--gold);background:var(--burgundy);}
+.nav-logo-wrap img{width:100%;height:100%;object-fit:cover;}
+.nav-pill{display:flex;align-items:center;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border:1px solid var(--grey-200);border-radius:100px;padding:6px 14px;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.nav-pill a{font-size:.75rem;font-weight:600;color:var(--grey-600);text-decoration:none;padding:4px 10px;border-radius:100px;transition:all .15s;}
+.nav-pill a:hover,.nav-pill a.active{color:var(--black);background:var(--grey-100);}
+.nav-right{display:flex;gap:8px;}
+.nav-btn{background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border:1px solid var(--grey-200);border-radius:100px;padding:8px 16px;font-size:.75rem;font-weight:600;color:var(--black);text-decoration:none;transition:all .15s;}
+.nav-btn:hover,.nav-join{background:var(--black);color:var(--white);}
+.nav-join{border-radius:100px;padding:8px 18px;font-size:.75rem;font-weight:600;text-decoration:none;border:none;}
+.page-hero{background:var(--grey-50);padding:110px 24px 56px;border-bottom:1px solid var(--grey-200);position:relative;overflow:hidden;}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;opacity:.5;}
+.hero-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(460px,70vw);height:min(460px,70vw);opacity:0.038;pointer-events:none;z-index:1;filter:grayscale(1);}
+.hero-watermark img{width:100%;height:100%;object-fit:contain;}
+.blob-1{width:500px;height:500px;background:radial-gradient(circle,#e8e4dc 0%,transparent 70%);top:-100px;right:-100px;}
+.page-hero-inner{max-width:1000px;margin:0 auto;position:relative;z-index:2;}
+.ph-kicker{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-400);margin-bottom:12px;}
+.page-hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;color:var(--black);letter-spacing:-.04em;line-height:1.02;margin-bottom:12px;}
+.page-hero p{font-size:.9rem;color:var(--grey-600);max-width:480px;line-height:1.6;}
+.filter-bar{background:var(--white);border-bottom:1px solid var(--grey-200);padding:16px 24px;position:sticky;top:56px;z-index:50;}
+.filter-inner{max-width:1000px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.filter-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-400);margin-right:8px;}
+.fb{font-size:.75rem;font-weight:600;color:var(--grey-600);background:var(--grey-50);border:1px solid var(--grey-200);border-radius:100px;padding:6px 14px;cursor:pointer;transition:all .15s;}
+.fb:hover,.fb.active{background:var(--black);color:var(--white);border-color:var(--black);}
+.notes-body{max-width:1000px;margin:0 auto;padding:48px 24px 80px;}
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.note-card{background:var(--grey-50);border:1px solid var(--grey-200);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:all .15s;}
+.note-card:hover{background:var(--white);box-shadow:0 4px 20px rgba(0,0,0,.08);border-color:var(--grey-400);}
+.note-card.featured{border-color:var(--gold);background:var(--white);}
+.nc-top{padding:20px 20px 16px;}
+.nc-kicker{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-400);margin-bottom:8px;}
+.nc-new{display:inline-block;background:var(--gold);color:var(--white);font-size:.52rem;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.06em;text-transform:uppercase;margin-left:6px;vertical-align:middle;}
+.note-card h3{font-size:1rem;font-weight:800;color:var(--black);letter-spacing:-.03em;line-height:1.25;margin-bottom:6px;}
+.note-card p{font-size:.75rem;color:var(--grey-600);line-height:1.55;}
+.nc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.nc-tag{font-size:.58rem;font-weight:600;color:var(--black);background:var(--grey-100);border:1px solid var(--grey-200);padding:3px 8px;border-radius:5px;letter-spacing:-.01em;}
+.nc-tag.red{color:var(--red);background:rgba(163,21,21,.05);border-color:rgba(163,21,21,.15);}
+.nc-foot{padding:14px 20px;border-top:1px solid var(--grey-200);display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
+.nc-pages{font-size:.65rem;font-weight:600;color:var(--grey-400);}
+.nc-dl{background:var(--black);color:var(--white);border-radius:100px;padding:7px 16px;font-size:.72rem;font-weight:700;text-decoration:none;letter-spacing:-.01em;transition:opacity .15s;}
+.nc-dl:hover{opacity:.75;}
+.nc-dl.coming{background:var(--grey-100);color:var(--grey-400);cursor:default;}
+.cta-bar{background:var(--grey-50);border:1px solid var(--grey-200);border-radius:20px;padding:32px;display:flex;align-items:center;justify-content:space-between;gap:2rem;margin-top:48px;flex-wrap:wrap;}
+.cta-bar h3{font-size:1.3rem;font-weight:800;color:var(--black);letter-spacing:-.03em;line-height:1.2;}
+.cta-bar p{font-size:.8rem;color:var(--grey-600);margin-top:4px;max-width:360px;line-height:1.5;}
+.cta-tg{background:var(--black);color:var(--white);border-radius:100px;padding:12px 24px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:opacity .15s;}
+.cta-tg:hover{opacity:.8;}
+footer{padding:40px 24px 28px;border-top:1px solid var(--grey-200);max-width:1000px;margin:0 auto;}
+.ft{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:32px;}
+.fb2 p{font-size:.75rem;color:var(--grey-400);max-width:200px;line-height:1.5;margin-top:4px;}
+.fb2-name{font-size:.88rem;font-weight:800;color:var(--black);letter-spacing:-.02em;}
+.fc h5{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-400);margin-bottom:10px;}
+.fc a{display:block;font-size:.78rem;color:var(--grey-600);text-decoration:none;margin-bottom:6px;transition:color .15s;}
+.fc a:hover{color:var(--black);}
+.fbot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;padding-top:20px;border-top:1px solid var(--grey-100);}
+.fbot p{font-size:.68rem;color:var(--grey-400);}
+@media(max-width:768px){.notes-grid{grid-template-columns:1fr 1fr;}.nav-pill{display:none;}}
+@media(max-width:520px){.notes-grid{grid-template-columns:1fr;}.ft{flex-direction:column;}}
+
+
+
+
+
+.mob-back-btn{
+  display:none;
+  align-items:center;
+  gap:6px;
+  background:#2b1810;
+  border:1.5px solid #b8922a;
+  color:#f0d080;
+  border-radius:8px;
+  padding:7px 13px;
+  font-size:.75rem;
+  font-weight:700;
+  text-decoration:none;
+  font-family:inherit;
+  white-space:nowrap;
+}
+.mob-back-btn:hover{opacity:.85;}
+@media(max-width:620px){
+  .mob-back-btn{display:flex;}
+  .nav-links-pill,.nav-pill{display:none!important;}
+  .mob-nav-toggle{display:none!important;}
+}
+
+
+/* ── UNIFIED NAV ── */
+.nav{position:fixed;top:14px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:200;pointer-events:none;}
+.nav-left,.nav-right{pointer-events:all;display:flex;align-items:center;gap:10px;}
+.nav-logo-pill{display:flex;align-items:center;gap:10px;background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid rgba(184,146,42,0.25);border-radius:100px;padding:6px 16px 6px 6px;box-shadow:0 2px 10px rgba(43,24,16,0.1);}
+.nav-logo-img{width:46px;height:46px;border-radius:50%;overflow:hidden;border:2px solid #b8922a;background:#2b1810;flex-shrink:0;box-shadow:0 0 12px rgba(184,146,42,0.3);}
+.nav-logo-img img{width:100%;height:100%;object-fit:cover;}
+.nav-brand-text{font-size:.82rem;font-weight:800;color:#1a1208;letter-spacing:-.02em;line-height:1.1;}
+.nav-brand-sub{font-size:.58rem;font-weight:500;color:#b8922a;letter-spacing:.08em;text-transform:uppercase;}
+.nav-links-pill{display:flex;align-items:center;gap:2px;background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid rgba(184,146,42,0.22);border-radius:100px;padding:5px;box-shadow:0 2px 8px rgba(43,24,16,0.07);}
+.nav-links-pill a{font-size:.75rem;font-weight:600;color:#6b5a40;text-decoration:none;padding:5px 13px;border-radius:100px;transition:all .15s;white-space:nowrap;}
+.nav-links-pill a:hover,.nav-links-pill a.active{color:#1a1208;background:rgba(184,146,42,0.12);}
+.nav-tg-btn{background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid rgba(184,146,42,0.22);border-radius:100px;padding:9px 18px;font-size:.75rem;font-weight:600;color:#1a1208;text-decoration:none;box-shadow:0 2px 6px rgba(43,24,16,0.07);transition:all .15s;}
+.nav-tg-btn:hover{background:rgba(184,146,42,0.1);}
+.nav-cta-btn{background:#2b1810;color:#f0d080;border-radius:100px;padding:9px 20px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid rgba(184,146,42,0.3);transition:opacity .15s;}
+.nav-cta-btn:hover{opacity:.82;}
+.mob-back-btn{display:none;align-items:center;gap:6px;background:#2b1810;border:1.5px solid #b8922a;color:#f0d080;border-radius:8px;padding:7px 13px;font-size:.75rem;font-weight:700;text-decoration:none;white-space:nowrap;pointer-events:all;}
+.mob-back-btn:hover{opacity:.85;}
+@media(max-width:900px){.nav-links-pill{display:none!important;}.mob-back-btn{display:flex!important;}}
+
+.site-footer{border-top:1px solid rgba(184,146,42,0.2);padding:48px 24px 32px;max-width:1040px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;margin-bottom:40px;}
+.ft-brand-name{font-size:.92rem;font-weight:800;color:#1a1208;letter-spacing:-.02em;margin-bottom:5px;}
+.ft-brand p{font-size:.75rem;color:#a3927a;line-height:1.55;max-width:220px;margin-top:4px;}
+.ft-col h5{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;margin-bottom:12px;}
+.ft-col a{display:block;font-size:.78rem;color:#6b5a40;text-decoration:none;margin-bottom:7px;transition:color .15s;}
+.ft-col a:hover{color:#1a1208;}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding-top:24px;border-top:1px solid rgba(184,146,42,0.12);}
+.ft-bottom p{font-size:.68rem;color:#a3927a;}
+.ft-handle{font-size:.68rem;font-weight:700;color:#2b1810;}
+@media(max-width:700px){.ft-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" style="text-decoration:none;">
+      <div class="nav-logo-pill">
+        <div class="nav-logo-img"><img loading="lazy" src="Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+        <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">@sugicalInsightHub</div></div>
+      </div>
+    </a>
+    <div class="nav-links-pill">
+      <a href="index.html">Home</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="notes.html" class="active">Notes</a>
+      <a href="mcq.html" style="background:rgba(163,21,21,0.1);color:#a31515;font-weight:700;">MCQ Arena</a>
+      <a href="review.html" style="background:rgba(184,146,42,0.1);color:#7a5c00;font-weight:700;">AI Review</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <a href="index.html" class="mob-back-btn">&#8592; Home</a>
+  <div class="nav-right">
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-tg-btn">Telegram</a>
+    <a href="notes.html" class="nav-cta-btn">Get Notes &#8594;</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="blob blob-1"></div>
+  <div class="hero-watermark"><img src="Surgical_Insight_Hub_Logo.png" alt=""></div>
+  <div class="page-hero-inner">
+    <div class="ph-kicker">Residency Journal</div>
+    <h1>The Library.<br>All Free.</h1>
+    <p>High-yield PDF study guides. Dense tables, zero paragraphs, referenced against current guidelines. Download free via Telegram.</p>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <div class="filter-inner">
+    <span class="filter-label">Filter:</span>
+    <button class="fb active" onclick="filterNotes('all',this)">All</button>
+    <button class="fb" onclick="filterNotes('emergency',this)">Emergency</button>
+    <button class="fb" onclick="filterNotes('hpb',this)">HPB</button>
+    <button class="fb" onclick="filterNotes('colorectal',this)">Colorectal</button>
+    <button class="fb" onclick="filterNotes('peds',this)">Paediatric</button>
+    <button class="fb" onclick="filterNotes('periop',this)">Perioperative</button>
+    <button class="fb" onclick="filterNotes('ortho',this)">Orthopaedic</button>
+  </div>
+</div>
+
+<div class="notes-body">
+  <div class="notes-grid" id="notesGrid">
+    <div class="note-card" data-cat="periop" style="border-top-color:#b8922a;">
+      <div class="nc-top">
+        <div class="nc-kicker">SIH Monograph Series <span class="nc-new">New</span></div>
+        <h3>Anesthesia &amp; Perioperative Care</h3>
+        <p>Interactive dashboard. Airway, pharmacology, RSI, anesthesia types, complications, ICU basics. LEMON score, Mallampati, Cormack-Lehane. Board review MCQs included.</p>
+        <div class="nc-tags">
+          <span class="nc-tag red">RSI</span><span class="nc-tag red">Airway</span><span class="nc-tag">LEMON</span><span class="nc-tag">Mallampati</span><span class="nc-tag">ICU</span>
+        </div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">5 topics + MCQ</span>
+        <a href="anestesia_with_mono.html" class="nc-dl">Read Now</a>
+      </div>
+    </div>
+
+    <div class="note-card" data-cat="colorectal" style="border-top-color:#b8922a;">
+      <div class="nc-top">
+        <div class="nc-kicker">SIH Monograph Series <span class="nc-new">New</span></div>
+        <h3>Colorectal &amp; Anal Surgery</h3>
+        <p>6 monographs. Benign polyps, FAP, Lynch syndrome, CRC, rectal cancer, CRLM, anal tumors, Fournier's. ABSITE · MRCS · FRCS board review with integrated viva Q&amp;A and trial data.</p>
+        <div class="nc-tags">
+          <span class="nc-tag red">TME</span><span class="nc-tag red">CRC</span><span class="nc-tag">Lynch</span><span class="nc-tag">CRLM</span><span class="nc-tag">Nigro</span>
+        </div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">6 monographs</span>
+        <a href="colorectal_Notebook.html" class="nc-dl">Read Now</a>
+      </div>
+    </div>
+
+
+
+    <div class="note-card featured" data-cat="peds">
+      <div class="nc-top">
+        <div class="nc-kicker">Paediatric Surgery <span class="nc-new">New</span></div>
+        <h3>Anorectal Malformation</h3>
+        <p>Peña/Krickenbeck classification, VACTERL, PSARP steps, colostomy principles, cloaca management, bowel management programme.</p>
+        <div class="nc-tags">
+          <span class="nc-tag red">Krickenbeck</span><span class="nc-tag red">PSARP</span><span class="nc-tag">Cloaca</span><span class="nc-tag">VACTERL</span>
+        </div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">In progress</span>
+        <a href="https://t.me/sugicalInsightHub" target="_blank" class="nc-dl">Get on Telegram</a>
+      </div>
+    </div>
+
+    <div class="note-card" data-cat="emergency">
+      <div class="nc-top">
+        <div class="nc-kicker">Emergency Surgery</div>
+        <h3>Bowel Obstruction</h3>
+        <p>SBO/LBO, Bologna criteria, WSES 2020 algorithm, strangulation recognition, operative decision-making.</p>
+        <div class="nc-tags"><span class="nc-tag red">WSES 2020</span><span class="nc-tag">Bologna</span><span class="nc-tag">8 pages</span></div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">8 pages</span>
+        <a href="https://t.me/sugicalInsightHub" target="_blank" class="nc-dl">Download Free</a>
+      </div>
+    </div>
+
+    <div class="note-card" data-cat="emergency">
+      <div class="nc-top">
+        <div class="nc-kicker">Emergency Surgery</div>
+        <h3>PUD Perforation</h3>
+        <p>Boey score, omental patch technique, resection indications, H. pylori eradication protocol.</p>
+        <div class="nc-tags"><span class="nc-tag red">Boey Score</span><span class="nc-tag">Omental Patch</span><span class="nc-tag">6 pages</span></div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">6 pages</span>
+        <a href="https://t.me/sugicalInsightHub" target="_blank" class="nc-dl">Download Free</a>
+      </div>
+    </div>
+
+    <div class="note-card" data-cat="emergency colorectal">
+      <div class="nc-top">
+        <div class="nc-kicker">Emergency Surgery</div>
+        <h3>Fournier's Gangrene</h3>
+        <p>FGSI scoring, debridement extent, reconstruction timing, colostomy indications, mortality predictors.</p>
+        <div class="nc-tags"><span class="nc-tag red">FGSI</span><span class="nc-tag">Debridement</span><span class="nc-tag">5 pages</span></div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">5 pages</span>
+        <a href="https://t.me/sugicalInsightHub" target="_blank" class="nc-dl">Download Free</a>
+      </div>
+    </div>
+
+    <div class="note-card" data-cat="hpb">
+      <div class="nc-top">
+        <div class="nc-kicker">HPB Surgery</div>
+        <h3>Choledocholithiasis</h3>
+        <p>ASGE 2019 risk stratification, ERCP indications, laparoscopic CBD exploration, MRCP pathway.</p>
+        <div class="nc-tags"><span class="nc-tag red">ASGE 2019</span><span class="nc-tag">ERCP</span><span class="nc-tag">6 pages</span></div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">6 pages</span>
+        <a href="https://t.me/sugicalInsightHub" target="_blank" class="nc-dl">Download Free</a>
+      </div>
+    </div>
+
+    <div class="note-card" data-cat="hpb">
+      <div class="nc-top">
+        <div class="nc-kicker">HPB Surgery</div>
+        <h3>HPB Surgery</h3>
+        <p>Biliary anatomy, BDI Strasberg, cholangiocarcinoma Bismuth-Corlette, Whipple steps, portal HTN.</p>
+        <div class="nc-tags"><span class="nc-tag red">Strasberg</span><span class="nc-tag">Whipple</span><span class="nc-tag">7 pages</span></div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">7 pages</span>
+        <a href="https://t.me/sugicalInsightHub" target="_blank" class="nc-dl">Download Free</a>
+      </div>
+    </div>
+
+    <div class="note-card" data-cat="periop">
+      <div class="nc-top">
+        <div class="nc-kicker">Perioperative Care</div>
+        <h3>Anesthesia & Perioperative Care</h3>
+        <p>RSI, airway decision tree, regional vs general, postop pain protocols, ICU handover essentials.</p>
+        <div class="nc-tags"><span class="nc-tag red">RSI</span><span class="nc-tag">ASA</span><span class="nc-tag">6 pages</span></div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">6 pages</span>
+        <a href="https://t.me/sugicalInsightHub" target="_blank" class="nc-dl">Download Free</a>
+      </div>
+    </div>
+
+    <div class="note-card" data-cat="emergency">
+      <div class="nc-top">
+        <div class="nc-kicker">Imaging</div>
+        <h3>High-Yield CT Imaging Findings</h3>
+        <p>Free air, pneumatosis, volvulus, closed loop, ischaemia — rapid surgical pattern recognition.</p>
+        <div class="nc-tags"><span class="nc-tag">CT Pearls</span><span class="nc-tag">Free Air</span><span class="nc-tag">5 pages</span></div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">5 pages</span>
+        <a href="https://t.me/sugicalInsightHub" target="_blank" class="nc-dl">Download Free</a>
+      </div>
+    </div>
+
+    <div class="note-card" data-cat="ortho" style="border-top-color:#2C4A6E;">
+      <div class="nc-top">
+        <div class="nc-kicker">SIH Monograph Series <span class="nc-new">New</span></div>
+        <h3>Orthopaedic Trauma</h3>
+        <p>3 volumes, 29 topics. Fracture classification, damage control orthopaedics, MESS score, compartment syndrome, hip fractures, open fractures, polytrauma principles.</p>
+        <div class="nc-tags">
+          <span class="nc-tag red">MESS Score</span><span class="nc-tag red">Compartment</span><span class="nc-tag">Damage Control</span><span class="nc-tag">AO Classification</span>
+        </div>
+      </div>
+      <div class="nc-foot">
+        <span class="nc-pages">3 volumes · 29 topics</span>
+        <a href="ortho_trauma.html" class="nc-dl">Read Now</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta-bar">
+    <div>
+      <h3>All notes. Always free.</h3>
+      <p>Join the Telegram channel to download every note the moment it drops. No paywall. No signup required.</p>
+    </div>
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="cta-tg">Join Telegram →</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="ft-grid">
+    <div class="ft-brand"><div class="ft-brand-name">Surgical Insight Hub</div><p>High-yield surgical education for residents who need the right answer now. Built by Dr. Abdulmalik Moh.</p></div>
+    <div class="ft-col"><h5>Resources</h5><a href="notes.html">All Notes</a><a href="podcast.html">Podcast</a><a href="mcq.html">MCQ Arena</a><a href="https://t.me/sugicalInsightHub" target="_blank">Telegram</a></div>
+    <div class="ft-col"><h5>Topics</h5><a href="notes.html">Bowel Obstruction</a><a href="notes.html">PUD Perforation</a><a href="notes.html">Fournier&#39;s Gangrene</a><a href="notes.html">HPB Surgery</a></div>
+    <div class="ft-col"><h5>Connect</h5><a href="https://t.me/sugicalInsightHub" target="_blank">Telegram</a><a href="https://www.youtube.com/@YeSurgeryBett" target="_blank">YouTube</a><a href="https://www.linkedin.com/company/surgical-insight-hub" target="_blank">LinkedIn</a><a href="about.html">About</a></div>
+  </div>
+  <div class="ft-bottom"><p>&#169; 2025 Surgical Insight Hub &#183; Dr. Abdulmalik Moh</p><span class="ft-handle">@sugicalInsightHub</span><p>Not a substitute for clinical judgment</p></div>
+</footer>
+
+</body>
+</html>

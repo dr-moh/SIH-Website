@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIH Design Options — A / B / C</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#111;font-family:'Inter',system-ui,sans-serif;color:#fff;}
+
+/* ─── SHELL ─── */
+.shell{display:flex;flex-direction:column;min-height:100vh;}
+
+/* ─── TOPBAR ─── */
+.topbar{
+  position:sticky;top:0;z-index:200;
+  background:rgba(17,17,17,0.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(184,146,42,0.2);
+  padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:52px;gap:12px;
+}
+.topbar-brand{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8922a;flex-shrink:0;}
+.option-tabs{display:flex;gap:4px;}
+.opt-tab{
+  padding:7px 18px;border-radius:6px;font-size:12px;font-weight:700;
+  cursor:pointer;border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.4);
+  transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:1px;
+}
+.opt-tab .sub{font-size:9px;font-weight:400;opacity:.7;}
+.opt-tab:hover{background:rgba(184,146,42,0.1);color:#f0d080;border-color:rgba(184,146,42,0.3);}
+.opt-tab.active{background:#b8922a;color:#1a0f06;border-color:#b8922a;}
+.opt-tab.active .sub{opacity:.7;}
+.vw-tabs{display:flex;gap:3px;}
+.vw-tab{padding:5px 12px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.3);transition:all .15s;}
+.vw-tab.active{background:rgba(255,255,255,0.1);color:#fff;}
+
+/* ─── NOTICE BAR ─── */
+.notice{
+  background:rgba(22,163,74,0.07);border-bottom:1px solid rgba(22,163,74,0.15);
+  padding:8px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.notice-label{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#4ade80;flex-shrink:0;}
+.fix{background:rgba(22,163,74,0.1);border:1px solid rgba(22,163,74,0.2);color:#86efac;border-radius:3px;padding:2px 8px;font-size:9px;font-weight:600;}
+
+/* ─── VIEWPORT ─── */
+.vp-wrap{flex:1;display:flex;justify-content:center;padding:24px 16px 48px;transition:all .3s;}
+.vp-frame{
+  border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;
+  overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
+  transition:width .3s cubic-bezier(.22,1,.36,1);
+  max-height:calc(100vh - 140px);overflow-y:auto;
+}
+.vp-frame.desktop{width:100%;max-width:1180px;}
+.vp-frame.mobile{width:390px;border-radius:20px;}
+
+/* ─── OPTION PANELS ─── */
+.opt-panel{display:none;}
+.opt-panel.active{display:block;}
+
+/* ══════════════════════════════════════
+   OPTION A — Refined Desk (Parchment + Warm serif)
+══════════════════════════════════════ */
+.oa{background:#faf7f2;font-family:'Inter',sans-serif;color:#1a1208;}
+.oa-nav{
+  position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;height:70px;background:rgba(250,247,242,0.93);
+  backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,146,42,0.18);z-index:10;
+}
+.oa-logo-pill{display:flex;align-items:center;gap:12px;background:rgba(250,247,242,0.9);border:1px solid rgba(184,146,42,0.25);border-radius:100px;padding:6px 18px 6px 6px;box-shadow:0 2px 10px rgba(43,24,16,0.1);}
+.oa-av{width:52px;height:52px;border-radius:50%;background:#2b1810;border:2px solid #b8922a;display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(184,146,42,0.35);flex-shrink:0;}
+.oa-av span{font-family:'Fraunces',Georgia,serif;font-size:14px;font-style:italic;font-weight:700;color:#f0d080;}
+.oa-brand-name{font-size:14px;font-weight:800;color:#1a1208;letter-spacing:-.02em;}
+.oa-brand-sub{font-size:9px;font-weight:500;color:#b8922a;letter-spacing:.08em;text-transform:uppercase;margin-top:2px;}
+.oa-links{display:flex;align-items:center;gap:2px;background:rgba(250,247,242,0.9);border:1px solid rgba(184,146,42,0.22);border-radius:100px;padding:5px;box-shadow:0 2px 8px rgba(43,24,16,0.07);}
+.oa-link{font-size:12px;font-weight:600;color:#6b5a40;padding:6px 13px;border-radius:100px;white-space:nowrap;}
+.oa-link.active{background:rgba(184,146,42,0.12);color:#1a1208;}
+.oa-link.mcq{background:rgba(163,21,21,0.1);color:#a31515;font-weight:700;}
+.oa-link.ai{background:rgba(184,146,42,0.12);color:#7a5c00;font-weight:700;}
+.oa-nav-right{display:flex;gap:8px;}
+.oa-nav-tg{background:rgba(250,247,242,0.9);border:1px solid rgba(184,146,42,0.22);border-radius:100px;padding:9px 18px;font-size:12px;font-weight:600;color:#1a1208;}
+.oa-nav-cta{background:#2b1810;color:#f0d080;border:1px solid rgba(184,146,42,0.3);border-radius:100px;padding:9px 20px;font-size:12px;font-weight:700;}
+
+.oa-hero{padding:56px 48px 64px;max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:center;}
+.oa-hero.mob{grid-template-columns:1fr;padding:32px 18px 40px;}
+.oa-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(184,146,42,0.08);border:1px solid rgba(184,146,42,0.25);border-radius:100px;padding:6px 14px;font-size:11px;font-weight:600;color:#7a5c00;margin-bottom:24px;}
+.oa-badge-dot{width:6px;height:6px;border-radius:50%;background:#b8922a;}
+.oa-h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(2.8rem,5vw,4.4rem);font-weight:600;line-height:.98;letter-spacing:-.035em;margin-bottom:22px;color:#1a1208;}
+.oa-h1 em{font-style:italic;color:#8b1515;}
+.oa-sub{font-size:16px;color:#6b5a40;line-height:1.55;max-width:460px;margin-bottom:28px;}
+.oa-btns{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;}
+.oa-btn-p{background:#2b1810;color:#f0d080;border-radius:100px;padding:12px 24px;font-size:13px;font-weight:700;border:1px solid rgba(184,146,42,0.3);}
+.oa-btn-s{background:#fff;color:#1a1208;border:1px solid rgba(184,146,42,0.25);border-radius:100px;padding:11px 20px;font-size:13px;font-weight:600;}
+.oa-stats{display:flex;gap:28px;padding-top:22px;border-top:1px solid rgba(184,146,42,0.18);}
+.oa-stat-n{font-family:'Fraunces',Georgia,serif;font-size:26px;font-weight:600;color:#1a1208;line-height:1;}
+.oa-stat-l{font-size:10px;color:#a3927a;letter-spacing:.08em;text-transform:uppercase;margin-top:2px;}
+.oa-patch{background:linear-gradient(135deg,#2b1810 0%,#4a2818 100%);border-radius:20px;border:1px solid rgba(184,146,42,0.3);aspect-ratio:4/5;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(43,24,16,0.25);display:flex;flex-direction:column;justify-content:flex-end;padding:18px;}
+.oa-patch-circle{position:absolute;top:16px;left:50%;transform:translateX(-50%);width:60%;aspect-ratio:1;border-radius:50%;border:2.5px solid rgba(184,146,42,0.4);background:radial-gradient(circle at 35% 30%,#4a2818,#0d0804);display:flex;align-items:center;justify-content:center;}
+.oa-patch-sih{font-family:'Fraunces',Georgia,serif;font-size:28px;font-style:italic;font-weight:700;color:#f0d080;}
+.oa-patch-badge{background:rgba(250,247,242,0.97);border-radius:10px;padding:12px 14px;position:relative;z-index:2;}
+.oa-patch-k{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;margin-bottom:3px;}
+.oa-patch-t{font-size:14px;font-weight:700;color:#1a1208;line-height:1.3;}
+
+.oa-brutal{background:#2b1810;border-top:2.5px solid #b8922a;border-bottom:2.5px solid #b8922a;padding:14px 48px;display:flex;align-items:center;gap:14px;}
+.oa-brutal.mob{padding:12px 18px;}
+.oa-brutal-tag{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b8922a;flex-shrink:0;}
+.oa-brutal-text{font-family:'Fraunces',Georgia,serif;font-size:15px;font-style:italic;color:#faf7f2;flex:1;line-height:1.4;}
+.oa-brutal-text em{font-style:normal;color:#ff7a6a;font-weight:700;}
+
+.oa-pillars{padding:40px 48px 16px;max-width:1040px;margin:0 auto;}
+.oa-pillars.mob{padding:24px 18px 16px;}
+.oa-kicker{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;margin-bottom:8px;}
+.oa-section-h{font-family:'Fraunces',Georgia,serif;font-size:32px;font-weight:500;letter-spacing:-.02em;margin-bottom:28px;line-height:1.1;color:#1a1208;}
+.oa-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.oa-grid4.mob{grid-template-columns:1fr 1fr;gap:10px;}
+.oa-pillar{background:#fff8f0;border:1px solid rgba(184,146,42,0.18);border-radius:14px;padding:22px 18px;min-height:160px;display:flex;flex-direction:column;justify-content:space-between;}
+.oa-pillar-n{font-family:'Fraunces',Georgia,serif;font-size:13px;font-style:italic;color:#b8922a;}
+.oa-pillar-t{font-size:15px;font-weight:700;color:#1a1208;margin-bottom:4px;}
+.oa-pillar-d{font-size:11px;color:#6b5a40;line-height:1.5;}
+
+.oa-feature{padding:32px 48px 64px;max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:18px;}
+.oa-feature.mob{grid-template-columns:1fr;padding:20px 18px 40px;}
+.oa-feature-note{background:linear-gradient(135deg,#fef3d4,#faf7f2);border:1px solid rgba(184,146,42,0.25);border-radius:16px;padding:32px 30px;position:relative;overflow:hidden;}
+.oa-feature-note h3{font-family:'Fraunces',Georgia,serif;font-size:26px;line-height:1.05;margin-bottom:10px;color:#1a1208;}
+.oa-feature-note p{font-size:13px;color:#6b5a40;line-height:1.55;margin-bottom:20px;}
+.oa-feature-pod{background:#2b1810;border-radius:16px;padding:28px 26px;display:flex;flex-direction:column;justify-content:space-between;}
+.oa-feature-pod h4{font-family:'Fraunces',Georgia,serif;font-size:20px;color:#faf7f2;margin-bottom:8px;line-height:1.2;}
+.oa-feature-pod p{font-size:12px;color:#d4a846;line-height:1.5;}
+.oa-play-row{display:flex;align-items:center;gap:12px;margin-top:20px;}
+.oa-play-btn{width:40px;height:40px;border-radius:50%;background:#f0d080;color:#2b1810;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.oa-progress{flex:1;height:3px;background:rgba(240,208,128,0.2);border-radius:2px;position:relative;}
+.oa-progress-fill{position:absolute;left:0;top:0;height:100%;width:22%;background:#f0d080;border-radius:2px;}
+
+.oa-footer{border-top:1px solid rgba(184,146,42,0.2);padding:48px 48px 32px;max-width:1040px;margin:0 auto;}
+.oa-footer.mob{padding:28px 18px 24px;}
+.oa-footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px;}
+.oa-footer-grid.mob{grid-template-columns:1fr 1fr;gap:20px;}
+.oa-ft-brand{font-size:14px;font-weight:800;color:#1a1208;letter-spacing:-.02em;margin-bottom:5px;}
+.oa-ft-p{font-size:12px;color:#a3927a;line-height:1.55;max-width:220px;}
+.oa-ft-h{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8922a;margin-bottom:10px;}
+.oa-ft-a{display:block;font-size:12px;color:#6b5a40;margin-bottom:6px;}
+.oa-footer-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;padding-top:20px;border-top:1px solid rgba(184,146,42,0.12);}
+.oa-footer-bot p{font-size:10px;color:#a3927a;}
+
+/* ══════════════════════════════════════
+   OPTION B — Clinical Editorial (Journal style)
+══════════════════════════════════════ */
+.ob{background:#f7f4ed;font-family:'Inter',sans-serif;color:#1a1208;}
+.ob-nav{position:sticky;top:0;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(247,244,237,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,146,42,0.18);z-index:10;}
+.ob-logo{display:flex;align-items:center;gap:12px;}
+.ob-av{width:44px;height:44px;border-radius:50%;background:#2b1810;border:2px solid #b8922a;display:flex;align-items:center;justify-content:center;}
+.ob-av span{font-family:'Fraunces',serif;font-size:11px;font-style:italic;font-weight:700;color:#f0d080;}
+.ob-brand{font-size:13px;font-weight:800;color:#1a1208;letter-spacing:-.02em;}
+.ob-nav-links{display:flex;gap:28px;}
+.ob-nav-link{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a3927a;padding-bottom:2px;}
+.ob-nav-link.active{color:#1a1208;border-bottom:2px solid #8b1515;}
+.ob-nav-cta{background:#1a1208;color:#fff;border-radius:100px;padding:9px 20px;font-size:12px;font-weight:700;}
+
+.ob-masthead{max-width:1100px;margin:0 auto;padding:80px 28px 32px;}
+.ob-masthead.mob{padding:50px 18px 24px;}
+.ob-ms-strip{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #1a1208;padding-bottom:10px;margin-bottom:28px;}
+.ob-ms-l,.ob-ms-r{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1a1208;}
+.ob-ms-r{color:#8b1515;}
+.ob-ms-c{font-family:'Fraunces',Georgia,serif;font-size:13px;font-style:italic;color:#6b5a40;}
+.ob-h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:500;letter-spacing:-.04em;line-height:.92;margin-bottom:24px;color:#1a1208;}
+.ob-h1 em{color:#8b1515;font-weight:500;}
+.ob-cols{display:grid;grid-template-columns:1fr 2fr 1fr;gap:48px;padding-top:22px;border-top:1px solid rgba(26,18,8,0.15);}
+.ob-cols.mob{grid-template-columns:1fr;gap:20px;}
+.ob-col-label{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8b1515;margin-bottom:8px;}
+.ob-col-name{font-family:'Fraunces',Georgia,serif;font-size:16px;font-weight:600;margin-bottom:2px;color:#1a1208;}
+.ob-col-role{font-size:12px;color:#6b5a40;font-style:italic;}
+.ob-editorial{font-size:15px;line-height:1.55;color:#2b1810;font-family:'Fraunces',Georgia,serif;font-weight:400;}
+.ob-col-right{display:flex;flex-direction:column;gap:8px;align-items:flex-end;justify-content:flex-end;}
+.ob-subscribe{background:#1a1208;color:#fff;border-radius:100px;padding:11px 22px;font-size:12px;font-weight:700;}
+.ob-free{font-size:10px;color:#a3927a;font-style:italic;}
+
+.ob-spread{max-width:1100px;margin:0 auto;padding:20px 28px 56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch;}
+.ob-spread.mob{grid-template-columns:1fr;padding:16px 18px 40px;}
+.ob-fig{aspect-ratio:4/5;background:#2b1810;border-radius:4px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.ob-fig-sih{font-family:'Fraunces',serif;font-size:48px;font-style:italic;font-weight:700;color:#f0d080;opacity:.6;}
+.ob-fig-label{position:absolute;left:20px;bottom:20px;color:#f0d080;font-size:9px;letter-spacing:.2em;font-weight:700;}
+.ob-article{display:flex;flex-direction:column;justify-content:center;}
+.ob-article-tag{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8b1515;margin-bottom:16px;}
+.ob-article-h{font-family:'Fraunces',Georgia,serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:500;letter-spacing:-.025em;line-height:1.0;margin-bottom:18px;color:#1a1208;}
+.ob-article-h em{color:#8b1515;}
+.ob-article-p{font-size:15px;line-height:1.6;color:#3e2d20;font-family:'Fraunces',Georgia,serif;}
+.ob-byline{display:flex;align-items:center;gap:14px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(26,18,8,0.12);}
+.ob-byline-av{width:36px;height:36px;border-radius:50%;background:#2b1810;border:2px solid #b8922a;flex-shrink:0;}
+.ob-byline-name{font-size:13px;font-weight:700;color:#1a1208;}
+.ob-byline-date{font-size:11px;color:#6b5a40;font-style:italic;}
+.ob-read{background:#fff;color:#1a1208;border:1px solid rgba(184,146,42,0.25);border-radius:100px;padding:9px 18px;font-size:12px;font-weight:600;white-space:nowrap;margin-left:auto;}
+
+.ob-index{max-width:1100px;margin:0 auto;padding:16px 28px 72px;}
+.ob-index.mob{padding:12px 18px 48px;}
+.ob-index-hdr{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #1a1208;padding-bottom:8px;margin-bottom:0;}
+.ob-index-title{font-family:'Fraunces',Georgia,serif;font-size:28px;font-weight:500;letter-spacing:-.02em;color:#1a1208;}
+.ob-index-all{font-size:12px;font-weight:700;color:#8b1515;text-decoration:underline;}
+.ob-index-row{display:grid;grid-template-columns:60px 1fr 160px 80px 30px;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid rgba(26,18,8,0.12);}
+.ob-index-row.mob{grid-template-columns:40px 1fr 24px;gap:12px;}
+.ob-index-n{font-family:'Fraunces',Georgia,serif;font-size:28px;color:#b8922a;font-weight:500;}
+.ob-index-t{font-family:'Fraunces',Georgia,serif;font-size:20px;font-weight:500;letter-spacing:-.015em;color:#1a1208;}
+.ob-index-cat{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8b1515;}
+.ob-index-time{font-size:11px;color:#6b5a40;font-style:italic;}
+.ob-index-arr{font-size:18px;color:#b8922a;}
+
+.ob-footer{border-top:1px solid rgba(26,18,8,0.12);padding:40px 28px 28px;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.ob-footer p{font-size:10px;color:#a3927a;}
+
+/* ══════════════════════════════════════
+   OPTION C — Bold Brutalist Patch
+══════════════════════════════════════ */
+.oc{background:#2b1810;font-family:'Inter',sans-serif;color:#f0d080;position:relative;min-height:100%;}
+.oc-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(184,146,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(184,146,42,0.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
+.oc-nav{position:sticky;top:0;z-index:10;background:rgba(43,24,16,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(240,208,128,0.15);padding:0 24px;height:70px;display:flex;align-items:center;justify-content:space-between;}
+.oc-nav-left{display:flex;align-items:center;gap:16px;}
+.oc-patch-av{width:46px;height:46px;border-radius:50%;border:2px solid #b8922a;background:radial-gradient(circle at 35% 30%,#4a2818,#0d0804);display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(184,146,42,0.3);}
+.oc-patch-av span{font-family:'Fraunces',serif;font-size:12px;font-style:italic;font-weight:700;color:#f0d080;}
+.oc-brand{font-family:'JetBrains Mono','Courier New',monospace;}
+.oc-brand-name{font-size:11px;font-weight:700;color:#e8d5a0;letter-spacing:.08em;}
+.oc-brand-sub{font-size:8px;color:#b8922a;letter-spacing:.2em;margin-top:1px;}
+.oc-nav-links{display:flex;gap:24px;}
+.oc-nav-link{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;color:rgba(240,208,128,0.35);}
+.oc-nav-link.active{color:#f0d080;}
+.oc-nav-link.mcq{color:#e05555;}
+.oc-nav-cta{background:#f0d080;color:#2b1810;padding:9px 20px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:2px;}
+
+.oc-hero{padding:64px 24px 56px;max-width:1160px;margin:0 auto;position:relative;}
+.oc-hero.mob{padding:40px 18px 36px;}
+.oc-ops-strip{display:flex;align-items:center;gap:14px;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid rgba(240,208,128,0.2);}
+.oc-ops-dot{width:8px;height:8px;background:#b8922a;border-radius:50%;}
+.oc-ops-txt{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:#d4a846;}
+.oc-ops-line{flex:1;height:1px;background:rgba(240,208,128,0.2);}
+.oc-ops-live{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;color:#8b1515;}
+.oc-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.oc-hero-grid.mob{grid-template-columns:1fr;gap:32px;}
+.oc-mission{font-family:'JetBrains Mono',monospace;font-size:10px;color:#b8922a;letter-spacing:.18em;margin-bottom:20px;}
+.oc-h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:500;line-height:.95;letter-spacing:-.035em;color:#faf7f2;margin-bottom:22px;}
+.oc-h1 span{color:#f0d080;font-style:italic;}
+.oc-sub{font-size:15px;color:#d4a846;line-height:1.6;max-width:440px;margin-bottom:28px;}
+.oc-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.oc-btn-p{background:#f0d080;color:#2b1810;padding:13px 26px;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;border-radius:2px;border:none;}
+.oc-btn-s{background:transparent;color:#f0d080;border:1px solid #b8922a;padding:13px 26px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:2px;}
+.oc-stats{display:flex;gap:28px;margin-top:32px;padding-top:22px;border-top:1px solid rgba(240,208,128,0.2);}
+.oc-stat-n{font-family:'Fraunces',Georgia,serif;font-size:28px;color:#f0d080;font-weight:500;line-height:1;}
+.oc-stat-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:#a3927a;letter-spacing:.15em;margin-top:3px;}
+
+.oc-patch-holder{position:relative;aspect-ratio:1/1;}
+.oc-patch-border{position:absolute;inset:0;border:1px solid rgba(240,208,128,0.2);border-radius:8px;}
+.oc-patch-circle{position:absolute;inset:24px;background:radial-gradient(circle at 30% 30%,#4a2818,#1a0f08);border-radius:50%;border:3px solid #b8922a;box-shadow:0 0 80px rgba(184,146,42,0.35),inset 0 0 40px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;}
+.oc-patch-sih{font-family:'Fraunces',serif;font-size:52px;font-style:italic;font-weight:700;color:#f0d080;opacity:.8;}
+.oc-corner{position:absolute;width:22px;height:22px;border-color:#b8922a;}
+.oc-patch-label{position:absolute;bottom:-8px;left:0;right:0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:#a3927a;letter-spacing:.3em;}
+
+.oc-field-kit{max-width:1160px;margin:0 auto;padding:32px 24px 72px;position:relative;}
+.oc-field-kit.mob{padding:24px 18px 48px;}
+.oc-section-hdr{display:flex;align-items:baseline;gap:14px;margin-bottom:24px;}
+.oc-section-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:#b8922a;letter-spacing:.2em;}
+.oc-section-title{font-family:'Fraunces',Georgia,serif;font-size:32px;font-weight:500;color:#faf7f2;letter-spacing:-.02em;}
+.oc-section-line{flex:1;height:1px;background:rgba(240,208,128,0.2);}
+.oc-kit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.oc-kit-grid.mob{grid-template-columns:1fr 1fr;gap:8px;}
+.oc-kit-card{background:rgba(0,0,0,0.25);border:1px solid rgba(240,208,128,0.2);padding:22px 20px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;border-radius:2px;}
+.oc-kit-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.oc-kit-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:#a3927a;letter-spacing:.2em;}
+.oc-kit-dot{width:8px;height:8px;border-radius:50%;}
+.oc-kit-title{font-family:'Fraunces',Georgia,serif;font-size:20px;color:#faf7f2;margin-bottom:8px;letter-spacing:-.01em;}
+.oc-kit-desc{font-size:11px;color:#d4a846;line-height:1.5;}
+.oc-kit-enter{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;}
+
+.oc-footer{border-top:1px solid rgba(240,208,128,0.15);padding:32px 24px 24px;max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.oc-footer-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:#a3927a;letter-spacing:.15em;}
+.oc-footer-handle{font-family:'JetBrains Mono',monospace;font-size:9px;color:#b8922a;letter-spacing:.15em;}
+
+/* ─── MOBILE HELPERS ─── */
+@media(max-width:500px){
+  .oa-links,.ob-nav-links,.oc-nav-links{display:none;}
+  .oa-nav-tg{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span class="topbar-brand">SIH Design Options</span>
+  <div class="option-tabs">
+    <button class="opt-tab active" onclick="setOpt('A')">
+      A <span class="sub">Refined Desk</span>
+    </button>
+    <button class="opt-tab" onclick="setOpt('B')">
+      B <span class="sub">Clinical Editorial</span>
+    </button>
+    <button class="opt-tab" onclick="setOpt('C')">
+      C <span class="sub">Brutalist Patch</span>
+    </button>
+  </div>
+  <div class="vw-tabs">
+    <button class="vw-tab active" onclick="setVw('desktop')">🖥 Desktop</button>
+    <button class="vw-tab" onclick="setVw('mobile')">📱 Mobile</button>
+  </div>
+</div>
+
+<!-- NOTICE -->
+<div class="notice">
+  <span class="notice-label">✓ All options include:</span>
+  <span class="fix">Orphaned links removed</span>
+  <span class="fix">Nav active state fixed</span>
+  <span class="fix">Unified nav across all pages</span>
+  <span class="fix">Mobile menu added</span>
+  <span class="fix">Lazy-loaded images</span>
+  <span class="fix">Consistent © footer</span>
+</div>
+
+<!-- VIEWPORT -->
+<div class="vp-wrap">
+  <div class="vp-frame desktop" id="vpFrame">
+
+    <!-- ══ OPTION A ══ -->
+    <div class="opt-panel active" id="panel-A">
+      <div class="oa" id="oa-root">
+        <!-- NAV -->
+        <div class="oa-nav">
+          <div class="oa-logo-pill">
+            <div class="oa-av"><span>SIH</span></div>
+            <div><div class="oa-brand-name">Surgical Insight Hub</div><div class="oa-brand-sub">@sugicalInsightHub</div></div>
+          </div>
+          <div class="oa-links">
+            <span class="oa-link active">Home</span>
+            <span class="oa-link">Podcast</span>
+            <span class="oa-link">Notes</span>
+            <span class="oa-link mcq">MCQ Arena</span>
+            <span class="oa-link ai">AI Review</span>
+            <span class="oa-link">About</span>
+          </div>
+          <div class="oa-nav-right">
+            <span class="oa-nav-tg">Telegram</span>
+            <span class="oa-nav-cta">Get Notes →</span>
+          </div>
+        </div>
+        <!-- HERO -->
+        <div class="oa-hero" id="oa-hero">
+          <div>
+            <div class="oa-badge"><span class="oa-badge-dot"></span>Surgical education · MOH track</div>
+            <div class="oa-h1">The <em>surgeon's</em><br>field manual.</div>
+            <p class="oa-sub">High-yield notes, a focused podcast, and a growing MCQ arena — written for residents preparing for MOH boards and revising on call.</p>
+            <div class="oa-btns">
+              <span class="oa-btn-p">Browse Notes →</span>
+              <span class="oa-btn-s">Listen to Podcast</span>
+            </div>
+            <div class="oa-stats">
+              <div><div class="oa-stat-n">10+</div><div class="oa-stat-l">Notes</div></div>
+              <div><div class="oa-stat-n">12</div><div class="oa-stat-l">Episodes</div></div>
+              <div><div class="oa-stat-n">Free</div><div class="oa-stat-l">Always</div></div>
+            </div>
+          </div>
+          <div class="oa-patch">
+            <div class="oa-patch-circle"><span class="oa-patch-sih">SIH</span></div>
+            <div class="oa-patch-badge">
+              <div class="oa-patch-k">Latest note</div>
+              <div class="oa-patch-t">Fournier's Gangrene — Rapid recognition &amp; debridement</div>
+            </div>
+          </div>
+        </div>
+        <!-- BRUTAL RULE -->
+        <div class="oa-brutal" id="oa-brutal">
+          <span class="oa-brutal-tag">Brutal Rule</span>
+          <p class="oa-brutal-text">"When colicky pain goes constant — <em>that bowel is dying.</em> Stop waiting. Operate."</p>
+          <span class="oa-btn-s" style="flex-shrink:0;font-size:11px;padding:6px 14px;">Read note →</span>
+        </div>
+        <!-- PILLARS -->
+        <div class="oa-pillars" id="oa-pillars">
+          <div class="oa-kicker">Four pillars</div>
+          <div class="oa-section-h">Everything you need between rounds.</div>
+          <div class="oa-grid4" id="oa-grid4">
+            <div class="oa-pillar" style="border-top:3px solid #b8922a;"><div class="oa-pillar-n">01</div><div><div class="oa-pillar-t">Notes</div><div class="oa-pillar-d">High-yield, bullet-tight writeups. Dense tables. Zero paragraphs.</div></div></div>
+            <div class="oa-pillar" style="border-top:3px solid #8b1515;"><div class="oa-pillar-n">02</div><div><div class="oa-pillar-t">Podcast</div><div class="oa-pillar-d">Short-form audio for the overnight shift. YesSurgeryBet.</div></div></div>
+            <div class="oa-pillar" style="border-top:3px solid #2b1810;"><div class="oa-pillar-n">03</div><div><div class="oa-pillar-t">MCQ Arena</div><div class="oa-pillar-d">Board-style questions with SHARP debriefs. Global leaderboard.</div></div></div>
+            <div class="oa-pillar" style="border-top:3px solid #7a5c00;"><div class="oa-pillar-n">04</div><div><div class="oa-pillar-t">AI Review</div><div class="oa-pillar-d">Ask. Clarify. Quiz yourself. Structured review on demand.</div></div></div>
+          </div>
+        </div>
+        <!-- FEATURE SPLIT -->
+        <div class="oa-feature" id="oa-feature">
+          <div class="oa-feature-note">
+            <div class="oa-kicker" style="color:#8b1515;">Featured note</div>
+            <h3>Small-bowel obstruction —<br>from triage to trocar.</h3>
+            <p>Adhesive vs. closed-loop, the three red flags you cannot miss, fluid strategy, and when the clock stops being your friend.</p>
+            <span class="oa-btn-p">Read note →</span>
+          </div>
+          <div class="oa-feature-pod">
+            <div>
+              <div class="oa-kicker" style="color:#f0d080;margin-bottom:6px;">Episode 08</div>
+              <h4>"Never operate on an unresuscitated patient."</h4>
+              <p style="margin-top:6px;">22 min · Anesthesia &amp; Perioperative Care</p>
+            </div>
+            <div class="oa-play-row">
+              <div class="oa-play-btn">▶</div>
+              <div class="oa-progress"><div class="oa-progress-fill"></div></div>
+              <span style="font-size:11px;color:#d4a846;">04:51</span>
+            </div>
+          </div>
+        </div>
+        <!-- FOOTER -->
+        <div class="oa-footer" id="oa-footer">
+          <div class="oa-footer-grid" id="oa-footer-grid">
+            <div><div class="oa-ft-brand">Surgical Insight Hub</div><p class="oa-ft-p">High-yield surgical education for residents who need the right answer now.</p></div>
+            <div><div class="oa-ft-h">Resources</div><a class="oa-ft-a">All Notes</a><a class="oa-ft-a">Podcast</a><a class="oa-ft-a">Telegram</a></div>
+            <div><div class="oa-ft-h">Topics</div><a class="oa-ft-a">Bowel Obstruction</a><a class="oa-ft-a">PUD Perforation</a><a class="oa-ft-a">Fournier's</a></div>
+            <div><div class="oa-ft-h">Connect</div><a class="oa-ft-a">Telegram</a><a class="oa-ft-a">YouTube</a><a class="oa-ft-a">LinkedIn</a></div>
+          </div>
+          <div class="oa-footer-bot">
+            <p>© 2025 Surgical Insight Hub · Dr. Abdulmalik Moh</p>
+            <p style="font-weight:700;color:#2b1810;">@sugicalInsightHub</p>
+            <p>Not a substitute for clinical judgment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ OPTION B ══ -->
+    <div class="opt-panel" id="panel-B">
+      <div class="ob">
+        <div class="ob-nav">
+          <div class="ob-logo">
+            <div class="ob-av"><span>SIH</span></div>
+            <div><div class="ob-brand">Surgical Insight Hub</div><div style="font-size:9px;color:#b8922a;letter-spacing:.06em;font-style:italic;">@sugicalInsightHub</div></div>
+          </div>
+          <div class="ob-nav-links" id="ob-nav-links">
+            <span class="ob-nav-link active">Home</span>
+            <span class="ob-nav-link">Podcast</span>
+            <span class="ob-nav-link">Notes</span>
+            <span class="ob-nav-link" style="color:#a31515;">MCQ Arena</span>
+            <span class="ob-nav-link" style="color:#7a5c00;">AI Review</span>
+            <span class="ob-nav-link">About</span>
+          </div>
+          <span class="ob-nav-cta">Subscribe free →</span>
+        </div>
+        <div class="ob-masthead" id="ob-masthead">
+          <div class="ob-ms-strip">
+            <span class="ob-ms-l">Vol. I · No. 12</span>
+            <span class="ob-ms-c">A field manual for the modern surgical resident</span>
+            <span class="ob-ms-r">Established 2024</span>
+          </div>
+          <div class="ob-h1" id="ob-h1">When the ward is loud, <em>these pages</em> are quiet.</div>
+          <div class="ob-cols" id="ob-cols">
+            <div><div class="ob-col-label">The editor</div><div class="ob-col-name">Dr. Abdulmalik Moh</div><div class="ob-col-role">General surgery resident · MOH track</div></div>
+            <p class="ob-editorial">Surgical Insight Hub is a free, ad-free project: compact, evidence-anchored notes, a short-form podcast and an MCQ arena — built from the floor up by residents, for residents revising on call, between cases, or the night before boards.</p>
+            <div class="ob-col-right"><span class="ob-subscribe">Subscribe free →</span><span class="ob-free">No paywall. Ever.</span></div>
+          </div>
+        </div>
+        <div class="ob-spread" id="ob-spread">
+          <div class="ob-fig"><span class="ob-fig-sih">SIH</span><span class="ob-fig-label">FIG. 01 — PATCH</span></div>
+          <div class="ob-article">
+            <div class="ob-article-tag">→ Feature · 14 min read</div>
+            <div class="ob-article-h">Small-bowel obstruction, <em>revisited.</em></div>
+            <p class="ob-article-p">Adhesive versus closed-loop. The three signs that should move the patient from the corridor to the CT scanner to the OR. When conservative management is the brave answer — and when it is the lazy one.</p>
+            <div class="ob-byline">
+              <div class="ob-byline-av"></div>
+              <div><div class="ob-byline-name">A. Moh</div><div class="ob-byline-date">Updated 2 weeks ago</div></div>
+              <span class="ob-read">Read feature →</span>
+            </div>
+          </div>
+        </div>
+        <div class="ob-index" id="ob-index">
+          <div class="ob-index-hdr"><span class="ob-index-title">In this issue</span><span class="ob-index-all">View all notes →</span></div>
+          <div class="ob-index-row" id="ob-row-1">
+            <div class="ob-index-n">01</div><div class="ob-index-t">Peptic ulcer perforation — the Boey score in practice</div><div class="ob-index-cat">Upper GI</div><div class="ob-index-time">8 min</div><div class="ob-index-arr">→</div>
+          </div>
+          <div class="ob-index-row" id="ob-row-2">
+            <div class="ob-index-n">02</div><div class="ob-index-t">Fournier's gangrene: recognition beats heroics</div><div class="ob-index-cat">Soft tissue</div><div class="ob-index-time">6 min</div><div class="ob-index-arr">→</div>
+          </div>
+          <div class="ob-index-row" id="ob-row-3">
+            <div class="ob-index-n">03</div><div class="ob-index-t">Acute cholangitis &amp; the Tokyo criteria</div><div class="ob-index-cat">HPB</div><div class="ob-index-time">11 min</div><div class="ob-index-arr">→</div>
+          </div>
+          <div class="ob-index-row" id="ob-row-4">
+            <div class="ob-index-n">04</div><div class="ob-index-t">Compartment syndrome — the fasciotomy decision</div><div class="ob-index-cat">Ortho</div><div class="ob-index-time">7 min</div><div class="ob-index-arr">→</div>
+          </div>
+          <div class="ob-index-row" id="ob-row-5">
+            <div class="ob-index-n">05</div><div class="ob-index-t">Anaesthesia &amp; Perioperative Care</div><div class="ob-index-cat">Periop</div><div class="ob-index-time">9 min</div><div class="ob-index-arr">→</div>
+          </div>
+        </div>
+        <div class="ob-footer"><p>© 2025 Surgical Insight Hub · Dr. Abdulmalik Moh · @sugicalInsightHub</p><p>Not a substitute for clinical judgment</p></div>
+      </div>
+    </div>
+
+    <!-- ══ OPTION C ══ -->
+    <div class="opt-panel" id="panel-C">
+      <div class="oc">
+        <div class="oc-grid-bg"></div>
+        <div class="oc-nav">
+          <div class="oc-nav-left">
+            <div class="oc-patch-av"><span>SIH</span></div>
+            <div class="oc-brand"><div class="oc-brand-name">SURGICAL INSIGHT HUB</div><div class="oc-brand-sub">DISSECT · LEARN · DOMINATE</div></div>
+          </div>
+          <div class="oc-nav-links" id="oc-nav-links">
+            <span class="oc-nav-link active">HOME</span>
+            <span class="oc-nav-link">PODCAST</span>
+            <span class="oc-nav-link">NOTES</span>
+            <span class="oc-nav-link mcq">MCQ ARENA</span>
+            <span class="oc-nav-link">AI REVIEW</span>
+            <span class="oc-nav-link">ABOUT</span>
+          </div>
+          <span class="oc-nav-cta">GET NOTES</span>
+        </div>
+        <div class="oc-hero" id="oc-hero">
+          <div class="oc-ops-strip">
+            <div class="oc-ops-dot"></div>
+            <div class="oc-ops-txt">SIH // OPS-BRIEF // 2025 // EST. MMXXIV</div>
+            <div class="oc-ops-line"></div>
+            <div class="oc-ops-live">● LIVE</div>
+          </div>
+          <div class="oc-hero-grid" id="oc-hero-grid">
+            <div>
+              <div class="oc-mission">[ 001 ] — MISSION BRIEF</div>
+              <div class="oc-h1">Operate<br>on <span>knowledge.</span></div>
+              <p class="oc-sub">A free surgical education field kit — notes, a short-form podcast, an MCQ arena, and AI-assisted review. No fluff, no paywalls, no marketing.</p>
+              <div class="oc-btns">
+                <button class="oc-btn-p">Enter the arena →</button>
+                <button class="oc-btn-s">Latest Notes</button>
+              </div>
+              <div class="oc-stats">
+                <div><div class="oc-stat-n">10+</div><div class="oc-stat-l">NOTES LIVE</div></div>
+                <div><div class="oc-stat-n">12</div><div class="oc-stat-l">EPISODES</div></div>
+                <div><div class="oc-stat-n">∞</div><div class="oc-stat-l">FREE ACCESS</div></div>
+              </div>
+            </div>
+            <div class="oc-patch-holder" id="oc-patch">
+              <div class="oc-patch-border"></div>
+              <div class="oc-patch-circle"><span class="oc-patch-sih">SIH</span></div>
+              <div class="oc-corner" style="top:0;left:0;border-top:1px solid #b8922a;border-left:1px solid #b8922a;"></div>
+              <div class="oc-corner" style="top:0;right:0;border-top:1px solid #b8922a;border-right:1px solid #b8922a;"></div>
+              <div class="oc-corner" style="bottom:0;left:0;border-bottom:1px solid #b8922a;border-left:1px solid #b8922a;"></div>
+              <div class="oc-corner" style="bottom:0;right:0;border-bottom:1px solid #b8922a;border-right:1px solid #b8922a;"></div>
+              <div class="oc-patch-label">— SIH OFFICIAL PATCH —</div>
+            </div>
+          </div>
+        </div>
+        <div class="oc-field-kit" id="oc-field-kit">
+          <div class="oc-section-hdr">
+            <span class="oc-section-num">[ 002 ]</span>
+            <span class="oc-section-title">The field kit.</span>
+            <div class="oc-section-line"></div>
+          </div>
+          <div class="oc-kit-grid" id="oc-kit-grid">
+            <div class="oc-kit-card">
+              <div class="oc-kit-top"><span class="oc-kit-num">// 01</span><div class="oc-kit-dot" style="background:#faf7f2;"></div></div>
+              <div><div class="oc-kit-title">Notes</div><div class="oc-kit-desc">High-yield writeups on 10+ surgical topics. Dense tables. Zero paragraphs.</div></div>
+              <div class="oc-kit-enter" style="color:#faf7f2;">ENTER →</div>
+            </div>
+            <div class="oc-kit-card">
+              <div class="oc-kit-top"><span class="oc-kit-num">// 02</span><div class="oc-kit-dot" style="background:#f0d080;"></div></div>
+              <div><div class="oc-kit-title">Podcast</div><div class="oc-kit-desc">Short audio briefs. YesSurgeryBet. On the commute. Between cases.</div></div>
+              <div class="oc-kit-enter" style="color:#f0d080;">ENTER →</div>
+            </div>
+            <div class="oc-kit-card">
+              <div class="oc-kit-top"><span class="oc-kit-num">// 03</span><div class="oc-kit-dot" style="background:#8b1515;"></div></div>
+              <div><div class="oc-kit-title">MCQ Arena</div><div class="oc-kit-desc">Board-style questions with SHARP debriefs. Global leaderboard. Free.</div></div>
+              <div class="oc-kit-enter" style="color:#8b1515;">ENTER →</div>
+            </div>
+            <div class="oc-kit-card">
+              <div class="oc-kit-top"><span class="oc-kit-num">// 04</span><div class="oc-kit-dot" style="background:#b8922a;"></div></div>
+              <div><div class="oc-kit-title">AI Review</div><div class="oc-kit-desc">Quiz yourself. Ask follow-ups. Structured surgical review in seconds.</div></div>
+              <div class="oc-kit-enter" style="color:#b8922a;">ENTER →</div>
+            </div>
+          </div>
+        </div>
+        <div class="oc-footer">
+          <span class="oc-footer-txt">© MMXXV · SURGICAL INSIGHT HUB · DR. A. MOH</span>
+          <span class="oc-footer-handle">@SUGICALINSIGHTHUB</span>
+          <span class="oc-footer-txt">NOT A SUBSTITUTE FOR CLINICAL JUDGMENT</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /vp-frame -->
+</div><!-- /vp-wrap -->
+
+</div><!-- /shell -->
+
+<script>
+let curOpt = 'A', curVw = 'desktop';
+
+function setOpt(opt) {
+  curOpt = opt;
+  document.querySelectorAll('.opt-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + opt).classList.add('active');
+  document.querySelectorAll('.opt-tab').forEach((t,i) => {
+    t.classList.toggle('active', ['A','B','C'][i] === opt);
+  });
+  applyMobile();
+}
+
+function setVw(vw) {
+  curVw = vw;
+  const frame = document.getElementById('vpFrame');
+  frame.className = 'vp-frame ' + vw;
+  document.querySelectorAll('.vw-tab').forEach(t => {
+    t.classList.toggle('active', t.textContent.includes(vw === 'desktop' ? '🖥' : '📱'));
+  });
+  applyMobile();
+}
+
+function applyMobile() {
+  const mob = curVw === 'mobile';
+
+  // Option A mobile tweaks
+  document.getElementById('oa-hero').className = 'oa-hero' + (mob ? ' mob' : '');
+  document.getElementById('oa-brutal').className = 'oa-brutal' + (mob ? ' mob' : '');
+  document.getElementById('oa-pillars').className = 'oa-pillars' + (mob ? ' mob' : '');
+  document.getElementById('oa-grid4').className = 'oa-grid4' + (mob ? ' mob' : '');
+  document.getElementById('oa-feature').className = 'oa-feature' + (mob ? ' mob' : '');
+  document.getElementById('oa-footer').className = 'oa-footer' + (mob ? ' mob' : '');
+  document.getElementById('oa-footer-grid').className = 'oa-footer-grid' + (mob ? ' mob' : '');
+
+  // Option B mobile tweaks
+  document.getElementById('ob-masthead').className = 'ob-masthead' + (mob ? ' mob' : '');
+  document.getElementById('ob-h1').style.fontSize = mob ? '2rem' : '';
+  document.getElementById('ob-cols').className = 'ob-cols' + (mob ? ' mob' : '');
+  document.getElementById('ob-spread').className = 'ob-spread' + (mob ? ' mob' : '');
+  document.getElementById('ob-index').className = 'ob-index' + (mob ? ' mob' : '');
+  ['ob-row-1','ob-row-2','ob-row-3','ob-row-4','ob-row-5'].forEach(id => {
+    document.getElementById(id).className = 'ob-index-row' + (mob ? ' mob' : '');
+  });
+  document.getElementById('ob-nav-links').style.display = mob ? 'none' : '';
+
+  // Option C mobile tweaks
+  document.getElementById('oc-hero').className = 'oc-hero' + (mob ? ' mob' : '');
+  document.getElementById('oc-hero-grid').className = 'oc-hero-grid' + (mob ? ' mob' : '');
+  document.getElementById('oc-patch').style.display = mob ? 'none' : '';
+  document.getElementById('oc-kit-grid').className = 'oc-kit-grid' + (mob ? ' mob' : '');
+  document.getElementById('oc-field-kit').className = 'oc-field-kit' + (mob ? ' mob' : '');
+  document.getElementById('oc-nav-links').style.display = mob ? 'none' : '';
+}
+</script>
+</body>
+</html>

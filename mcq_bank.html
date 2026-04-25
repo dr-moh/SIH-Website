@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCQ Bank — Surgical Insight Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/shared.css">
+<style>
+.bank-hero {
+  background: var(--brand-burgundy);
+  padding: 100px 24px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+.bank-hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -.04em;
+  margin-bottom: 14px;
+}
+.bank-hero h1 span { color: var(--brand-gold); }
+.bank-hero p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.7);
+  max-width: 600px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+.bank-grid {
+  max-width: 1100px;
+  margin: -40px auto 80px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+  position: relative;
+  z-index: 10;
+}
+.bank-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.bank-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+.bank-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(184,146,42,0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.bank-icon svg { width: 28px; height: 28px; fill: var(--brand-gold); }
+.bank-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.bank-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex: 1;
+}
+.bank-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.bank-badge {
+  background: var(--bg-secondary);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+.bank-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--brand-burgundy);
+  color: #f0d080;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.bank-btn:hover { opacity: 0.9; }
+
+@media (max-width: 600px) {
+  .bank-grid { grid-template-columns: 1fr; }
+}
+</style>
+<script>
+  const savedTheme = localStorage.getItem('sih-theme') || 'light';
+  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">MCQ Bank</div></div>
+    </div>
+    <div class="nav-links-pill">
+      <a href="index.html">Home</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="notes.html">Notes</a>
+      <a href="mcq.html">MCQ Arena</a>
+      <a href="review.html">AI Review</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <button class="mob-nav-toggle" onclick="openMobNav()">☰ Menu</button>
+  <div class="nav-right">
+    <button class="theme-toggle nav-btn" id="themeToggle" aria-label="Toggle dark mode">
+        <svg id="moonIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+        <svg id="sunIcon" style="display:none;" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 5 5 5.006 5.006 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3.003 3.003 0 0 1-3 3zm0-13a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1zm0 18a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zm8-11h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zm-16 0H2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zm13.657-5.657a1 1 0 0 0-1.414 0l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414a1 1 0 0 0 0-1.414zm-11.314 0a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414L4.929 5.757a1 1 0 0 0-1.414 0zm11.314 11.314a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414a1 1 0 0 0-1.414 0zm-11.314 0a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414a1 1 0 0 0 0-1.414z"/></svg>
+    </button>
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-btn">Telegram</a>
+    <a href="notes.html" class="nav-cta-btn">Get Notes →</a>
+  </div>
+</nav>
+
+<div class="bank-hero">
+  <div class="hero-watermark"><img src="assets/images/Surgical_Insight_Hub_Logo.png" alt=""></div>
+  <h1>Source <span>MCQ</span> Banks</h1>
+  <p>The definitive source material for the MCQ Practice Arena. High-yield case files and specialty-specific banks for deep study.</p>
+</div>
+
+<div class="bank-grid">
+  <!-- BANK 1 -->
+  <div class="bank-card">
+    <div class="bank-icon">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+    </div>
+    <div class="bank-title">Surgery Clinical Cases MCQ Bank</div>
+    <div class="bank-desc">A comprehensive collection of surgical clinical cases with detailed explanations. Covers general surgery, critical care, and trauma scenarios often found in board exams.</div>
+    <div class="bank-meta">
+      <span class="bank-badge">PDF</span>
+      <span class="bank-badge">General Surgery</span>
+      <span class="bank-badge">4.2 MB</span>
+    </div>
+    <a href="MCQ Bank/Surgery Clinical Cases MCQ's_copy.pdf" target="_blank" class="bank-btn">View PDF →</a>
+  </div>
+
+  <!-- BANK 2 -->
+  <div class="bank-card">
+    <div class="bank-icon">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+    </div>
+    <div class="bank-title">Plastic Surgery MCQ Bank</div>
+    <div class="bank-desc">Specialized bank focusing on plastic surgery principles, basic sciences, and microsurgery. Referenced from Shokrollahi & Kayvan's definitive text.</div>
+    <div class="bank-meta">
+      <span class="bank-badge">PDF</span>
+      <span class="bank-badge">Plastic Surgery</span>
+      <span class="bank-badge">1.5 MB</span>
+    </div>
+    <a href="MCQ Bank/multiple_choice_questions_in_plastic_surgery_shokrollahi_kayvan.pdf" target="_blank" class="bank-btn">View PDF →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="fb"><div class="fb-name">Surgical Insight Hub</div><p>High-yield surgical education for residents. Built by Dr. Abdulmalik Moh.</p></div>
+    <div class="fc"><h5>Resources</h5><a href="notes.html">Notes</a><a href="podcast.html">Podcast</a><a href="mcq.html">MCQ Arena</a><a href="https://t.me/sugicalInsightHub" target="_blank">Telegram</a></div>
+    <div class="fc"><h5>Connect</h5><a href="https://www.youtube.com/@YeSurgeryBett" target="_blank">YouTube</a><a href="https://www.linkedin.com/company/surgical-insight-hub" target="_blank">LinkedIn</a></div>
+  </div>
+  <div class="fbot"><p>© 2025 Surgical Insight Hub · Dr. Abdulmalik Moh · @sugicalInsightHub</p><p>Not a substitute for clinical judgment</p></div>
+</footer>
+
+<div class="mob-nav-overlay" id="mobNavOverlay" onclick="closeMobNav()"></div>
+<div class="mob-nav-sheet" id="mobNavSheet">
+  <div class="mob-nav-handle"></div>
+  <a href="index.html">Home</a>
+  <a href="podcast.html">Podcast</a>
+  <a href="notes.html">Notes</a>
+  <a href="mcq.html" class="mcq-link">MCQ Arena</a>
+  <a href="review.html" class="review-link">AI Review</a>
+  <a href="about.html">About</a>
+</div>
+
+<script>
+function openMobNav(){
+  document.getElementById('mobNavSheet').classList.add('open');
+  document.getElementById('mobNavOverlay').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closeMobNav(){
+  document.getElementById('mobNavSheet').classList.remove('open');
+  document.getElementById('mobNavOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+
+// Dark Mode Toggle Logic
+const themeToggle = document.getElementById('themeToggle');
+const moonIcon = document.getElementById('moonIcon');
+const sunIcon = document.getElementById('sunIcon');
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    moonIcon.style.display = 'none';
+    sunIcon.style.display = 'block';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    sunIcon.style.display = 'none';
+    moonIcon.style.display = 'block';
+  }
+}
+
+applyTheme(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const isDark = document.documentElement.hasAttribute('data-theme');
+  const newTheme = isDark ? 'light' : 'dark';
+  applyTheme(newTheme);
+  localStorage.setItem('sih-theme', newTheme);
+});
+</script>
+
+<script src="js/nav-pill.js"></script>
+</body>
+</html>

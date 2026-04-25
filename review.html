@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High-Yield Review — Surgical Insight Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=EB+Garamond:ital,wght@0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/shared.css">
+<script>
+  const savedTheme = localStorage.getItem('sih-theme') || 'light';
+  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;background:var(--bg-primary);color:var(--text-primary);font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:300;background:var(--glass-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-color);}
+.nav-logo{display:flex;align-items:center;gap:8px;}
+.nav-logo-img{width:34px;height:34px;border-radius:50%;border:2px solid var(--brand-gold);background:var(--brand-burgundy);overflow:hidden;flex-shrink:0;}
+.nav-logo-img img{width:100%;height:100%;object-fit:cover;}
+.nav-brand{font-size:.78rem;font-weight:800;color:var(--text-primary);letter-spacing:-.02em;line-height:1.1;}
+.nav-brand-sub{font-size:.55rem;font-weight:600;color:var(--brand-gold);letter-spacing:.1em;text-transform:uppercase;}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.nav-back{font-size:.72rem;font-weight:600;color:var(--text-secondary);text-decoration:none;padding:6px 12px;border-radius:100px;border:1px solid var(--border-color);transition:all .15s;}
+.nav-back:hover{background:var(--border-color);color:var(--text-primary);}
+.stream-badge{display:flex;align-items:center;gap:5px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-gold);}
+.stream-dot{width:6px;height:6px;border-radius:50%;background:var(--brand-green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── LAYOUT ── */
+.page{display:flex;flex-direction:column;height:100vh;padding-top:52px;}
+.layout{display:flex;flex:1;min-height:0;overflow:hidden;}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:220px;flex-shrink:0;background:var(--brand-burgundy);
+  border-right:2px solid var(--brand-gold);display:flex;flex-direction:column;overflow:hidden;
+  transition:width 0.3s ease, opacity 0.3s ease;
+  position:relative;
+}
+.sidebar.collapsed{width:12px;overflow:hidden;opacity:0.5;cursor:pointer;}
+.sidebar.collapsed .sidebar-header,
+.sidebar.collapsed .sidebar-body{opacity:0;pointer-events:none;}
+.sidebar-peek{
+  position:absolute;top:0;left:0;width:12px;height:100%;
+  background:var(--brand-gold);display:none;cursor:pointer;z-index:10;
+  align-items:center;justify-content:center;
+  writing-mode:vertical-lr;font-size:.55rem;font-weight:700;
+  color:var(--brand-burgundy);letter-spacing:.1em;text-transform:uppercase;
+}
+.sidebar.collapsed .sidebar-peek{display:flex;}
+.sidebar-header{flex-shrink:0;padding:12px 12px 6px;border-bottom:1px solid var(--border-color);}
+.sidebar-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f0d080;margin-bottom:8px;}
+.sidebar-search{width:100%;font-family:inherit;font-size:.78rem;color:var(--bg-card);background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:7px;padding:7px 10px;outline:none;transition:border-color .15s;}
+.sidebar-search:focus{border-color:#f0d080;}
+.sidebar-search::placeholder{color:rgba(255,255,255,0.35);}
+.sidebar-body{flex:1;overflow-y:auto;padding:6px 8px 12px;}
+.sidebar-body::-webkit-scrollbar{width:3px;}
+.sidebar-body::-webkit-scrollbar-thumb{background:var(--border-color);border-radius:2px;}
+.sys-group{margin-bottom:4px;}
+.sys-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-gold);padding:8px 6px 3px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;background:transparent;}
+.sys-label-arrow{font-size:.6rem;color:rgba(184,146,42,0.5);transition:transform .2s;}
+.sys-label.open .sys-label-arrow{transform:rotate(90deg);}
+.sys-topics{display:flex;flex-direction:column;gap:2px;overflow:hidden;max-height:0;transition:max-height .25s ease;}
+.sys-topics.open{max-height:600px;}
+.topic-btn{background:transparent;border:none;border-radius:6px;padding:6px 8px;font-family:inherit;font-size:.8rem;font-weight:500;color:rgba(255,255,255,0.6);cursor:pointer;text-align:left;width:100%;transition:all .15s;line-height:1.4;border-bottom:1px solid var(--border-color);}
+.topic-btn:hover{background:var(--border-color);color:var(--brand-gold);}
+.topic-btn.active{background:var(--border-color);color:#f0d080;font-weight:700;}
+
+/* ── MAIN ── */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden;}
+.input-bar{flex-shrink:0;padding:10px 16px;background:var(--bg-card);border-bottom:1px solid var(--border-color);display:flex;gap:8px;align-items:center;}
+.topic-input{flex:1;font-family:inherit;font-size:.9rem;color:var(--text-primary);background:var(--bg-primary);border:1px solid var(--border-color);border-radius:9px;padding:9px 13px;outline:none;transition:border-color .15s;}
+.topic-input:focus{border-color:var(--brand-gold);background:var(--bg-card);}
+.topic-input::placeholder{color:var(--text-muted);}
+.run-btn{background:var(--brand-burgundy);color:#f0d080;border:none;border-radius:9px;padding:9px 18px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;cursor:pointer;letter-spacing:.04em;white-space:nowrap;transition:opacity .15s;flex-shrink:0;}
+.run-btn:hover{opacity:.85;}
+.run-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* ── OUTPUT ── */
+.output-area{flex:1;min-height:0;overflow-y:auto;padding:20px 20px 48px;background:var(--bg-primary);}
+.output-area::-webkit-scrollbar{width:4px;}
+.output-area::-webkit-scrollbar-thumb{background:var(--border-color);border-radius:2px;}
+
+/* EMPTY */
+.empty-state{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;color:var(--text-muted);}
+.empty-icon{width:60px;height:60px;border-radius:50%;background:var(--brand-burgundy);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:4px;border:2px solid var(--border-color);}
+.empty-title{font-family:'EB Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--brand-burgundy);letter-spacing:-.02em;}
+.empty-sub{font-size:.78rem;color:var(--text-muted);max-width:280px;line-height:1.6;}
+
+/* TOPIC HEADER */
+.topic-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--brand-gold);flex-wrap:wrap;}
+.topic-header h2{font-family:'EB Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--brand-burgundy);letter-spacing:-.02em;flex:1;}
+.exam-tag{background:var(--brand-burgundy);color:#f0d080;font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:600;padding:3px 8px;border-radius:4px;letter-spacing:.08em;flex-shrink:0;}
+
+/* STREAM */
+.stream-raw{font-size:.9rem;line-height:1.8;color:var(--text-primary);white-space:pre-wrap;word-break:break-word;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:18px;}
+.cursor{display:inline-block;width:2px;height:13px;background:var(--brand-gold);margin-left:2px;vertical-align:middle;animation:blink .7s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* SECTIONS */
+.section{margin-bottom:12px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;overflow:hidden;}
+.section-header{padding:8px 14px;border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:8px;background:var(--bg-secondary);}
+.section-num{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--brand-gold);background:var(--border-color);padding:2px 6px;border-radius:3px;font-weight:600;}
+.section-title{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:700;color:var(--brand-burgundy);letter-spacing:-.01em;}
+.section-body{padding:14px 16px;font-size:.9rem;line-height:1.8;color:var(--text-primary);}
+.section-body h3{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:700;color:var(--brand-burgundy);margin:12px 0 5px;padding-left:8px;border-left:2px solid var(--brand-gold);}
+.section-body h3:first-child{margin-top:0;}
+.section-body p{margin-bottom:6px;}
+.section-body p:last-child{margin-bottom:0;}
+.section-body ul{list-style:none;padding:0;margin:4px 0;}
+.section-body li{padding:3px 0 3px 14px;position:relative;}
+.section-body li::before{content:'›';position:absolute;left:0;color:var(--brand-gold);font-weight:700;}
+.section-body table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.82rem;}
+.section-body th{background:var(--brand-burgundy);color:#f0d080;font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:7px 10px;text-align:left;border-bottom:2px solid var(--brand-gold);}
+.section-body td{padding:7px 10px;border-bottom:1px solid var(--border-color);vertical-align:top;}
+.section-body tr:last-child td{border-bottom:none;}
+.section-body tr:nth-child(even) td{background:rgba(184,146,42,0.03);}
+.gold-standard{display:inline-flex;align-items:center;gap:3px;background:var(--border-color);border:1px solid var(--border-color);color:#7a5c00;font-size:.68rem;padding:2px 6px;border-radius:4px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.mnemonic-box{display:block;background:var(--bg-card);border:1px solid var(--border-color);color:var(--brand-burgundy);font-size:.78rem;padding:8px 12px;border-radius:6px;margin:8px 0;font-family:'IBM Plex Mono',monospace;line-height:1.5;}
+strong{color:var(--text-primary);font-weight:700;}
+code{font-family:'IBM Plex Mono',monospace;background:var(--bg-secondary);color:var(--text-secondary);padding:1px 5px;border-radius:3px;font-size:.75rem;}
+
+/* MCQ SECTION */
+.mcq-section .section-body{padding:0;}
+.mcq-group{border-bottom:1px solid var(--border-color);}
+.mcq-group:last-child{border-bottom:none;}
+.mcq-group-title{padding:7px 14px;font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:600;color:var(--brand-red);letter-spacing:.08em;text-transform:uppercase;background:rgba(163,21,21,0.04);border-bottom:1px solid var(--border-color);}
+.mcq-items{padding:8px 14px;display:flex;flex-direction:column;gap:2px;}
+.mcq-item{display:flex;gap:8px;align-items:flex-start;padding:4px 0;border-bottom:1px solid var(--border-color);font-size:.85rem;line-height:1.65;color:var(--text-primary);}
+.mcq-item:last-child{border-bottom:none;}
+.mcq-bullet{color:var(--brand-gold);font-weight:700;flex-shrink:0;font-size:.7rem;margin-top:3px;}
+.error-box{background:rgba(163,21,21,0.06);border:1px solid rgba(163,21,21,0.2);color:var(--brand-red);padding:14px 16px;border-radius:10px;font-size:.82rem;}
+
+/* ── MOBILE DROPDOWN ── */
+.mob-category-bar{display:none;padding:8px 12px;background:var(--bg-card);border-bottom:1px solid var(--border-color);}
+.mob-category-select{width:100%;font-family:inherit;font-size:.82rem;color:var(--text-primary);background:var(--bg-primary);border:1px solid var(--border-color);border-radius:9px;padding:9px 12px;outline:none;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-right > div:first-child{display:none;}
+
+  .sidebar{display:none;}
+  .mob-category-bar{display:block;}
+  .input-bar{padding:8px 12px;}
+  .topic-input{font-size:.82rem;}
+  .run-btn{padding:9px 14px;font-size:.68rem;}
+  .output-area{padding:14px 12px 60px;}
+  .topic-header h2{font-size:1.3rem;}
+  .section-body{font-size:.78rem;}
+  .stream-raw{font-size:.78rem;padding:14px;}
+}
+@media(max-width:480px){
+  .nav-brand{font-size:.72rem;}
+  .nav-back{display:none;}
+  .stream-badge span{display:none;}
+}
+
+/* ── MOBILE HAMBURGER NAV ── */
+.mob-nav-toggle{display:none;background:var(--brand-burgundy);border:1.5px solid var(--brand-gold);color:#f0d080;border-radius:8px;padding:7px 12px;font-size:12px;cursor:pointer;align-items:center;gap:6px;font-family:inherit;font-weight:700;z-index:500;}
+.mob-nav-overlay{display:none;position:fixed;inset:0;background:rgba(43,24,16,0.55);z-index:480;backdrop-filter:blur(4px);}
+.mob-nav-sheet{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--brand-burgundy);border-radius:20px 20px 0 0;border-top:2px solid var(--brand-gold);padding:20px 20px 40px;z-index:490;transform:translateY(100%);transition:transform .28s ease;}
+.mob-nav-sheet.open{transform:translateY(0);}
+.mob-nav-sheet a{display:block;color:rgba(255,255,255,0.7);text-decoration:none;font-size:.92rem;font-weight:600;padding:11px 0;border-bottom:1px solid var(--border-color);}
+.mob-nav-sheet a:last-child{border-bottom:none;}
+.mob-nav-sheet a:hover,.mob-nav-sheet a.active{color:#f0d080;}
+.mob-nav-sheet a.mcq-link{color:#f87171;font-weight:700;}
+.mob-nav-sheet a.review-link{color:var(--brand-gold);font-weight:700;}
+.mob-nav-handle{width:40px;height:4px;background:rgba(184,146,42,0.4);border-radius:2px;margin:0 auto 18px;}
+@media(max-width:768px){
+  .mob-nav-toggle{display:flex;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub" style="font-size: .58rem; font-weight: 500;">High-Yield Review</div></div>
+    </div>
+  </div>
+  <button class="mob-nav-toggle" onclick="openMobNav()">☰ Menu</button>
+  <div class="nav-right">
+    <button class="theme-toggle nav-btn" id="themeToggle" aria-label="Toggle dark mode">
+        <svg id="moonIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+        <svg id="sunIcon" style="display:none;" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 5 5 5.006 5.006 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3.003 3.003 0 0 1-3 3zm0-13a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1zm0 18a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zm8-11h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zm-16 0H2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zm13.657-5.657a1 1 0 0 0-1.414 0l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414a1 1 0 0 0 0-1.414zm-11.314 0a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414L4.929 5.757a1 1 0 0 0-1.414 0zm11.314 11.314a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414a1 1 0 0 0-1.414 0zm-11.314 0a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414a1 1 0 0 0 0-1.414z"/></svg>
+    </button>
+    <a href="index.html" class="nav-cta-btn">← Back to Home</a>
+    <div class="stream-badge" style="margin-left:4px;"><div class="stream-dot"></div><span style="display:none;">AI Live</span></div>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="layout">
+
+    <!-- DESKTOP SIDEBAR -->
+    <aside class="sidebar" id="desktopSidebar">
+      <div class="sidebar-peek" onclick="expandSidebar()">Topics</div>
+      <div class="sidebar-header">
+        <div class="sidebar-title">Surgical Systems</div>
+        <input type="text" class="sidebar-search" id="sidebarSearch" placeholder="Filter topics..." oninput="filterTopics(this.value)">
+      </div>
+      <div class="sidebar-body" id="sidebarBody"></div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- MOBILE CATEGORY DROPDOWN -->
+      <div class="mob-category-bar" id="mobCategoryBar">
+        <select class="mob-category-select" id="mobCategorySelect" onchange="onMobCategoryChange(this.value)">
+          <option value="">— Select a system or topic —</option>
+        </select>
+      </div>
+
+      <!-- INPUT BAR -->
+      <div class="input-bar">
+        <input type="text" class="topic-input" id="topicInput" placeholder="Type any surgical topic or pick from the list..." autocomplete="off">
+        <button class="run-btn" id="runBtn" onclick="runQuery()">RUN ↵</button>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="output-area" id="outputArea">
+        <div class="empty-state">
+          <div class="empty-icon">⚕</div>
+          <div class="empty-title">Drop a topic.</div>
+          <div class="empty-sub">Pick from the sidebar or type any surgical topic. Full high-yield review streams instantly.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ── TOPIC DATA ──
+const SYSTEMS = [
+  {
+    name: 'Upper GI',
+    topics: ['Peptic Ulcer Disease & Complications','Upper GI Bleeding','Gastric Cancer','Esophageal Cancer']
+  },
+  {
+    name: 'Hepatobiliary',
+    topics: ['Gallstone Disease & Cholelithiasis','Acute Cholecystitis','Choledocholithiasis & Cholangitis','Hepatocellular Carcinoma','Hepatic Abscess (Amoebic & Pyogenic)','Hydatid Cyst of the Liver','Portal Hypertension & Varices']
+  },
+  {
+    name: 'Pancreas',
+    topics: ['Acute Pancreatitis','Chronic Pancreatitis']
+  },
+  {
+    name: 'Lower GI',
+    topics: ['Acute Appendicitis','Intestinal Obstruction','Colorectal Cancer','Diverticular Disease','Lower GI Bleeding','Intestinal Volvulus','Intussusception']
+  },
+  {
+    name: 'Anorectal',
+    topics: ['Anorectal Disorders (Hemorrhoids, Fissure, Fistula)']
+  },
+  {
+    name: 'Hernia',
+    topics: ['Hernia (Inguinal, Ventral, Hiatal)']
+  },
+  {
+    name: 'Endocrine & Breast',
+    topics: ['Thyroid Nodule & Goiter','Thyroid Cancer','Breast Cancer']
+  },
+  {
+    name: 'Trauma',
+    topics: ['Trauma — Primary & Secondary Survey','Splenic Injuries','Burns']
+  },
+  {
+    name: 'Urology',
+    topics: ['Renal & Ureteric Calculi']
+  },
+  {
+    name: 'Infections',
+    topics: ['Soft Tissue Infections (Necrotizing Fasciitis)']
+  }
+];
+
+const SYSTEM_PROMPT = `You are a surgical residency exam preparation assistant. When the user drops a topic, provide a full structured surgical discussion immediately. No preamble, no clarifying questions.
+
+Use these exact ## section headers in order:
+
+## 1. DEFINITION
+## 2. PATHOPHYSIOLOGY
+## 3. ETIOLOGY & RISK FACTORS
+## 4. CLINICAL PRESENTATION
+## 5. TYPES, SUBTYPES & CLASSIFICATIONS
+## 6. PATIENT APPROACH & INVESTIGATIONS
+## 7. MANAGEMENT
+## 8. POSTOPERATIVE CARE & FOLLOW-UP
+## 9. HIGH-YIELD MCQ REVISION
+
+Within section 9 use ### subheaders to group bullets by theme.
+
+CONTENT RULES:
+- Specific numbers always: doses, durations, thresholds, timings, percentages
+- Mark gold standard: ⭐ GOLD STANDARD
+- All named classifications as full markdown tables
+- Bold key terms, eponyms, numbers with **text**
+- Add mnemonics where they add real recall value (not forced): 🧠 **Mnemonic:** ...
+- No history, no filler — clinical and exam content only
+- Section 9: short punchy bullets grouped by ### theme headers
+- Reference 2024–2026 guidelines where applicable
+- Tone: concise, precise, exam-oriented`;
+
+// ── BUILD SIDEBAR ──
+const sidebarBody = document.getElementById('sidebarBody');
+const mobSelect = document.getElementById('mobCategorySelect');
+
+SYSTEMS.forEach((sys, si) => {
+  // Desktop
+  const group = document.createElement('div');
+  group.className = 'sys-group';
+  group.dataset.system = sys.name;
+
+  const label = document.createElement('div');
+  label.className = 'sys-label' + (si === 0 ? ' open' : '');
+  label.innerHTML = `<span>${sys.name}</span><span class="sys-label-arrow">›</span>`;
+  label.onclick = function() {
+    const isOpen = label.classList.contains('open');
+    label.classList.toggle('open');
+    topicsDiv.classList.toggle('open');
+  };
+  group.appendChild(label);
+
+  const topicsDiv = document.createElement('div');
+  topicsDiv.className = 'sys-topics' + (si === 0 ? ' open' : '');
+  topicsDiv.dataset.systemTopics = sys.name;
+
+  sys.topics.forEach(topic => {
+    const btn = document.createElement('button');
+    btn.className = 'topic-btn';
+    btn.textContent = topic;
+    btn.dataset.topic = topic;
+    btn.onclick = function() { selectTopic(topic, btn); };
+    topicsDiv.appendChild(btn);
+  });
+
+  group.appendChild(topicsDiv);
+  sidebarBody.appendChild(group);
+
+  // Mobile dropdown — system group
+  const optGroup = document.createElement('optgroup');
+  optGroup.label = sys.name;
+  sys.topics.forEach(topic => {
+    const opt = document.createElement('option');
+    opt.value = topic;
+    opt.textContent = topic;
+    optGroup.appendChild(opt);
+  });
+  mobSelect.appendChild(optGroup);
+});
+
+// ── FILTER ──
+function filterTopics(val) {
+  const q = val.toLowerCase();
+  document.querySelectorAll('.sys-group').forEach(group => {
+    let anyVisible = false;
+    group.querySelectorAll('.topic-btn').forEach(btn => {
+      const match = !q || btn.textContent.toLowerCase().includes(q);
+      btn.style.display = match ? '' : 'none';
+      if (match) anyVisible = true;
+    });
+    group.style.display = anyVisible ? '' : 'none';
+    if (q && anyVisible) {
+      group.querySelector('.sys-label').classList.add('open');
+      group.querySelector('.sys-topics').classList.add('open');
+    }
+  });
+}
+
+// ── SELECT TOPIC ──
+let activeBtn = null;
+function selectTopic(topic, btn) {
+  if (activeBtn) activeBtn.classList.remove('active');
+  if (btn) { btn.classList.add('active'); activeBtn = btn; }
+  document.getElementById('topicInput').value = topic;
+  if (window.innerWidth <= 768) {
+    document.getElementById('mobCategoryBar').style.display = 'none';
+  } else {
+    // Collapse sidebar after short delay so user sees active state
+    setTimeout(collapseSidebar, 300);
+  }
+  runQuery();
+}
+
+function onMobCategoryChange(val) {
+  if (!val) return;
+  selectTopic(val, null);
+}
+
+// ── KEYBOARD ──
+document.getElementById('topicInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') runQuery();
+});
+
+// ── RUN ──
+let isRunning = false;
+
+async function runQuery() {
+  const topic = document.getElementById('topicInput').value.trim();
+  if (!topic || isRunning) return;
+
+  isRunning = true;
+  const runBtn = document.getElementById('runBtn');
+  const outputArea = document.getElementById('outputArea');
+  runBtn.disabled = true;
+  runBtn.textContent = 'LOADING...';
+
+  outputArea.innerHTML = `
+    <div class="topic-header">
+      <h2>${esc(topic)}</h2>
+      <span class="exam-tag">STREAMING</span>
+    </div>
+    <div class="stream-raw" id="rawEl"></div>`;
+
+  const rawEl = document.getElementById('rawEl');
+  const cursorEl = document.createElement('span');
+  cursorEl.className = 'cursor';
+  rawEl.appendChild(cursorEl);
+
+  let fullText = '';
+
+  try {
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: { 
+        'Authorization': 'Bearer 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',
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({
+        model: 'anthropic/claude-3.5-sonnet',
+        stream: true,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: topic }
+        ]
+      })
+    });
+
+    if (!res.ok) {
+      const e = await res.json();
+      throw new Error(e.error?.message || `HTTP ${res.status}`);
+    }
+
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const d = line.slice(6).trim();
+        if (d === '[DONE]') continue;
+        try {
+          const p = JSON.parse(d);
+          if (p.choices && p.choices.length > 0 && p.choices[0].delta && p.choices[0].delta.content) {
+            fullText += p.choices[0].delta.content;
+            rawEl.textContent = fullText;
+            rawEl.appendChild(cursorEl);
+            outputArea.scrollTop = outputArea.scrollHeight;
+          }
+        } catch {}
+      }
+    }
+
+    renderFinal(topic, fullText, outputArea);
+
+  } catch (err) {
+    outputArea.innerHTML = `<div class="error-box">Error: ${esc(err.message)}</div>`;
+  } finally {
+    isRunning = false;
+    runBtn.disabled = false;
+    runBtn.textContent = 'RUN ↵';
+  }
+}
+
+// ── RENDER ──
+function renderFinal(topic, text, container) {
+  container.innerHTML = '';
+
+  const topicHdr = document.createElement('div');
+  topicHdr.className = 'topic-header';
+  topicHdr.innerHTML = `<h2>${esc(topic)}</h2><span class="exam-tag">EXAM READY</span>`;
+  container.appendChild(topicHdr);
+
+  const numMap = {
+    'DEFINITION':'01','PATHOPHYSIOLOGY':'02','ETIOLOGY':'03','RISK':'03',
+    'CLINICAL':'04','PRESENTATION':'04','TYPES':'05','CLASSIFICATIONS':'05','SUBTYPES':'05',
+    'PATIENT':'06','INVESTIGATIONS':'06','APPROACH':'06',
+    'MANAGEMENT':'07','POSTOPERATIVE':'08','POST-OP':'08',
+    'HIGH-YIELD':'09','MCQ':'09'
+  };
+
+  const lines = text.split('\n');
+  const sections = [];
+  let cur = null;
+  for (const line of lines) {
+    const m = line.match(/^##\s+(.+)/);
+    if (m) {
+      if (cur) sections.push(cur);
+      cur = { title: m[1].replace(/\*\*/g,'').replace(/^\d+\.\s*/,'').trim(), lines: [] };
+    } else if (cur) {
+      cur.lines.push(line);
+    }
+  }
+  if (cur) sections.push(cur);
+
+  if (!sections.length) {
+    const div = document.createElement('div');
+    div.className = 'section';
+    const body = document.createElement('div');
+    body.className = 'section-body';
+    body.innerHTML = mdToHtml(text);
+    div.appendChild(body);
+    container.appendChild(div);
+    container.scrollTop = 0;
+    return;
+  }
+
+  sections.forEach((sec, idx) => {
+    const bodyText = sec.lines.join('\n').trim();
+    if (!bodyText) return;
+
+    const isMCQ = /MCQ|HIGH.YIELD/i.test(sec.title);
+    const el = document.createElement('div');
+    el.className = 'section' + (isMCQ ? ' mcq-section' : '');
+
+    let num = String(idx + 1).padStart(2,'0');
+    const up = sec.title.toUpperCase();
+    for (const [k,v] of Object.entries(numMap)) {
+      if (up.includes(k)) { num = v; break; }
+    }
+
+    const hdr = document.createElement('div');
+    hdr.className = 'section-header';
+    hdr.innerHTML = `<span class="section-num">${num}</span><span class="section-title">${esc(sec.title)}</span>`;
+    el.appendChild(hdr);
+
+    const body = document.createElement('div');
+    body.className = 'section-body';
+    if (isMCQ) body.appendChild(buildMCQ(bodyText));
+    else body.innerHTML = mdToHtml(bodyText);
+
+    el.appendChild(body);
+    container.appendChild(el);
+  });
+
+  container.scrollTop = 0;
+}
+
+function buildMCQ(text) {
+  const wrap = document.createElement('div');
+  const lines = text.split('\n');
+  let items = null;
+
+  function newGroup(title) {
+    const g = document.createElement('div');
+    g.className = 'mcq-group';
+    if (title) {
+      const t = document.createElement('div');
+      t.className = 'mcq-group-title';
+      t.textContent = title;
+      g.appendChild(t);
+    }
+    items = document.createElement('div');
+    items.className = 'mcq-items';
+    g.appendChild(items);
+    wrap.appendChild(g);
+  }
+
+  for (const line of lines) {
+    const tr = line.trim();
+    if (!tr) continue;
+    if (/^###\s/.test(line)) {
+      newGroup(tr.replace(/^###\s*/,'').replace(/\*\*/g,''));
+    } else if (/^\*\*[^*]+\*\*:?\s*$/.test(tr)) {
+      newGroup(tr.replace(/\*\*/g,'').replace(/:$/,''));
+    } else if (/^[-*•]\s/.test(tr)) {
+      if (!items) newGroup('');
+      const item = document.createElement('div');
+      item.className = 'mcq-item';
+      item.innerHTML = `<span class="mcq-bullet">★</span><span>${inlineHtml(tr.replace(/^[-*•]\s+/,''))}</span>`;
+      items.appendChild(item);
+    }
+  }
+  return wrap;
+}
+
+function mdToHtml(raw) {
+  let s = esc(raw);
+
+  // Tables
+  s = s.replace(/((?:\|[^\n]+\|\n?)+)/g, match => {
+    const rows = match.trim().split('\n');
+    let html = '<table>';
+    rows.forEach((row, i) => {
+      if (/^\|[-:\s|]+\|$/.test(row.trim())) return;
+      const isHdr = i === 0 && rows[1] && /^\|[-:\s|]+\|$/.test(rows[1].trim());
+      const tag = isHdr ? 'th' : 'td';
+      const cells = row.split('|').slice(1,-1);
+      html += '<tr>' + cells.map(c => `<${tag}>${inlineHtml(c.trim())}</${tag}>`).join('') + '</tr>';
+    });
+    return html + '</table>';
+  });
+
+  // Mnemonics
+  s = s.replace(/🧠\s*\*\*Mnemonic:\*\*\s*([^\n]+)/g,
+    (_, content) => `<div class="mnemonic-box">🧠 <strong>Mnemonic:</strong> ${inlineHtml(content)}</div>`);
+
+  // Headers
+  s = s.replace(/^####\s+(.+)$/gm, '<h3>$1</h3>');
+  s = s.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
+
+  // Bullets
+  s = s.replace(/^[-*•]\s+(.+)$/gm, '<li>$1</li>');
+  s = s.replace(/(<li>[\s\S]*?<\/li>\n?)+/g, m => `<ul>${m}</ul>`);
+
+  // Inline
+  s = s.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+  s = s.replace(/⭐\s*GOLD STANDARD/gi, '<span class="gold-standard">⭐ GOLD STANDARD</span>');
+
+  // Paragraphs
+  s = s.split(/\n{2,}/).map(chunk => {
+    chunk = chunk.trim();
+    if (!chunk) return '';
+    if (/^<(h3|ul|table|div)/.test(chunk)) return chunk;
+    return `<p>${chunk.replace(/\n/g,' ')}</p>`;
+  }).filter(Boolean).join('\n');
+
+  return s;
+}
+
+function inlineHtml(raw) {
+  return esc(raw)
+    .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+    .replace(/⭐\s*GOLD STANDARD/gi, '<span class="gold-standard">⭐ GOLD STANDARD</span>');
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+
+// ── SIDEBAR COLLAPSE ──
+var sidebarEl = document.getElementById('desktopSidebar');
+var sidebarCollapsed = false;
+
+function collapseSidebar() {
+  if (window.innerWidth <= 768) return;
+  sidebarCollapsed = true;
+  sidebarEl.classList.add('collapsed');
+}
+
+function expandSidebar() {
+  sidebarCollapsed = false;
+  sidebarEl.classList.remove('collapsed');
+}
+
+// Hover to expand on desktop
+sidebarEl.addEventListener('mouseenter', function() {
+  if (sidebarCollapsed) expandSidebar();
+});
+
+sidebarEl.addEventListener('mouseleave', function() {
+  // Only collapse if a topic was already selected (content is showing)
+  if (!sidebarCollapsed && document.querySelector('.topic-btn.active')) {
+    collapseSidebar();
+  }
+});
+
+// Touch to toggle on tablet
+sidebarEl.addEventListener('touchstart', function(e) {
+  if (sidebarCollapsed) { expandSidebar(); e.preventDefault(); }
+}, { passive: false });
+
+// ── MOBILE: Show dropdown again when input cleared ──
+document.getElementById('topicInput').addEventListener('input', function() {
+  if (!this.value && window.innerWidth <= 768) {
+    document.getElementById('mobCategoryBar').style.display = 'block';
+    document.getElementById('mobCategorySelect').value = '';
+  }
+});
+</script>
+
+<div class="mob-nav-overlay" id="mobNavOverlay" onclick="closeMobNav()"></div>
+<div class="mob-nav-sheet" id="mobNavSheet">
+  <div class="mob-nav-handle"></div>
+  <a href="index.html">Home</a>
+  <a href="podcast.html">Podcast</a>
+  <a href="notes.html">Notes</a>
+  <a href="mcq.html" class="mcq-link">MCQ Arena</a>
+  <a href="review.html" class="review-link">AI Review</a>
+  <a href="about.html">About</a>
+</div>
+
+<script>
+function openMobNav(){
+  document.getElementById('mobNavSheet').classList.add('open');
+  document.getElementById('mobNavOverlay').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closeMobNav(){
+  document.getElementById('mobNavSheet').classList.remove('open');
+  document.getElementById('mobNavOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+
+// Dark Mode Toggle Logic
+const themeToggle = document.getElementById('themeToggle');
+const moonIcon = document.getElementById('moonIcon');
+const sunIcon = document.getElementById('sunIcon');
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    moonIcon.style.display = 'none';
+    sunIcon.style.display = 'block';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    sunIcon.style.display = 'none';
+    moonIcon.style.display = 'block';
+  }
+}
+
+// Initial state
+applyTheme(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const isDark = document.documentElement.hasAttribute('data-theme');
+  const newTheme = isDark ? 'light' : 'dark';
+  applyTheme(newTheme);
+  localStorage.setItem('sih-theme', newTheme);
+});
+</script>
+
+<script src="js/nav-pill.js"></script>
+</body>
+</html>

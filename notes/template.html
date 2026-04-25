@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Note Title — Surgical Insight Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+
+<!-- CSS Paths are updated to go up one directory (../) since this file is inside notes/ -->
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/shared.css">
+
+<script>
+  const savedTheme = localStorage.getItem('sih-theme') || 'light';
+  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+
+<style>
+  /* Add any specific note styling here */
+  .note-content-area {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: var(--shadow-sm);
+  }
+  .note-content-area h2 {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+  }
+  .note-content-area p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="../assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">@sugicalInsightHub</div></div>
+    </div>
+  </div>
+  
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 19.07l1.41-1.41M17.66 6.34l1.41-1.41M12 7a5 5 0 100 10m0 0a5 5 0 100-10z"/></svg>
+      <svg class="moon-icon" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+    <div class="nav-links-pill">
+      <a href="../notes.html" class="active">Notes</a>
+      <a href="../podcast.html">Podcast</a>
+      <a href="../review.html">Review</a>
+      <a href="../mcq.html">MCQ Arena</a>
+      <a href="../about.html">About</a>
+    </div>
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-btn">Get Notes →</a>
+
+    <!-- Hamburger menu for mobile -->
+    <button class="mob-nav-toggle" id="hamburgerMenu" aria-label="Open menu">
+      ☰ Menu
+    </button>
+  </div>
+</nav>
+
+<div class="main-container">
+  <div class="note-content-area mt-5">
+    <h2>Your Technical Note Title Here</h2>
+    
+    <p>This is your specific HTML note section. Because this file is inside the <code>notes/</code> directory, it inherits the entire website's global navigation, dark mode, and UI style, but gives you a blank canvas here.</p>
+    
+    <p>You can add paragraphs, images, tables, bullet points, and clinical algorithms however you like!</p>
+  </div>
+</div>
+
+<!-- Mobile Navigation Sheet -->
+<div class="mob-nav-overlay" id="mobOverlay"></div>
+<div class="mob-nav-sheet" id="mobSheet">
+  <div class="mob-nav-handle" id="mobClose"></div>
+  <div class="mob-nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../notes.html" class="active">Notes</a>
+    <a href="../podcast.html">Podcast</a>
+    <a href="../review.html">Review</a>
+    <a href="../mcq.html">MCQ Arena</a>
+    <a href="../about.html">About</a>
+  </div>
+  <a href="https://t.me/sugicalInsightHub" target="_blank" class="mob-nav-cta">Join Telegram</a>
+</div>
+
+<!-- All paths in the JS file are fixed here via ../js/nav-pill.js -->
+<script src="../js/nav-pill.js"></script>
+<script>
+  // Theme Toggle Logic
+  const themeToggle = document.getElementById('themeToggle');
+  const sunIcon = document.querySelector('.sun-icon');
+  const moonIcon = document.querySelector('.moon-icon');
+
+  function updateIcons(theme) {
+    if (theme === 'dark') {
+      if(sunIcon) sunIcon.style.display = 'none';
+      if(moonIcon) moonIcon.style.display = 'block';
+    } else {
+      if(sunIcon) sunIcon.style.display = 'block';
+      if(moonIcon) moonIcon.style.display = 'none';
+    }
+  }
+
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  updateIcons(currentTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const root = document.documentElement;
+      let newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', newTheme);
+      localStorage.setItem('sih-theme', newTheme);
+      updateIcons(newTheme);
+    });
+  }
+
+  // Mobile Nav Logic
+  const mobToggle = document.getElementById('hamburgerMenu');
+  const mobOverlay = document.getElementById('mobOverlay');
+  const mobSheet = document.getElementById('mobSheet');
+  const mobClose = document.getElementById('mobClose');
+
+  if(mobToggle) {
+    mobToggle.addEventListener('click', () => {
+      mobOverlay.style.display = 'block';
+      setTimeout(() => mobSheet.classList.add('open'), 10);
+    });
+  }
+  
+  function closeNav() {
+    mobSheet.classList.remove('open');
+    setTimeout(() => mobOverlay.style.display = 'none', 300);
+  }
+
+  if(mobOverlay) mobOverlay.addEventListener('click', closeNav);
+  if(mobClose) mobClose.addEventListener('click', closeNav);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orthopaedic Trauma Master — Surgical Insight Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/shared.css">
+
+<script>
+  const savedTheme = localStorage.getItem('sih-theme') || 'light';
+  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+
+<style>
+
+:root {
+  --primary:   #2C4A6E;
+  --primary-dk:#1A3050;
+  --primary-lt:#E6F2F8;
+  --accent:    #4A9EBF;
+  --accent-lt: #E0F4FA;
+  --gold:      #C9910A;
+  --gold-lt:   #FFF8E8;
+  --v1:        #2C4A6E;
+  --v2:        #3A5F82;
+  --v3:        #4A7499;
+  --v1-lt:     #E6F2F8;
+  --v2-lt:     #EAF4FA;
+  --v3-lt:     #EEF6FB;
+  --red:       #8B2020;
+  --red-lt:    #FAF0F0;
+  --green:     #1A5C3A;
+  --green-lt:  #E8F5EE;
+  --amber:     #7B4F00;
+  --amber-lt:  #FFF8E8;
+  --bg:        #F7F9FC;
+  --bg2:       #EEF3F8;
+  --border:    #D0DCE8;
+  --text:      #1A1A2E;
+  --muted:     #4A5568;
+  --white:     #FFFFFF;
+  --sidebar-w: 300px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;}
+
+/* SIDEBAR */
+#sidebar{position:fixed;top:70px;left:0;width:var(--sidebar-w);height:calc(100vh - 70px);background:var(--primary-dk);color:#CBD8E8;display:flex;flex-direction:column;z-index:100;overflow:hidden;}
+#sidebar-header{padding:20px 20px 14px;border-bottom:1px solid rgba(255,255,255,0.1);flex-shrink:0;}
+#sidebar-header .logo{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#9EC8E0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+#sidebar-header .sub{font-size:10.5px;color:rgba(203,216,232,0.6);letter-spacing:0.04em;}
+#sidebar-search{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;}
+#sidebar-search input{width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#CBD8E8;padding:6px 10px;font-size:12px;font-family:'Source Serif 4',serif;outline:none;transition:border-color 0.2s;}
+#sidebar-search input::placeholder{color:rgba(203,216,232,0.4);}
+#sidebar-search input:focus{border-color:#9EC8E0;}
+#sidebar-nav{flex:1;overflow-y:auto;padding:8px 0 20px;}
+#sidebar-nav::-webkit-scrollbar{width:4px;}
+#sidebar-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:2px;}
+.vol-label{font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#9EC8E0;padding:14px 18px 4px;}
+.nav-item{display:block;padding:6px 18px 6px 22px;font-size:12px;color:rgba(203,216,232,0.75);text-decoration:none;border-left:2px solid transparent;transition:all 0.15s;line-height:1.4;}
+.nav-item:hover{color:#fff;background:rgba(255,255,255,0.05);border-left-color:rgba(158,200,224,0.5);}
+.nav-item.active{color:#fff;background:rgba(255,255,255,0.08);border-left-color:#9EC8E0;font-weight:600;}
+.nav-item .num{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(203,216,232,0.4);margin-right:6px;}
+
+/* MAIN */
+#main{margin-left:var(--sidebar-w);min-height:100vh;padding-top:70px;}
+
+/* HERO */
+#hero{background:linear-gradient(135deg,var(--primary-dk) 0%,#0D2038 60%,#081828 100%);color:white;padding:64px 72px 60px;position:relative;overflow:hidden;}
+#hero::before{content:'';position:absolute;top:-60px;right:-60px;width:380px;height:380px;background:radial-gradient(circle,rgba(74,158,191,0.15) 0%,transparent 70%);pointer-events:none;}
+#hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#4A9EBF,#9EC8E0,transparent);}
+#hero .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#9EC8E0;text-transform:uppercase;margin-bottom:14px;}
+#hero h1{font-family:'Playfair Display',serif;font-size:46px;font-weight:700;line-height:1.15;margin-bottom:10px;color:#fff;}
+#hero .subtitle{font-size:18px;color:rgba(255,255,255,0.65);font-style:italic;margin-bottom:28px;}
+#hero .badges{display:flex;gap:10px;flex-wrap:wrap;}
+#hero .badge{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:4px 14px;font-size:12px;color:rgba(255,255,255,0.8);font-family:'JetBrains Mono',monospace;}
+
+/* CONTENT */
+.content-wrap{max-width:900px;margin:0 auto;padding:0 48px 80px;}
+
+/* VOLUME HEADER */
+.vol-header{margin-top:60px;margin-bottom:8px;padding:28px 36px;border-radius:10px;display:flex;align-items:center;gap:20px;}
+.vol-header.v1{background:linear-gradient(135deg,#2C4A6E08,#2C4A6E18);border-left:4px solid var(--v1);}
+.vol-header.v2{background:linear-gradient(135deg,#3A5F8208,#3A5F8218);border-left:4px solid var(--v2);}
+.vol-header.v3{background:linear-gradient(135deg,#4A749908,#4A749918);border-left:4px solid var(--v3);}
+.vol-badge{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;padding:4px 12px;border-radius:4px;white-space:nowrap;flex-shrink:0;}
+.v1 .vol-badge{background:var(--v1);color:white;}
+.v2 .vol-badge{background:var(--v2);color:white;}
+.v3 .vol-badge{background:var(--v3);color:white;}
+.vol-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
+.v1 .vol-title{color:var(--v1);}
+.v2 .vol-title{color:var(--v2);}
+.v3 .vol-title{color:var(--v3);}
+
+/* TOPIC */
+.topic{margin-top:48px;padding-top:48px;border-top:1px solid var(--border);}
+.topic:first-of-type{border-top:none;}
+.topic-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;}
+.topic-num{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;padding:3px 10px;border-radius:4px;margin-top:4px;flex-shrink:0;}
+.v1 .topic-num{background:var(--v1-lt);color:var(--v1);}
+.v2 .topic-num{background:var(--v2-lt);color:var(--v2);}
+.v3 .topic-num{background:var(--v3-lt);color:var(--v3);}
+.topic h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;line-height:1.2;}
+.v1 .topic h2{color:var(--v1);}
+.v2 .topic h2{color:var(--v2);}
+.v3 .topic h2{color:var(--v3);}
+.topic h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--muted);margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.topic h4{font-size:14px;font-weight:600;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin:20px 0 8px;font-family:'JetBrains Mono',monospace;}
+.topic p{margin-bottom:12px;color:var(--text);}
+.topic ul,.topic ol{margin:8px 0 14px 20px;color:var(--text);}
+.topic li{margin-bottom:6px;line-height:1.65;}
+.topic li::marker{color:var(--accent);}
+.topic strong{color:var(--text);font-weight:600;}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;margin:16px 0 20px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+table{width:100%;border-collapse:collapse;font-size:14px;background:white;}
+thead tr{background:var(--v1);}
+thead th{color:white;padding:10px 14px;text-align:left;font-family:'Source Serif 4',serif;font-weight:600;font-size:13px;}
+tbody tr:nth-child(even){background:var(--bg2);}
+tbody tr:hover{background:var(--v1-lt);transition:background 0.15s;}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
+.v2 thead tr{background:var(--v2);}
+.v3 thead tr{background:var(--v3);}
+
+/* CALLOUTS */
+.callout{margin:18px 0;padding:14px 18px;border-radius:0 8px 8px 0;border-left:4px solid;font-size:14.5px;line-height:1.65;}
+.callout .label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:4px;}
+.callout.pearl{background:var(--amber-lt);border-color:var(--amber);}
+.callout.pearl .label{color:var(--amber);}
+.callout.warn{background:var(--red-lt);border-color:var(--red);}
+.callout.warn .label{color:var(--red);}
+.callout.clin{background:var(--green-lt);border-color:var(--green);}
+.callout.clin .label{color:var(--green);}
+.callout.exam{background:var(--v1-lt);border-color:var(--v1);}
+.callout.exam .label{color:var(--v1);}
+
+/* KEY GRID */
+.key-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:14px 0 20px;}
+.key-card{background:white;border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13.5px;line-height:1.55;}
+.key-card .kc-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;font-weight:600;}
+.key-card.slate .kc-label{color:var(--v1);}
+.key-card.steel .kc-label{color:var(--v2);}
+.key-card.sky .kc-label{color:var(--v3);}
+.key-card .kc-val{font-weight:700;font-size:15px;}
+
+/* CHIPS */
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px;}
+.chip{background:white;border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:13px;color:var(--muted);}
+.chip strong{color:var(--text);}
+
+/* DIAGRAM */
+.diagram-wrap{background:var(--v1-lt);border:1px solid var(--border);border-radius:8px;padding:18px;margin:20px 0;}
+.diagram-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--v1);margin-bottom:12px;}
+svg text{font-family:'Source Serif 4',Georgia,serif;}
+
+/* PROGRESS */
+#progress-bar{position:fixed;top:70px;left:var(--sidebar-w);right:0;height:3px;background:linear-gradient(90deg,#4A9EBF,#9EC8E0);transform-origin:left;transform:scaleX(0);transition:transform 0.1s;z-index:50;}
+
+/* TOP BTN */
+#top-btn{position:fixed;bottom:28px;right:28px;background:var(--primary);color:white;border:none;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:all 0.2s;opacity:0;pointer-events:none;}
+#top-btn.show{opacity:1;pointer-events:auto;}
+#top-btn:hover{background:var(--accent);transform:translateY(-2px);}
+
+.highlight{background:#B8DEF0;border-radius:2px;padding:0 2px;}
+.topic{animation:fadeUp 0.4s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* SIH FOOTER */
+.sih-footer{background:#1A3050;padding:20px 48px;border-top:1px solid rgba(74,158,191,0.2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.72rem;color:rgba(203,216,232,0.5);}
+.sih-footer .sf-brand{font-family:'Playfair Display',serif;color:#9EC8E0;font-weight:700;}
+.sih-footer a{color:#9EC8E0;text-decoration:none;font-weight:600;}
+
+@media(max-width:900px){
+  :root{--sidebar-w:0px;}
+  #sidebar{transform:translateX(-300px);width:300px;top:70px;height:calc(100vh - 70px);}
+  #sidebar.open{transform:translateX(0);}
+  #main{margin-left:0;}
+  .content-wrap{padding:0 24px 60px;}
+  #hero{padding:48px 24px 40px;}
+  #hero h1{font-size:32px;}
+  #progress-bar{left:0;}
+  .sih-footer{padding:16px 24px;}
+}
+
+@media print{
+  .nav,.mob-nav-overlay,.mob-nav-sheet,#top-btn,#progress-bar,.sih-footer{display:none;}
+  #main{margin-left:0;padding-top:0;}
+  #sidebar{display:none;}
+  .topic{page-break-inside:avoid;}
+  .vol-header{page-break-before:always;}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="../assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">@sugicalInsightHub</div></div>
+    </div>
+  </div>
+  
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 19.07l1.41-1.41M17.66 6.34l1.41-1.41M12 7a5 5 0 100 10m0 0a5 5 0 100-10z"/></svg>
+      <svg class="moon-icon" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+    <div class="nav-links-pill">
+      <a href="../notes.html" class="active">Notes</a>
+      <a href="../podcast.html">Podcast</a>
+      <a href="../review.html">Review</a>
+      <a href="../mcq.html">MCQ Arena</a>
+      <a href="../about.html">About</a>
+    </div>
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-btn">Get Notes →</a>
+
+    <button class="mob-nav-toggle" id="hamburgerMenu" aria-label="Open menu">
+      ☰ Menu
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Navigation Sheet -->
+<div class="mob-nav-overlay" id="mobOverlay"></div>
+<div class="mob-nav-sheet" id="mobSheet">
+  <div class="mob-nav-handle" id="mobClose"></div>
+  <a href="../index.html">Home</a>
+  <a href="../notes.html" class="active">Notes</a>
+  <a href="../podcast.html">Podcast</a>
+  <a href="../review.html">Review</a>
+  <a href="../mcq.html">MCQ Arena</a>
+  <a href="../about.html">About</a>
+  <a href="https://t.me/sugicalInsightHub" target="_blank" class="mob-nav-cta" style="margin-top:20px;display:block;text-align:center;background:var(--brand-gold);color:#1a1208;padding:12px;border-radius:100px;">Join Telegram</a>
+</div>
+
+<script src="../js/nav-pill.js"></script>
+<script>
+  // Theme Toggle Logic
+  const themeToggle = document.getElementById('themeToggle');
+  const sunIcon = document.querySelector('.sun-icon');
+  const moonIcon = document.querySelector('.moon-icon');
+
+  function updateIcons(theme) {
+    if (theme === 'dark') {
+      if(sunIcon) sunIcon.style.display = 'none';
+      if(moonIcon) moonIcon.style.display = 'block';
+    } else {
+      if(sunIcon) sunIcon.style.display = 'block';
+      if(moonIcon) moonIcon.style.display = 'none';
+    }
+  }
+
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  updateIcons(currentTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const root = document.documentElement;
+      let newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', newTheme);
+      localStorage.setItem('sih-theme', newTheme);
+      updateIcons(newTheme);
+    });
+  }
+
+  // Mobile Nav Logic
+  const mobToggle = document.getElementById('hamburgerMenu');
+  const mobOverlay = document.getElementById('mobOverlay');
+  const mobSheet = document.getElementById('mobSheet');
+  const mobClose = document.getElementById('mobClose');
+
+  if(mobToggle) {
+    mobToggle.addEventListener('click', () => {
+      mobOverlay.style.display = 'block';
+      setTimeout(() => mobSheet.classList.add('open'), 10);
+    });
+  }
+  
+  function closeNav() {
+    mobSheet.classList.remove('open');
+    setTimeout(() => mobOverlay.style.display = 'none', 300);
+  }
+
+  if(mobOverlay) mobOverlay.addEventListener('click', closeNav);
+  if(mobClose) mobClose.addEventListener('click', closeNav);
+</script>
+
+<div id="progress-bar"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <div class="logo">Surgical Insight Hub</div>
+    <div class="sub">Orthopaedic Trauma · Master Monograph</div>
+  </div>
+  <div id="sidebar-search">
+    <input type="text" id="search-input" placeholder="Search topics…" oninput="filterNav(this.value)">
+  </div>
+  <div id="sidebar-nav">
+    <div class="vol-label">Vol 1 — Emergencies &amp; Trauma</div>
+    <a class="nav-item" href="#t1"><span class="num">1.1</span>Pelvic Ring Fractures</a>
+    <a class="nav-item" href="#t2"><span class="num">1.2</span>Compartment Syndrome</a>
+    <a class="nav-item" href="#t3"><span class="num">1.3</span>Vascular-Associated Injuries</a>
+    <a class="nav-item" href="#t4"><span class="num">1.4</span>Open Fractures</a>
+    <a class="nav-item" href="#t5"><span class="num">1.5</span>Damage Control Orthopaedics</a>
+    <a class="nav-item" href="#t6"><span class="num">1.6</span>The Mangled Extremity</a>
+    <a class="nav-item" href="#t7"><span class="num">1.7</span>Septic Arthritis</a>
+    <a class="nav-item" href="#t8"><span class="num">1.8</span>Spinal Emergencies</a>
+    <a class="nav-item" href="#t9"><span class="num">1.9</span>Fat Embolism Syndrome</a>
+    <div class="vol-label">Vol 2 — Fractures &amp; Regional</div>
+    <a class="nav-item" href="#t10"><span class="num">2.1</span>Fracture Principles</a>
+    <a class="nav-item" href="#t11"><span class="num">2.2</span>Shoulder &amp; Clavicle</a>
+    <a class="nav-item" href="#t12"><span class="num">2.3</span>Humerus, Elbow &amp; Forearm</a>
+    <a class="nav-item" href="#t13"><span class="num">2.4</span>Wrist &amp; Hand</a>
+    <a class="nav-item" href="#t14"><span class="num">2.5</span>Hip &amp; Femur</a>
+    <a class="nav-item" href="#t15"><span class="num">2.6</span>Knee &amp; Tibia</a>
+    <a class="nav-item" href="#t16"><span class="num">2.7</span>Ankle &amp; Foot</a>
+    <a class="nav-item" href="#t17"><span class="num">2.8</span>Spine Degenerative</a>
+    <a class="nav-item" href="#t18"><span class="num">2.9</span>Paediatric Orthopaedics</a>
+    <a class="nav-item" href="#t19"><span class="num">2.10</span>Soft Tissue Injuries</a>
+    <div class="vol-label">Vol 3 — Perioperative &amp; Oncology</div>
+    <a class="nav-item" href="#t20"><span class="num">3.1</span>DVT &amp; VTE Prophylaxis</a>
+    <a class="nav-item" href="#t21"><span class="num">3.2</span>Crush Syndrome</a>
+    <a class="nav-item" href="#t22"><span class="num">3.3</span>Bone Cement Syndrome</a>
+    <a class="nav-item" href="#t23"><span class="num">3.4</span>Nonunion, Malunion &amp; AVN</a>
+    <a class="nav-item" href="#t24"><span class="num">3.5</span>Osteomyelitis</a>
+    <a class="nav-item" href="#t25"><span class="num">3.6</span>Periprosthetic Joint Infection</a>
+    <a class="nav-item" href="#t26"><span class="num">3.7</span>NSTI &amp; Fournier's</a>
+    <a class="nav-item" href="#t27"><span class="num">3.8</span>Bone &amp; Soft Tissue Tumours</a>
+    <a class="nav-item" href="#t28"><span class="num">3.9</span>Metastatic Bone Disease</a>
+    <a class="nav-item" href="#t29"><span class="num">3.10</span>Deformity Correction</a>
+  </div>
+</nav>
+<main id="main">
+<section id="hero">
+  <div class="eyebrow">Surgical Insight Hub · Monograph Series · ABSITE · MRCS/FRCS</div>
+  <h1>Orthopaedic Trauma<br>Master Monograph</h1>
+  <p class="subtitle">All three volumes — 29 topics — board-calibrated depth</p>
+  <div class="badges">
+    <span class="badge">Vol 1 · Emergencies &amp; Trauma</span>
+    <span class="badge">Vol 2 · Fractures &amp; Regional</span>
+    <span class="badge">Vol 3 · Perioperative &amp; Oncology</span>
+    <span class="badge">29 Topics</span>
+    <span class="badge">Integrated Diagrams</span>
+  </div>
+</section>
+
+<div class="content-wrap">
+
+<!-- VOL 1 -->
+<div class="vol-header v1">
+  <span class="vol-badge">VOLUME 1</span>
+  <span class="vol-title">Orthopaedic Emergencies &amp; Trauma</span>
+</div>
+
+<section class="topic v1" id="t1">
+  <div class="topic-header"><span class="topic-num">1.1</span><h2>Pelvic Ring Fractures &amp; Haemorrhage Control</h2></div>
+  <h3>Definition &amp; Pathophysiology</h3>
+  <p>Disruption of the bony pelvic ring involving sacrum, iliac wings, pubic rami, or sacroiliac joints. The pelvis is a closed ring — disruption at one point implies a second injury elsewhere. Mortality of open-book APC-III fractures: <strong>15–25%</strong>. 85% of haemorrhage originates from the presacral venous plexus (Zone 3). APC injuries open the pelvis, increasing its volume and abolishing tamponade.</p>
+  <h3>Young-Burgess Classification</h3>
+  <div class="table-wrap"><table><thead><tr><th>Type</th><th>Mechanism</th><th>Injury Pattern</th><th>Stability</th></tr></thead><tbody>
+    <tr><td><strong>LC-I</strong></td><td>Lateral force</td><td>Pubic rami crush + sacral buckle fracture</td><td>Stable</td></tr>
+    <tr><td><strong>LC-II</strong></td><td>Lateral force</td><td>+ Posterior iliac crescent fracture</td><td>Rotationally unstable</td></tr>
+    <tr><td><strong>LC-III</strong></td><td>Lateral force</td><td>Windswept pelvis; contralateral APC injury</td><td>Highly unstable</td></tr>
+    <tr><td><strong>APC-I</strong></td><td>AP force</td><td>Symphysis diastasis &lt;2.5 cm</td><td>Stable</td></tr>
+    <tr><td><strong>APC-II</strong></td><td>AP force</td><td>Open book 2.5–5 cm; SI ligaments stretched</td><td>Rotationally unstable</td></tr>
+    <tr><td><strong>APC-III</strong></td><td>AP force</td><td>Complete SI joint disruption</td><td>Fully unstable</td></tr>
+    <tr><td><strong>VS</strong></td><td>Axial load</td><td>Vertical displacement; all ligaments torn</td><td>Fully unstable</td></tr>
+  </tbody></table></div>
+  <h3>Denis Sacral Zones</h3>
+  <div class="key-grid">
+    <div class="key-card slate"><div class="kc-label">Zone I</div>Lateral to foramina — lowest neurological risk</div>
+    <div class="key-card slate"><div class="kc-label">Zone II</div>Through foramina — moderate L5/S1 risk</div>
+    <div class="key-card slate"><div class="kc-label">Zone III</div>Central/transforaminal — highest risk; bladder/bowel dysfunction</div>
+  </div>
+  <h3>Haemorrhage Control Algorithm</h3>
+  <ol>
+    <li>Activate MTP — trigger at SBP &lt;90 refractory to 1L crystalloid</li>
+    <li><strong>Pelvic binder at greater trochanters</strong> — NOT iliac crests. Reduces pelvic volume ≤40%. NOT for LC fractures.</li>
+    <li>Resuscitation: 1:1:1 pRBC:FFP:Plt. Permissive hypotension MAP 50–65 mmHg. TXA 1g IV within 3h (CRASH-2).</li>
+    <li>Stable → CT angiography → angioembolisation if blush</li>
+    <li>Unstable → pelvic packing vs REBOA Zone 3</li>
+  </ol>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Pelvic binder at GREATER TROCHANTERS not iliac crests. LC fractures must NOT receive a binder — worsens lateral compression. Consistent ABSITE/MRCS distractor.</div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>85% of pelvic haemorrhage is venous (presacral plexus). Arterial bleeders (15%) are higher volume — arterial blush on CTA requires angioembolisation regardless of packing status.</div>
+  <div class="diagram-wrap">
+    <div class="diagram-title">Pelvic haemorrhage control algorithm</div>
+    <svg width="100%" viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2C4A6E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect x="220" y="10" width="240" height="44" rx="8" fill="#E6F2F8" stroke="#2C4A6E" stroke-width="1"/><text x="340" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1A3050">High-energy pelvic injury</text><text x="340" y="46" text-anchor="middle" font-size="11" fill="#2C4A6E">Suspected pelvic ring fracture</text>
+      <line x1="340" y1="54" x2="340" y2="80" stroke="#2C4A6E" stroke-width="1" marker-end="url(#arw)"/>
+      <rect x="200" y="80" width="280" height="54" rx="8" fill="#2C4A6E" stroke="#1A3050" stroke-width="1"/><text x="340" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Immediate actions</text><text x="340" y="116" text-anchor="middle" font-size="11" fill="#9EC8E0">MTP · Pelvic binder (greater trochanters)</text><text x="340" y="130" text-anchor="middle" font-size="11" fill="#9EC8E0">1:1:1 · TXA 1g IV &lt;3h · Permissive hypotension</text>
+      <line x1="300" y1="134" x2="140" y2="170" stroke="#2C4A6E" stroke-width="1" marker-end="url(#arw)"/><line x1="380" y1="134" x2="540" y2="170" stroke="#2C4A6E" stroke-width="1" marker-end="url(#arw)"/>
+      <text x="170" y="162" text-anchor="middle" font-size="10" fill="#2C4A6E">Haemodynamically stable</text><text x="510" y="162" text-anchor="middle" font-size="10" fill="#2C4A6E">Haemodynamically unstable</text>
+      <rect x="30" y="170" width="200" height="44" rx="6" fill="#E0F4FA" stroke="#4A9EBF" stroke-width="1"/><text x="130" y="189" text-anchor="middle" font-size="12" font-weight="bold" fill="#1A6080">CT angiography</text><text x="130" y="205" text-anchor="middle" font-size="11" fill="#2C7A9A">Identify arterial blush</text>
+      <line x1="130" y1="214" x2="130" y2="244" stroke="#2C4A6E" stroke-width="1" marker-end="url(#arw)"/>
+      <rect x="30" y="244" width="200" height="44" rx="6" fill="#E6F2F8" stroke="#2C4A6E" stroke-width="1"/><text x="130" y="263" text-anchor="middle" font-size="12" font-weight="bold" fill="#1A3050">Angioembolisation</text><text x="130" y="279" text-anchor="middle" font-size="11" fill="#2C4A6E">Arterial haemorrhage control</text>
+      <rect x="450" y="170" width="200" height="44" rx="6" fill="#FAF0F0" stroke="#8B2020" stroke-width="1"/><text x="550" y="189" text-anchor="middle" font-size="12" font-weight="bold" fill="#8B2020">Direct to theatre</text><text x="550" y="205" text-anchor="middle" font-size="11" fill="#8B2020">No time for CT</text>
+      <line x1="550" y1="214" x2="550" y2="244" stroke="#2C4A6E" stroke-width="1" marker-end="url(#arw)"/>
+      <rect x="450" y="244" width="200" height="44" rx="6" fill="#FAF0F0" stroke="#8B2020" stroke-width="1"/><text x="550" y="263" text-anchor="middle" font-size="12" font-weight="bold" fill="#8B2020">Pelvic packing ± REBOA</text><text x="550" y="279" text-anchor="middle" font-size="11" fill="#8B2020">Zone 3 aortic occlusion</text>
+      <line x1="130" y1="288" x2="130" y2="340" stroke="#2C4A6E" stroke-width="1"/><line x1="130" y1="340" x2="340" y2="340" stroke="#2C4A6E" stroke-width="1" marker-end="url(#arw)"/>
+      <line x1="550" y1="288" x2="550" y2="340" stroke="#2C4A6E" stroke-width="1"/><line x1="550" y1="340" x2="360" y2="340" stroke="#2C4A6E" stroke-width="1" marker-end="url(#arw)"/>
+      <rect x="220" y="350" width="240" height="44" rx="8" fill="#2C4A6E" stroke="#1A3050" stroke-width="1"/><text x="340" y="370" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Definitive stabilisation</text><text x="340" y="386" text-anchor="middle" font-size="11" fill="#9EC8E0">Ex-Fix / SI screws / ORIF when physiologically stable</text>
+    </svg>
+  </div>
+</section>
+
+<section class="topic v1" id="t2">
+  <div class="topic-header"><span class="topic-num">1.2</span><h2>Compartment Syndrome</h2></div>
+  <h3>Critical Thresholds</h3>
+  <div class="key-grid">
+    <div class="key-card slate"><div class="kc-label">Absolute Pressure</div><div class="kc-val">≥30 mmHg</div>Fasciotomy indicated</div>
+    <div class="key-card slate"><div class="kc-label">Delta Pressure (ΔP)</div><div class="kc-val">≤30 mmHg</div>Diastolic BP minus compartment pressure — more physiologically sound</div>
+  </div>
+  <h3>The 6 Ps — Chronological Order</h3>
+  <div class="table-wrap"><table><thead><tr><th>Sign</th><th>Timing</th><th>Significance</th></tr></thead><tbody>
+    <tr><td><strong>Pain out of proportion</strong></td><td>Earliest</td><td>Most reliable early sign — disproportionate to injury</td></tr>
+    <tr><td><strong>Pain on passive stretch</strong></td><td>Early</td><td>Passive stretch of compartment muscles → exquisite pain. Highly sensitive.</td></tr>
+    <tr><td><strong>Pressure (tense)</strong></td><td>Early–mid</td><td>Woody, tense, non-pitting compartment on palpation</td></tr>
+    <tr><td><strong>Paraesthesia</strong></td><td>Mid</td><td>Tingling/numbness in nerve distribution — early nerve ischaemia</td></tr>
+    <tr><td><strong>Paresis</strong></td><td>Mid–late</td><td>Weakness of muscles within compartment</td></tr>
+    <tr><td><strong>Pulselessness</strong></td><td>LATE/TERMINAL</td><td>Do NOT wait for this before fasciotomy</td></tr>
+  </tbody></table></div>
+  <h3>Lower Leg — 2-Incision 4-Compartment Fasciotomy</h3>
+  <ul>
+    <li><strong>Lateral incision</strong> (over fibular shaft, 10–15 cm): decompresses anterior (tibialis anterior, EHL, EDL, deep peroneal nerve, anterior tibial vessels) and lateral compartments (peroneus longus/brevis, superficial peroneal nerve)</li>
+    <li><strong>Medial incision</strong> (2 cm posterior to medial tibial border): decompresses superficial posterior (gastrocnemius, soleus) and deep posterior compartments (tibialis posterior, FDL, FHL, tibial nerve, posterior tibial vessels)</li>
+  </ul>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Deep posterior compartment is the most commonly missed. Requires medial incision extended with soleus detached from tibia. Missing it = ongoing ischaemia despite fasciotomy.</div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Do NOT elevate the limb above heart level post-fasciotomy — reduces arterial perfusion pressure and worsens ischaemia. Keep limb flat or dependent.</div>
+</section>
+
+<section class="topic v1" id="t3">
+  <div class="topic-header"><span class="topic-num">1.3</span><h2>Vascular-Associated Orthopaedic Injuries</h2></div>
+  <h3>Hard vs Soft Signs</h3>
+  <div class="table-wrap"><table><thead><tr><th>Category</th><th>Hard Signs → OR immediately</th><th>Soft Signs → CTA first</th></tr></thead><tbody>
+    <tr><td>Haemorrhage</td><td>Pulsatile active bleeding; expanding haematoma</td><td>History of bleeding, now controlled</td></tr>
+    <tr><td>Ischaemia</td><td>Absent pulse; pallor; paralysis; paraesthesia; poikilothermia</td><td>ABI &lt;0.9; diminished pulse; bruit</td></tr>
+    <tr><td>Action</td><td>Immediate operative exploration — NO CTA</td><td>CT angiography to define anatomy</td></tr>
+  </tbody></table></div>
+  <h3>Knee Dislocation — Popliteal Artery</h3>
+  <ul>
+    <li>Popliteal artery tethered at adductor hiatus + anterior tibial artery origin → vulnerable to stretch</li>
+    <li>Vascular injury in <strong>20–40%</strong> of knee dislocations</li>
+    <li>ABI &lt;0.9 or hard signs → CTA or direct operative exploration</li>
+    <li>Revascularisation within <strong>6 hours</strong>: amputation rate &lt;10%. Beyond 8h: &gt;80%</li>
+  </ul>
+  <h3>Supracondylar Humerus — Brachial Artery</h3>
+  <div class="table-wrap"><table><thead><tr><th>Vascular Status</th><th>Management</th></tr></thead><tbody>
+    <tr><td><strong>Pulseless but PINK</strong> (warm, perfused hand)</td><td>Urgent ORIF first — reduction commonly restores flow. If pulse returns: done. If not: explore.</td></tr>
+    <tr><td><strong>Pulseless and WHITE</strong> (cold, ischaemic)</td><td>Emergent ORIF + immediate vascular exploration and repair</td></tr>
+  </tbody></table></div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Pulseless pink hand: ORIF first. Reduction releases the kinked brachial artery in most cases. Do not take directly to vascular exploration without first reducing the fracture.</div>
+</section>
+
+<section class="topic v1" id="t4">
+  <div class="topic-header"><span class="topic-num">1.4</span><h2>Open Fractures</h2></div>
+  <h3>Gustilo-Anderson Classification</h3>
+  <div class="table-wrap"><table><thead><tr><th>Grade</th><th>Wound</th><th>Contamination</th><th>Soft Tissue</th><th>Antibiotic</th><th>Infection Risk</th></tr></thead><tbody>
+    <tr><td><strong>I</strong></td><td>&lt;1 cm</td><td>Minimal/clean</td><td>Minimal crush</td><td>Cefazolin 2g q8h</td><td>0–2%</td></tr>
+    <tr><td><strong>II</strong></td><td>1–10 cm</td><td>Moderate</td><td>Moderate crush</td><td>Cefazolin 2g q8h</td><td>2–7%</td></tr>
+    <tr><td><strong>IIIA</strong></td><td>&gt;10 cm</td><td>Heavy</td><td>Adequate coverage</td><td>Cefazolin + Gentamicin</td><td>7–12%</td></tr>
+    <tr><td><strong>IIIB</strong></td><td>&gt;10 cm</td><td>Heavy</td><td>Periosteal stripping; needs flap</td><td>Cefazolin + Gentamicin</td><td>10–50%</td></tr>
+    <tr><td><strong>IIIC</strong></td><td>Any</td><td>Any</td><td>Arterial repair required</td><td>+ Penicillin G (farm/soil)</td><td>25–50%</td></tr>
+  </tbody></table></div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Gustilo grade is FINALISED intraoperatively after debridement — not in the ED. Inter-observer reliability for IIIA vs IIIB is only 60%. Always quote grade after full debridement under anaesthesia.</div>
+  <h3>The 4 Cs of Muscle Viability</h3>
+  <div class="chip-row">
+    <div class="chip"><strong>C</strong>olour</div><div class="chip"><strong>C</strong>onsistency</div><div class="chip"><strong>C</strong>ontractility</div><div class="chip"><strong>C</strong>apacity to bleed</div>
+  </div>
+  <ul>
+    <li>Antibiotics within <strong>1 hour</strong> of injury</li>
+    <li>Irrigation: 3L (Grade I), 6L (Grade II), 9L (Grade III)</li>
+    <li>Wound left <strong>OPEN</strong> — no primary closure of contaminated wounds</li>
+    <li>Return at 48–72h; definitive coverage by 72h (BOAST guidelines)</li>
+  </ul>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Tetanus prophylaxis: all open fractures. Booster if &gt;5 years. Immunoglobulin if unimmunised. Never omit. Farm/soil contamination: add Penicillin G for Clostridium coverage.</div>
+</section>
+
+<section class="topic v1" id="t5">
+  <div class="topic-header"><span class="topic-num">1.5</span><h2>Damage Control Orthopaedics &amp; Polytrauma</h2></div>
+  <h3>The Lethal Triad</h3>
+  <div class="key-grid">
+    <div class="key-card slate"><div class="kc-label">Hypothermia</div><div class="kc-val">&lt;35°C</div>Impairs clotting factor function</div>
+    <div class="key-card slate"><div class="kc-label">Acidosis</div><div class="kc-val">pH &lt;7.2 / BE &lt;−6</div>Coagulopathy; myocardial depression</div>
+    <div class="key-card slate"><div class="kc-label">Coagulopathy</div><div class="kc-val">INR &gt;1.5</div>Uncontrollable surgical bleeding</div>
+  </div>
+  <h3>DCO vs Early Total Care</h3>
+  <div class="table-wrap"><table><thead><tr><th>Parameter</th><th>DCO</th><th>ETC</th></tr></thead><tbody>
+    <tr><td>Patient physiology</td><td>Unstable; lethal triad present</td><td>Stable; lactate &lt;2; temp &gt;35°C; INR &lt;1.5</td></tr>
+    <tr><td>Procedure</td><td>External fixation / skeletal traction</td><td>Definitive ORIF or IM nail</td></tr>
+    <tr><td>Timing</td><td>Immediate (within hours)</td><td>First 24–48h</td></tr>
+    <tr><td>Conversion</td><td>5–7 days post-injury</td><td>N/A</td></tr>
+  </tbody></table></div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>External fixator pins placed in zone of planned ORIF incision substantially increase post-operative infection risk. Communicate with orthopaedic team before placing emergency Ex-Fix.</div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Convert Ex-Fix to IM nail at 5–7 days. Beyond 14 days, pin tract colonisation significantly increases deep infection risk with subsequent IM nail.</div>
+</section>
+
+<section class="topic v1" id="t6">
+  <div class="topic-header"><span class="topic-num">1.6</span><h2>The Mangled Extremity — MESS Score</h2></div>
+  <div class="table-wrap"><table><thead><tr><th>Variable</th><th>Score</th></tr></thead><tbody>
+    <tr><td>Skeletal/soft tissue — low energy</td><td>1</td></tr>
+    <tr><td>Skeletal/soft tissue — medium energy</td><td>2</td></tr>
+    <tr><td>Skeletal/soft tissue — high energy</td><td>3</td></tr>
+    <tr><td>Skeletal/soft tissue — very high energy</td><td>4</td></tr>
+    <tr><td>Limb ischaemia — pulse reduced but perfused</td><td>1 (×2 if &gt;6h)</td></tr>
+    <tr><td>Limb ischaemia — pulseless, paraesthesia</td><td>2 (×2 if &gt;6h)</td></tr>
+    <tr><td>Limb ischaemia — cool, paralysed, insensate</td><td>3 (×2 if &gt;6h)</td></tr>
+    <tr><td>Shock — SBP consistently &gt;90</td><td>0</td></tr>
+    <tr><td>Shock — transient hypotension</td><td>1</td></tr>
+    <tr><td>Shock — persistent hypotension</td><td>2</td></tr>
+    <tr><td>Age &lt;30 / 30–50 / &gt;50</td><td>0 / 1 / 2</td></tr>
+  </tbody></table></div>
+  <div class="callout exam"><span class="label">Key Threshold</span><strong>MESS ≥7</strong>: predicted amputation (100% sensitivity — Johansen 1990). <strong>LEAP Study (NEJM 2002)</strong>: salvage vs amputation — equivalent functional outcomes at 7 years. Psychosocial factors dominate.</div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>MESS score guides but does NOT mandate amputation. Patient values and goals must inform the shared decision.</div>
+</section>
+
+<section class="topic v1" id="t7">
+  <div class="topic-header"><span class="topic-num">1.7</span><h2>Septic Arthritis</h2></div>
+  <h3>Synovial Fluid Analysis</h3>
+  <div class="table-wrap"><table><thead><tr><th>Parameter</th><th>Normal</th><th>Septic</th><th>Gout/Pseudogout</th></tr></thead><tbody>
+    <tr><td>WBC/mm³</td><td>&lt;200</td><td><strong>≥50,000</strong></td><td>2,000–50,000</td></tr>
+    <tr><td>PMN %</td><td>&lt;25%</td><td><strong>&gt;75%</strong></td><td>50–80%</td></tr>
+    <tr><td>Glucose</td><td>= serum</td><td>Low (&lt;50 mg/dL)</td><td>= serum</td></tr>
+    <tr><td>Crystals</td><td>None</td><td>None</td><td>+ (MSU/CPPD)</td></tr>
+    <tr><td>Culture</td><td>Negative</td><td>Positive 70–80%</td><td>Negative</td></tr>
+  </tbody></table></div>
+  <h3>Kocher Criteria (Paediatric Hip)</h3>
+  <div class="chip-row">
+    <div class="chip"><strong>1.</strong> Non-weight bearing</div><div class="chip"><strong>2.</strong> ESR &gt;40 mm/h</div><div class="chip"><strong>3.</strong> WBC &gt;12,000</div><div class="chip"><strong>4.</strong> Fever &gt;38.5°C</div><div class="chip"><strong>5.</strong> CRP &gt;2 mg/dL</div>
+  </div>
+  <p>0 criteria = &lt;0.2% | 3 criteria = 73% | 4 criteria = 93% | 5 criteria = <strong>99.6%</strong></p>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Crystals do NOT exclude septic arthritis — 5% of cases have both. If WBC &gt;50,000 with crystals present, treat for septic arthritis until cultures return.</div>
+</section>
+
+<section class="topic v1" id="t8">
+  <div class="topic-header"><span class="topic-num">1.8</span><h2>Spinal Emergencies</h2></div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>New urinary retention + saddle anaesthesia = MRI lumbar spine IMMEDIATELY. Do not wait for morning.</div>
+  <h3>Cauda Equina Syndrome</h3>
+  <p><strong>Classic triad:</strong> Saddle anaesthesia + Bladder dysfunction (retention most common) + Bowel dysfunction</p>
+  <div class="table-wrap"><table><thead><tr><th>Type</th><th>Features</th><th>Urgency</th></tr></thead><tbody>
+    <tr><td>CESI (Incomplete)</td><td>Urinary hesitancy but NOT retention; some perineal sensation preserved</td><td>Emergency — within 24h</td></tr>
+    <tr><td>CESC (Complete)</td><td>Urinary retention; complete saddle anaesthesia; paralysed bladder</td><td>Emergency — within 24h; worse prognosis</td></tr>
+  </tbody></table></div>
+  <h3>NEXUS C-Spine Clearance (All 5 required)</h3>
+  <div class="chip-row">
+    <div class="chip">No midline tenderness</div><div class="chip">No focal deficit</div><div class="chip">Normal alertness (GCS 15)</div><div class="chip">No intoxication</div><div class="chip">No distracting injury</div>
+  </div>
+  <h3>ASIA Classification</h3>
+  <div class="table-wrap"><table><thead><tr><th>Grade</th><th>Definition</th><th>Prognosis</th></tr></thead><tbody>
+    <tr><td><strong>A</strong></td><td>Complete — no motor or sensory below injury</td><td>Poor for motor recovery</td></tr>
+    <tr><td><strong>B</strong></td><td>Sensory only below injury</td><td>Some recovery possible</td></tr>
+    <tr><td><strong>C</strong></td><td>Motor preserved; &gt;50% muscles grade &lt;3</td><td>Variable</td></tr>
+    <tr><td><strong>D</strong></td><td>Motor preserved; ≥50% muscles grade ≥3</td><td>Good recovery likely</td></tr>
+    <tr><td><strong>E</strong></td><td>Normal motor and sensory</td><td>Full recovery</td></tr>
+  </tbody></table></div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Neurogenic shock = hypotension + BRADYCARDIA + warm peripheries. Hypovolaemic shock = hypotension + TACHYCARDIA + cold peripheries. Methylprednisolone for SCI is NO LONGER recommended (ATLS 10th Ed).</div>
+</section>
+
+<section class="topic v1" id="t9">
+  <div class="topic-header"><span class="topic-num">1.9</span><h2>Fat Embolism Syndrome (FES)</h2></div>
+  <h3>Gurd's Criteria — 1 Major + 4 Minor Required</h3>
+  <div class="table-wrap"><table><thead><tr><th>Category</th><th>Criteria</th></tr></thead><tbody>
+    <tr><td><strong>Major (≥1 required)</strong></td><td>Petechial rash (axillae, upper chest, conjunctivae — pathognomonic); PaO₂ &lt;60 on FiO₂ 0.4; Cerebral involvement</td></tr>
+    <tr><td><strong>Minor (≥4 required)</strong></td><td>Tachycardia &gt;110; Pyrexia &gt;38.5°C; Thrombocytopenia (drop &gt;50%); High ESR; Fat globules in urine; Hb drop &gt;20g/L</td></tr>
+  </tbody></table></div>
+  <ul>
+    <li>Timeline: <strong>24–72 hours</strong> post long-bone fracture (femur &gt; tibia &gt; pelvis)</li>
+    <li>Petechiae present in only 50% — do not wait for rash to diagnose</li>
+    <li>Supportive care: lung-protective ventilation (6 mL/kg IBW, PEEP ≥5)</li>
+    <li><strong>Prevention:</strong> early fracture stabilisation reduces FES incidence by 50–75%</li>
+  </ul>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Petechiae: upper chest, axillae, conjunctivae. CXR: bilateral snowstorm infiltrates at 24–48h. Best prevention = early fracture stabilisation — this is the exam answer.</div>
+</section>
+
+<!-- VOL 2 -->
+<div class="vol-header v2">
+  <span class="vol-badge">VOLUME 2</span>
+  <span class="vol-title">Fractures &amp; Regional Orthopaedics</span>
+</div>
+
+<section class="topic v2" id="t10">
+  <div class="topic-header"><span class="topic-num">2.1</span><h2>Fracture Principles &amp; Healing</h2></div>
+  <h3>Fracture Pattern Classification</h3>
+  <div class="table-wrap"><table><thead><tr><th>Pattern</th><th>Mechanism</th><th>Key Implication</th></tr></thead><tbody>
+    <tr><td>Transverse</td><td>Bending / direct blow</td><td>Stable; resists shortening</td></tr>
+    <tr><td>Oblique</td><td>Bending + axial load</td><td>Shortens; needs lag screw</td></tr>
+    <tr><td>Spiral</td><td>Torsion</td><td>Low energy; rule out pathological fracture</td></tr>
+    <tr><td>Comminuted (&gt;3 fragments)</td><td>High energy</td><td>Poor bone stock; bridging construct</td></tr>
+    <tr><td>Segmental</td><td>High energy</td><td>Devascularised middle segment; high non-union risk</td></tr>
+    <tr><td>Avulsion</td><td>Muscle/ligament pull</td><td>Check musculotendinous unit integrity</td></tr>
+  </tbody></table></div>
+  <h3>Factors Impairing Healing</h3>
+  <ul>
+    <li><strong>Smoking:</strong> non-union risk ×2–3. Counsel cessation pre-operatively.</li>
+    <li><strong>NSAIDs:</strong> avoid first 4–6 weeks — COX-2 inhibition impairs MSC recruitment</li>
+    <li><strong>Diabetes:</strong> HbA1c &gt;7% significantly impairs healing. Optimise pre-operatively.</li>
+    <li><strong>Steroids:</strong> suppress osteoblast function; increase RANKL</li>
+    <li><strong>Malnutrition:</strong> albumin &lt;35 g/L predicts complications</li>
+  </ul>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Operative fixation required when: intra-articular step-off &gt;2 mm; unstable fracture; open fracture; vascular/nerve injury; polytrauma requiring early mobilisation.</div>
+</section>
+
+<section class="topic v2" id="t11">
+  <div class="topic-header"><span class="topic-num">2.2</span><h2>Shoulder &amp; Clavicle</h2></div>
+  <h3>Clavicle — Allman Classification</h3>
+  <div class="key-grid">
+    <div class="key-card steel"><div class="kc-label">Group I (80%)</div>Middle third — most common; conservative usually sufficient</div>
+    <div class="key-card steel"><div class="kc-label">Group II (15%)</div>Distal third — Neer II has 30% non-union; usually operative</div>
+    <div class="key-card steel"><div class="kc-label">Group III (5%)</div>Medial third — rare; check subclavian vessels</div>
+  </div>
+  <h3>Shoulder Dislocation</h3>
+  <div class="table-wrap"><table><thead><tr><th>Type</th><th>Mechanism</th><th>Key Feature</th><th>Management</th></tr></thead><tbody>
+    <tr><td><strong>Anterior (95%)</strong></td><td>FOOSH in abduction + ER</td><td>Squared shoulder; axillary nerve — test regimental badge area</td><td>Cunningham/Milch/Stimson reduction. Post-reduction X-ray mandatory.</td></tr>
+    <tr><td><strong>Posterior (5%)</strong></td><td>Axial load; seizure; electrocution</td><td>'Light bulb sign' on AP; fixed IR; most missed major dislocation</td><td>Axillary view required. Reduction under GA if needed.</td></tr>
+  </tbody></table></div>
+  <h3>Proximal Humerus — Neer Classification</h3>
+  <div class="table-wrap"><table><thead><tr><th>Type</th><th>Parts Displaced</th><th>Management</th></tr></thead><tbody>
+    <tr><td>1-part</td><td>None</td><td>Sling × 3–6 weeks; early pendulum exercises</td></tr>
+    <tr><td>2-part GT</td><td>GT &gt;5 mm</td><td>ORIF — supraspinatus/infraspinatus attachment</td></tr>
+    <tr><td>3-part</td><td>2 parts displaced</td><td>ORIF (PHILOS plate) or reverse TSA in elderly</td></tr>
+    <tr><td>4-part</td><td>All 4 parts</td><td>AVN risk 76%; <strong>reverse TSA</strong> in elderly; ORIF only in young</td></tr>
+  </tbody></table></div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Posterior shoulder dislocation — most commonly missed major dislocation. Always obtain axillary view. Post-seizure or post-electrocution patient with restricted ER = posterior dislocation until proven otherwise.</div>
+</section>
+
+<section class="topic v2" id="t12">
+  <div class="topic-header"><span class="topic-num">2.3</span><h2>Humerus, Elbow &amp; Forearm</h2></div>
+  <h3>Radial Nerve — Humeral Shaft</h3>
+  <ul>
+    <li>Radial nerve in spiral groove — mid and distal third fractures at risk</li>
+    <li>Wrist drop + loss of finger/thumb extension + sensory loss dorsum 1st web space</li>
+    <li>Primary palsy: 90% recover spontaneously. Observe × 3–4 months; EMG at 6–8 weeks.</li>
+    <li>Secondary palsy (post-manipulation): explore immediately</li>
+    <li><strong>Holstein-Lewis fracture:</strong> distal third spiral — highest radial nerve entrapment risk</li>
+  </ul>
+  <h3>Paediatric Elbow — CRITOE Ossification</h3>
+  <div class="chip-row">
+    <div class="chip"><strong>C</strong>apitellum — 1y</div><div class="chip"><strong>R</strong>adial head — 3y</div><div class="chip"><strong>I</strong>nternal epicondyle — 5y</div><div class="chip"><strong>T</strong>rochlea — 7y</div><div class="chip"><strong>O</strong>lecranon — 9y</div><div class="chip"><strong>E</strong>xternal epicondyle — 11y</div>
+  </div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Trochlea visible without medial epicondyle = medial epicondyle incarcerated in joint. Surgical emergency.</div>
+  <h3>Forearm Ring Rule</h3>
+  <div class="table-wrap"><table><thead><tr><th>Fracture</th><th>Associated Injury</th><th>Treatment</th></tr></thead><tbody>
+    <tr><td><strong>Monteggia</strong> — proximal ulna</td><td>Radial head dislocation</td><td>Always operative — ORIF ulna; radial head reduces</td></tr>
+    <tr><td><strong>Galeazzi</strong> — distal radius</td><td>DRUJ dislocation</td><td>Always operative — ORIF radius; DRUJ repair</td></tr>
+  </tbody></table></div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Never accept isolated single-bone forearm fracture without imaging BOTH joints. Missed Monteggia leads to permanent loss of forearm rotation.</div>
+</section>
+
+<section class="topic v2" id="t13">
+  <div class="topic-header"><span class="topic-num">2.4</span><h2>Wrist &amp; Hand</h2></div>
+  <h3>Distal Radius Eponymous Fractures</h3>
+  <div class="table-wrap"><table><thead><tr><th>Eponym</th><th>Description</th><th>Key Feature</th></tr></thead><tbody>
+    <tr><td><strong>Colles'</strong></td><td>Dorsally displaced + angulated</td><td>Dinner fork deformity; most common wrist fracture</td></tr>
+    <tr><td><strong>Smith's</strong></td><td>Volar displacement</td><td>FOOSH onto flexed wrist; usually operative</td></tr>
+    <tr><td><strong>Barton's</strong></td><td>Intra-articular rim + carpal subluxation</td><td>Always operative — volar locking plate</td></tr>
+  </tbody></table></div>
+  <h3>Scaphoid Fractures</h3>
+  <ul>
+    <li>Blood supply enters <strong>distally</strong> — proximal pole AVN risk: <strong>30–40%</strong></li>
+    <li>X-ray visible in only 70% acutely — normal X-ray does NOT exclude fracture</li>
+    <li>MRI: gold standard — sensitivity ~100%, changes within 24h</li>
+    <li>Proximal pole fractures → operative (Herbert headless compression screw)</li>
+  </ul>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Clinical scaphoid fracture + negative X-ray = treat as scaphoid fracture (thumb spica) until MRI clarifies. Missing it → non-union → AVN → DISI collapse → wrist arthritis.</div>
+  <h3>Key Hand Injuries</h3>
+  <ul>
+    <li><strong>Mallet finger:</strong> continuous DIP extension splint × 6–8 weeks. 30 seconds of flexion resets the clock.</li>
+    <li><strong>Jersey finger:</strong> FDP avulsion; ring finger most common; surgical repair within 10 days</li>
+    <li><strong>Boxer's fracture (5th MC neck):</strong> acceptable angulation up to 40°; check rotation</li>
+  </ul>
+</section>
+
+<section class="topic v2" id="t14">
+  <div class="topic-header"><span class="topic-num">2.5</span><h2>Hip &amp; Femur</h2></div>
+  <h3>Hip Fracture Classification</h3>
+  <div class="table-wrap"><table><thead><tr><th>Type</th><th>Location</th><th>AVN Risk</th><th>Fixation</th></tr></thead><tbody>
+    <tr><td>Femoral neck (intracapsular)</td><td>Proximal to capsule</td><td><strong>HIGH</strong></td><td>Hemi/THA vs ORIF</td></tr>
+    <tr><td>Intertrochanteric (extracapsular)</td><td>Between trochanters</td><td>LOW</td><td>SHS or IM nail</td></tr>
+    <tr><td>Subtrochanteric</td><td>&lt;5 cm below lesser trochanter</td><td>LOW</td><td>Long cephalomedullary nail</td></tr>
+  </tbody></table></div>
+  <h3>Garden Classification — Femoral Neck</h3>
+  <div class="table-wrap"><table><thead><tr><th>Grade</th><th>Description</th><th>Management</th></tr></thead><tbody>
+    <tr><td>I</td><td>Incomplete/impacted valgus</td><td>ORIF vs conservative — controversial</td></tr>
+    <tr><td>II</td><td>Complete, non-displaced</td><td>ORIF: 3 cannulated screws (inverted triangle)</td></tr>
+    <tr><td>III</td><td>Partial displacement</td><td>Hemiarthroplasty (&gt;65y) or ORIF (&lt;65y)</td></tr>
+    <tr><td>IV</td><td>Full displacement</td><td>Hemiarthroplasty or THA (HEALTH trial)</td></tr>
+  </tbody></table></div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span><strong>HEALTH Trial (NEJM 2019):</strong> THA superior to hemiarthroplasty in physiologically fit patients. <strong>HIP ATTACK (Lancet 2020):</strong> fixation within 6 hours reduces mortality.</div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Always X-ray ipsilateral hip in every femoral shaft fracture. Associated femoral neck fracture missed in up to 30% of cases.</div>
+</section>
+
+<section class="topic v2" id="t15">
+  <div class="topic-header"><span class="topic-num">2.6</span><h2>Knee &amp; Tibia</h2></div>
+  <h3>Schatzker Classification — Tibial Plateau</h3>
+  <div class="table-wrap"><table><thead><tr><th>Schatzker</th><th>Description</th><th>Management</th></tr></thead><tbody>
+    <tr><td>I</td><td>Lateral plateau split</td><td>ORIF if displaced &gt;2 mm</td></tr>
+    <tr><td>II</td><td>Lateral split + depression</td><td>ORIF: elevate, bone graft, buttress plate</td></tr>
+    <tr><td>III</td><td>Pure lateral depression</td><td>ORIF if depression &gt;2 mm</td></tr>
+    <tr><td>IV</td><td>Medial plateau</td><td>ORIF; popliteal artery at risk; high energy</td></tr>
+    <tr><td>V</td><td>Bicondylar</td><td>Spanning Ex-Fix acutely → ORIF at 5–7 days</td></tr>
+    <tr><td>VI</td><td>Plateau + diaphysis dissociation</td><td>Staged; compartment syndrome risk</td></tr>
+  </tbody></table></div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Lipohaemarthrosis on lateral X-ray (fat-fluid level on horizontal beam) = osteochondral fracture = tibial plateau until proven otherwise.</div>
+</section>
+
+<section class="topic v2" id="t16">
+  <div class="topic-header"><span class="topic-num">2.7</span><h2>Ankle &amp; Foot</h2></div>
+  <h3>Weber Classification</h3>
+  <div class="table-wrap"><table><thead><tr><th>Weber</th><th>Fibular Level</th><th>Syndesmosis</th><th>Stability &amp; Treatment</th></tr></thead><tbody>
+    <tr><td><strong>A</strong></td><td>Below syndesmosis</td><td>Intact</td><td>Usually stable; cast if non-displaced</td></tr>
+    <tr><td><strong>B</strong></td><td>At syndesmosis</td><td>Variable</td><td>Stable if mortise intact; operative if medial injury</td></tr>
+    <tr><td><strong>C</strong></td><td>Above syndesmosis</td><td><strong>Always torn</strong></td><td>Always unstable; always operative</td></tr>
+  </tbody></table></div>
+  <div class="key-grid">
+    <div class="key-card steel"><div class="kc-label">Medial clear space</div><div class="kc-val">≤4 mm</div>Intact syndesmosis on mortise view</div>
+    <div class="key-card steel"><div class="kc-label">Tibiofibular overlap</div><div class="kc-val">≥6 mm</div>On AP view</div>
+  </div>
+  <ul>
+    <li>Bohler's angle normal: 20–40°. Reduced (&lt;20°) = calcaneal fracture with depression</li>
+    <li>Calcaneal fractures: bilateral + <strong>L1 lumbar burst fracture</strong> — always X-ray spine</li>
+    <li><strong>Lisfranc:</strong> plantar ecchymosis at mid-foot = pathognomonic. Diastasis ≥2 mm = operative.</li>
+  </ul>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Lisfranc injury: most commonly missed serious foot injury. Normal X-ray does NOT exclude. CT if clinically suspicious.</div>
+</section>
+
+<section class="topic v2" id="t17">
+  <div class="topic-header"><span class="topic-num">2.8</span><h2>Spine — Degenerative Conditions</h2></div>
+  <h3>Nerve Root Levels</h3>
+  <div class="table-wrap"><table><thead><tr><th>Level</th><th>Root</th><th>Motor Deficit</th><th>Sensory</th><th>Reflex Lost</th></tr></thead><tbody>
+    <tr><td>C5–6</td><td>C6</td><td>Weak wrist extension</td><td>Thumb/index finger</td><td>Brachioradialis</td></tr>
+    <tr><td>C6–7</td><td>C7</td><td>Weak elbow extension</td><td>Middle finger</td><td>Triceps</td></tr>
+    <tr><td>L3–4</td><td>L4</td><td>Weak knee extension</td><td>Medial shin</td><td>Knee jerk</td></tr>
+    <tr><td>L4–5</td><td>L5</td><td>Weak great toe dorsiflexion</td><td>Dorsum of foot</td><td>None</td></tr>
+    <tr><td>L5–S1</td><td>S1</td><td>Weak plantarflexion</td><td>Lateral foot/sole</td><td><strong>Ankle jerk</strong></td></tr>
+  </tbody></table></div>
+  <h3>Neurogenic vs Vascular Claudication</h3>
+  <div class="table-wrap"><table><thead><tr><th>Feature</th><th>Neurogenic (Spinal stenosis)</th><th>Vascular (PAD)</th></tr></thead><tbody>
+    <tr><td>Trigger</td><td>Walking + standing upright</td><td>Walking only</td></tr>
+    <tr><td>Relief</td><td>Sitting, leaning forward (shopping trolley sign)</td><td>Standing still</td></tr>
+    <tr><td>Pulses</td><td>Normal</td><td>Reduced/absent</td></tr>
+    <tr><td>ABI</td><td>Normal (≥1.0)</td><td>&lt;0.9</td></tr>
+  </tbody></table></div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Shopping trolley sign: patient unconsciously flexes lumbar spine, opening the stenotic canal. Classic ABSITE/MRCS vignette for neurogenic claudication.</div>
+</section>
+
+<section class="topic v2" id="t18">
+  <div class="topic-header"><span class="topic-num">2.9</span><h2>Paediatric Orthopaedics</h2></div>
+  <h3>Salter-Harris Classification — SALTR</h3>
+  <div class="table-wrap"><table><thead><tr><th>Type</th><th>Mnemonic</th><th>Description</th><th>Growth Arrest Risk</th></tr></thead><tbody>
+    <tr><td>I</td><td>S — Slipped</td><td>Through physis only</td><td>Low</td></tr>
+    <tr><td>II</td><td>A — Above</td><td>Through physis + metaphysis (75% — most common)</td><td>Low</td></tr>
+    <tr><td>III</td><td>L — Lower</td><td>Through physis + epiphysis; intra-articular</td><td>Moderate</td></tr>
+    <tr><td>IV</td><td>T — Through</td><td>Metaphysis + physis + epiphysis</td><td>High</td></tr>
+    <tr><td>V</td><td>R — Rammed</td><td>Crush of physis; often invisible on X-ray</td><td><strong>Very high</strong></td></tr>
+  </tbody></table></div>
+  <h3>SCFE — Slipped Capital Femoral Epiphysis</h3>
+  <ul>
+    <li>Obese adolescent 10–16 years; posterior/inferior epiphyseal slip through hypertrophic zone</li>
+    <li><strong>Drehmann sign:</strong> obligatory ER of hip on passive flexion — pathognomonic</li>
+    <li>Referred knee pain via obturator nerve — classic missed diagnosis</li>
+    <li>Unstable SCFE: cannot weight-bear; AVN risk <strong>50%</strong></li>
+    <li>All SCFEs: urgent in-situ single cannulated screw. <strong>Do NOT reduce stable SCFE</strong></li>
+  </ul>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>SCFE presenting as knee pain — adolescent + knee pain + no knee pathology = examine the hip. Drehmann sign. X-ray the hip.</div>
+</section>
+
+<section class="topic v2" id="t19">
+  <div class="topic-header"><span class="topic-num">2.10</span><h2>Soft Tissue Injuries</h2></div>
+  <h3>Knee Ligament Examination</h3>
+  <div class="table-wrap"><table><thead><tr><th>Test</th><th>Structure</th><th>Sensitivity</th><th>Technique</th></tr></thead><tbody>
+    <tr><td><strong>Lachman</strong></td><td>ACL</td><td>85–98%</td><td>Anterior tibial translation at 20–30° flexion — most sensitive</td></tr>
+    <tr><td><strong>Anterior drawer</strong></td><td>ACL</td><td>38–62%</td><td>Anterior translation at 90° flexion</td></tr>
+    <tr><td><strong>Pivot shift</strong></td><td>ACL (functional)</td><td>High specificity</td><td>Tibial subluxation + reduction in ER/extension</td></tr>
+    <tr><td><strong>Posterior sag/drawer</strong></td><td>PCL</td><td>Moderate</td><td>Posterior tibial translation at 90° flexion</td></tr>
+    <tr><td><strong>McMurray</strong></td><td>Meniscus</td><td>Moderate</td><td>Pain + click on IR/ER with flexion-extension</td></tr>
+  </tbody></table></div>
+  <ul>
+    <li>Thompson test: calf squeezed prone — absent plantarflexion = complete Achilles rupture. Sensitivity 96%, specificity 93%.</li>
+    <li><strong>Preserved active plantarflexion does NOT exclude rupture</strong> — toe flexors compensate</li>
+    <li>UKSTAR trial (2020): no significant difference operative vs non-operative at 9 months</li>
+  </ul>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Active plantarflexion preserved does NOT exclude complete Achilles rupture. Always perform Thompson test before discharging any patient with suspected Achilles injury.</div>
+</section>
+
+<!-- VOL 3 -->
+<div class="vol-header v3">
+  <span class="vol-badge">VOLUME 3</span>
+  <span class="vol-title">Perioperative, ICU &amp; Oncology</span>
+</div>
+
+<section class="topic v3" id="t20">
+  <div class="topic-header"><span class="topic-num">3.1</span><h2>DVT &amp; Thromboembolic Prophylaxis</h2></div>
+  <h3>Prophylaxis Protocols — ACCP 2022 / AAOS</h3>
+  <div class="table-wrap"><table><thead><tr><th>Scenario</th><th>Agent</th><th>Duration</th></tr></thead><tbody>
+    <tr><td>Elective THA</td><td>LMWH, DOAC, or aspirin 81–325 mg</td><td><strong>35 days</strong></td></tr>
+    <tr><td>Elective TKA</td><td>LMWH, DOAC, or aspirin</td><td>10–14 days</td></tr>
+    <tr><td>Hip fracture surgery</td><td>LMWH (enoxaparin 40 mg SC qd)</td><td><strong>35 days</strong> post-op</td></tr>
+    <tr><td>High bleeding risk</td><td>Mechanical only (SCD + stockings)</td><td>Add pharmacological at 48–72h</td></tr>
+    <tr><td>Pelvic/acetabular ORIF</td><td>LMWH starting 12h post-op</td><td>28–35 days</td></tr>
+  </tbody></table></div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>EPCAT-II Trial (NEJM 2018): aspirin 81 mg non-inferior to rivaroxaban for VTE prophylaxis in hip and knee arthroplasty. NOT standard for hip fracture or high-risk polytrauma.</div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Prophylactic IVC filter in trauma without documented VTE has NO proven mortality benefit (EAST 2020). Must be removed once anticoagulation begins.</div>
+</section>
+
+<section class="topic v3" id="t21">
+  <div class="topic-header"><span class="topic-num">3.2</span><h2>Crush Syndrome &amp; Rhabdomyolysis</h2></div>
+  <p>Prolonged muscle compression → ischaemia → cell death → release of myoglobin, K⁺, PO₄³⁻, urate, CK on reperfusion. Myoglobin precipitates in acidic urine → tubular obstruction + direct toxicity → acute tubular necrosis.</p>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Pre-treat with aggressive IV crystalloid BEFORE releasing crush. Crush release = massive K⁺ surge on reperfusion → VF and cardiac arrest. Start 1–2L NS/Hartmann's before extrication.</div>
+  <div class="table-wrap"><table><thead><tr><th>Parameter</th><th>Threshold</th><th>Significance</th></tr></thead><tbody>
+    <tr><td>CK</td><td>≥5,000–10,000 U/L</td><td>Severe — high AKI risk</td></tr>
+    <tr><td>Myoglobin</td><td>Dipstick heme+ with no RBCs</td><td>Myoglobinuria — not haematuria</td></tr>
+    <tr><td>Potassium</td><td>&gt;6.5 mEq/L or ECG changes</td><td>Life-threatening — calcium gluconate immediately</td></tr>
+    <tr><td>Urine output target</td><td>200–300 mL/h</td><td>Maintain until urine clears</td></tr>
+  </tbody></table></div>
+  <h3>Hyperkalaemia Management Ladder</h3>
+  <ol>
+    <li><strong>Calcium gluconate 10 mL 10% IV</strong> — membrane stabilisation</li>
+    <li><strong>Insulin 10 units IV + 50 mL 50% dextrose</strong> — intracellular shift</li>
+    <li><strong>Sodium bicarbonate IV</strong> — intracellular shift + urinary alkalinisation</li>
+    <li><strong>Salbutamol 10–20 mg nebulised</strong> — beta-2 mediated intracellular shift</li>
+    <li><strong>Haemodialysis</strong> — K⁺ &gt;7.0 refractory; oliguria/anuria</li>
+  </ol>
+</section>
+
+<section class="topic v3" id="t22">
+  <div class="topic-header"><span class="topic-num">3.3</span><h2>Bone Cement Implantation Syndrome (BCIS)</h2></div>
+  <h3>Donaldson Grading</h3>
+  <div class="table-wrap"><table><thead><tr><th>Grade</th><th>Definition</th><th>Immediate Management</th></tr></thead><tbody>
+    <tr><td><strong>1</strong></td><td>SpO₂ &lt;94% OR SBP fall &gt;20%</td><td>100% O₂; fluid bolus 500 mL; vasopressor readiness</td></tr>
+    <tr><td><strong>2</strong></td><td>SpO₂ &lt;88% OR SBP fall &gt;40%; loss of consciousness</td><td>Epinephrine 0.1–1 mcg/kg IV; aggressive resuscitation</td></tr>
+    <tr><td><strong>3</strong></td><td>Cardiovascular collapse requiring CPR</td><td>Full ACLS; ICU; consider ECMO</td></tr>
+  </tbody></table></div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Surgeon MUST warn anaesthesia 30 seconds before cement insertion. BCIS occurs at moment of cemented stem impaction. Failure to communicate is a preventable patient safety error.</div>
+</section>
+
+<section class="topic v3" id="t23">
+  <div class="topic-header"><span class="topic-num">3.4</span><h2>Nonunion, Malunion &amp; Avascular Necrosis</h2></div>
+  <h3>Weber-Cech Nonunion Classification</h3>
+  <div class="table-wrap"><table><thead><tr><th>Type</th><th>Biology</th><th>Management</th></tr></thead><tbody>
+    <tr><td><strong>Hypertrophic</strong></td><td>Active; exuberant callus; good vascularity</td><td>Mechanical problem only → revise fixation. <strong>NO bone graft needed.</strong></td></tr>
+    <tr><td><strong>Oligotrophic</strong></td><td>Marginal activity; scant callus</td><td>Revise fixation + bone graft</td></tr>
+    <tr><td><strong>Atrophic</strong></td><td>Avascular; no callus; sclerotic ends</td><td>Fixation revision AND biological augmentation (graft + BMP)</td></tr>
+    <tr><td><strong>Septic nonunion</strong></td><td>Infected</td><td>Stage 1: remove hardware + débride. Stage 2: definitive fixation + graft.</td></tr>
+  </tbody></table></div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>Broken nail or plate = absolute radiographic sign of nonunion. Exclude infection BEFORE any revision surgery.</div>
+  <h3>AVN Aetiology — ASEPTIC Mnemonic</h3>
+  <div class="chip-row">
+    <div class="chip"><strong>A</strong>lcohol</div><div class="chip"><strong>S</strong>teroids (#1 non-traumatic cause)</div><div class="chip"><strong>E</strong>mbolism</div><div class="chip"><strong>P</strong>ancreatitis</div><div class="chip"><strong>T</strong>rauma</div><div class="chip"><strong>I</strong>nfection/idiopathic</div><div class="chip"><strong>C</strong>oagulopathy</div>
+  </div>
+  <h3>Ficat Staging — Hip AVN</h3>
+  <div class="table-wrap"><table><thead><tr><th>Stage</th><th>X-ray</th><th>MRI Finding</th><th>Treatment</th></tr></thead><tbody>
+    <tr><td>I</td><td>Normal</td><td>Low T1 / high STIR — marrow oedema</td><td>Core decompression; protected weight-bearing</td></tr>
+    <tr><td>II</td><td>Sclerosis/cysts; no collapse</td><td><strong>Double line sign (T2)</strong> — pathognomonic</td><td>Core decompression; vascularised fibula graft in young</td></tr>
+    <tr><td>III</td><td>Crescent sign (subchondral fracture)</td><td>Subchondral fracture line</td><td>VFG if young; THA in older</td></tr>
+    <tr><td>IV</td><td>Joint space narrowing; OA</td><td>Established articular damage</td><td>THA</td></tr>
+  </tbody></table></div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>AVN double line sign on MRI T2: outer low-signal sclerotic rim + inner high-signal granulation tissue = pathognomonic of Stage II AVN femoral head.</div>
+</section>
+
+<section class="topic v3" id="t24">
+  <div class="topic-header"><span class="topic-num">3.5</span><h2>Osteomyelitis</h2></div>
+  <h3>Cierny-Mader Classification</h3>
+  <div class="table-wrap"><table><thead><tr><th>Stage</th><th>Description</th><th>Clinical Implication</th></tr></thead><tbody>
+    <tr><td>I — Medullary</td><td>Infection confined to endosteum</td><td>IM nail infection; reaming + long-term antibiotics</td></tr>
+    <tr><td>II — Superficial</td><td>Cortical surface only</td><td>Superficial débridement + antibiotics</td></tr>
+    <tr><td>III — Localised</td><td>Full-thickness cortical + medullary; stable bone</td><td>Excision of involved cortex; retain stable construct</td></tr>
+    <tr><td>IV — Diffuse</td><td>Circumferential; mechanically unstable</td><td>Resection + reconstruction; most complex</td></tr>
+  </tbody></table></div>
+  <ul>
+    <li><strong>Sequestrum:</strong> devascularised necrotic bone — nidus for persistent infection. Cannot cure without surgical removal.</li>
+    <li><strong>Involucrum:</strong> new periosteal bone forming around sequestrum.</li>
+    <li><strong>Brodie's abscess:</strong> subacute osteomyelitis — walled-off intraosseous abscess (typically distal tibia metaphysis in children)</li>
+  </ul>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Never start antibiotics for chronic osteomyelitis without bone biopsy culture first. Empirical antibiotics sterilise the specimen — guaranteed treatment failure.</div>
+</section>
+
+<section class="topic v3" id="t25">
+  <div class="topic-header"><span class="topic-num">3.6</span><h2>Periprosthetic Joint Infection (PJI)</h2></div>
+  <div class="table-wrap"><table><thead><tr><th>Type</th><th>Timing</th><th>Common Organisms</th></tr></thead><tbody>
+    <tr><td>Early acute</td><td>&lt;3 months post-op</td><td>Staph aureus, Gram-negatives</td></tr>
+    <tr><td>Late chronic</td><td>3 months–2 years</td><td>Coagulase-negative Staph (epidermidis) — biofilm forming</td></tr>
+    <tr><td>Late haematogenous</td><td>&gt;2 years</td><td>Staph aureus, Streptococcus</td></tr>
+  </tbody></table></div>
+  <div class="table-wrap"><table><thead><tr><th>Strategy</th><th>Indication</th><th>Key Points</th></tr></thead><tbody>
+    <tr><td><strong>DAIR</strong></td><td>Acute PJI &lt;3–4 weeks; well-fixed implant; susceptible organism</td><td>Débridement + modular exchange + rifampicin-based antibiotics</td></tr>
+    <tr><td><strong>Two-stage revision</strong></td><td>Chronic PJI; difficult organisms; compromised host</td><td>Stage 1: remove + antibiotic spacer. Stage 2: reimplantation at 6–8 weeks.</td></tr>
+    <tr><td><strong>One-stage revision</strong></td><td>Susceptible organism; no sinus tract; good soft tissue</td><td>Remove + débride + reimplant in one operation</td></tr>
+    <tr><td><strong>Suppressive antibiotics</strong></td><td>Not surgical candidate</td><td>Indefinite oral antibiotics; not curative</td></tr>
+  </tbody></table></div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>DAIR success drops sharply after 3–4 weeks — biofilm matures. Two-stage revision is gold standard for chronic PJI with 85–90% success rate.</div>
+</section>
+
+<section class="topic v3" id="t26">
+  <div class="topic-header"><span class="topic-num">3.7</span><h2>Necrotising Soft Tissue Infections &amp; Fournier's Gangrene</h2></div>
+  <h3>LRINEC Score</h3>
+  <div class="table-wrap"><table><thead><tr><th>Variable</th><th>Value</th><th>Points</th></tr></thead><tbody>
+    <tr><td>CRP</td><td>&gt;150 mg/L</td><td>4</td></tr>
+    <tr><td>WBC</td><td>15–25 × 10³/μL / &gt;25</td><td>1 / 2</td></tr>
+    <tr><td>Haemoglobin</td><td>11–13.5 g/dL / &lt;11</td><td>1 / 2</td></tr>
+    <tr><td>Sodium</td><td>&lt;135 mEq/L</td><td>2</td></tr>
+    <tr><td>Creatinine</td><td>&gt;1.6 mg/dL</td><td>2</td></tr>
+    <tr><td>Glucose</td><td>&gt;180 mg/dL</td><td>1</td></tr>
+  </tbody></table></div>
+  <div class="callout exam"><span class="label">Key Threshold</span><strong>LRINEC ≥6:</strong> PPV 92% for NSTI. <strong>LRINEC &lt;6 does NOT exclude NSTI.</strong></div>
+  <ul>
+    <li>Thin grey dishwater discharge — pathognomonic of fascial necrosis</li>
+    <li>Pain out of proportion → paradoxical analgesia as nerves die</li>
+    <li>Crepitus on palpation (gas-forming organisms)</li>
+    <li>Testes spared in <strong>95%</strong> of Fournier's — separate arterial supply via spermatic cord</li>
+    <li>FGSI &gt;9 → mortality ~75%; FGSI ≤9 → mortality ~9%</li>
+    <li>Empiric: Vancomycin + Piperacillin-tazobactam + Metronidazole ± antifungal</li>
+  </ul>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Time to knife is the most critical prognostic factor in NSTI. Do not delay surgery for imaging if clinical suspicion is high.</div>
+</section>
+
+<section class="topic v3" id="t27">
+  <div class="topic-header"><span class="topic-num">3.8</span><h2>Bone &amp; Soft Tissue Tumours</h2></div>
+  <h3>Radiographic Approach — 5 Questions</h3>
+  <ol>
+    <li><strong>Where is it?</strong> Epiphysis (GCT), metaphysis (osteosarcoma), diaphysis (Ewing's, myeloma)</li>
+    <li><strong>What is it doing to the bone?</strong> Lytic vs sclerotic vs mixed</li>
+    <li><strong>What is the bone doing to it?</strong> Geographic margin (benign) vs permeative (aggressive)</li>
+    <li><strong>Periosteal reaction?</strong> Solid (benign) vs sunburst/Codman's triangle (malignant)</li>
+    <li><strong>Soft tissue mass?</strong> Implies cortical breach — aggressive behaviour</li>
+  </ol>
+  <div class="table-wrap"><table><thead><tr><th>Tumour</th><th>Age</th><th>Site</th><th>Classic Finding</th><th>Treatment</th></tr></thead><tbody>
+    <tr><td><strong>Osteosarcoma</strong></td><td>10–20y</td><td>Distal femur / proximal tibia</td><td>Sunburst periosteal reaction; Codman's triangle; ↑ALP</td><td>Neo-adjuvant chemo + wide excision</td></tr>
+    <tr><td><strong>Ewing's sarcoma</strong></td><td>5–20y</td><td>Diaphysis femur/tibia/pelvis</td><td>Onion-skin periosteal reaction; ↑LDH</td><td>Chemo + surgery/radiotherapy</td></tr>
+    <tr><td><strong>Chondrosarcoma</strong></td><td>&gt;40y</td><td>Pelvis, proximal femur</td><td>Rings/arcs calcification; endosteal scalloping</td><td>Wide excision; chemo-resistant</td></tr>
+    <tr><td><strong>GCT</strong></td><td>20–40y</td><td>Epiphysis; distal radius, proximal tibia</td><td>Soap bubble; subarticular lytic to articular surface</td><td>Curettage + adjuvant ± denosumab</td></tr>
+    <tr><td><strong>Osteoid osteoma</strong></td><td>10–30y</td><td>Proximal femur, tibia diaphysis</td><td>Night pain relieved by aspirin; nidus &lt;2 cm on CT</td><td>Radiofrequency ablation</td></tr>
+    <tr><td><strong>Myeloma</strong></td><td>&gt;50y</td><td>Axial skeleton; skull; pelvis</td><td>Punched-out lytic; paraprotein; Bence-Jones</td><td>Medical (VRD); surgical for fracture/instability</td></tr>
+  </tbody></table></div>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Never biopsy a potential sarcoma without sarcoma centre involvement. Incorrectly placed biopsy tracts contaminate tissue planes and can preclude limb-salvage surgery.</div>
+  <h3>Soft Tissue Sarcoma — 5-5-5 Rule</h3>
+  <p>Any mass that is <strong>&gt;5 cm + deep to fascia + growing</strong> = urgent sarcoma centre referral. Most common metastatic site: <strong>lung</strong>.</p>
+</section>
+
+<section class="topic v3" id="t28">
+  <div class="topic-header"><span class="topic-num">3.9</span><h2>Metastatic Bone Disease</h2></div>
+  <h3>Common Primaries — BLT with Ketchup + Prostate</h3>
+  <div class="key-grid">
+    <div class="key-card sky"><div class="kc-label">Breast</div>#1 cause of pathological fracture overall; mixed lytic/sclerotic</div>
+    <div class="key-card sky"><div class="kc-label">Lung</div>#1 cause in men &gt;50y; lytic lesions; poor prognosis</div>
+    <div class="key-card sky"><div class="kc-label">Thyroid</div>Lytic, expansile; solitary; pre-op embolisation</div>
+    <div class="key-card sky"><div class="kc-label">Kidney (RCC)</div>Hypervascular — pre-op embolisation essential</div>
+    <div class="key-card sky"><div class="kc-label">Prostate</div>Sclerotic/blastic; ↑PSA; ↑ALP; bone scan hot</div>
+    <div class="key-card sky"><div class="kc-label">Myeloma</div>Punched-out lytic; bone scan can be NEGATIVE — use whole-body MRI/PET</div>
+  </div>
+  <h3>Mirels Scoring — Pathological Fracture Risk</h3>
+  <div class="table-wrap"><table><thead><tr><th>Variable</th><th>Score 1</th><th>Score 2</th><th>Score 3</th></tr></thead><tbody>
+    <tr><td>Site</td><td>Upper limb</td><td>Lower limb</td><td>Peritrochanteric</td></tr>
+    <tr><td>Pain</td><td>Mild</td><td>Moderate</td><td>Functional (weight-bearing)</td></tr>
+    <tr><td>Lesion type</td><td>Blastic</td><td>Mixed</td><td>Lytic</td></tr>
+    <tr><td>Size (cortex)</td><td>&lt;1/3</td><td>1/3–2/3</td><td>&gt;2/3</td></tr>
+  </tbody></table></div>
+  <div class="callout exam"><span class="label">Key Threshold</span>Score ≤7: radiotherapy alone. Score 8: borderline. <strong>Score ≥9: prophylactic fixation before fracture occurs.</strong></div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>For femoral shaft metastatic fractures — nail the ENTIRE femur. Whole bone is at risk.</div>
+</section>
+
+<section class="topic v3" id="t29">
+  <div class="topic-header"><span class="topic-num">3.10</span><h2>Deformity Correction Principles</h2></div>
+  <h3>Leg Length Discrepancy (LLD) Thresholds</h3>
+  <div class="key-grid">
+    <div class="key-card sky"><div class="kc-label">&lt;1 cm</div>Usually asymptomatic — reassure</div>
+    <div class="key-card sky"><div class="kc-label">1–2 cm</div>Shoe raise</div>
+    <div class="key-card sky"><div class="kc-label">≥2 cm</div>Surgical equalisation indicated</div>
+    <div class="key-card sky"><div class="kc-label">&gt;4 cm</div>Usually requires surgical correction</div>
+  </div>
+  <p>High Tibial Osteotomy (HTO): for isolated medial compartment OA in young/active patients (&lt;60y) with varus deformity. Delays TKA by 5–10 years in appropriately selected patients.</p>
+  <div class="table-wrap"><table><thead><tr><th>Condition</th><th>Common Cause</th><th>Management</th></tr></thead><tbody>
+    <tr><td>Physiological genu varum</td><td>Normal in infants to 18 months</td><td>Spontaneously corrects — reassure parents</td></tr>
+    <tr><td>Blount's disease</td><td>Tibia vara — medial proximal tibial growth disturbance</td><td>Persistent/progressive varum &gt;3y → orthopaedic referral</td></tr>
+    <tr><td>Adult genu varum</td><td>Medial OA, rickets, post-traumatic</td><td>HTO if isolated medial OA + varus</td></tr>
+  </tbody></table></div>
+  <div class="callout clin"><span class="label">✦ Clinical Pearl</span>Any child limping warrants full lower limb examination including the hip. Paediatric orthopaedic emergencies — septic arthritis, SCFE, Perthes — all present as a limp with no obvious localising signs.</div>
+</section>
+
+</div><!-- end content-wrap -->
+
+<!-- SIH FOOTER -->
+<footer class="sih-footer">
+  <span class="sf-brand">Surgical Insight Hub</span>
+  <span>Orthopaedic Trauma Master Monograph · 29 Topics · ABSITE · MRCS · FRCS</span>
+  <a href="notes.html">← Back to Notes</a>
+</footer>
+
+</main>
+
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const progressBar = document.getElementById('progress-bar');
+const topBtn = document.getElementById('top-btn');
+const navItems = document.querySelectorAll('.nav-item');
+const sections = document.querySelectorAll('.topic[id]');
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.transform = `scaleX(${scrollTop / docHeight})`;
+  topBtn.classList.toggle('show', scrollTop > 400);
+  let current = '';
+  sections.forEach(s => { if (scrollTop >= s.offsetTop - 120) current = s.id; });
+  navItems.forEach(n => { n.classList.toggle('active', n.getAttribute('href') === '#' + current); });
+});
+
+function filterNav(query) {
+  const q = query.toLowerCase();
+  navItems.forEach(item => { item.style.display = (!q || item.textContent.toLowerCase().includes(q)) ? 'block' : 'none'; });
+  document.querySelectorAll('.vol-label').forEach(label => { label.style.display = 'block'; });
+}
+
+navItems.forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(item.getAttribute('href'));
+    if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+  });
+});
+
+document.querySelectorAll('.topic').forEach((el, i) => { el.style.animationDelay = `${i * 0.03}s`; });
+</script>
+</body>
+</html>

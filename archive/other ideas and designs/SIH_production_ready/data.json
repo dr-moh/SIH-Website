@@ -1,0 +1,168 @@
+{
+  "site": {
+    "name": "Surgical Insight Hub",
+    "handle": "@sugicalInsightHub",
+    "tagline": "Dissect. Learn. Dominate.",
+    "differentiator": "The only surgical education resource written by a surgeon, for the overnight shift.",
+    "founder": "Dr. Abdulmalik Moh",
+    "telegram": "https://t.me/sugicalInsightHub",
+    "youtube": "https://www.youtube.com/@YeSurgeryBett",
+    "linkedin": "https://www.linkedin.com/company/surgical-insight-hub"
+  },
+  "notes": [
+    {
+      "id": 1,
+      "title": "Anorectal Malformation",
+      "category": "peds",
+      "categoryLabel": "Paediatric Surgery",
+      "description": "Peña/Krickenbeck classification, VACTERL associations, PSARP steps, colostomy principles, cloaca management, bowel management programme.",
+      "tags": ["Krickenbeck", "PSARP", "Cloaca", "VACTERL"],
+      "pages": "In progress",
+      "isNew": true,
+      "telegramLink": "https://t.me/sugicalInsightHub"
+    },
+    {
+      "id": 2,
+      "title": "Bowel Obstruction",
+      "category": "emergency",
+      "categoryLabel": "Emergency Surgery",
+      "description": "SBO/LBO classification, Bologna criteria, WSES 2020 management algorithm, strangulation recognition, operative decision-making.",
+      "tags": ["WSES 2020", "Bologna", "SBO/LBO"],
+      "pages": "8 pages",
+      "isNew": false,
+      "telegramLink": "https://t.me/sugicalInsightHub"
+    },
+    {
+      "id": 3,
+      "title": "PUD Perforation",
+      "category": "emergency",
+      "categoryLabel": "Emergency Surgery",
+      "description": "Boey score, omental patch technique, resection indications, H. pylori eradication protocol.",
+      "tags": ["Boey Score", "Omental Patch", "H. pylori"],
+      "pages": "6 pages",
+      "isNew": false,
+      "telegramLink": "https://t.me/sugicalInsightHub"
+    },
+    {
+      "id": 4,
+      "title": "Fournier's Gangrene",
+      "category": "emergency",
+      "categoryLabel": "Emergency Surgery",
+      "description": "FGSI scoring, debridement extent, reconstruction timing, colostomy indications, mortality predictors.",
+      "tags": ["FGSI", "Debridement", "Necrotizing"],
+      "pages": "5 pages",
+      "isNew": false,
+      "telegramLink": "https://t.me/sugicalInsightHub"
+    },
+    {
+      "id": 5,
+      "title": "Choledocholithiasis",
+      "category": "hpb",
+      "categoryLabel": "HPB Surgery",
+      "description": "ASGE 2019 risk stratification, ERCP indications, laparoscopic CBD exploration, MRCP pathway.",
+      "tags": ["ASGE 2019", "ERCP", "Mirizzi"],
+      "pages": "6 pages",
+      "isNew": false,
+      "telegramLink": "https://t.me/sugicalInsightHub"
+    },
+    {
+      "id": 6,
+      "title": "HPB Surgery",
+      "category": "hpb",
+      "categoryLabel": "HPB Surgery",
+      "description": "Biliary anatomy, BDI Strasberg, cholangiocarcinoma Bismuth-Corlette, Whipple steps, portal HTN.",
+      "tags": ["Strasberg", "Bismuth-Corlette", "Whipple"],
+      "pages": "7 pages",
+      "isNew": false,
+      "telegramLink": "https://t.me/sugicalInsightHub"
+    },
+    {
+      "id": 7,
+      "title": "Anesthesia & Perioperative Care",
+      "category": "periop",
+      "categoryLabel": "Perioperative Care",
+      "description": "RSI, airway decision tree, regional vs general anaesthesia, postop pain protocols, ICU handover.",
+      "tags": ["RSI", "ASA", "Airway"],
+      "pages": "6 pages",
+      "isNew": false,
+      "telegramLink": "https://t.me/sugicalInsightHub"
+    },
+    {
+      "id": 8,
+      "title": "High-Yield CT Imaging Findings",
+      "category": "emergency",
+      "categoryLabel": "Imaging",
+      "description": "Free air, pneumatosis, volvulus, closed loop, ischaemia — rapid surgical pattern recognition.",
+      "tags": ["CT Pearls", "Free Air", "Pattern Recognition"],
+      "pages": "5 pages",
+      "isNew": false,
+      "telegramLink": "https://t.me/sugicalInsightHub"
+    }
+  ],
+  "episodes": [
+    {
+      "id": 8,
+      "title": "Anesthesia & Perioperative Care",
+      "description": "What every surgical resident must know before the knife hits skin. RSI, airway management, regional vs general, ICU handover.",
+      "tags": ["Perioperative", "RSI", "Airway"],
+      "youtubeLink": "https://www.youtube.com/@YeSurgeryBett",
+      "isLatest": true
+    },
+    {
+      "id": 7,
+      "title": "PUD Perforation",
+      "description": "Boey score, omental patch vs resection, when to add vagotomy, H. pylori eradication.",
+      "tags": ["Emergency", "Boey", "Upper GI"],
+      "youtubeLink": "https://www.youtube.com/@YeSurgeryBett",
+      "isLatest": false
+    },
+    {
+      "id": 6,
+      "title": "Fournier's Gangrene",
+      "description": "FGSI scoring, debridement extent, diversion indications, reconstruction timing.",
+      "tags": ["Necrotizing", "FGSI", "Emergency"],
+      "youtubeLink": "https://www.youtube.com/@YeSurgeryBett",
+      "isLatest": false
+    },
+    {
+      "id": 5,
+      "title": "Bowel Obstruction",
+      "description": "SBO vs LBO, Bologna criteria, closed-loop on CT, stoma decision-making.",
+      "tags": ["Emergency", "WSES 2020", "Bologna"],
+      "youtubeLink": "https://www.youtube.com/@YeSurgeryBett",
+      "isLatest": false
+    },
+    {
+      "id": 4,
+      "title": "Choledocholithiasis",
+      "description": "ASGE 2019 risk stratification, ERCP timing, lap CBD exploration.",
+      "tags": ["HPB", "ASGE 2019", "ERCP"],
+      "youtubeLink": "https://www.youtube.com/@YeSurgeryBett",
+      "isLatest": false
+    },
+    {
+      "id": 3,
+      "title": "HPB Surgery",
+      "description": "Biliary anatomy, Strasberg BDI, Bismuth-Corlette, Whipple steps, portal HTN.",
+      "tags": ["HPB", "Biliary", "Whipple"],
+      "youtubeLink": "https://www.youtube.com/@YeSurgeryBett",
+      "isLatest": false
+    },
+    {
+      "id": 2,
+      "title": "High-Yield CT Imaging Findings",
+      "description": "Free air, pneumatosis, closed loop, volvulus — pattern recognition under pressure.",
+      "tags": ["Imaging", "CT"],
+      "youtubeLink": "https://www.youtube.com/@YeSurgeryBett",
+      "isLatest": false
+    },
+    {
+      "id": 1,
+      "title": "Welcome to YesSurgeryBet",
+      "description": "Why this podcast exists. What residents actually need. The rules of the game.",
+      "tags": ["Intro", "SIH"],
+      "youtubeLink": "https://www.youtube.com/@YeSurgeryBett",
+      "isLatest": false
+    }
+  ]
+}

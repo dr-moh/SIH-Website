@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Surgical Insight Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/shared.css">
+<style>
+/* SPLIT-SCREEN PORTFOLIO STYLES */
+.about-portfolio {
+  max-width: 1200px;
+  margin: 64px auto 100px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 40px;
+  position: relative;
+}
+
+/* LEFT PANEL (Sticky Profile) */
+.ab-left {
+  position: sticky;
+  top: 100px;
+  height: max-content;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 40px 32px;
+  box-shadow: var(--shadow-md);
+}
+[data-theme="dark"] .ab-left {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+}
+.ab-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--brand-burgundy);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 3px solid var(--brand-gold);
+}
+.ab-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.ab-name {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -.04em;
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+[data-theme="dark"] .ab-left .ab-name { color: var(--bg-card); }
+.ab-title {
+  font-size: .85rem;
+  color: var(--brand-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 16px;
+}
+.ab-bio {
+  font-size: .95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+[data-theme="dark"] .ab-left .ab-bio { color: rgba(255,255,255,.6); }
+.ab-socials { display: flex; gap: 12px; }
+.ab-soc-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  transition: all .2s;
+}
+[data-theme="dark"] .ab-left .ab-soc-btn { background: rgba(255,255,255,.1); border-color: transparent; }
+.ab-soc-btn:hover { background: var(--bg-card); transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+.ab-soc-btn img { width: 22px; height: 22px; object-fit: contain; mix-blend-mode: multiply; }
+[data-theme="dark"] .ab-left .ab-soc-btn img { filter: invert(1); mix-blend-mode: screen; }
+
+/* RIGHT PANEL (Scrolling Content) */
+.ab-right {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.ab-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 40px;
+}
+.ab-kicker {
+  font-size: .65rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+}
+.ab-card h2 {
+  font-size: 1.8rem; font-weight: 800; color: var(--text-primary);
+  letter-spacing: -.03em; line-height: 1.2; margin-bottom: 16px;
+}
+.ab-card p {
+  font-size: 1rem; color: var(--text-secondary); line-height: 1.7;
+}
+
+/* Principles */
+.principles { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+.principle {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 16px; background: var(--bg-card); border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+.p-num {
+  font-size: .75rem; font-weight: 800; color: var(--brand-gold);
+  background: rgba(184,146,42,.1); border-radius: 8px; padding: 6px 12px; flex-shrink: 0;
+}
+.p-text { font-size: .95rem; color: var(--text-secondary); line-height: 1.6; }
+.p-text strong { color: var(--text-primary); display: block; margin-bottom: 4px; font-size: 1.05rem; }
+
+/* Guidelines */
+.gl-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.gl-b {
+  font-size: .75rem; font-weight: 700; color: var(--text-primary);
+  background: var(--bg-card); border: 2px solid var(--border-color);
+  padding: 8px 16px; border-radius: 12px;
+}
+
+/* Stats */
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 32px; }
+.stat-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 16px; padding: 24px; text-align: center;
+}
+.stat-num { font-size: 2.5rem; font-weight: 900; color: var(--text-primary); letter-spacing: -.04em; line-height: 1; }
+.stat-label { font-size: .7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin-top: 8px; }
+
+@media(max-width: 900px) {
+  .about-portfolio { grid-template-columns: 1fr; }
+  .ab-left { position: static; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width: 600px) {
+  .ab-card { padding: 24px; }
+  .stats-grid { grid-template-columns: 1fr; }
+}
+</style>
+<script>
+  const savedTheme = localStorage.getItem('sih-theme') || 'light';
+  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">@sugicalInsightHub</div></div>
+    </div>
+    <div class="nav-links-pill">
+      <a href="index.html">Home</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="notes.html">Notes</a>
+      <a href="mcq.html" style="background:rgba(163,21,21,0.1);color:#a31515;font-weight:700;">MCQ Arena</a>
+      <a href="review.html" style="background:rgba(184,146,42,0.1);color:#7a5c00;font-weight:700;">AI Review</a>
+      <a href="about.html" class="active">About</a>
+    </div>
+  </div>
+  <button class="mob-nav-toggle" onclick="openMobNav()">☰ Menu</button>
+  <div class="nav-right">
+    <button class="theme-toggle nav-btn" id="themeToggle" aria-label="Toggle dark mode">
+        <svg id="moonIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+        <svg id="sunIcon" style="display:none;" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 5 5 5.006 5.006 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3.003 3.003 0 0 1-3 3zm0-13a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1zm0 18a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zm8-11h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zm-16 0H2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zm13.657-5.657a1 1 0 0 0-1.414 0l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414a1 1 0 0 0 0-1.414zm-11.314 0a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414L4.929 5.757a1 1 0 0 0-1.414 0zm11.314 11.314a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414a1 1 0 0 0-1.414 0zm-11.314 0a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414a1 1 0 0 0 0-1.414z"/></svg>
+    </button>
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-btn">Telegram</a>
+    <a href="notes.html" class="nav-cta-btn">Get Notes →</a>
+  </div>
+</nav>
+
+<div class="about-portfolio">
+  <!-- STICKY BIO PANEL -->
+  <div class="ab-left">
+    <div class="ab-photo"><img src="assets/images/Resident.jpg" alt="Dr. Moh" onerror="this.style.display='none'"></div>
+    <h1 class="ab-name">Dr. Abdulmalik<br>Moh</h1>
+    <div class="ab-title">Founder · Surgical Resident</div>
+    <div class="ab-bio">
+      Built Surgical Insight Hub because the existing resources were not designed for how surgery actually works. I believe residents deserve access to definitive, high-yield answers without digging through narrative paragraphs at 3 AM.
+    </div>
+    <div class="ab-socials">
+      <a href="https://t.me/sugicalInsightHub" target="_blank" class="ab-soc-btn" title="Telegram">
+        <img src="assets/icons/telegram.png" alt="Telegram">
+      </a>
+      <a href="https://www.youtube.com/@YeSurgeryBett" target="_blank" class="ab-soc-btn" title="YouTube">
+        <img src="assets/icons/Youtube.png" alt="YouTube">
+      </a>
+      <a href="https://www.linkedin.com/company/surgical-insight-hub" target="_blank" class="ab-soc-btn" title="LinkedIn">
+        <img src="assets/icons/linkedin.png" alt="LinkedIn">
+      </a>
+    </div>
+  </div>
+
+  <!-- SCROLLING HIGHLIGHTS -->
+  <div class="ab-right">
+    <div class="ab-card">
+      <div class="ab-kicker">The Mission</div>
+      <h2>The only resource built for the overnight shift.</h2>
+      <p>Every surgical textbook is written for someone sitting at a desk with three hours and a cup of coffee. You are on hour sixteen of a call shift. You need the right answer now. That is why SIH exists.</p>
+      
+      <div class="principles">
+        <div class="principle">
+          <span class="p-num">01</span>
+          <div class="p-text"><strong>Zero Paragraphs.</strong> Tables, bullets, numbered steps. If it can't be tabulated safely, it gets cut.</div>
+        </div>
+        <div class="principle">
+          <span class="p-num">02</span>
+          <div class="p-text"><strong>Current Guidelines Only.</strong> WSES, TG18, ASGE, SAGES. The exact year and version are explicitly cited.</div>
+        </div>
+        <div class="principle">
+          <span class="p-num">03</span>
+          <div class="p-text"><strong>Always Free.</strong> No paywall between a resident and the critical knowledge they need to treat a patient.</div>
+        </div>
+        <div class="principle">
+          <span class="p-num">04</span>
+          <div class="p-text"><strong>Written by a Surgeon.</strong> Not a marketing team. Not AI. A practicing surgeon who has stood where you are standing.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ab-card">
+      <div class="ab-kicker">Guidelines Referenced</div>
+      <h2>Current. Specific. Cited by year.</h2>
+      <p>Every note references the exact guideline version. No generic "according to standard guidelines." The year matters when making life-saving adjustments.</p>
+      <div class="gl-badges">
+        <span class="gl-b">WSES 2020</span><span class="gl-b">TG18</span><span class="gl-b">ASGE 2019</span>
+        <span class="gl-b">SAGES 2025</span><span class="gl-b">AHPBA 2025</span><span class="gl-b">AGA 2023</span>
+        <span class="gl-b">ESMO 2024</span><span class="gl-b">Bologna 2013/2017</span>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num">8+</div><div class="stat-label">Topics Published</div></div>
+        <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Podcast Episodes</div></div>
+        <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Free Access</div></div>
+        <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Paragraphs</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="fb"><div class="fb-name">Surgical Insight Hub</div><p>High-yield surgical education for residents. Built by Dr. Abdulmalik Moh.</p></div>
+    <div class="fc"><h5>Resources</h5><a href="notes.html">All Notes</a><a href="podcast.html">Podcast</a><a href="mcq.html">MCQ Arena</a><a href="mcq_bank.html">MCQ Bank</a><a href="https://t.me/sugicalInsightHub" target="_blank">Telegram</a></div>
+    <div class="fc"><h5>Connect</h5><a href="https://www.youtube.com/@YeSurgeryBett" target="_blank">YouTube</a><a href="https://www.linkedin.com/company/surgical-insight-hub" target="_blank">LinkedIn</a></div>
+  </div>
+  <div class="fbot"><p>© 2025 Surgical Insight Hub · Dr. Abdulmalik Moh · @sugicalInsightHub</p><p>Not a substitute for clinical judgment</p></div>
+</footer>
+
+<div class="mob-nav-overlay" id="mobNavOverlay" onclick="closeMobNav()"></div>
+<div class="mob-nav-sheet" id="mobNavSheet">
+  <div class="mob-nav-handle"></div>
+  <a href="index.html">Home</a>
+  <a href="podcast.html">Podcast</a>
+  <a href="notes.html">Notes</a>
+  <a href="mcq.html" class="mcq-link">MCQ Arena</a>
+  <a href="review.html" class="review-link">AI Review</a>
+  <a href="about.html">About</a>
+</div>
+
+<script>
+function openMobNav(){
+  document.getElementById('mobNavSheet').classList.add('open');
+  document.getElementById('mobNavOverlay').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closeMobNav(){
+  document.getElementById('mobNavSheet').classList.remove('open');
+  document.getElementById('mobNavOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+
+// Dark Mode Toggle Logic
+const themeToggle = document.getElementById('themeToggle');
+const moonIcon = document.getElementById('moonIcon');
+const sunIcon = document.getElementById('sunIcon');
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    moonIcon.style.display = 'none';
+    sunIcon.style.display = 'block';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    sunIcon.style.display = 'none';
+    moonIcon.style.display = 'block';
+  }
+}
+
+applyTheme(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const isDark = document.documentElement.hasAttribute('data-theme');
+  const newTheme = isDark ? 'light' : 'dark';
+  applyTheme(newTheme);
+  localStorage.setItem('sih-theme', newTheme);
+});
+</script>
+
+<script src="js/nav-pill.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YesSurgeryBet Podcast — Surgical Insight Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/shared.css">
+<script>
+  const savedTheme = localStorage.getItem('sih-theme') || 'light';
+  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">@sugicalInsightHub</div></div>
+    </div>
+    <div class="nav-links-pill">
+      <a href="index.html">Home</a>
+      <a href="podcast.html" class="active">Podcast</a>
+      <a href="notes.html">Notes</a>
+      <a href="mcq.html" style="background:rgba(163,21,21,0.1);color:#a31515;font-weight:700;">MCQ Arena</a>
+      <a href="review.html" style="background:rgba(184,146,42,0.1);color:#7a5c00;font-weight:700;">AI Review</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <button class="mob-nav-toggle" onclick="openMobNav()">☰ Menu</button>
+  <div class="nav-right">
+    <button class="theme-toggle nav-btn" id="themeToggle" aria-label="Toggle dark mode">
+        <svg id="moonIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+        <svg id="sunIcon" style="display:none;" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 5 5 5.006 5.006 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3.003 3.003 0 0 1-3 3zm0-13a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1zm0 18a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zm8-11h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zm-16 0H2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zm13.657-5.657a1 1 0 0 0-1.414 0l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414a1 1 0 0 0 0-1.414zm-11.314 0a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414L4.929 5.757a1 1 0 0 0-1.414 0zm11.314 11.314a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414a1 1 0 0 0-1.414 0zm-11.314 0a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414a1 1 0 0 0 0-1.414z"/></svg>
+    </button>
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-btn">Telegram</a>
+    <a href="notes.html" class="nav-cta-btn">Get Notes →</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="blob blob-1"></div>
+  <div class="hero-watermark"><img src="assets/images/Surgical_Insight_Hub_Logo.png" alt=""></div>
+  <div class="page-hero-inner">
+    <div class="ph-kicker">YesSurgeryBet</div>
+    <h1>Raw. Clinical.<br>Zero filler.</h1>
+    <p>Dr. Abdulmalik Moh breaks down surgical topics the way they actually matter. Built for residents managing crashing patients at 3 AM.</p>
+    <div class="platform-links">
+      <a href="https://www.youtube.com/@YeSurgeryBett" target="_blank" class="pl-btn"><span class="pl-dot" style="background:#ff0000;"></span>YouTube</a>
+      <a href="https://t.me/sugicalInsightHub" target="_blank" class="pl-btn"><span class="pl-dot" style="background:#2ca5e0;"></span>Telegram</a>
+      <a href="https://www.linkedin.com/company/surgical-insight-hub" target="_blank" class="pl-btn"><span class="pl-dot" style="background:#0077b5;"></span>LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<div class="podcast-body">
+  <div class="featured-ep">
+    <div>
+      <div class="fe-kicker">Latest Episode</div>
+      <h2>Anesthesia & Perioperative Care</h2>
+      <p>What every surgical resident must know before the knife hits skin. RSI, airway management, regional vs general, ICU handover. No theory. Just decisions.</p>
+      <div class="fe-actions">
+        <a href="https://www.youtube.com/@YeSurgeryBett" target="_blank" class="fe-play">▶ Watch on YouTube</a>
+        <a href="https://t.me/sugicalInsightHub" target="_blank" class="fe-tg">Get notes on Telegram</a>
+      </div>
+    </div>
+    <div class="fe-num">08</div>
+  </div>
+
+  <div class="sec-label">All Episodes</div>
+  <div class="ep-list">
+    <div class="ep-row">
+      <span class="ep-num-badge">EP 08</span>
+      <div class="ep-info">
+        <h4>Anesthesia & Perioperative Care</h4>
+        <p>RSI, airway decision tree, regional vs general, postop pain, ICU handover</p>
+        <div class="ep-tags"><span class="ep-tag">Perioperative</span><span class="ep-tag">RSI</span><span class="ep-tag">Airway</span></div>
+      </div>
+      <button class="ep-play-btn" onclick="window.open('https://www.youtube.com/@YeSurgeryBett','_blank')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+    <div class="ep-row">
+      <span class="ep-num-badge">EP 07</span>
+      <div class="ep-info">
+        <h4>PUD Perforation</h4>
+        <p>Boey score, omental patch vs resection, when to add vagotomy, H. pylori eradication</p>
+        <div class="ep-tags"><span class="ep-tag">Emergency</span><span class="ep-tag">Boey</span><span class="ep-tag">Upper GI</span></div>
+      </div>
+      <button class="ep-play-btn" onclick="window.open('https://www.youtube.com/@YeSurgeryBett','_blank')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+    <div class="ep-row">
+      <span class="ep-num-badge">EP 06</span>
+      <div class="ep-info">
+        <h4>Fournier's Gangrene</h4>
+        <p>FGSI scoring, debridement extent, diversion indications, reconstruction timing</p>
+        <div class="ep-tags"><span class="ep-tag">Necrotizing</span><span class="ep-tag">FGSI</span><span class="ep-tag">Emergency</span></div>
+      </div>
+      <button class="ep-play-btn" onclick="window.open('https://www.youtube.com/@YeSurgeryBett','_blank')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+    <div class="ep-row">
+      <span class="ep-num-badge">EP 05</span>
+      <div class="ep-info">
+        <h4>Bowel Obstruction</h4>
+        <p>SBO vs LBO, Bologna criteria, closed-loop on CT, stoma decision-making</p>
+        <div class="ep-tags"><span class="ep-tag">Emergency</span><span class="ep-tag">WSES 2020</span><span class="ep-tag">Bologna</span></div>
+      </div>
+      <button class="ep-play-btn" onclick="window.open('https://www.youtube.com/@YeSurgeryBett','_blank')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+    <div class="ep-row">
+      <span class="ep-num-badge">EP 04</span>
+      <div class="ep-info">
+        <h4>Choledocholithiasis</h4>
+        <p>ASGE 2019 risk stratification, ERCP timing, lap CBD exploration, when to leave the stone</p>
+        <div class="ep-tags"><span class="ep-tag">HPB</span><span class="ep-tag">ASGE 2019</span><span class="ep-tag">ERCP</span></div>
+      </div>
+      <button class="ep-play-btn" onclick="window.open('https://www.youtube.com/@YeSurgeryBett','_blank')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+    <div class="ep-row">
+      <span class="ep-num-badge">EP 03</span>
+      <div class="ep-info">
+        <h4>HPB Surgery</h4>
+        <p>Biliary anatomy, Strasberg BDI, Bismuth-Corlette, Whipple steps, portal HTN</p>
+        <div class="ep-tags"><span class="ep-tag">HPB</span><span class="ep-tag">Biliary</span><span class="ep-tag">Whipple</span></div>
+      </div>
+      <button class="ep-play-btn" onclick="window.open('https://www.youtube.com/@YeSurgeryBett','_blank')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+    <div class="ep-row">
+      <span class="ep-num-badge">EP 02</span>
+      <div class="ep-info">
+        <h4>High-Yield CT Imaging Findings</h4>
+        <p>Free air, pneumatosis, closed loop, volvulus, ischaemia — pattern recognition under pressure</p>
+        <div class="ep-tags"><span class="ep-tag">Imaging</span><span class="ep-tag">CT</span></div>
+      </div>
+      <button class="ep-play-btn" onclick="window.open('https://www.youtube.com/@YeSurgeryBett','_blank')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+    <div class="ep-row">
+      <span class="ep-num-badge">EP 01</span>
+      <div class="ep-info">
+        <h4>Welcome to YesSurgeryBet</h4>
+        <p>Why this podcast exists. What residents actually need. The rules of the game.</p>
+        <div class="ep-tags"><span class="ep-tag">Intro</span><span class="ep-tag">SIH</span></div>
+      </div>
+      <button class="ep-play-btn" onclick="window.open('https://www.youtube.com/@YeSurgeryBett','_blank')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <div><h3>Never miss an episode.</h3><p>New episodes drop on Telegram first. Join the channel now.</p></div>
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="cta-btn">Join Telegram →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="fb"><div class="fb-name">Surgical Insight Hub</div><p>High-yield surgical education. Built by Dr. Abdulmalik Moh.</p></div>
+    <div class="fc"><h5>Resources</h5><a href="notes.html">Notes</a><a href="podcast.html">Podcast</a><a href="mcq.html">MCQ Arena</a><a href="mcq_bank.html">MCQ Bank</a><a href="https://t.me/sugicalInsightHub" target="_blank">Telegram</a></div>
+    <div class="fc"><h5>Connect</h5><a href="https://www.youtube.com/@YeSurgeryBett" target="_blank">YouTube</a><a href="https://www.linkedin.com/company/surgical-insight-hub" target="_blank">LinkedIn</a><a href="about.html">About</a></div>
+  </div>
+  <div class="fbot"><p>© 2025 Surgical Insight Hub · Dr. Abdulmalik Moh · @sugicalInsightHub</p><p>Not a substitute for clinical judgment</p></div>
+</footer>
+
+<div class="mob-nav-overlay" id="mobNavOverlay" onclick="closeMobNav()"></div>
+<div class="mob-nav-sheet" id="mobNavSheet">
+  <div class="mob-nav-handle"></div>
+  <a href="index.html">Home</a>
+  <a href="podcast.html">Podcast</a>
+  <a href="notes.html">Notes</a>
+  <a href="mcq.html" class="mcq-link">MCQ Arena</a>
+  <a href="review.html" class="review-link">AI Review</a>
+  <a href="about.html">About</a>
+</div>
+
+<script>
+function openMobNav(){
+  document.getElementById('mobNavSheet').classList.add('open');
+  document.getElementById('mobNavOverlay').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closeMobNav(){
+  document.getElementById('mobNavSheet').classList.remove('open');
+  document.getElementById('mobNavOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+
+// Dark Mode Toggle Logic
+const themeToggle = document.getElementById('themeToggle');
+const moonIcon = document.getElementById('moonIcon');
+const sunIcon = document.getElementById('sunIcon');
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    moonIcon.style.display = 'none';
+    sunIcon.style.display = 'block';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    sunIcon.style.display = 'none';
+    moonIcon.style.display = 'block';
+  }
+}
+
+// Initial state
+applyTheme(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const isDark = document.documentElement.hasAttribute('data-theme');
+  const newTheme = isDark ? 'light' : 'dark';
+  applyTheme(newTheme);
+  localStorage.setItem('sih-theme', newTheme);
+});
+</script>
+
+<script src="js/nav-pill.js"></script>
+</body>
+</html>

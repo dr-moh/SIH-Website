@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCQ Arena — Surgical Insight Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/theme.css">
+<script>
+  const savedTheme = localStorage.getItem('sih-theme') || 'light';
+  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+.nav{position:fixed;top:14px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:200;pointer-events:none;}
+.nav-left,.nav-right{pointer-events:all;display:flex;align-items:center;gap:10px;}
+.nav-logo-pill{display:flex;align-items:center;gap:10px;background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border:1px solid var(--border-color);border-radius:100px;padding:6px 16px 6px 6px;box-shadow:0 2px 10px rgba(43,24,16,0.1);}
+.nav-logo-img{width:38px;height:38px;border-radius:50%;overflow:hidden;border:2px solid var(--brand-gold);background:var(--brand-burgundy);flex-shrink:0;}
+.nav-logo-img img{width:100%;height:100%;object-fit:cover;}
+.nav-brand-text{font-size:.82rem;font-weight:800;color:var(--text-primary);letter-spacing:-.02em;line-height:1.1;}
+.nav-brand-sub{font-size:.58rem;font-weight:500;color:var(--brand-gold);letter-spacing:.08em;text-transform:uppercase;}
+.nav-back{background:var(--brand-burgundy);color:#f0d080;border-radius:100px;padding:8px 18px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid rgba(184,146,42,0.3);transition:opacity .15s;}
+.nav-back:hover{opacity:.82;}
+
+/* HERO */
+.mcq-hero{min-height:100vh;background:linear-gradient(160deg,var(--bg-secondary) 0%,var(--bg-primary) 45%,#f0e8d8 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 24px 60px;text-align:center;position:relative;overflow:hidden;}
+.hero-blob{position:absolute;border-radius:50%;pointer-events:none;filter:blur(85px);}
+.hb1{width:600px;height:600px;top:-150px;left:-150px;background:radial-gradient(circle,#e8d5b0 0%,transparent 65%);opacity:.5;}
+.hb2{width:500px;height:500px;bottom:-100px;right:-100px;background:radial-gradient(circle,#dcc89a 0%,transparent 65%);opacity:.4;}
+.hero-kicker{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--brand-gold);margin-bottom:16px;}
+.hero-title{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:900;color:var(--text-primary);letter-spacing:-.04em;line-height:1.0;margin-bottom:14px;}
+.hero-title span{color:var(--brand-gold);}
+.hero-sub{font-size:.95rem;color:var(--text-secondary);max-width:480px;margin:0 auto 40px;line-height:1.65;}
+.hero-stats{display:flex;gap:24px;justify-content:center;margin-bottom:48px;flex-wrap:wrap;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-size:1.8rem;font-weight:900;color:var(--brand-burgundy);letter-spacing:-.03em;line-height:1;}
+.hero-stat-label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;}
+
+/* SETUP CARD */
+.setup-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:36px;max-width:640px;width:100%;box-shadow:0 8px 32px rgba(43,24,16,0.08);position:relative;z-index:2;}
+.setup-title{font-size:1.1rem;font-weight:800;color:var(--text-primary);margin-bottom:6px;letter-spacing:-.02em;}
+.setup-sub{font-size:.8rem;color:var(--text-secondary);margin-bottom:24px;}
+.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.setup-field{display:flex;flex-direction:column;gap:5px;}
+.setup-field label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-gold);}
+.setup-field input,.setup-field select{font-family:inherit;font-size:.82rem;color:var(--text-primary);background:var(--bg-primary);border:1px solid var(--border-color);border-radius:10px;padding:10px 12px;outline:none;transition:border-color .15s;width:100%;}
+.setup-field input:focus,.setup-field select:focus{border-color:var(--brand-gold);background:var(--bg-card);}
+.setup-field select option{background:var(--bg-card);}
+.setup-section-title{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-gold);margin:16px 0 8px;}
+.specialty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;margin-bottom:16px;max-height:160px;overflow-y:auto;padding-right:4px;}
+.spec-chip{padding:7px 12px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-primary);font-size:.75rem;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all .15s;text-align:center;}
+.spec-chip:hover{border-color:var(--brand-gold);color:var(--text-primary);}
+.spec-chip.active{background:var(--brand-burgundy);color:#f0d080;border-color:var(--brand-burgundy);}
+.qcount-row{display:flex;gap:8px;margin-bottom:20px;}
+.qcount-btn{flex:1;padding:8px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-primary);font-size:.8rem;font-weight:700;color:var(--text-secondary);cursor:pointer;transition:all .15s;text-align:center;}
+.qcount-btn.active{background:var(--brand-burgundy);color:#f0d080;border-color:var(--brand-burgundy);}
+.start-btn{width:100%;background:var(--brand-burgundy);color:#f0d080;border:none;border-radius:12px;padding:14px;font-family:inherit;font-size:.9rem;font-weight:800;cursor:pointer;transition:opacity .15s;letter-spacing:-.01em;}
+.start-btn:hover{opacity:.85;}
+.start-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* ARENA */
+.arena{display:none;min-height:100vh;padding:80px 16px 40px;background:var(--bg-primary);}
+.arena-inner{max-width:760px;margin:0 auto;}
+
+/* PROGRESS BAR */
+.prog-wrap{margin-bottom:20px;}
+.prog-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.prog-label{font-size:.72rem;font-weight:700;color:var(--brand-gold);letter-spacing:.06em;text-transform:uppercase;}
+.prog-score{font-size:.72rem;font-weight:700;color:var(--text-primary);font-family:monospace;}
+.prog-bar{height:4px;background:var(--border-color);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--brand-burgundy),var(--brand-gold));border-radius:2px;transition:width .4s ease;}
+.q-steps{display:flex;gap:4px;margin-top:8px;}
+.q-step{flex:1;height:4px;border-radius:2px;background:var(--border-color);}
+.q-step.done-correct{background:var(--brand-green);}
+.q-step.done-wrong{background:var(--brand-red);}
+.q-step.current{background:var(--brand-gold);}
+
+/* QUESTION CARD */
+.q-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:28px;margin-bottom:16px;box-shadow:0 4px 16px rgba(43,24,16,0.06);}
+.q-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.q-badge{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f0d080;background:var(--brand-burgundy);border-radius:6px;padding:4px 10px;}
+.q-topic-badge{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-gold);background:rgba(184,146,42,0.1);border-radius:6px;padding:4px 10px;}
+.q-num{font-size:.7rem;font-family:monospace;color:var(--text-muted);}
+.q-text{font-size:.95rem;font-weight:600;color:var(--text-primary);line-height:1.65;margin-bottom:20px;}
+
+/* OPTIONS */
+.options{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--bg-primary);border:1.5px solid var(--border-color);border-radius:12px;cursor:pointer;transition:all .18s;user-select:none;}
+.opt:hover:not(.locked){border-color:var(--brand-gold);background:rgba(184,146,42,0.06);}
+.opt-letter{width:26px;height:26px;border-radius:50%;background:var(--bg-card);border:1.5px solid rgba(184,146,42,0.3);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:var(--text-secondary);flex-shrink:0;margin-top:1px;transition:all .18s;}
+.opt-text{font-size:.85rem;color:var(--text-primary);line-height:1.5;padding-top:2px;}
+.opt.selected{border-color:var(--brand-gold);background:rgba(184,146,42,0.08);}
+.opt.selected .opt-letter{background:var(--brand-gold);color:var(--brand-burgundy);border-color:var(--brand-gold);}
+.opt.correct{border-color:var(--brand-green);background:#f0fdf4;}
+.opt.correct .opt-letter{background:var(--brand-green);color:var(--bg-card);border-color:var(--brand-green);}
+.opt.wrong{border-color:var(--brand-red);background:var(--bg-card)0f0;}
+.opt.wrong .opt-letter{background:var(--brand-red);color:var(--bg-card);border-color:var(--brand-red);}
+.opt.locked{cursor:default;}
+.opt.dimmed{opacity:.55;}
+
+/* SUBMIT */
+.submit-btn{width:100%;background:var(--brand-burgundy);color:#f0d080;border:none;border-radius:12px;padding:13px;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;transition:opacity .15s;margin-top:12px;letter-spacing:-.01em;}
+.submit-btn:hover{opacity:.85;}
+.submit-btn:disabled{opacity:.35;cursor:not-allowed;}
+
+/* SHARP DEBRIEF */
+.sharp-card{background:var(--brand-burgundy);border-radius:20px;padding:24px;margin-top:12px;display:none;border:1px solid var(--border-color);}
+.sharp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.sharp-title{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--brand-gold);}
+.sharp-result{display:flex;align-items:center;gap:6px;font-size:.75rem;font-weight:700;}
+.sharp-result.correct{color:var(--brand-green);}
+.sharp-result.wrong{color:var(--brand-red);}
+.sharp-rows{display:flex;flex-direction:column;gap:12px;}
+.sharp-row{display:flex;gap:10px;align-items:flex-start;}
+.sharp-badge{width:22px;height:22px;border-radius:5px;background:var(--brand-gold);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:var(--brand-burgundy);flex-shrink:0;margin-top:1px;}
+.sharp-content{}
+.sharp-row-title{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(184,146,42,0.7);margin-bottom:3px;}
+.sharp-row-text{font-size:.8rem;color:rgba(255,255,255,0.8);line-height:1.6;}
+.sharp-divider{height:1px;background:var(--border-color);margin:6px 0;}
+.opt-explanations{margin-top:10px;}
+.opt-exp{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid rgba(184,146,42,0.1);}
+.opt-exp:last-child{border-bottom:none;}
+.opt-exp-letter{font-size:.65rem;font-weight:800;color:var(--brand-gold);width:16px;flex-shrink:0;margin-top:2px;}
+.opt-exp-text{font-size:.77rem;color:rgba(255,255,255,0.65);line-height:1.5;}
+.guideline-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(184,146,42,0.1);border:1px solid var(--border-color);border-radius:6px;padding:5px 10px;font-size:.65rem;color:var(--brand-gold);font-weight:600;margin-top:10px;}
+.takehome{background:rgba(184,146,42,0.12);border-left:3px solid var(--brand-gold);padding:10px 14px;border-radius:0 8px 8px 0;margin-top:12px;}
+.takehome-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-gold);margin-bottom:4px;}
+.takehome-text{font-size:.8rem;color:#f0d080;font-weight:600;line-height:1.5;}
+.next-btn{width:100%;background:var(--brand-gold);color:var(--brand-burgundy);border:none;border-radius:12px;padding:13px;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;transition:opacity .15s;margin-top:16px;}
+.next-btn:hover{opacity:.85;}
+
+/* RESULTS */
+.results{display:none;min-height:100vh;padding:80px 16px 60px;background:var(--bg-primary);}
+.results-inner{max-width:720px;margin:0 auto;}
+.results-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:24px;padding:40px;text-align:center;box-shadow:0 8px 32px rgba(43,24,16,0.08);margin-bottom:24px;}
+.results-icon{font-size:3rem;margin-bottom:16px;}
+.results-title{font-size:1.8rem;font-weight:900;color:var(--text-primary);letter-spacing:-.03em;margin-bottom:6px;}
+.results-name{font-size:1rem;color:var(--brand-gold);font-weight:700;margin-bottom:20px;}
+.score-ring{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--brand-burgundy),var(--brand-gold));display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(43,24,16,0.2);}
+.score-num{font-size:2.2rem;font-weight:900;color:#f0d080;line-height:1;}
+.score-total{font-size:.7rem;color:rgba(240,208,128,0.6);letter-spacing:.06em;}
+.results-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
+.results-meta-card{background:var(--bg-primary);border-radius:12px;padding:14px;text-align:center;}
+.results-meta-num{font-size:1.4rem;font-weight:900;color:var(--brand-burgundy);line-height:1;}
+.results-meta-label{font-size:.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;}
+.results-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.results-btn{flex:1;min-width:140px;padding:13px;border-radius:12px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;transition:opacity .15s;border:none;}
+.results-btn-primary{background:var(--brand-burgundy);color:#f0d080;}
+.results-btn-secondary{background:rgba(184,146,42,0.1);color:var(--brand-burgundy);border:1px solid rgba(184,146,42,0.3)!important;}
+.results-btn:hover{opacity:.82;}
+
+/* LEADERBOARD */
+.lb-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;overflow:hidden;box-shadow:0 4px 16px rgba(43,24,16,0.06);}
+.lb-header{background:var(--brand-burgundy);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;}
+.lb-title{font-size:.8rem;font-weight:700;color:#f0d080;}
+.lb-sub{font-size:.65rem;color:rgba(255,255,255,0.4);}
+.lb-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid rgba(184,146,42,0.08);}
+.lb-row:last-child{border-bottom:none;}
+.lb-row.highlight{background:rgba(184,146,42,0.06);}
+.lb-rank{font-size:.75rem;font-weight:800;color:var(--brand-gold);width:20px;text-align:center;font-family:monospace;}
+.lb-rank.gold{color:#f0d080;}
+.lb-rank.silver{color:var(--text-muted);}
+.lb-avatar{width:34px;height:34px;border-radius:50%;background:var(--brand-burgundy);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#f0d080;flex-shrink:0;border:1.5px solid rgba(184,146,42,0.3);}
+.lb-info{flex:1;min-width:0;}
+.lb-name{font-size:.82rem;font-weight:700;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lb-detail{font-size:.65rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lb-score{text-align:right;}
+.lb-pct{font-size:.9rem;font-weight:800;color:var(--brand-burgundy);font-family:monospace;}
+.lb-qcount{font-size:.62rem;color:var(--text-muted);}
+.lb-loading{padding:24px;text-align:center;font-size:.8rem;color:var(--text-muted);}
+.lb-empty{padding:24px;text-align:center;font-size:.8rem;color:var(--text-muted);}
+
+/* MOBILE */
+@media(max-width:600px){
+  .setup-grid{grid-template-columns:1fr;}
+  .specialty-grid{grid-template-columns:repeat(2,1fr);}
+  .results-meta-grid{grid-template-columns:repeat(2,1fr);}
+  .q-card{padding:18px;}
+  .sharp-card{padding:18px;}
+  .results-card{padding:24px;}
+  .hero-stats{gap:16px;}
+}
+
+/* ── MOBILE HAMBURGER NAV ── */
+.mob-nav-toggle{display:none;background:var(--brand-burgundy);border:1.5px solid var(--brand-gold);color:#f0d080;border-radius:8px;padding:7px 12px;font-size:12px;cursor:pointer;align-items:center;gap:6px;font-family:inherit;font-weight:700;z-index:500;}
+.mob-nav-overlay{display:none;position:fixed;inset:0;background:rgba(43,24,16,0.55);z-index:480;backdrop-filter:blur(4px);}
+.mob-nav-sheet{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--brand-burgundy);border-radius:20px 20px 0 0;border-top:2px solid var(--brand-gold);padding:20px 20px 40px;z-index:490;transform:translateY(100%);transition:transform .28s ease;}
+.mob-nav-sheet.open{transform:translateY(0);}
+.mob-nav-sheet a{display:block;color:rgba(255,255,255,0.7);text-decoration:none;font-size:.92rem;font-weight:600;padding:11px 0;border-bottom:1px solid var(--border-color);}
+.mob-nav-sheet a:last-child{border-bottom:none;}
+.mob-nav-sheet a:hover,.mob-nav-sheet a.active{color:#f0d080;}
+.mob-nav-sheet a.mcq-link{color:var(--brand-red);font-weight:700;}
+.mob-nav-sheet a.review-link{color:var(--brand-gold);font-weight:700;}
+.mob-nav-handle{width:40px;height:4px;background:rgba(184,146,42,0.4);border-radius:2px;margin:0 auto 18px;}
+@media(max-width:768px){
+  .mob-nav-toggle{display:flex;}
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">MCQ Arena</div></div>
+    </div>
+  </div>
+  <button class="mob-nav-toggle" onclick="openMobNav()">☰ Menu</button>
+  <div class="nav-right">
+    <div class="nav-links-pill">
+      <a href="index.html">Home</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="notes.html">Notes</a>
+      <a href="mcq.html" class="active" style="background:rgba(163,21,21,0.1);color:#a31515;font-weight:700;">MCQ Arena</a>
+      <a href="review.html" style="background:rgba(184,146,42,0.1);color:#7a5c00;font-weight:700;">AI Review</a>
+      <a href="about.html">About</a>
+    </div>
+    <button class="theme-toggle nav-btn" id="themeToggle" aria-label="Toggle dark mode">
+        <svg id="moonIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+        <svg id="sunIcon" style="display:none;" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 5 5 5.006 5.006 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3.003 3.003 0 0 1-3 3zm0-13a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1zm0 18a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zm8-11h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zm-16 0H2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zm13.657-5.657a1 1 0 0 0-1.414 0l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414a1 1 0 0 0 0-1.414zm-11.314 0a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414L4.929 5.757a1 1 0 0 0-1.414 0zm11.314 11.314a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414a1 1 0 0 0-1.414 0zm-11.314 0a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414a1 1 0 0 0 0-1.414z"/></svg>
+    </button>
+    <a href="index.html" class="nav-cta-btn">← Back to Home</a>
+  </div>
+</nav>
+
+<!-- SETUP SCREEN -->
+<div class="mcq-hero" id="setupScreen">
+  <div class="hero-blob hb1"></div>
+  <div class="hero-blob hb2"></div>
+  <div style="position:relative;z-index:2;width:100%;max-width:640px;">
+    <div class="hero-kicker">Surgical Insight Hub</div>
+    <h1 class="hero-title">MCQ <span>Practice</span><br>Arena</h1>
+    <p class="hero-sub">Board-style questions with SHARP debriefing after each answer. Your score goes on the global leaderboard.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num" id="totalQCount">20</div><div class="hero-stat-label">Questions</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label">Specialties</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">Global</div><div class="hero-stat-label">Leaderboard</div></div>
+    </div>
+
+    <div class="setup-card">
+      <div class="setup-title">Set up your session</div>
+      <div class="setup-sub">Fill in your details — your score will appear on the global leaderboard.</div>
+      <div class="setup-grid">
+        <div class="setup-field">
+          <label>Your Name</label>
+          <input type="text" id="setupName" placeholder="Dr. ..." autocomplete="off">
+        </div>
+        <div class="setup-field">
+          <label>School / Hospital</label>
+          <input type="text" id="setupSchool" placeholder="University / Hospital" autocomplete="off">
+        </div>
+      </div>
+      <div class="setup-section-title">Specialty</div>
+      <div class="specialty-grid" id="specialtyGrid"></div>
+      <div class="setup-section-title">Number of Questions</div>
+      <div class="qcount-row" id="qcountRow">
+        <button class="qcount-btn active" data-count="5">5</button>
+        <button class="qcount-btn" data-count="10">10</button>
+        <button class="qcount-btn" data-count="20">20</button>
+        <button class="qcount-btn" data-count="all">All</button>
+      </div>
+      <button class="start-btn" id="startBtn" onclick="startSession()">Start Session →</button>
+      <div style="text-align: center; margin-top: 16px;">
+        <a href="mcq_bank.html" style="font-size: .75rem; font-weight: 700; color: var(--brand-gold); text-decoration: none; border-bottom: 1px solid rgba(184,146,42,0.3); padding-bottom: 2px;">Browse Source MCQ Bank →</a>
+      </div>
+    </div>
+
+    <!-- LEADERBOARD BELOW SETUP -->
+    <div style="max-width:640px;width:100%;margin-top:24px;position:relative;z-index:2;">
+      <div style="background:#2b1810;border-radius:16px;overflow:hidden;border:1px solid rgba(184,146,42,0.25);">
+        <div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(184,146,42,0.2);">
+          <div>
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(184,146,42,0.7);margin-bottom:2px;">Global Rankings</div>
+            <div style="font-size:.9rem;font-weight:800;color:#f0d080;letter-spacing:-.02em;">Top Performers</div>
+          </div>
+          <div style="font-size:.65rem;color:rgba(255,255,255,0.3);">Live · All specialties</div>
+        </div>
+        <div id="setupLbRows" style="padding:4px 0;">
+          <div style="padding:20px;text-align:center;font-size:.78rem;color:rgba(255,255,255,0.25);">Loading rankings...</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ARENA SCREEN -->
+<div class="arena" id="arenaScreen">
+  <div class="arena-inner">
+    <div class="prog-wrap">
+      <div class="prog-meta">
+        <span class="prog-label" id="progLabel">Question 1 of 10</span>
+        <span class="prog-score" id="progScore">Score: 0</span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+      <div class="q-steps" id="qSteps"></div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-meta">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="q-badge" id="qSpecialty">General Surgery</span>
+          <span class="q-topic-badge" id="qTopic">Critical Care</span>
+        </div>
+        <span class="q-num" id="qNum">Q1</span>
+      </div>
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="optionsWrap"></div>
+      <button class="submit-btn" id="submitBtn" onclick="submitAnswer()" disabled>Submit Answer</button>
+    </div>
+
+    <div class="sharp-card" id="sharpCard">
+      <div class="sharp-header">
+        <div class="sharp-title">SHARP Debrief</div>
+        <div class="sharp-result" id="sharpResult"></div>
+      </div>
+      <div class="sharp-rows">
+        <div class="sharp-row">
+          <div class="sharp-badge">S</div>
+          <div class="sharp-content">
+            <div class="sharp-row-title">Set the Stage</div>
+            <div class="sharp-row-text" id="sharpS"></div>
+          </div>
+        </div>
+        <div class="sharp-divider"></div>
+        <div class="sharp-row">
+          <div class="sharp-badge">H</div>
+          <div class="sharp-content">
+            <div class="sharp-row-title">Highlight Excellence</div>
+            <div class="sharp-row-text" id="sharpH"></div>
+          </div>
+        </div>
+        <div class="sharp-divider"></div>
+        <div class="sharp-row">
+          <div class="sharp-badge">A</div>
+          <div class="sharp-content">
+            <div class="sharp-row-title">Address the Gaps</div>
+            <div class="opt-explanations" id="sharpA"></div>
+          </div>
+        </div>
+        <div class="sharp-divider"></div>
+        <div class="sharp-row">
+          <div class="sharp-badge">R</div>
+          <div class="sharp-content">
+            <div class="sharp-row-title">Review — 2026 Guidelines</div>
+            <div class="sharp-row-text" id="sharpR"></div>
+            <div class="guideline-tag" id="sharpRTag">📋 Guideline Reference</div>
+          </div>
+        </div>
+        <div class="sharp-divider"></div>
+        <div class="sharp-row">
+          <div class="sharp-badge">P</div>
+          <div class="sharp-content">
+            <div class="sharp-row-title">Plan — Take-Home</div>
+            <div class="takehome"><div class="takehome-label">For your next shift</div><div class="takehome-text" id="sharpP"></div></div>
+          </div>
+        </div>
+      </div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div class="results" id="resultsScreen">
+  <div class="results-inner">
+    <div class="results-card">
+      <div class="results-icon" id="resultsIcon">🎯</div>
+      <div class="results-title" id="resultsTitle">Session Complete</div>
+      <div class="results-name" id="resultsName"></div>
+      <div class="score-ring">
+        <div class="score-num" id="scoreNum">0</div>
+        <div class="score-total" id="scoreTotal">/ 0</div>
+      </div>
+      <div class="results-meta-grid">
+        <div class="results-meta-card"><div class="results-meta-num" id="resPct">0%</div><div class="results-meta-label">Accuracy</div></div>
+        <div class="results-meta-card"><div class="results-meta-num" id="resCorrect">0</div><div class="results-meta-label">Correct</div></div>
+        <div class="results-meta-card"><div class="results-meta-num" id="resWrong">0</div><div class="results-meta-label">Wrong</div></div>
+      </div>
+      <div class="results-btns">
+        <button class="results-btn results-btn-primary" onclick="restartSession()">Try Again</button>
+        <button class="results-btn results-btn-secondary" onclick="goHome()">Back to Home</button>
+      </div>
+    </div>
+
+    <div class="lb-card">
+      <div class="lb-header">
+        <div class="lb-title">Global Leaderboard</div>
+        <div class="lb-sub" id="lbSub">All sessions · All specialties</div>
+      </div>
+      <div id="lbContent"><div class="lb-loading">Loading leaderboard...</div></div>
+    </div>
+  </div>
+</div>
+
+<script src="js/questions.js"></script>
+<script>
+
+
+
+// ── SUPABASE ──
+var SUPA_URL = 'https://sxushsvvmyokoknnsbuj.supabase.co';
+var SUPA_KEY = 'sb_publishable_Kl4RNEOxvmBewUToRv7HHw_2epulGkp';
+
+// ── STATE ──
+var state = {
+  name: '', school: '', specialty: 'All', qCount: 5,
+  questions: [], current: 0, score: 0,
+  answers: [], startTime: null
+};
+
+// ── INIT ──
+var SPECIALTIES = ['All', 'General Surgery', 'HPB', 'Colorectal', 'Anesthesia', 'Vascular', 'Trauma', 'Urology', 'Cardiothoracic', 'Pediatric Surgery', 'Orthopedic', 'Neurosurgery', 'Breast & Endocrine', 'Plastic Surgery'];
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadSetupLeaderboard();
+  // Update question count
+  document.getElementById('totalQCount').textContent = QUESTIONS.length;
+
+  // Build specialty chips
+  var sg = document.getElementById('specialtyGrid');
+  SPECIALTIES.forEach(function(s) {
+    var chip = document.createElement('div');
+    chip.className = 'spec-chip' + (s === 'All' ? ' active' : '');
+    chip.textContent = s;
+    chip.onclick = function() {
+      document.querySelectorAll('.spec-chip').forEach(function(c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      state.specialty = s;
+    };
+    sg.appendChild(chip);
+  });
+
+  // Q count buttons
+  document.querySelectorAll('.qcount-btn').forEach(function(btn) {
+    btn.onclick = function() {
+      document.querySelectorAll('.qcount-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      state.qCount = btn.dataset.count;
+    };
+  });
+});
+
+function startSession() {
+  var name = document.getElementById('setupName').value.trim();
+  var school = document.getElementById('setupSchool').value.trim();
+  if (!name || !school) { alert('Please enter your name and school/hospital.'); return; }
+
+  state.name = name;
+  state.school = school;
+  state.startTime = Date.now();
+
+  // Filter questions
+  var pool = state.specialty === 'All' ? QUESTIONS : QUESTIONS.filter(function(q) { return q.specialty === state.specialty; });
+  if (pool.length === 0) { alert('No questions found for this specialty. Choose "All" or another specialty.'); return; }
+
+  // Shuffle
+  pool = pool.slice().sort(function() { return Math.random() - 0.5; });
+
+  // Count
+  var count = state.qCount === 'all' ? pool.length : Math.min(parseInt(state.qCount), pool.length);
+  state.questions = pool.slice(0, count);
+  state.current = 0;
+  state.score = 0;
+  state.answers = [];
+
+  // Build step indicators
+  var steps = document.getElementById('qSteps');
+  steps.innerHTML = '';
+  state.questions.forEach(function(_, i) {
+    var s = document.createElement('div');
+    s.className = 'q-step' + (i === 0 ? ' current' : '');
+    s.id = 'step-' + i;
+    steps.appendChild(s);
+  });
+
+  document.getElementById('setupScreen').style.display = 'none';
+  document.getElementById('arenaScreen').style.display = 'block';
+  window.scrollTo(0, 0);
+  renderQuestion();
+}
+
+function renderQuestion() {
+  var q = state.questions[state.current];
+  var total = state.questions.length;
+  var idx = state.current;
+
+  // Meta
+  document.getElementById('progLabel').textContent = 'Question ' + (idx + 1) + ' of ' + total;
+  document.getElementById('progScore').textContent = 'Score: ' + state.score + ' / ' + idx;
+  document.getElementById('progFill').style.width = ((idx / total) * 100) + '%';
+  document.getElementById('qSpecialty').textContent = q.specialty;
+  document.getElementById('qTopic').textContent = q.topic;
+  document.getElementById('qNum').textContent = 'Q' + (idx + 1);
+  document.getElementById('qText').textContent = q.question;
+
+  // Options
+  var wrap = document.getElementById('optionsWrap');
+  wrap.innerHTML = '';
+  ['A','B','C','D','E'].forEach(function(letter) {
+    if (!q.options[letter]) return;
+    var opt = document.createElement('div');
+    opt.className = 'opt';
+    opt.id = 'opt-' + letter;
+    opt.innerHTML = '<div class="opt-letter">' + letter + '</div><div class="opt-text">' + q.options[letter] + '</div>';
+    opt.onclick = function() { selectOpt(letter); };
+    wrap.appendChild(opt);
+  });
+
+  // Reset
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('sharpCard').style.display = 'none';
+  state.selectedOpt = null;
+
+  // Next button text
+  document.getElementById('nextBtn').textContent = idx + 1 < total ? 'Next Question →' : 'See Results →';
+}
+
+function selectOpt(letter) {
+  // Allow free reselection before submit — no lock
+  document.querySelectorAll('.opt').forEach(function(o) { o.classList.remove('selected'); });
+  document.getElementById('opt-' + letter).classList.add('selected');
+  state.selectedOpt = letter;
+  document.getElementById('submitBtn').disabled = false;
+}
+
+function submitAnswer() {
+  if (state.selectedOpt === null) return;
+  var q = state.questions[state.current];
+  var selected = state.selectedOpt;
+  var correct = q.answer;
+  var isCorrect = selected === correct;
+
+  if (isCorrect) state.score++;
+  state.answers.push({ q: state.current, selected: selected, correct: correct, isCorrect: isCorrect });
+
+  // Lock options
+  document.querySelectorAll('.opt').forEach(function(o) {
+    o.classList.add('locked');
+    var letter = o.querySelector('.opt-letter').textContent;
+    if (letter === correct) { o.classList.add('correct'); o.classList.remove('selected','dimmed'); }
+    else if (letter === selected && !isCorrect) { o.classList.add('wrong'); }
+    else { o.classList.add('dimmed'); }
+  });
+
+  // Update step indicator
+  var step = document.getElementById('step-' + state.current);
+  step.classList.remove('current');
+  step.classList.add(isCorrect ? 'done-correct' : 'done-wrong');
+  if (state.current + 1 < state.questions.length) {
+    document.getElementById('step-' + (state.current + 1)).classList.add('current');
+  }
+
+  // Hide submit
+  document.getElementById('submitBtn').style.display = 'none';
+
+  // Show SHARP debrief
+  showSharp(q, selected, isCorrect);
+}
+
+function showSharp(q, selected, isCorrect) {
+  var card = document.getElementById('sharpCard');
+  card.style.display = 'block';
+
+  // S - Set the stage
+  var accuracy = Math.round((state.score / (state.answers.length)) * 100);
+  document.getElementById('sharpS').textContent =
+    (isCorrect ? '✓ Correct — ' : '✗ Incorrect — ') +
+    'The correct answer is ' + q.answer + '. ' + q.options[q.answer] + '. ' +
+    'Your session accuracy: ' + accuracy + '%.';
+
+  // H - Highlight Excellence
+  document.getElementById('sharpH').textContent = q.explanation.correct;
+
+  // A - Address the Gaps
+  var aWrap = document.getElementById('sharpA');
+  aWrap.innerHTML = '';
+  ['A','B','C','D','E'].forEach(function(letter) {
+    if (!q.options[letter] || letter === q.answer) return;
+    var row = document.createElement('div');
+    row.className = 'opt-exp';
+    row.innerHTML = '<div class="opt-exp-letter">' + letter + '</div><div class="opt-exp-text">' + q.explanation[letter] + '</div>';
+    aWrap.appendChild(row);
+  });
+
+  // R - Review Guidelines
+  document.getElementById('sharpR').textContent = '';
+  document.getElementById('sharpRTag').textContent = '📋 ' + q.guideline;
+
+  // P - Plan / Take-home
+  document.getElementById('sharpP').textContent = q.takeaway;
+
+  // Result badge
+  var res = document.getElementById('sharpResult');
+  if (isCorrect) { res.className = 'sharp-result correct'; res.textContent = '✓ Correct'; }
+  else { res.className = 'sharp-result wrong'; res.textContent = '✗ You selected ' + selected + ' — Answer is ' + q.answer; }
+
+  // Scroll to debrief
+  setTimeout(function() { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+}
+
+function nextQuestion() {
+  state.current++;
+  document.getElementById('submitBtn').style.display = 'block';
+  document.getElementById('submitBtn').disabled = true;
+  state.selectedOpt = null;
+
+  if (state.current >= state.questions.length) {
+    showResults();
+  } else {
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+async function showResults() {
+  var timeTaken = Math.round((Date.now() - state.startTime) / 1000);
+  var total = state.questions.length;
+  var pct = Math.round((state.score / total) * 100);
+
+  document.getElementById('arenaScreen').style.display = 'none';
+  document.getElementById('resultsScreen').style.display = 'block';
+  window.scrollTo(0, 0);
+
+  // Icon and title
+  var icon = pct >= 80 ? '🏆' : pct >= 60 ? '🎯' : '📚';
+  var title = pct >= 80 ? 'Outstanding!' : pct >= 60 ? 'Good Work!' : 'Keep Studying!';
+  document.getElementById('resultsIcon').textContent = icon;
+  document.getElementById('resultsTitle').textContent = title;
+  document.getElementById('resultsName').textContent = state.name + ' · ' + state.school;
+  document.getElementById('scoreNum').textContent = state.score;
+  document.getElementById('scoreTotal').textContent = '/ ' + total;
+  document.getElementById('resPct').textContent = pct + '%';
+  document.getElementById('resCorrect').textContent = state.score;
+  document.getElementById('resWrong').textContent = total - state.score;
+
+  // Save to Supabase
+  try {
+    await fetch(SUPA_URL + '/rest/v1/mcq_scores', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: state.name,
+        school: state.school,
+        specialty: state.specialty,
+        topic: 'Mixed',
+        score: state.score,
+        total: total,
+        time_taken: timeTaken
+      })
+    });
+  } catch(e) { console.log('Score save error:', e); }
+
+  // Load leaderboard
+  loadLeaderboard();
+}
+
+async function loadSetupLeaderboard() {
+  var container = document.getElementById('setupLbRows');
+  if (!container) return;
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/mcq_scores?order=percentage.desc,score.desc&limit=8', {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    var data = await res.json();
+    if (!data || !data.length) {
+      container.innerHTML = '<div style="padding:16px;text-align:center;font-size:.75rem;color:rgba(255,255,255,0.25);">No scores yet — be first!</div>';
+      return;
+    }
+    var html = '';
+    data.forEach(function(row, i) {
+      var initials = (row.name||'?').split(' ').filter(Boolean).map(function(n){return n[0];}).join('').slice(0,2).toUpperCase();
+      var pct = row.percentage !== undefined ? row.percentage : Math.round((row.score/row.total)*100);
+      var medal = i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
+      var rankColor = i===0?'#f0d080':i===1?'rgba(240,208,128,0.6)':'rgba(184,146,42,0.5)';
+      html += '<div style="display:flex;align-items:center;gap:10px;padding:9px 20px;border-bottom:1px solid rgba(184,146,42,0.08);">' +
+        '<div style="font-size:.75rem;font-weight:800;color:'+rankColor+';width:20px;text-align:center;font-family:monospace;">'+(i+1)+'</div>' +
+        '<div style="width:28px;height:28px;border-radius:50%;background:rgba(184,146,42,0.2);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;color:#f0d080;flex-shrink:0;">'+initials+'</div>' +
+        '<div style="flex:1;min-width:0;">' +
+          '<div style="font-size:.78rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+( row.name||'Anonymous')+medal+'</div>' +
+          '<div style="font-size:.62rem;color:rgba(255,255,255,0.3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+(row.school||'')+' · '+(row.specialty||'Mixed')+'</div>' +
+        '</div>' +
+        '<div style="font-size:.82rem;font-weight:800;color:#f0d080;font-family:monospace;">'+pct+'%<span style="font-size:.58rem;color:rgba(240,208,128,0.4);margin-left:3px;">'+row.score+'/'+row.total+'</span></div>' +
+        '</div>';
+    });
+    container.innerHTML = html;
+  } catch(e) {
+    container.innerHTML = '<div style="padding:16px;text-align:center;font-size:.75rem;color:rgba(255,255,255,0.25);">Leaderboard unavailable.</div>';
+  }
+}
+
+async function loadLeaderboard() {
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/mcq_scores?order=percentage.desc,score.desc&limit=20', {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    var data = await res.json();
+    renderLeaderboard(data);
+  } catch(e) {
+    document.getElementById('lbContent').innerHTML = '<div class="lb-empty">Could not load leaderboard.</div>';
+  }
+}
+
+function renderLeaderboard(data) {
+  if (!data || !data.length) {
+    document.getElementById('lbContent').innerHTML = '<div class="lb-empty">No scores yet. You are first!</div>';
+    return;
+  }
+  var html = '';
+  data.forEach(function(row, i) {
+    var isMe = row.name === state.name && row.school === state.school;
+    var rankColor = i === 0 ? 'gold' : i === 1 ? 'silver' : '';
+    var initials = (row.name || '?').split(' ').map(function(n) { return n[0]; }).join('').slice(0,2).toUpperCase();
+    var pct = row.percentage !== undefined ? row.percentage : Math.round((row.score/row.total)*100);
+    html += '<div class="lb-row' + (isMe ? ' highlight' : '') + '">' +
+      '<div class="lb-rank ' + rankColor + '">' + (i + 1) + '</div>' +
+      '<div class="lb-avatar">' + initials + '</div>' +
+      '<div class="lb-info"><div class="lb-name">' + (row.name || 'Anonymous') + (isMe ? ' (You)' : '') + '</div>' +
+      '<div class="lb-detail">' + (row.school || '') + ' · ' + (row.specialty || 'Mixed') + '</div></div>' +
+      '<div class="lb-score"><div class="lb-pct">' + pct + '%</div>' +
+      '<div class="lb-qcount">' + row.score + '/' + row.total + '</div></div></div>';
+  });
+  document.getElementById('lbContent').innerHTML = html;
+}
+
+function restartSession() {
+  state = { name: state.name, school: state.school, specialty: 'All', qCount: 5, questions: [], current: 0, score: 0, answers: [], startTime: null };
+  document.getElementById('resultsScreen').style.display = 'none';
+  document.getElementById('arenaScreen').style.display = 'none';
+  document.getElementById('setupScreen').style.display = 'flex';
+  document.getElementById('setupName').value = state.name;
+  document.getElementById('setupSchool').value = state.school;
+  window.scrollTo(0, 0);
+}
+
+function goHome() { window.location.href = 'index.html'; }
+</script>
+
+<div class="mob-nav-overlay" id="mobNavOverlay" onclick="closeMobNav()"></div>
+<div class="mob-nav-sheet" id="mobNavSheet">
+  <div class="mob-nav-handle"></div>
+  <a href="index.html">Home</a>
+  <a href="podcast.html">Podcast</a>
+  <a href="notes.html">Notes</a>
+  <a href="mcq.html" class="mcq-link">MCQ Arena</a>
+  <a href="review.html" class="review-link">AI Review</a>
+  <a href="about.html">About</a>
+</div>
+
+<script>
+function openMobNav(){
+  document.getElementById('mobNavSheet').classList.add('open');
+  document.getElementById('mobNavOverlay').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closeMobNav(){
+  document.getElementById('mobNavSheet').classList.remove('open');
+  document.getElementById('mobNavOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+
+// Dark Mode Toggle Logic
+const themeToggle = document.getElementById('themeToggle');
+const moonIcon = document.getElementById('moonIcon');
+const sunIcon = document.getElementById('sunIcon');
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    moonIcon.style.display = 'none';
+    sunIcon.style.display = 'block';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    sunIcon.style.display = 'none';
+    moonIcon.style.display = 'block';
+  }
+}
+
+// Initial state
+applyTheme(savedTheme || 'light');
+
+themeToggle.addEventListener('click', () => {
+  const isDark = document.documentElement.hasAttribute('data-theme');
+  const newTheme = isDark ? 'light' : 'dark';
+  applyTheme(newTheme);
+  localStorage.setItem('sih-theme', newTheme);
+});
+</script>
+
+<script src="js/nav-pill.js"></script>
+</body>
+</html>

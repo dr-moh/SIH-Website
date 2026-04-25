@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surgical Insight Hub — Appendicitis 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/shared.css">
+
+<script>
+  const savedTheme = localStorage.getItem('sih-theme') || 'light';
+  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+
+<style>
+:root {
+  --primary:   #1B4332;
+  --primary-dk:#0D2B1F;
+  --primary-lt:#E6F2EE;
+  --accent:    #2D6A4F;
+  --accent2:   #40916C;
+  --gold:      #C9910A;
+  --gold-lt:   #FFF8E8;
+  --s1:        #1B4332;
+  --s2:        #2D6A4F;
+  --s3:        #40916C;
+  --s4:        #52B788;
+  --s5:        #1A3050;
+  --s1-lt:     #E6F2EE;
+  --s2-lt:     #ECF5F0;
+  --s3-lt:     #F0F8F4;
+  --s4-lt:     #F4FAF7;
+  --s5-lt:     #E6EEF8;
+  --red:       #8B1A1A;
+  --red-lt:    #FFF0F0;
+  --amber:     #7B4F00;
+  --amber-lt:  #FFF8E8;
+  --blue:      #1A3050;
+  --blue-lt:   #E6EEF8;
+  --bg:        #F5FAF7;
+  --bg2:       #EBF4EF;
+  --border:    #C8DDD4;
+  --text:      #12241A;
+  --muted:     #3A5A47;
+  --white:     #FFFFFF;
+  --sidebar-w: 300px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;}
+
+/* SIDEBAR */
+#sidebar{position:fixed;top:70px;left:0;width:var(--sidebar-w);height:calc(100vh - 70px);background:var(--primary-dk);color:#C4D9CC;display:flex;flex-direction:column;z-index:100;overflow:hidden;}
+#sidebar-header{padding:20px 20px 14px;border-bottom:1px solid rgba(255,255,255,0.1);flex-shrink:0;}
+#sidebar-header .logo{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#8ECFAD;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+#sidebar-header .sub{font-size:10.5px;color:rgba(196,217,204,0.6);letter-spacing:0.04em;}
+#sidebar-search{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;}
+#sidebar-search input{width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#C4D9CC;padding:6px 10px;font-size:12px;font-family:'Source Serif 4',serif;outline:none;transition:border-color 0.2s;}
+#sidebar-search input::placeholder{color:rgba(196,217,204,0.4);}
+#sidebar-search input:focus{border-color:#8ECFAD;}
+#sidebar-nav{flex:1;overflow-y:auto;padding:8px 0 20px;}
+#sidebar-nav::-webkit-scrollbar{width:4px;}
+#sidebar-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:2px;}
+.vol-label{font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#8ECFAD;padding:14px 18px 4px;}
+.nav-item{display:block;padding:6px 18px 6px 22px;font-size:12px;color:rgba(196,217,204,0.75);text-decoration:none;border-left:2px solid transparent;transition:all 0.15s;line-height:1.4;}
+.nav-item:hover{color:#fff;background:rgba(255,255,255,0.05);border-left-color:rgba(142,207,173,0.5);}
+.nav-item.active{color:#fff;background:rgba(255,255,255,0.08);border-left-color:#8ECFAD;font-weight:600;}
+.nav-item .num{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(196,217,204,0.4);margin-right:6px;}
+
+/* MAIN */
+#main{margin-left:var(--sidebar-w);min-height:100vh;padding-top:70px;}
+
+/* HERO */
+#hero{background:linear-gradient(135deg,var(--primary-dk) 0%,#071A10 60%,#040F08 100%);color:white;padding:72px 72px 60px;position:relative;overflow:hidden;}
+#hero::before{content:'';position:absolute;top:-60px;right:-60px;width:380px;height:380px;background:radial-gradient(circle,rgba(64,145,108,0.18) 0%,transparent 70%);pointer-events:none;}
+#hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#40916C,#8ECFAD,transparent);}
+#hero .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#8ECFAD;text-transform:uppercase;margin-bottom:14px;}
+#hero h1{font-family:'Playfair Display',serif;font-size:46px;font-weight:700;line-height:1.15;margin-bottom:10px;color:#fff;}
+#hero .subtitle{font-size:18px;color:rgba(255,255,255,0.65);font-style:italic;margin-bottom:28px;}
+#hero .badges{display:flex;gap:10px;flex-wrap:wrap;}
+#hero .badge{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:4px 14px;font-size:12px;color:rgba(255,255,255,0.8);font-family:'JetBrains Mono',monospace;}
+
+/* CONTENT */
+.content-wrap{max-width:900px;margin:0 auto;padding:0 48px 80px;}
+
+/* SECTION HEADER */
+.sec-header{margin-top:60px;margin-bottom:8px;padding:28px 36px;border-radius:10px;display:flex;align-items:center;gap:20px;}
+.sec-header.s1{background:linear-gradient(135deg,#1B433208,#1B433218);border-left:4px solid var(--s1);}
+.sec-header.s2{background:linear-gradient(135deg,#2D6A4F08,#2D6A4F18);border-left:4px solid var(--s2);}
+.sec-header.s3{background:linear-gradient(135deg,#40916C08,#40916C18);border-left:4px solid var(--s3);}
+.sec-header.s4{background:linear-gradient(135deg,#52B78808,#52B78818);border-left:4px solid var(--s4);}
+.sec-header.s5{background:linear-gradient(135deg,#1A305008,#1A305018);border-left:4px solid var(--s5);}
+.sec-badge{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;padding:4px 12px;border-radius:4px;white-space:nowrap;flex-shrink:0;}
+.s1 .sec-badge{background:var(--s1);color:white;}
+.s2 .sec-badge{background:var(--s2);color:white;}
+.s3 .sec-badge{background:var(--s3);color:white;}
+.s4 .sec-badge{background:var(--s4);color:white;}
+.s5 .sec-badge{background:var(--s5);color:white;}
+.sec-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
+.s1 .sec-title{color:var(--s1);}
+.s2 .sec-title{color:var(--s2);}
+.s3 .sec-title{color:var(--s3);}
+.s4 .sec-title{color:var(--s4);}
+.s5 .sec-title{color:var(--s5);}
+
+/* TOPIC */
+.topic{margin-top:48px;padding-top:48px;border-top:1px solid var(--border);}
+.topic:first-of-type{border-top:none;}
+.topic-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;}
+.topic-num{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;padding:3px 10px;border-radius:4px;margin-top:4px;flex-shrink:0;}
+.s1 .topic-num{background:var(--s1-lt);color:var(--s1);}
+.s2 .topic-num{background:var(--s2-lt);color:var(--s2);}
+.s3 .topic-num{background:var(--s3-lt);color:var(--s3);}
+.s4 .topic-num{background:var(--s4-lt);color:var(--s4);}
+.s5 .topic-num{background:var(--s5-lt);color:var(--s5);}
+.topic h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;line-height:1.2;}
+.s1 .topic h2{color:var(--s1);}
+.s2 .topic h2{color:var(--s2);}
+.s3 .topic h2{color:var(--s3);}
+.s4 .topic h2{color:var(--s4);}
+.s5 .topic h2{color:var(--s5);}
+.topic h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--muted);margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.topic h4{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin:18px 0 8px;font-family:'JetBrains Mono',monospace;}
+.topic p{margin-bottom:12px;color:var(--text);}
+.topic ul,.topic ol{margin:8px 0 14px 20px;color:var(--text);}
+.topic li{margin-bottom:6px;line-height:1.65;}
+.topic li::marker{color:var(--accent2);}
+.topic strong{color:var(--text);font-weight:600;}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;margin:16px 0 20px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:white;}
+thead tr{background:var(--s1);}
+thead th{color:white;padding:10px 14px;text-align:left;font-family:'Source Serif 4',serif;font-weight:600;font-size:13px;}
+tbody tr:nth-child(even){background:var(--bg2);}
+tbody tr:hover{background:var(--s1-lt);transition:background 0.15s;}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
+.s2-tbl thead tr{background:var(--s2);}
+.s3-tbl thead tr{background:var(--s3);}
+.s4-tbl thead tr{background:var(--s4);}
+.s5-tbl thead tr{background:var(--s5);}
+
+/* CALLOUTS */
+.callout{margin:18px 0;padding:14px 18px;border-radius:0 8px 8px 0;border-left:4px solid;font-size:14px;line-height:1.65;}
+.callout .label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:4px;}
+.callout.pearl{background:var(--amber-lt);border-color:var(--amber);}
+.callout.pearl .label{color:var(--amber);}
+.callout.warn{background:var(--red-lt);border-color:var(--red);}
+.callout.warn .label{color:var(--red);}
+.callout.clin{background:var(--s1-lt);border-color:var(--s1);}
+.callout.clin .label{color:var(--s1);}
+.callout.exam{background:var(--blue-lt);border-color:var(--blue);}
+.callout.exam .label{color:var(--blue);}
+
+/* VIVA BOXES */
+.viva{background:var(--s1-lt);border:1px solid var(--border);border-left:4px solid var(--s1);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.viva .vq{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:var(--s1);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;}
+.viva .vscenario{font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.5;}
+.viva .vanswer{font-size:13.5px;color:var(--muted);line-height:1.65;}
+.viva .vanswer ul{margin:6px 0 0 18px;}
+.viva .vanswer li{margin-bottom:4px;}
+
+/* KEY GRID */
+.key-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin:14px 0 20px;}
+.key-card{background:white;border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.55;}
+.key-card .kc-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;font-weight:600;color:var(--s1);}
+.key-card .kc-val{font-weight:700;font-size:15px;color:var(--text);}
+.key-card.g2 .kc-label{color:var(--s2);}
+.key-card.g3 .kc-label{color:var(--s3);}
+.key-card.red .kc-label{color:var(--red);}
+.key-card.amb .kc-label{color:var(--amber);}
+
+/* CHIPS */
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px;}
+.chip{background:white;border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:13px;color:var(--muted);}
+.chip strong{color:var(--text);}
+
+/* DIAGRAM */
+.diagram-wrap{background:var(--s1-lt);border:1px solid var(--border);border-radius:8px;padding:18px;margin:20px 0;}
+.diagram-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--s1);margin-bottom:12px;}
+
+/* RAPID REFERENCE */
+.rapid-ref{background:var(--primary-dk);color:#C4D9CC;border-radius:10px;padding:28px 32px;margin:30px 0;}
+.rapid-ref h3{font-family:'Playfair Display',serif;font-size:20px;color:#8ECFAD;margin-bottom:16px;}
+.rapid-ref table{font-size:12.5px;}
+.rapid-ref thead tr{background:rgba(142,207,173,0.2);}
+.rapid-ref thead th{color:#8ECFAD;padding:8px 12px;font-size:11px;}
+.rapid-ref tbody tr:nth-child(even){background:rgba(255,255,255,0.04);}
+.rapid-ref tbody tr:hover{background:rgba(255,255,255,0.07);}
+.rapid-ref tbody td{color:#C4D9CC;padding:7px 12px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.rapid-ref tbody td strong{color:#8ECFAD;}
+
+/* PROGRESS */
+#progress-bar{position:fixed;top:70px;left:var(--sidebar-w);right:0;height:3px;background:linear-gradient(90deg,#40916C,#8ECFAD);transform-origin:left;transform:scaleX(0);transition:transform 0.1s;z-index:50;}
+
+/* TOP BTN */
+#top-btn{position:fixed;bottom:28px;right:28px;background:var(--primary);color:white;border:none;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:all 0.2s;opacity:0;pointer-events:none;}
+#top-btn.show{opacity:1;pointer-events:auto;}
+#top-btn:hover{background:var(--accent2);transform:translateY(-2px);}
+
+/* ANIMATION */
+.topic{animation:fadeUp 0.4s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:900px){
+  :root{--sidebar-w:0px;}
+  #sidebar{transform:translateX(-300px);width:300px;top:70px;height:calc(100vh - 70px);}
+  #main{margin-left:0;}
+  .content-wrap{padding:0 20px 60px;}
+  #hero{padding:48px 20px 40px;}
+  #hero h1{font-size:30px;}
+  #progress-bar{left:0;}
+}
+@media print{
+  .nav,.mob-nav-overlay,.mob-nav-sheet,#top-btn,#progress-bar{display:none!important;}
+  #main{margin-left:0;}
+  .topic{page-break-inside:avoid;}
+  .sec-header{page-break-before:always;}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="../assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH" onerror="this.parentElement.style.background='#b8922a'"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">@sugicalInsightHub</div></div>
+    </div>
+  </div>
+  
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 19.07l1.41-1.41M17.66 6.34l1.41-1.41M12 7a5 5 0 100 10m0 0a5 5 0 100-10z"/></svg>
+      <svg class="moon-icon" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+    <div class="nav-links-pill">
+      <a href="../notes.html" class="active">Notes</a>
+      <a href="../podcast.html">Podcast</a>
+      <a href="../review.html">Review</a>
+      <a href="../mcq.html">MCQ Arena</a>
+      <a href="../about.html">About</a>
+    </div>
+    <a href="https://t.me/sugicalInsightHub" target="_blank" class="nav-btn">Get Notes →</a>
+
+    <button class="mob-nav-toggle" id="hamburgerMenu" aria-label="Open menu">
+      ☰ Menu
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Navigation Sheet -->
+<div class="mob-nav-overlay" id="mobOverlay"></div>
+<div class="mob-nav-sheet" id="mobSheet">
+  <div class="mob-nav-handle" id="mobClose"></div>
+  <a href="../index.html">Home</a>
+  <a href="../notes.html" class="active">Notes</a>
+  <a href="../podcast.html">Podcast</a>
+  <a href="../review.html">Review</a>
+  <a href="../mcq.html">MCQ Arena</a>
+  <a href="../about.html">About</a>
+  <a href="https://t.me/sugicalInsightHub" target="_blank" class="mob-nav-cta" style="margin-top:20px;display:block;text-align:center;background:var(--brand-gold);color:#1a1208;padding:12px;border-radius:100px;">Join Telegram</a>
+</div>
+
+<script src="../js/nav-pill.js"></script>
+<script>
+  // Theme Toggle Logic
+  const themeToggle = document.getElementById('themeToggle');
+  const sunIcon = document.querySelector('.sun-icon');
+  const moonIcon = document.querySelector('.moon-icon');
+
+  function updateIcons(theme) {
+    if (theme === 'dark') {
+      if(sunIcon) sunIcon.style.display = 'none';
+      if(moonIcon) moonIcon.style.display = 'block';
+    } else {
+      if(sunIcon) sunIcon.style.display = 'block';
+      if(moonIcon) moonIcon.style.display = 'none';
+    }
+  }
+
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  updateIcons(currentTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const root = document.documentElement;
+      let newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', newTheme);
+      localStorage.setItem('sih-theme', newTheme);
+      updateIcons(newTheme);
+    });
+  }
+
+  // Mobile Nav Logic
+  const mobToggle = document.getElementById('hamburgerMenu');
+  const mobOverlay = document.getElementById('mobOverlay');
+  const mobSheet = document.getElementById('mobSheet');
+  const mobClose = document.getElementById('mobClose');
+
+  if(mobToggle) {
+    mobToggle.addEventListener('click', () => {
+      mobOverlay.style.display = 'block';
+      setTimeout(() => mobSheet.classList.add('open'), 10);
+    });
+  }
+  
+  function closeNav() {
+    mobSheet.classList.remove('open');
+    setTimeout(() => mobOverlay.style.display = 'none', 300);
+  }
+
+  if(mobOverlay) mobOverlay.addEventListener('click', closeNav);
+  if(mobClose) mobClose.addEventListener('click', closeNav);
+</script>
+
+<div id="progress-bar"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <div class="logo">Surgical Insight Hub</div>
+    <div class="sub">Appendicitis 2025 · Monograph Series</div>
+  </div>
+  <div id="sidebar-search">
+    <input type="text" id="search-input" placeholder="Search topics…" oninput="filterNav(this.value)">
+  </div>
+  <div id="sidebar-nav">
+    <div class="vol-label">Section 1 — Operative Atlas</div>
+    <a class="nav-item" href="#s1a"><span class="num">1.1</span>Surgical Anatomy</a>
+    <a class="nav-item" href="#s1b"><span class="num">1.2</span>Step-by-Step Procedure</a>
+    <a class="nav-item" href="#s1c"><span class="num">1.3</span>The Difficult Case</a>
+    <div class="vol-label">Section 2 — Academic Didactics</div>
+    <a class="nav-item" href="#s2a"><span class="num">2.1</span>Seminar Outline</a>
+    <a class="nav-item" href="#s2b"><span class="num">2.2</span>Landmark Trials</a>
+    <a class="nav-item" href="#s2c"><span class="num">2.3</span>Grand Rounds Debate</a>
+    <div class="vol-label">Section 3 — Board Review</div>
+    <a class="nav-item" href="#s3a"><span class="num">3.1</span>Viva Scenarios</a>
+    <a class="nav-item" href="#s3b"><span class="num">3.2</span>Scoring Systems</a>
+    <a class="nav-item" href="#s3c"><span class="num">3.3</span>WSES Grading</a>
+    <a class="nav-item" href="#s3d"><span class="num">3.4</span>Clavien-Dindo</a>
+    <div class="vol-label">Section 4 — Perioperative Protocol</div>
+    <a class="nav-item" href="#s4a"><span class="num">4.1</span>Imaging Comparison</a>
+    <a class="nav-item" href="#s4b"><span class="num">4.2</span>Biomarkers</a>
+    <a class="nav-item" href="#s4c"><span class="num">4.3</span>ERAS 2025 Protocol</a>
+    <a class="nav-item" href="#s4d"><span class="num">4.4</span>Complication Management</a>
+    <div class="vol-label">Section 5 — Visualization</div>
+    <a class="nav-item" href="#s5a"><span class="num">5.1</span>Spatial Awareness</a>
+    <a class="nav-item" href="#s5b"><span class="num">5.2</span>CT Signs</a>
+    <a class="nav-item" href="#s5c"><span class="num">5.3</span>Diagrams</a>
+    <div class="vol-label">Quick Reference</div>
+    <a class="nav-item" href="#rapid">Rapid Board Facts</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+<section id="hero">
+  <div class="eyebrow">Surgical Insight Hub · Monograph Series · ABSITE · MRCS · FRCS · FWACS</div>
+  <h1>Appendicitis 2025<br>Master Monograph</h1>
+  <p class="subtitle">Approach, Management &amp; Contemporary Updates</p>
+  <div class="badges">
+    <span class="badge">Schwartz 12e</span>
+    <span class="badge">Bailey &amp; Love 28e</span>
+    <span class="badge">SAGES 2025</span>
+    <span class="badge">WSES 2020</span>
+    <span class="badge">APPAC I/II · CODA</span>
+    <span class="badge">PubMed 2024–2025</span>
+  </div>
+</section>
+
+<div class="content-wrap">
+
+<!-- ══════════════ SECTION 1 ══════════════ -->
+<div class="sec-header s1">
+  <span class="sec-badge">SECTION 1</span>
+  <span class="sec-title">The Operative Atlas</span>
+</div>
+
+<!-- 1.1 ANATOMY -->
+<section class="topic s1" id="s1a">
+  <div class="topic-header"><span class="topic-num">1.1</span><h2>Surgical Anatomy: Fascial Planes, Neurovascular Danger Zones &amp; Critical Variations</h2></div>
+
+  <h3>Anatomical Position of the Appendix</h3>
+  <ul>
+    <li>Base arises from the posteromedial cecal wall, 2–3 cm below the ileocecal valve, at the convergence of the three taeniae coli — <strong>reliable intraoperative landmark</strong></li>
+    <li>McBurney's point: junction of lateral one-third and medial two-thirds of a line from ASIS to umbilicus; corresponds to the appendiceal base in most patients</li>
+  </ul>
+
+  <h3>Positional Variations</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Position</th><th>Frequency</th><th>Clinical Implication</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Retrocecal</strong></td><td>65–70%</td><td>RLQ pain atypical; psoas sign positive; risk of missed diagnosis on clinical exam alone</td></tr>
+      <tr><td><strong>Pelvic / Descending</strong></td><td>25–30%</td><td>Pelvic/suprapubic pain; may mimic gynaecological pathology; rectal/vaginal tenderness</td></tr>
+      <tr><td><strong>Preileal</strong></td><td>~5%</td><td>Anterior; classic presentation; easiest surgical access</td></tr>
+      <tr><td><strong>Postileal</strong></td><td>~2%</td><td>Behind terminal ileum; highest risk of delayed diagnosis</td></tr>
+      <tr><td><strong>Subhepatic</strong></td><td>Rare</td><td>RUQ pain; mimics cholecystitis; associated with malrotation/situs inversus</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Vascular Supply &amp; Neurovascular Danger Zones</h3>
+  <ul>
+    <li>Appendicular artery: terminal branch of the ileocolic artery (from SMA); runs in the free border of the mesoappendix</li>
+    <li><strong>DANGER ZONE 1:</strong> Mesoappendical base — vessels run here; inadvertent traction tears vessel, causing uncontrolled retroperitoneal bleeding extending to the ileocolic pedicle</li>
+    <li><strong>DANGER ZONE 2:</strong> Terminal ileum mesentery — aggressive dissection risks ileocolic artery injury</li>
+    <li><strong>DANGER ZONE 3:</strong> Right ureter — lies on psoas medial to cecum; especially vulnerable in retrocecal dissection</li>
+    <li><strong>DANGER ZONE 4:</strong> Right gonadal vessels — cross anterior to psoas, medial to ureter; at risk in deep pelvic/retrocecal dissection</li>
+    <li>Nerve supply: sympathetic T10 (visceral pain → periumbilical) + parietal T11–L1 (localises to RLQ with peritoneal involvement)</li>
+  </ul>
+  <div class="callout clin"><span class="label">★ Board Pearl</span>The taeniae coli converge at the appendiceal base — if you cannot find the appendix, follow the anterior taenia inferiorly to the cecum.</div>
+
+  <!-- DIAGRAM 1: Positional Variations -->
+  <div class="diagram-wrap">
+    <div class="diagram-title">Appendiceal positional variations — schematic view</div>
+    <svg width="100%" viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1B4332" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+      <!-- Cecum body -->
+      <ellipse cx="340" cy="190" rx="70" ry="80" fill="#E6F2EE" stroke="#1B4332" stroke-width="2"/>
+      <text x="340" y="185" text-anchor="middle" font-size="13" font-weight="bold" fill="#1B4332">Cecum</text>
+      <!-- Taeniae convergence dot -->
+      <circle cx="340" cy="230" r="6" fill="#1B4332"/>
+      <text x="340" y="248" text-anchor="middle" font-size="10" fill="#1B4332">Appendiceal base</text>
+      <text x="340" y="260" text-anchor="middle" font-size="9" fill="#2D6A4F">(taeniae convergence)</text>
+      <!-- Terminal ileum -->
+      <path d="M430 155 Q470 145 490 160" fill="none" stroke="#40916C" stroke-width="2"/>
+      <text x="502" y="158" font-size="11" fill="#2D6A4F">Terminal ileum</text>
+      <!-- Position 1: Retrocecal -->
+      <path d="M340 224 Q300 200 270 130" fill="none" stroke="#1B4332" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#a1)"/>
+      <rect x="195" y="90" width="90" height="36" rx="6" fill="#1B4332"/>
+      <text x="240" y="104" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Retrocecal</text>
+      <text x="240" y="118" text-anchor="middle" font-size="10" fill="#8ECFAD">65–70%</text>
+      <!-- Position 2: Pelvic -->
+      <path d="M340 236 Q350 265 360 320" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#a1)"/>
+      <rect x="310" y="320" width="90" height="36" rx="6" fill="#2D6A4F"/>
+      <text x="355" y="334" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Pelvic</text>
+      <text x="355" y="348" text-anchor="middle" font-size="10" fill="#B0D9C0">25–30%</text>
+      <!-- Position 3: Preileal -->
+      <path d="M340 224 Q380 215 430 200" fill="none" stroke="#40916C" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#a1)"/>
+      <rect x="440" y="182" width="80" height="36" rx="6" fill="#40916C"/>
+      <text x="480" y="196" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Preileal</text>
+      <text x="480" y="210" text-anchor="middle" font-size="10" fill="#D0F0E0">~5%</text>
+      <!-- Position 4: Postileal -->
+      <path d="M340 224 Q390 240 440 260" fill="none" stroke="#52B788" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#a1)"/>
+      <rect x="450" y="248" width="80" height="36" rx="6" fill="#52B788"/>
+      <text x="490" y="262" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Postileal</text>
+      <text x="490" y="276" text-anchor="middle" font-size="10" fill="#E0FAF0">~2%</text>
+      <!-- Position 5: Subhepatic -->
+      <path d="M340 224 Q310 190 270 120" fill="none" stroke="#8B2020" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#a1)"/>
+      <rect x="170" y="158" width="90" height="36" rx="6" fill="#8B2020"/>
+      <text x="215" y="172" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Subhepatic</text>
+      <text x="215" y="186" text-anchor="middle" font-size="10" fill="#FFCFCF">Rare</text>
+      <!-- Psoas -->
+      <rect x="290" y="286" width="100" height="22" rx="4" fill="#D3DCE6" stroke="#1A3050" stroke-width="0.5"/>
+      <text x="340" y="301" text-anchor="middle" font-size="10" fill="#1A3050">Psoas muscle</text>
+      <!-- Ureter label -->
+      <text x="148" y="290" font-size="10" fill="#8B2020">Right ureter</text>
+      <line x1="196" y1="288" x2="295" y2="295" stroke="#8B2020" stroke-width="1" stroke-dasharray="3 2"/>
+    </svg>
+  </div>
+</section>
+
+<!-- 1.2 PROCEDURE -->
+<section class="topic s1" id="s1b">
+  <div class="topic-header"><span class="topic-num">1.2</span><h2>Step-by-Step Procedure</h2></div>
+
+  <h3>A. Laparoscopic Appendicectomy — SAGES 2025 Preferred</h3>
+  <ul>
+    <li><strong>Position:</strong> supine, left lateral tilt 15–20°, Trendelenburg; catheterise only if pelvic anatomy anticipated</li>
+    <li><strong>Ports:</strong> 12mm umbilical (camera), 5mm suprapubic, 5mm LIF; 30-degree scope preferred</li>
+    <li>Systematic survey first: rule out Meckel's, tubo-ovarian, Crohn's, right-sided diverticulitis</li>
+    <li>Identify cecum by following taeniae; grasp appendix tip with atraumatic grasper</li>
+    <li>Develop window in mesoappendix at base using hook diathermy or Harmonic; clip appendicular artery (×2 proximal, ×1 distal) or vessel sealer</li>
+    <li>Skeletonise base to 5mm; apply two Endoloops or two 5mm endo-GIA staple fires; divide between</li>
+    <li><strong>Mandatory:</strong> specimen retrieval in Endobag — prevents port-site infection and seeding</li>
+    <li>Irrigate RIF and pelvis (1–2L warm saline) if perforation or peritonitis; no routine drain in uncomplicated cases</li>
+    <li>Close: 12mm port fascia only; subcuticular absorbable for skin</li>
+  </ul>
+
+  <h3>B. Open Appendicectomy (Lanz / Gridiron)</h3>
+  <ul>
+    <li><strong>Lanz:</strong> transverse at McBurney's point (cosmetically superior). <strong>Gridiron:</strong> oblique along Langer's lines</li>
+    <li>Layers: skin → Scarpa's → external oblique (split along fibres) → internal oblique + transversus abdominis (split with Langenbeck retractors) → transversalis fascia → parietal peritoneum</li>
+    <li>Mesoappendix: transfixion ligature of appendicular artery with 2/0 Vicryl; divide in sections</li>
+    <li>Base: purse-string suture (2/0 Vicryl) + crushing clamp 5mm from base; ligate under clamp; stump inversion optional (no evidence mandates it but standard UK practice)</li>
+    <li>Closure: loop PDS or nylon for all layers; subcuticular absorbable for skin</li>
+  </ul>
+
+  <h3>C. Robotic Appendicectomy (da Vinci Xi)</h3>
+  <ul>
+    <li>Emerging role in complex/retrocecal cases, obese patients, and simultaneous pelvic procedures</li>
+    <li>3-arm configuration: periumbilical camera + two 8mm robotic ports + 5mm assistant port LIF</li>
+    <li>No Level-1 evidence for superiority over standard laparoscopy in routine appendicectomy</li>
+    <li>Reserved for complex presentations or concurrent procedures</li>
+  </ul>
+
+  <div class="callout pearl"><span class="label">★ Operative Pearl</span>Endoloop vs. stapler at the base: SAGES 2025 and Cochrane meta-analyses show no significant difference in stump leak rate for non-inflamed bases. <strong>Inflamed/friable base or diameter &gt;10mm — staple.</strong></div>
+
+  <!-- DIAGRAM 2: Port Placement -->
+  <div class="diagram-wrap">
+    <div class="diagram-title">Laparoscopic port placement — 3-port standard configuration</div>
+    <svg width="100%" viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+      <!-- Body outline -->
+      <ellipse cx="340" cy="155" rx="180" ry="140" fill="#F5FAF7" stroke="#C8DDD4" stroke-width="1.5"/>
+      <!-- Umbilicus -->
+      <circle cx="340" cy="148" r="5" fill="#C8DDD4" stroke="#1B4332" stroke-width="1"/>
+      <text x="340" y="138" text-anchor="middle" font-size="10" fill="#2D6A4F">Umbilicus</text>
+      <!-- 12mm port (umbilical) -->
+      <circle cx="340" cy="148" r="14" fill="#1B4332" stroke="#0D2B1F" stroke-width="1.5"/>
+      <text x="340" y="153" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">12mm</text>
+      <!-- Label -->
+      <text x="405" y="145" font-size="11" font-weight="bold" fill="#1B4332">Camera port</text>
+      <text x="405" y="158" font-size="10" fill="#2D6A4F">Umbilical · 30° scope</text>
+      <line x1="354" y1="148" x2="400" y2="148" stroke="#1B4332" stroke-width="0.8" stroke-dasharray="3 2"/>
+      <!-- 5mm suprapubic port -->
+      <circle cx="340" cy="242" r="11" fill="#2D6A4F" stroke="#1B4332" stroke-width="1.5"/>
+      <text x="340" y="247" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">5mm</text>
+      <text x="405" y="238" font-size="11" font-weight="bold" fill="#2D6A4F">Suprapubic port</text>
+      <text x="405" y="251" font-size="10" fill="#2D6A4F">Working · grasper</text>
+      <line x1="351" y1="242" x2="400" y2="242" stroke="#2D6A4F" stroke-width="0.8" stroke-dasharray="3 2"/>
+      <!-- 5mm LIF port -->
+      <circle cx="228" cy="195" r="11" fill="#40916C" stroke="#1B4332" stroke-width="1.5"/>
+      <text x="228" y="200" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">5mm</text>
+      <text x="90" y="190" font-size="11" font-weight="bold" fill="#40916C">LIF port</text>
+      <text x="90" y="203" font-size="10" fill="#2D6A4F">Working · dissect</text>
+      <line x1="216" y1="195" x2="175" y2="195" stroke="#40916C" stroke-width="0.8" stroke-dasharray="3 2"/>
+      <!-- Camera direction arrow toward RLQ -->
+      <line x1="340" y1="162" x2="390" y2="210" stroke="#C9910A" stroke-width="2" stroke-dasharray="5 3"/>
+      <circle cx="400" cy="220" r="12" fill="#FFF8E8" stroke="#C9910A" stroke-width="1.5"/>
+      <text x="400" y="225" text-anchor="middle" font-size="10" font-weight="bold" fill="#7B4F00">RLQ</text>
+      <!-- Tilt annotation -->
+      <text x="490" y="80" font-size="11" fill="#1B4332" font-weight="bold">Position:</text>
+      <text x="490" y="96" font-size="10" fill="#2D6A4F">· Supine</text>
+      <text x="490" y="110" font-size="10" fill="#2D6A4F">· Left lateral tilt 15–20°</text>
+      <text x="490" y="124" font-size="10" fill="#2D6A4F">· Trendelenburg</text>
+      <text x="490" y="138" font-size="10" fill="#2D6A4F">· Surgeon right of patient</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 1.3 DIFFICULT CASE -->
+<section class="topic s1" id="s1c">
+  <div class="topic-header"><span class="topic-num">1.3</span><h2>The Difficult Case</h2></div>
+
+  <h3>Scenario A: Retrocecal Appendix with Extensive Adhesions</h3>
+  <ul>
+    <li><strong>Retrograde technique:</strong> divide base first, then develop the retroperitoneal plane posteriorly to lift appendix off psoas; avoids blind traction on adherent tip</li>
+    <li>Identify right ureter early (peristalsis; crossing iliac vessels at pelvic brim) before any posterior dissection</li>
+    <li><strong>Subtotal appendicectomy:</strong> if appendix cannot be safely freed — divide at safe point; oversew distal stump mucosa with argon/Harmonic; insert drain; document clearly</li>
+  </ul>
+
+  <h3>Scenario B: Appendiceal Mass (Phlegmon/Abscess)</h3>
+  <ul>
+    <li>APPAC II and WSES 2020: initial non-operative management (antibiotics ± drainage) + interval appendicectomy at 8–12 weeks is safe for select cases</li>
+    <li><strong>Surgery indicated for:</strong> peritonitis, free perforation, failed conservative management (&gt;72h no improvement), suspicion of tumour, immunocompromised patients</li>
+    <li>Intraoperative mass: convert to open if laparoscopic dissection unsafe; drain placement mandatory if abscess encountered</li>
+  </ul>
+
+  <h3>Scenario C: Haemorrhage from Mesoappendix</h3>
+  <ul>
+    <li>Immediate: instrument/finger pressure at mesoappendical base against psoas</li>
+    <li>Clip or suture-ligate the ileocolic origin if appendicular artery avulsion extends proximally</li>
+    <li><strong>Low threshold for conversion to open</strong> — uncontrolled mesoappendical haemorrhage + limited working space = convert immediately</li>
+  </ul>
+
+  <h3>Scenario D: Incidental Findings</h3>
+  <ul>
+    <li><strong>Carcinoid &gt;2cm:</strong> right hemicolectomy required — do not miss mesoappendix for nodal harvest</li>
+    <li><strong>Mucocele:</strong> no rupture — intact removal in Endobag; aspirate only if impending rupture during extraction</li>
+    <li><strong>Normal appendix at laparoscopy:</strong> systematic survey (Meckel's 50cm back, fallopian tubes, ovaries, sigmoid); remove appendix to avoid future diagnostic confusion — standard practice</li>
+  </ul>
+  <div class="callout warn"><span class="label">⚠ Danger Zone</span>Never attempt to aspirate a mucocele laparoscopically before bagging. A single breach of the mucin-containing wall causes pseudomyxoma peritonei (PMP) — an incurable seeding of mucinous tumour throughout the peritoneal cavity.</div>
+</section>
+
+<!-- ══════════════ SECTION 2 ══════════════ -->
+<div class="sec-header s2">
+  <span class="sec-badge">SECTION 2</span>
+  <span class="sec-title">Academic Didactics</span>
+</div>
+
+<!-- 2.1 SEMINAR -->
+<section class="topic s2" id="s2a">
+  <div class="topic-header"><span class="topic-num">2.1</span><h2>Seminar Outline — 45-Minute Resident Teaching Session</h2></div>
+  <h3>Learning Objectives</h3>
+  <ul>
+    <li>Diagnose appendicitis accurately using clinical scoring systems and appropriate imaging, minimising CT use in younger patients</li>
+    <li>Stratify patients: uncomplicated vs. complicated; operative vs. non-operative candidates</li>
+    <li>Perform safe laparoscopic appendicectomy and manage intraoperative challenges</li>
+    <li>Apply contemporary evidence on antibiotic-only management and its limitations</li>
+    <li>Recognise appendiceal tumours and their operative implications</li>
+  </ul>
+  <div class="table-wrap s2-tbl"><table>
+    <thead><tr><th>Time</th><th>Topic</th><th>Teaching Point</th></tr></thead>
+    <tbody>
+      <tr><td>0–5 min</td><td>Epidemiology &amp; Pathophysiology</td><td>Luminal obstruction (faecolith 30%, lymphoid hyperplasia, tumour); bacterial translocation; progression to perforation in 24–72h</td></tr>
+      <tr><td>5–12 min</td><td>Clinical Diagnosis &amp; Scoring</td><td>Alvarado score, AIR score; Rovsing's, psoas, obturator signs; atypical presentations (elderly, pregnancy, immunocompromised)</td></tr>
+      <tr><td>12–20 min</td><td>Imaging Algorithm 2025</td><td>USS first (children, women of childbearing age, pregnancy); CT with contrast (adults, diagnostic uncertainty); MRI in pregnancy</td></tr>
+      <tr><td>20–30 min</td><td>Management Stratification</td><td>Uncomplicated: antibiotics vs. surgery (APPAC, CODA); complicated: perforation grading, drain vs. operation</td></tr>
+      <tr><td>30–40 min</td><td>Operative Technique</td><td>Laparoscopic steps; base management; difficult retrocecal case; conversion criteria</td></tr>
+      <tr><td>40–45 min</td><td>Complications &amp; Tumours</td><td>SSI, stump leak, IAA; carcinoid; mucocele; LAMN vs. HAMN; right hemicolectomy indications</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 2.2 TRIALS -->
+<section class="topic s2" id="s2b">
+  <div class="topic-header"><span class="topic-num">2.2</span><h2>The Golden Thread — Landmark Trials &amp; Evidence</h2></div>
+  <div class="table-wrap s2-tbl"><table>
+    <thead><tr><th>Trial / Reference</th><th>Year</th><th>N</th><th>Key Finding</th><th>Clinical Impact</th></tr></thead>
+    <tbody>
+      <tr><td><strong>APPAC I</strong> (Salminen et al.)</td><td>2015</td><td>530</td><td>Antibiotics non-inferior to surgery at 1yr in uncomplicated appendicitis (73% success at 1yr); 27% crossed to surgery</td><td>Established antibiotics as acceptable for select patients; not 'standard of care'</td></tr>
+      <tr><td><strong>APPAC II</strong> (Salminen et al., JAMA)</td><td>2022</td><td>399</td><td>Appendiceal mass: antibiotics safe; avoided surgery in 63% at 5yr; recurrence 37%</td><td>Non-operative management of appendiceal mass endorsed; interval appendicectomy not mandatory in all</td></tr>
+      <tr><td><strong>CODA Trial</strong> (NEJM)</td><td>2020</td><td>1552</td><td>Antibiotics non-inferior for uncomplicated appendicitis; 29% required appendicectomy by 90 days; appendicolith predicted higher failure</td><td>Appendicolith = poor predictor of antibiotic success; prefer surgery in this subgroup</td></tr>
+      <tr><td><strong>NOTA Study</strong> (Meta-analysis)</td><td>2022</td><td>META</td><td>Laparoscopic vs. open: shorter LOS, less SSI; higher IAA rate with laparoscopy in perforated cases (attenuated with irrigation)</td><td>Laparoscopy preferred; irrigation mitigates IAA risk</td></tr>
+      <tr><td><strong>Cochrane</strong> (Di Saverio et al.)</td><td>2021</td><td>META</td><td>Appendicolith on CT associated with significantly higher failure rate of conservative Mx (OR 3.2)</td><td>Operative management preferred with appendicolith even in 'uncomplicated' cases</td></tr>
+      <tr><td><strong>WSES Jerusalem Guidelines</strong></td><td>2020</td><td>—</td><td>Grading system for acute appendicitis; antibiotic prophylaxis; IAA management; drainage criteria</td><td>Current international consensus reference</td></tr>
+      <tr><td><strong>SAGES Clinical Spotlight</strong></td><td>2025</td><td>—</td><td>Laparoscopic appendicectomy first-line; robotic role emerging; ambulatory appendicectomy feasible in uncomplicated cases</td><td>2025 technical standard</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 2.3 DEBATE -->
+<section class="topic s2" id="s2c">
+  <div class="topic-header"><span class="topic-num">2.3</span><h2>Consultant's Debate — Grand Rounds Controversy</h2></div>
+  <div class="callout exam"><span class="label">Grand Rounds Question</span>Antibiotics Alone for Uncomplicated Appendicitis: Paradigm Shift or Overreach?</div>
+
+  <h3>FOR — Non-Operative Management</h3>
+  <ul>
+    <li>APPAC I/II and CODA demonstrate 70–73% success at 1 year — the majority avoid an operation</li>
+    <li>No perioperative mortality or major complications from antibiotics alone</li>
+    <li>Patient preference: 80% of CODA participants would choose antibiotics again</li>
+    <li>Cost-effective; reduces theatre burden in high-volume systems</li>
+  </ul>
+
+  <h3>AGAINST — Operative Standard</h3>
+  <ul>
+    <li>27–30% recurrence requiring eventual surgery — two episodes of illness, more total antibiotics, longer cumulative LOS</li>
+    <li>Appendicolith on CT predicts failure (OR 3.2 per Cochrane 2021); present in 30–40% of CT-diagnosed 'uncomplicated' cases — the cohort is not homogeneous</li>
+    <li>Appendiceal neoplasm missed rate: 1–3% of appendicitis cases harbour occult malignancy (carcinoid, LAMN); antibiotics delay diagnosis</li>
+    <li>WSES 2020 and most European guidelines: surgery remains first-line; antibiotics for specific patient groups only</li>
+  </ul>
+
+  <h3>Current Nuanced Position — Board-Defensible</h3>
+  <div class="callout clin"><span class="label">Current Consensus</span>
+    <strong>Antibiotics acceptable for:</strong> uncomplicated appendicitis WITHOUT appendicolith, fit patient, informed consent, reliable follow-up, access to emergency surgery if deteriorating.<br><br>
+    <strong>Surgery preferred for:</strong> appendicolith, paediatric patients, pregnancy, immunocompromised, diagnostic uncertainty.<br><br>
+    <strong>Framing:</strong> antibiotics = 'initial treatment with planned reassessment', not 'definitive cure'.
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 3 ══════════════ -->
+<div class="sec-header s3">
+  <span class="sec-badge">SECTION 3</span>
+  <span class="sec-title">Senior Fellowship &amp; Board Review</span>
+</div>
+
+<!-- 3.1 VIVA -->
+<section class="topic s3" id="s3a">
+  <div class="topic-header"><span class="topic-num">3.1</span><h2>High-Order Viva Scenarios</h2></div>
+
+  <div class="viva">
+    <div class="vq">Viva 1</div>
+    <div class="vscenario">A 24-year-old woman presents with RLQ pain and fever. CT shows a 7mm appendix with periappendiceal fat stranding and a 5mm appendicolith. Alvarado score = 7. She requests antibiotic treatment. What do you advise?</div>
+    <div class="vanswer">
+      <ul>
+        <li>High-risk features: Alvarado 7 (moderate-high probability), CT-confirmed appendicolith, inflammatory changes</li>
+        <li>Appendicolith is the critical modifier — CODA and Cochrane data show OR 3.2 for antibiotic failure in this subgroup</li>
+        <li><strong>Advise: laparoscopic appendicectomy.</strong> Antibiotic failure risk ~50% with appendicolith vs. 27% overall; surgery is safer, definitive, and excludes occult tumour</li>
+        <li>Document informed consent discussion. If patient declines after full counselling, antibiotics with close inpatient monitoring are acceptable — NOT the default recommendation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="viva">
+    <div class="vq">Viva 2</div>
+    <div class="vscenario">20 minutes into laparoscopic appendicectomy, the appendicular artery avulses proximally and retracts into the mesoappendix. There is active bleeding obscuring your view. Next steps?</div>
+    <div class="vanswer">
+      <ul>
+        <li>Immediate: direct pressure with grasper or rolled swab at appendicular base against psoas — do NOT remove the grasper and chase the vessel</li>
+        <li>Suction + irrigation to clear field; increase intra-abdominal pressure to 15mmHg for tamponade</li>
+        <li>Attempt laparoscopic clip/suture-ligation of the stump from the mesoappendix side; if vessel retracted to ileocolic origin: clip the ileocolic artery segment</li>
+        <li><strong>Low threshold for immediate conversion to open</strong> — uncontrolled haemorrhage with poor laparoscopic access = convert without delay; this is not failure</li>
+        <li>Post-op: if ileocolic artery ligated, monitor for right colonic ischaemia</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="viva">
+    <div class="vq">Viva 3</div>
+    <div class="vscenario">CT shows a 6cm appendiceal mass in a 65-year-old diabetic. He is afebrile, haemodynamically stable. Inflammatory markers elevated. Management strategy?</div>
+    <div class="vanswer">
+      <ul>
+        <li>Step 1: CT-guided drainage if abscess &gt;3cm + IV broad-spectrum antibiotics (pip-taz)</li>
+        <li>Step 2: Monitor response at 48–72h; lower threshold for early surgery in diabetic (&gt;72h no improvement)</li>
+        <li>Step 3: <strong>Colonoscopy at 6–8 weeks mandatory</strong> — ~10% of appendiceal masses in &gt;50-year-olds are caused by an underlying caecal carcinoma</li>
+        <li>Step 4: Interval appendicectomy at 8–12 weeks — APPAC II shows 37% 5-year recurrence without interval surgery; recommend in this patient given age + diabetes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="viva">
+    <div class="vq">Viva 4</div>
+    <div class="vscenario">Histology confirms a 2.3cm well-differentiated appendiceal carcinoid (NET). What are the staging and management implications?</div>
+    <div class="vanswer">
+      <ul>
+        <li>Most common appendiceal neoplasm (&gt;50% of all appendiceal tumours)</li>
+        <li><strong>Size-based management (ENETS/NANETS):</strong></li>
+        <li>&lt;2cm: simple appendicectomy curative in &gt;95%</li>
+        <li>2–2.9cm (this case): <strong>RIGHT HEMICOLECTOMY recommended</strong> — lymph node involvement 20–30% at this threshold; mesoappendical invasion &gt;3mm also indicates R0H</li>
+        <li>&gt;2cm: right hemicolectomy + staging CT C/A/P + baseline Chromogranin A + 24h urine 5-HIAA</li>
+        <li>This patient: proceed to right hemicolectomy; ENETS surveillance protocol post-op</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="viva">
+    <div class="vq">Viva 5</div>
+    <div class="vscenario">A 28-week pregnant woman presents with RLQ pain, fever, and leucocytosis. USS is non-diagnostic. Next step?</div>
+    <div class="vanswer">
+      <ul>
+        <li><strong>Imaging: MRI abdomen/pelvis WITHOUT gadolinium</strong> — sensitivity 90–100%; safe at all gestational ages; recommended by ACR and RCOG</li>
+        <li>If MRI unavailable within 6 hours and clinical picture deteriorating: CT acceptable — fetal radiation dose &lt;50mGy is below teratogenic threshold; diagnostic delay carries higher risk than radiation</li>
+        <li>If confirmed: laparoscopic appendicectomy — safe up to 28–30 weeks; beyond 30 weeks open approach may be preferred due to uterine size</li>
+        <li>Obstetric: tocolytics not routinely required; foetal monitoring perioperatively; left lateral tilt to avoid aortocaval compression</li>
+        <li><strong>Perforation in pregnancy: foetal mortality rises to 20–35%</strong> — do not delay surgery awaiting further imaging</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="viva">
+    <div class="vq">Viva 6</div>
+    <div class="vscenario">Post-op day 5 following laparoscopic appendicectomy for perforated appendicitis. Patient develops spiking fevers, diarrhoea, RLQ tenderness. CT shows 4cm RIF fluid collection. Management?</div>
+    <div class="vanswer">
+      <ul>
+        <li>Diagnosis: intra-abdominal abscess (IAA) — most common complication after perforated appendicitis (5–10%)</li>
+        <li>Clavien-Dindo Grade IIIa: intervention required, no general anaesthesia</li>
+        <li><strong>First-line:</strong> CT-guided percutaneous drainage + IV antibiotics (pip-taz/ertapenem)</li>
+        <li>If &lt;3cm or inaccessible: IV antibiotics alone; repeat CT at 48–72h</li>
+        <li>If deteriorates despite drainage → return to theatre (laparoscopic washout) = Clavien-Dindo IIIb</li>
+        <li>Rule out: stump leak (check staple line), C. difficile colitis (send stool), pelvic collection</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="viva">
+    <div class="vq">Viva 7</div>
+    <div class="vscenario">A 4cm intact mucocele of the appendix is identified laparoscopically. No peritoneal implants visible. How do you proceed?</div>
+    <div class="vanswer">
+      <ul>
+        <li>Mucocele = mucinous dilatation: hyperplastic polyp (benign), LAMN, HAMN, or mucinous adenocarcinoma</li>
+        <li><strong>CRITICAL: NO rupture, NO aspiration</strong> — spillage of mucin causes pseudomyxoma peritonei (PMP), an incurable peritoneal seeding</li>
+        <li>Technique: enclose appendix in retrieval bag BEFORE any dissection; divide mesoappendix and base within bag; extract through 12mm port; if bag damaged — convert to open immediately</li>
+        <li>If LAMN with R0 resection: surveillance (CEA, CT at 1 year). If HAMN or adenocarcinoma: right hemicolectomy + surgical oncology referral</li>
+        <li>If PMP discovered incidentally: refer to specialist HIPEC centre (PSOGI guidelines); do not attempt debulking at index procedure</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3.2 SCORING SYSTEMS -->
+<section class="topic s3" id="s3b">
+  <div class="topic-header"><span class="topic-num">3.2</span><h2>Scoring Systems</h2></div>
+
+  <h3>Alvarado Score (MANTRELS)</h3>
+  <div class="table-wrap s3-tbl"><table>
+    <thead><tr><th>Parameter</th><th>Score</th></tr></thead>
+    <tbody>
+      <tr><td>Migration of pain to RLQ</td><td>1</td></tr>
+      <tr><td>Anorexia</td><td>1</td></tr>
+      <tr><td>Nausea/Vomiting</td><td>1</td></tr>
+      <tr><td>RLQ tenderness</td><td>2</td></tr>
+      <tr><td>Rebound tenderness</td><td>1</td></tr>
+      <tr><td>Elevated temperature (&gt;37.3°C)</td><td>1</td></tr>
+      <tr><td>Leucocytosis (WBC &gt;10)</td><td>2</td></tr>
+      <tr><td>Left shift (neutrophilia)</td><td>1</td></tr>
+      <tr><td><strong>TOTAL</strong></td><td><strong>10</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="key-grid">
+    <div class="key-card"><div class="kc-label">Score 1–4</div>Low probability; consider discharge with safety netting</div>
+    <div class="key-card g2"><div class="kc-label">Score 5–6</div>Equivocal; imaging mandatory (USS or CT)</div>
+    <div class="key-card g3"><div class="kc-label">Score 7–8</div>Probable appendicitis; operate or confirm with imaging</div>
+    <div class="key-card red"><div class="kc-label">Score 9–10</div>Almost certain appendicitis; operate</div>
+  </div>
+
+  <h3>AIR Score — Appendicitis Inflammatory Response</h3>
+  <div class="table-wrap s3-tbl"><table>
+    <thead><tr><th>Parameter</th><th>Points</th></tr></thead>
+    <tbody>
+      <tr><td>Vomiting</td><td>1</td></tr>
+      <tr><td>RLQ pain</td><td>1</td></tr>
+      <tr><td>Rebound tenderness: mild / moderate / strong</td><td>1 / 2 / 3</td></tr>
+      <tr><td>WBC: 10–14.9 / ≥15 (×10⁹/L)</td><td>1 / 2</td></tr>
+      <tr><td>CRP: 10–49 / ≥50 mg/L</td><td>1 / 2</td></tr>
+      <tr><td>Body temperature ≥38.5°C</td><td>1</td></tr>
+    </tbody>
+  </table></div>
+  <div class="key-grid">
+    <div class="key-card"><div class="kc-label">AIR 0–4</div>Low probability (NPV &gt;97%) — safe discharge</div>
+    <div class="key-card g2"><div class="kc-label">AIR 5–8</div>Intermediate — imaging recommended</div>
+    <div class="key-card red"><div class="kc-label">AIR 9–12</div>High probability — operate</div>
+  </div>
+  <div class="callout pearl"><span class="label">★ Board Pearl</span>AIR score outperforms Alvarado in sensitivity and NPV for ruling out appendicitis. Use AIR in clinical practice; Alvarado still dominates exam questions — know both.</div>
+</section>
+
+<!-- 3.3 WSES GRADING -->
+<section class="topic s3" id="s3c">
+  <div class="topic-header"><span class="topic-num">3.3</span><h2>WSES 2020 Appendicitis Severity Grading</h2></div>
+  <div class="table-wrap s3-tbl"><table>
+    <thead><tr><th>Grade</th><th>Pathology</th><th>Management</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grade 0</strong></td><td>Normal appendix</td><td>Review; investigate alternative pathology</td></tr>
+      <tr><td><strong>Grade 1 (Uncomplicated)</strong></td><td>Acute appendicitis; no perforation, abscess, or phlegmon</td><td>Laparoscopic appendicectomy (or antibiotics if criteria met + no appendicolith)</td></tr>
+      <tr><td><strong>Grade 2 (Complicated)</strong></td><td>Phlegmon surrounding appendix</td><td>Surgery vs. conservative depending on haemodynamic status and response</td></tr>
+      <tr><td><strong>Grade 3a (Complicated)</strong></td><td>Abscess &lt;5cm</td><td>Percutaneous drainage + IV antibiotics; interval appendicectomy considered</td></tr>
+      <tr><td><strong>Grade 3b (Complicated)</strong></td><td>Abscess &gt;5cm or multiloculated</td><td>CT-guided drainage + IV antibiotics; interval surgery often required</td></tr>
+      <tr><td><strong>Grade 4 (Complicated)</strong></td><td>Free perforation with purulent/faecal peritonitis</td><td>Emergency surgery: laparoscopic washout; convert to open if required</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 3.4 CLAVIEN-DINDO -->
+<section class="topic s3" id="s3d">
+  <div class="topic-header"><span class="topic-num">3.4</span><h2>Clavien-Dindo Classification — Applied to Post-Appendicectomy</h2></div>
+  <div class="table-wrap s3-tbl"><table>
+    <thead><tr><th>Grade</th><th>Definition</th><th>Post-Appendicectomy Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>I</strong></td><td>Minor complication; no intervention</td><td>Superficial wound infection managed with dressings</td></tr>
+      <tr><td><strong>II</strong></td><td>Requires pharmacological treatment</td><td>Superficial SSI requiring antibiotics; transfusion; DVT</td></tr>
+      <tr><td><strong>IIIa</strong></td><td>Intervention under local anaesthesia / radiology</td><td>Intra-abdominal abscess: CT-guided percutaneous drainage</td></tr>
+      <tr><td><strong>IIIb</strong></td><td>Intervention under general anaesthesia</td><td>Return to theatre: peritonitis, stump leak, haemorrhage</td></tr>
+      <tr><td><strong>IVa</strong></td><td>Single-organ ICU-level dysfunction</td><td>Post-op sepsis with renal failure requiring ICU</td></tr>
+      <tr><td><strong>IVb</strong></td><td>Multi-organ failure, ICU</td><td>Faecal peritonitis with multi-organ dysfunction</td></tr>
+      <tr><td><strong>V</strong></td><td>Death</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ══════════════ SECTION 4 ══════════════ -->
+<div class="sec-header s4">
+  <span class="sec-badge">SECTION 4</span>
+  <span class="sec-title">Clinical Protocol &amp; Perioperative Care</span>
+</div>
+
+<!-- 4.1 IMAGING -->
+<section class="topic s4" id="s4a">
+  <div class="topic-header"><span class="topic-num">4.1</span><h2>Advanced Diagnostics — Comparative Imaging Utility</h2></div>
+  <div class="table-wrap s4-tbl"><table>
+    <thead><tr><th>Modality</th><th>Sensitivity</th><th>Specificity</th><th>Indication</th><th>Limitations</th></tr></thead>
+    <tbody>
+      <tr><td><strong>USS</strong></td><td>72–86%</td><td>85–92%</td><td>First-line: children, women of childbearing age, pregnancy; low cost; no radiation</td><td>Operator-dependent; limited in obese, gas-filled bowel, retrocecal position</td></tr>
+      <tr><td><strong>CT (contrast-enhanced)</strong></td><td>94–98%</td><td>94–97%</td><td>Adults, equivocal USS, suspected perforation or mass; diagnostic gold standard</td><td>Radiation (3–5 mSv); IV contrast risks; not first-line in young females or children</td></tr>
+      <tr><td><strong>MRI (T2/DWI, no contrast)</strong></td><td>90–96%</td><td>93–97%</td><td>Pregnancy (all trimesters); paediatric after failed USS</td><td>Availability; cost; time; cannot assess free air as well as CT</td></tr>
+      <tr><td><strong>Plain X-ray</strong></td><td>Limited</td><td>Limited</td><td>Faecolith detection (5–10%); exclude viscus perforation (erect CXR)</td><td>Not diagnostic for appendicitis; largely supplanted by CT/USS</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 4.2 BIOMARKERS -->
+<section class="topic s4" id="s4b">
+  <div class="topic-header"><span class="topic-num">4.2</span><h2>Biomarkers in Appendicitis</h2></div>
+  <div class="table-wrap s4-tbl"><table>
+    <thead><tr><th>Biomarker</th><th>Sensitivity</th><th>Clinical Role</th><th>Limitations</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CRP (&gt;40 mg/L)</strong></td><td>60–80%</td><td>Supports diagnosis; elevated &gt;80 suggests perforation; used in AIR score</td><td>Non-specific; peaks at 48–72h</td></tr>
+      <tr><td><strong>WBC (&gt;10 ×10⁹/L)</strong></td><td>70–80%</td><td>Component of all scoring systems; left shift adds specificity</td><td>Normal in 20–30% of confirmed appendicitis; poor discriminator alone</td></tr>
+      <tr><td><strong>NLR (&gt;5)</strong></td><td>70–85%</td><td>Emerging biomarker; NLR &gt;5 correlates with perforation; from routine FBC</td><td>Not yet in standard scoring systems</td></tr>
+      <tr><td><strong>PCT (&gt;0.5 ng/mL)</strong></td><td>40–60%</td><td>Better for perforation/gangrene than simple appendicitis; correlates with SIRS</td><td>Low sensitivity for early appendicitis; expensive</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 4.3 ERAS -->
+<section class="topic s4" id="s4c">
+  <div class="topic-header"><span class="topic-num">4.3</span><h2>ERAS 2025 Protocol — Appendicectomy</h2></div>
+  <h3>Preoperative</h3>
+  <ul>
+    <li>Clear fluids up to 2h preoperatively (ERAS Society); carbohydrate loading only if GA with no aspiration risk</li>
+    <li><strong>Antibiotic prophylaxis:</strong> cefuroxime 1.5g + metronidazole 500mg IV at induction; do NOT continue &gt;24h in uncomplicated cases (SIGN 2021)</li>
+    <li><strong>Antibiotic therapy</strong> (not prophylaxis) for complicated appendicitis: 4–5 days pip-taz or cefuroxime/metronidazole; de-escalate to sensitivities</li>
+    <li>VTE prophylaxis: LMWH 12h pre-op for all but emergency cases; TEDs + pneumatic compression intraoperatively</li>
+  </ul>
+  <h3>Intraoperative</h3>
+  <ul>
+    <li>Goal-directed fluid therapy: balanced solutions (Hartmann's) over normal saline; avoid crystalloid excess</li>
+    <li>Normothermia: active warming blanket; warmed irrigation fluid</li>
+    <li><strong>Multimodal analgesia:</strong> paracetamol + NSAID + port-site infiltration 0.5% levobupivacaine; avoid routine opioids</li>
+    <li>CO₂ insufflation to 12mmHg maximum; reduce to 10mmHg once visualised — reduces post-op shoulder tip pain</li>
+  </ul>
+  <h3>Postoperative</h3>
+  <ul>
+    <li>Resume oral fluids within 4h of uncomplicated laparoscopic appendicectomy</li>
+    <li>Early mobilisation: out of bed at 4–6h; ambulation at 12h</li>
+    <li><strong>Ambulatory appendicectomy (SAGES 2025):</strong> same-day or 23-hour discharge feasible for uncomplicated cases — criteria: tolerating oral fluids, pain controlled on oral analgesia, afebrile 6h, WBC downtrending</li>
+    <li>Drain policy: no routine drain in uncomplicated cases; drain in RIF for perforated appendicitis with significant contamination; review at 48–72h</li>
+    <li>IV to PO antibiotic switch at 48h if apyrexial and tolerating orally in complicated appendicitis</li>
+  </ul>
+</section>
+
+<!-- 4.4 COMPLICATIONS -->
+<section class="topic s4" id="s4d">
+  <div class="topic-header"><span class="topic-num">4.4</span><h2>Complication Management — Clavien-Dindo Grade III–V</h2></div>
+  <h3>Grade IIIa — Intra-Abdominal Abscess (IAA)</h3>
+  <ul>
+    <li>Incidence: 2–5% uncomplicated; 10–20% perforated appendicitis</li>
+    <li>CT-guided percutaneous drainage first-line for &gt;3cm accessible collection; 8–12F pigtail catheter; irrigate 2× daily with 10ml normal saline</li>
+    <li>IV antibiotics: pip-taz or ertapenem; target Bacteroides, E. coli</li>
+    <li>Failure at 48–72h → Grade IIIb</li>
+  </ul>
+  <h3>Grade IIIb — Return to Theatre</h3>
+  <ul>
+    <li>Stump blow-out (&lt;1%): presents as peritonitis Day 3–5; usually staple failure on inflamed/oedematous base</li>
+    <li>Management: laparoscopic re-exploration; washout; if stump unrepairable — ileocolic resection or right hemicolectomy ± defunctioning ileostomy</li>
+    <li>Faecal peritonitis: thorough 4-quadrant washout; source control paramount</li>
+  </ul>
+  <h3>Grade IV–V — Sepsis with Organ Dysfunction</h3>
+  <ul>
+    <li>Sepsis-3: suspected infection + SOFA score ≥2</li>
+    <li>Septic shock: vasopressors required despite adequate fluid resuscitation (&gt;30ml/kg)</li>
+    <li><strong>Surgical source control within 6–12h of septic shock</strong> — do not delay operation beyond vasopressor initiation; every hour of delay worsens mortality</li>
+  </ul>
+</section>
+
+<!-- ══════════════ SECTION 5 ══════════════ -->
+<div class="sec-header s5">
+  <span class="sec-badge">SECTION 5</span>
+  <span class="sec-title">Spatial Awareness &amp; Radiological Correlation</span>
+</div>
+
+<!-- 5.1 SPATIAL -->
+<section class="topic s5" id="s5a">
+  <div class="topic-header"><span class="topic-num">5.1</span><h2>Surgeon's 3D Spatial Awareness at Laparoscopy</h2></div>
+  <h3>Standard Laparoscopic View (30° Camera, Trendelenburg + Left Tilt)</h3>
+  <ul>
+    <li><strong>ANTERIOR:</strong> anterior cecal wall; taeniae coli converge centrally toward appendiceal base; appendix tip can point anywhere from anterior to deep pelvis</li>
+    <li><strong>POSTERIOR (key danger zone):</strong> retroperitoneum visible as a whitish sheen through posterior parietal peritoneum; right ureter courses here; psoas visible as a firm ridge if peritoneum opened for retrocecal dissection</li>
+    <li><strong>MEDIAL:</strong> terminal ileum enters ileocecal valve; preserving the ileocolic pedicle is non-negotiable; stay lateral during mesoappendical division</li>
+    <li><strong>INFERIOR:</strong> pelvic brim visible in deep Trendelenburg; right ovary and fallopian tube must be visualised in all female patients; pelvic appendix may loop behind the uterus</li>
+    <li><strong>SUPERIOR:</strong> hepatic flexure in the upper field — do not mistake a subhepatic appendix for cholecystic disease</li>
+  </ul>
+  <h3>The Retrocecal Appendix — Spatial Reconstruction</h3>
+  <ul>
+    <li>Posterior to the cecum, anterior to the psoas, posterior to the parietal peritoneum — not in the peritoneal cavity until mobilised</li>
+    <li>Mobilise by incising the white line of Toldt laterally and developing the retroperitoneal plane; the appendix delivers anteriorly like a banana peel off the psoas</li>
+    <li>Key landmark: right ureter crosses the pelvic brim anterior to the common iliac bifurcation — always identify BEFORE dividing any posterior structures</li>
+  </ul>
+</section>
+
+<!-- 5.2 CT SIGNS -->
+<section class="topic s5" id="s5b">
+  <div class="topic-header"><span class="topic-num">5.2</span><h2>Radiological Correlation — CT Signs</h2></div>
+  <div class="table-wrap s5-tbl"><table>
+    <thead><tr><th>CT Sign</th><th>Significance</th><th>Board Relevance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Appendix diameter &gt;6mm</strong></td><td>Primary diagnostic criterion; &gt;10mm high specificity</td><td>Threshold question: answer is 6mm</td></tr>
+      <tr><td><strong>Periappendiceal fat stranding</strong></td><td>Inflammation; grade extent to estimate perforation risk</td><td>Present in all grades of appendicitis</td></tr>
+      <tr><td><strong>Appendicolith</strong></td><td>Predicts higher perforation rate; antibiotics likely to fail</td><td>CODA key finding; OR 3.2 failure risk</td></tr>
+      <tr><td><strong>'Arrowhead sign'</strong></td><td>Cecal tip thickening converging on appendiceal orifice</td><td>Distinguishes appendicitis from colitis</td></tr>
+      <tr><td><strong>Free fluid RIF/pelvis</strong></td><td>Localised: contained perforation; generalised: free perforation</td><td>Indicates WSES Grade 3–4</td></tr>
+      <tr><td><strong>Extraluminal free air</strong></td><td>Perforated viscus; look on lung windows; subdiaphragmatic on erect CXR</td><td>Emergency surgery indication</td></tr>
+      <tr><td><strong>Loss of wall enhancement</strong></td><td>Gangrenous appendix; transmural necrosis</td><td>Higher complication risk; operate</td></tr>
+      <tr><td><strong>Pericecal abscess (thick-walled collection)</strong></td><td>Peripheral enhancement; internal debris</td><td>CT-guided drainage candidate</td></tr>
+      <tr><td><strong>Terminal ileal thickening (no appendix inflammation)</strong></td><td>Crohn's disease or Yersinia ileitis; appendix may be normal</td><td>Alter management: no appendicectomy</td></tr>
+      <tr><td><strong>Tubular, mucin-filled appendix + wall calcification</strong></td><td>Appendiceal mucocele / LAMN</td><td>Do NOT rupture at surgery</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout pearl"><span class="label">★ Radiological Pearl</span>The 'arrowhead sign' (cecal thickening pointing to appendix base) and the 'hamburger sign' (appendix compressed between cecum and psoas) are CT signs supporting appendicitis in difficult diagnostic cases.</div>
+</section>
+
+<!-- 5.3 DIAGRAMS -->
+<section class="topic s5" id="s5c">
+  <div class="topic-header"><span class="topic-num">5.3</span><h2>Management Algorithm — Appendicitis 2025</h2></div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title">Decision algorithm — appendicitis management 2025</div>
+    <svg width="100%" viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1B4332" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+      <!-- Start -->
+      <rect x="215" y="10" width="250" height="44" rx="8" fill="#1B4332" stroke="#0D2B1F" stroke-width="1"/>
+      <text x="340" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Suspected appendicitis</text>
+      <text x="340" y="46" text-anchor="middle" font-size="11" fill="#8ECFAD">RLQ pain · fever · leucocytosis</text>
+      <line x1="340" y1="54" x2="340" y2="80" stroke="#1B4332" stroke-width="1.5" marker-end="url(#a2)"/>
+      <!-- Scoring -->
+      <rect x="215" y="80" width="250" height="44" rx="8" fill="#E6F2EE" stroke="#1B4332" stroke-width="1"/>
+      <text x="340" y="98" text-anchor="middle" font-size="12" font-weight="bold" fill="#1B4332">Clinical scoring</text>
+      <text x="340" y="114" text-anchor="middle" font-size="11" fill="#2D6A4F">Alvarado / AIR score</text>
+      <!-- Three branches from scoring -->
+      <line x1="260" y1="124" x2="100" y2="164" stroke="#1B4332" stroke-width="1" marker-end="url(#a2)"/>
+      <line x1="340" y1="124" x2="340" y2="164" stroke="#1B4332" stroke-width="1" marker-end="url(#a2)"/>
+      <line x1="420" y1="124" x2="580" y2="164" stroke="#1B4332" stroke-width="1" marker-end="url(#a2)"/>
+      <text x="110" y="156" text-anchor="middle" font-size="10" fill="#2D6A4F">Low (&lt;4)</text>
+      <text x="340" y="156" text-anchor="middle" font-size="10" fill="#2D6A4F">Intermediate (5–6)</text>
+      <text x="570" y="156" text-anchor="middle" font-size="10" fill="#2D6A4F">High (≥7)</text>
+      <!-- Low: discharge -->
+      <rect x="30" y="164" width="150" height="44" rx="6" fill="#F0F8F4" stroke="#40916C" stroke-width="1"/>
+      <text x="105" y="182" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B4332">Discharge</text>
+      <text x="105" y="197" text-anchor="middle" font-size="10" fill="#2D6A4F">Safety netting</text>
+      <!-- Intermediate: imaging -->
+      <rect x="215" y="164" width="250" height="44" rx="6" fill="#E6F2EE" stroke="#2D6A4F" stroke-width="1"/>
+      <text x="340" y="182" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B4332">Imaging</text>
+      <text x="340" y="197" text-anchor="middle" font-size="10" fill="#2D6A4F">USS first → CT if inconclusive; MRI in pregnancy</text>
+      <!-- High: CT + proceed -->
+      <rect x="500" y="164" width="150" height="44" rx="6" fill="#FFF0F0" stroke="#8B1A1A" stroke-width="1"/>
+      <text x="575" y="182" text-anchor="middle" font-size="11" font-weight="bold" fill="#8B1A1A">CT + proceed</text>
+      <text x="575" y="197" text-anchor="middle" font-size="10" fill="#8B1A1A">Unless antibiotic candidate</text>
+      <!-- Merge to CT confirmed -->
+      <line x1="340" y1="208" x2="340" y2="240" stroke="#1B4332" stroke-width="1" marker-end="url(#a2)"/>
+      <line x1="575" y1="208" x2="460" y2="240" stroke="#1B4332" stroke-width="1" marker-end="url(#a2)"/>
+      <rect x="215" y="240" width="250" height="44" rx="8" fill="#2D6A4F" stroke="#1B4332" stroke-width="1"/>
+      <text x="340" y="258" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">CT confirmed appendicitis</text>
+      <text x="340" y="274" text-anchor="middle" font-size="10" fill="#B0D9C0">Assess for appendicolith and complications</text>
+      <!-- Two branches from CT -->
+      <line x1="300" y1="284" x2="165" y2="320" stroke="#1B4332" stroke-width="1" marker-end="url(#a2)"/>
+      <line x1="380" y1="284" x2="510" y2="320" stroke="#1B4332" stroke-width="1" marker-end="url(#a2)"/>
+      <text x="190" y="314" text-anchor="middle" font-size="10" fill="#8B1A1A">Uncomplicated</text>
+      <text x="500" y="314" text-anchor="middle" font-size="10" fill="#8B1A1A">Complicated</text>
+      <!-- Uncomplicated branch -->
+      <rect x="50" y="320" width="210" height="54" rx="6" fill="#E6F2EE" stroke="#1B4332" stroke-width="1"/>
+      <text x="155" y="340" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B4332">Appendicolith?</text>
+      <text x="155" y="356" text-anchor="middle" font-size="10" fill="#2D6A4F">YES → Surgery preferred</text>
+      <text x="155" y="369" text-anchor="middle" font-size="10" fill="#2D6A4F">NO → Antibiotics vs. surgery</text>
+      <!-- Complicated branch -->
+      <rect x="420" y="320" width="230" height="54" rx="6" fill="#FFF0F0" stroke="#8B1A1A" stroke-width="1"/>
+      <text x="535" y="340" text-anchor="middle" font-size="11" font-weight="bold" fill="#8B1A1A">WSES grading</text>
+      <text x="535" y="356" text-anchor="middle" font-size="10" fill="#8B1A1A">Gr 1–2: surgery | Gr 3: drain + abx</text>
+      <text x="535" y="369" text-anchor="middle" font-size="10" fill="#8B1A1A">Gr 4: emergency surgery</text>
+      <!-- Convergence to surgery -->
+      <line x1="155" y1="374" x2="155" y2="420" stroke="#1B4332" stroke-width="1"/>
+      <line x1="155" y1="420" x2="255" y2="444" stroke="#1B4332" stroke-width="1" marker-end="url(#a2)"/>
+      <line x1="535" y1="374" x2="535" y2="420" stroke="#1B4332" stroke-width="1"/>
+      <line x1="535" y1="420" x2="425" y2="444" stroke="#1B4332" stroke-width="1" marker-end="url(#a2)"/>
+      <!-- Final surgery box -->
+      <rect x="190" y="444" width="300" height="44" rx="8" fill="#1B4332" stroke="#0D2B1F" stroke-width="1.5"/>
+      <text x="340" y="462" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Laparoscopic appendicectomy</text>
+      <text x="340" y="478" text-anchor="middle" font-size="10" fill="#8ECFAD">SAGES 2025 · ERAS protocol · Endobag retrieval</text>
+      <!-- Post-op -->
+      <line x1="340" y1="488" x2="340" y2="510" stroke="#1B4332" stroke-width="1" marker-end="url(#a2)"/>
+      <rect x="215" y="510" width="250" height="36" rx="8" fill="#E6F2EE" stroke="#1B4332" stroke-width="1"/>
+      <text x="340" y="533" text-anchor="middle" font-size="11" fill="#1B4332">Uncomplicated: ERAS discharge · Complicated: IV abx + drain review + CT 48–72h</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════════ RAPID REFERENCE ══════════════ -->
+<div class="rapid-ref" id="rapid">
+  <h3>Rapid Reference — High-Yield Board Facts</h3>
+  <table>
+    <thead><tr><th>Topic</th><th>Key Fact</th></tr></thead>
+    <tbody>
+      <tr><td>Appendix blood supply</td><td><strong>Appendicular artery</strong> — terminal branch of ileocolic artery (SMA)</td></tr>
+      <tr><td>Most common position</td><td><strong>Retrocecal (65–70%)</strong></td></tr>
+      <tr><td>CT diagnosis threshold</td><td><strong>Appendix diameter &gt;6mm</strong></td></tr>
+      <tr><td>Alvarado low threshold</td><td>&lt;4 = low probability — consider discharge with safety netting</td></tr>
+      <tr><td>AIR score cutoffs</td><td>0–4 = low (NPV &gt;97%); 5–8 = intermediate; <strong>9–12 = high, operate</strong></td></tr>
+      <tr><td>Antibiotic success rate</td><td><strong>70–73% at 1yr</strong> (APPAC I); drops to ~50% with appendicolith</td></tr>
+      <tr><td>Appendicolith implication</td><td><strong>OR 3.2</strong> antibiotic failure — prefer surgery (CODA, Cochrane 2021)</td></tr>
+      <tr><td>CODA trial</td><td>Appendicolith = poor predictor of non-operative success; 29% needed surgery by 90 days overall</td></tr>
+      <tr><td>Interval appendicectomy</td><td>8–12 weeks after mass/abscess resolution; <strong>colonoscopy mandatory if &gt;50 years</strong></td></tr>
+      <tr><td>Carcinoid &lt;2cm</td><td>Simple appendicectomy curative</td></tr>
+      <tr><td>Carcinoid 2–2.9cm</td><td><strong>Right hemicolectomy</strong> — LN involvement 20–30%</td></tr>
+      <tr><td>Carcinoid &gt;2cm</td><td>Right hemicolectomy + Chromogranin A + 24h urine 5-HIAA</td></tr>
+      <tr><td>Mucocele — critical rule</td><td><strong>No rupture; retrieve in Endobag intact</strong> — spillage = PMP (incurable)</td></tr>
+      <tr><td>Pregnancy imaging</td><td>MRI (no gadolinium) first; CT if MRI unavailable within 6h</td></tr>
+      <tr><td>IAA management</td><td>CT-guided drainage if &gt;3cm accessible; pip-taz IV</td></tr>
+      <tr><td>WSES Grade 4</td><td>Free perforation with peritonitis — <strong>emergency surgery</strong></td></tr>
+      <tr><td>Normal appendix at surgery</td><td>Still remove — prevents future diagnostic confusion; standard practice</td></tr>
+      <tr><td>Retrograde appendicectomy</td><td>Divide base first for retrocecal/adherent appendix</td></tr>
+      <tr><td>Stump management</td><td>Endoloop vs. stapler equivalent in non-inflamed base; <strong>staple if friable or &gt;10mm diameter</strong></td></tr>
+      <tr><td>Three must-know numbers</td><td><strong>6mm</strong> (CT diameter threshold) · <strong>2cm</strong> (carcinoid right hemicolectomy) · <strong>27–30%</strong> (antibiotic failure, rising to ~50% with appendicolith)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div><!-- end content-wrap -->
+</main>
+
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const progressBar = document.getElementById('progress-bar');
+const topBtn = document.getElementById('top-btn');
+const navItems = document.querySelectorAll('.nav-item');
+const sections = document.querySelectorAll('.topic[id], .rapid-ref[id]');
+
+window.addEventListener('scroll', () => {
+  const st = window.scrollY;
+  const dh = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.transform = `scaleX(${st / dh})`;
+  topBtn.classList.toggle('show', st > 400);
+  let current = '';
+  sections.forEach(s => { if (st >= s.offsetTop - 120) current = s.id; });
+  navItems.forEach(n => { n.classList.toggle('active', n.getAttribute('href') === '#' + current); });
+});
+
+function filterNav(query) {
+  const q = query.toLowerCase();
+  navItems.forEach(item => { item.style.display = (!q || item.textContent.toLowerCase().includes(q)) ? 'block' : 'none'; });
+  document.querySelectorAll('.vol-label').forEach(l => { l.style.display = 'block'; });
+}
+
+navItems.forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(item.getAttribute('href'));
+    if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+  });
+});
+
+document.querySelectorAll('.topic').forEach((el, i) => { el.style.animationDelay = `${i * 0.03}s`; });
+</script>
+</body>
+</html>
