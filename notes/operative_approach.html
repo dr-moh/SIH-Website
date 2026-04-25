@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surgical Operative Approach — SIH</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/shared.css">
+<style>
+  :root {
+    --brand-burgundy: #2b1810;
+    --brand-gold: #b8922a;
+    --bg-dark: #0f0a06;
+  }
+  
+  body { background: var(--bg-primary); color: var(--text-primary); }
+
+  .op-hero {
+    padding: 120px 5% 60px;
+    background: var(--brand-burgundy);
+    color: #f0d080;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .op-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('../assets/images/Surgical_Insight_Hub_Logo.png') center/40% no-repeat;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .op-hero h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -0.04em; margin-bottom: 10px; }
+  .op-hero p { font-size: 1.1rem; opacity: 0.8; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+  .playbook-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: -40px auto 80px;
+    padding: 0 5%;
+    position: relative;
+    z-index: 10;
+  }
+
+  .op-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 32px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+  .op-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--brand-gold);
+    box-shadow: 0 20px 40px rgba(43, 24, 16, 0.1);
+  }
+
+  .op-kicker {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brand-gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .op-kicker::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--brand-gold);
+    border-radius: 50%;
+  }
+
+  .op-card h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+  .op-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .op-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  .op-status {
+    padding: 4px 10px;
+    background: rgba(184, 146, 42, 0.1);
+    color: var(--brand-gold);
+    border-radius: 100px;
+    font-size: 0.7rem;
+  }
+
+  .section-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+  }
+  .sn-link {
+    padding: 8px 20px;
+    border-radius: 100px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s;
+  }
+  .sn-link:hover {
+    background: var(--brand-burgundy);
+    color: #f0d080;
+    border-color: var(--brand-burgundy);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--bg-secondary);
+    border-radius: 32px;
+    border: 2px dashed var(--border-color);
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 768px) {
+    .op-hero h1 { font-size: 2.5rem; }
+    .playbook-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-pill" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+      <div class="nav-logo-img"><img src="../assets/images/Surgical_Insight_Hub_Logo.png" alt="SIH"></div>
+      <div><div class="nav-brand-text">Surgical Insight Hub</div><div class="nav-brand-sub">Operative Approach</div></div>
+    </div>
+    <div class="nav-links-pill">
+      <a href="../index.html">Home</a>
+      <a href="../notes.html">Library</a>
+      <a href="operative_approach.html" class="active">Playbook</a>
+    </div>
+  </div>
+  <a href="../index.html" class="nav-btn">Exit Playbook</a>
+</nav>
+
+<div class="op-hero">
+  <div class="ph-kicker" style="color:#b8922a;">Surgical Board Series</div>
+  <h1>The Operative Playbook</h1>
+  <p>Step-by-step cognitive task analysis for major procedures. From optimization to bail-out strategies.</p>
+  
+  <div class="section-nav">
+    <a href="#" class="sn-link">General Surgery</a>
+    <a href="#" class="sn-link">HPB</a>
+    <a href="#" class="sn-link">Colorectal</a>
+    <a href="#" class="sn-link">Upper GI</a>
+    <a href="#" class="sn-link">Emergency</a>
+  </div>
+</div>
+
+<div class="playbook-grid">
+  <!-- PROCEDURES WILL GO HERE -->
+  
+  <div class="op-card" onclick="window.location.href='Surgical Operative Approach/lap_chole_steps.html'">
+    <div>
+      <div class="op-kicker">HPB · Laparoscopy</div>
+      <h3>Laparoscopic Cholecystectomy</h3>
+      <p>Critical View of Safety (CVS), Calot's dissection, and the bail-out algorithm for the difficult gallbladder.</p>
+    </div>
+    <div class="op-meta">
+      <span class="op-status">Gold Standard</span>
+      <span>12 Technical Pearls</span>
+    </div>
+  </div>
+
+  <div class="op-card" onclick="window.location.href='Surgical Operative Approach/lap_appendectomy.html'">
+    <div>
+      <div class="op-kicker">Emergency · GI</div>
+      <h3>Laparoscopic Appendectomy</h3>
+      <p>Systematic approach to the retrocaecal appendix and the "Game Plan" for the perforated base.</p>
+    </div>
+    <div class="op-meta">
+      <span class="op-status">Emergency</span>
+      <span>8 Technical Pearls</span>
+    </div>
+  </div>
+
+  <div class="empty-state">
+    <div style="font-size: 40px; margin-bottom: 15px;">🔪</div>
+    <h3 style="font-weight: 800; color: var(--text-primary);">More Procedures Coming Soon</h3>
+    <p style="color: var(--text-secondary);">We're mapping out the Whipple, Right Hemicolectomy, and TEP Inguinal Hernia steps right now.</p>
+  </div>
+</div>
+
+<footer style="background:var(--bg-secondary); padding: 60px 5%; border-top: 1px solid var(--border-color);">
+  <div style="max-width:1200px; margin:0 auto; text-align:center;">
+    <div class="ft-brand-name" style="margin-bottom: 10px;">Surgical Insight Hub</div>
+    <p style="color:var(--text-secondary); max-width:500px; margin:0 auto 30px;">High-yield operative guides for the modern surgical resident.</p>
+    <a href="../notes.html" style="color:var(--brand-gold); font-weight:700; text-decoration:none;">Back to Main Library →</a>
+  </div>
+</footer>
+
+</body>
+</html>
