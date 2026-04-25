@@ -10,6 +10,67 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/index.css">
+<style>
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+  }
+  .tm-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.3s ease;
+  }
+  .tm-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--brand-gold);
+  }
+  .tm-quote {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    font-style: italic;
+    flex: 1;
+  }
+  .tm-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .tm-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--brand-burgundy);
+    color: #f0d080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    border: 2px solid var(--brand-gold);
+  }
+  .tm-name {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+  }
+  .tm-specialty {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  @media(max-width: 600px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+  }
+</style>
 <script>
   // Dark mode initialization to prevent FOUC
   const savedTheme = localStorage.getItem('sih-theme') || 'light';
@@ -267,6 +328,22 @@
   </div>
 </section>
 
+<!-- WALL OF INSIGHT (TESTIMONIALS) -->
+<section class="testimonials-section observe-target" style="max-width:1200px; margin: 0 auto 80px; padding:0 24px;">
+  <div style="text-align: center; margin-bottom: 40px;">
+    <div class="feat-kicker">Wall of Insight</div>
+    <h2 style="font-size:2.2rem; font-weight:800; color:var(--text-primary); letter-spacing:-.03em;">Feedback from the Frontlines</h2>
+    <p style="color:var(--text-secondary); font-size:.95rem; margin-top:12px; max-width:500px; margin-inline:auto;">Real reviews from surgical residents using SIH to dominate their shifts.</p>
+  </div>
+  
+  <div class="testimonials-grid" id="testimonialGrid">
+    <!-- Loaded via JS -->
+    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">
+      Loading insights...
+    </div>
+  </div>
+</section>
+
 <section class="cta-section">
   <div class="cta-blob cb1"></div>
   <div class="cta-wm"><img src="assets/images/Surgical_Insight_Hub_Logo.png" alt=""></div>
@@ -512,9 +589,50 @@ function getFallbackHTML(channel) {
     </div>`;
 }
 
+// Testimonials Logic
+const TESTIMONIAL_URL = 'https://sxushsvvmyokoknnsbuj.supabase.co/rest/v1/testimonials?approved=eq.true&order=created_at.desc&limit=6';
+
+async function loadTestimonials() {
+  const grid = document.getElementById('testimonialGrid');
+  try {
+    const res = await fetch(TESTIMONIAL_URL, {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    const data = await res.json();
+    
+    if (!data || data.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">No featured insights yet. Share yours on the About page!</div>';
+      return;
+    }
+    
+    grid.innerHTML = data.map(t => `
+      <div class="tm-card">
+        <div class="tm-quote">"${esc(t.content)}"</div>
+        <div class="tm-meta">
+          <div class="tm-avatar">${(t.name || 'D').charAt(0).toUpperCase()}</div>
+          <div class="tm-info">
+            <div class="tm-name">${esc(t.name || 'Anonymous Doctor')}</div>
+            <div class="tm-specialty">${esc(t.specialty || 'Surgical Resident')}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">Insights currently unavailable.</div>';
+  }
+}
+
+function esc(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+const SUPA_KEY = 'sb_publishable_Kl4RNEOxvmBewUToRv7HHw_2epulGkp';
+
 // Load on page ready
 document.addEventListener('DOMContentLoaded', () => {
   loadTelegramFeed();
+  loadTestimonials();
   // Auto-update feed every 60 seconds for real-time sync
   setInterval(loadTelegramFeed, 60000);
 });

@@ -422,20 +422,46 @@ function applyTheme(theme) {
   }
 }
 
+const SUPA_URL = 'https://sxushsvvmyokoknnsbuj.supabase.co';
+const SUPA_KEY = 'sb_publishable_Kl4RNEOxvmBewUToRv7HHw_2epulGkp';
+
 async function handleFeedback(e) {
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
   const formArea = document.getElementById('formArea');
   const successArea = document.getElementById('successArea');
   
+  const name = document.querySelector('.feedback-input').value;
+  const content = document.querySelector('.feedback-textarea').value;
+  
   btn.disabled = true;
   btn.innerHTML = 'Sending...';
   
-  // Simulate API call
-  await new Promise(r => setTimeout(r, 1500));
-  
-  formArea.style.display = 'none';
-  successArea.classList.add('active');
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/testimonials', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: name || 'Anonymous Doctor',
+        content: content,
+        approved: false // Default to false for moderation
+      })
+    });
+    
+    if (!res.ok) throw new Error('Failed to send');
+    
+    formArea.style.display = 'none';
+    successArea.classList.add('active');
+  } catch(err) {
+    alert('Error sending feedback. Please try again.');
+    btn.disabled = false;
+    btn.innerHTML = '<span>Send Feedback</span> <span class="btn-icon">🚀</span>';
+  }
 }
 
 function resetFeedback() {
