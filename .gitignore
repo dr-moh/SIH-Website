@@ -1,0 +1,28 @@
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node.js
+node_modules/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Scratch files (internal use only)
+scratch/
+
+# MCQ bank PDFs (large binary files - not for GitHub)
+MCQ Bank/
+
+# Environment variables
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
