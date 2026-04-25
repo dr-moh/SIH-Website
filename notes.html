@@ -83,10 +83,79 @@
   }
   .section-tab:hover { border-color: var(--brand-gold); color: var(--text-primary); }
   .section-tab.active {
-    background: var(--brand-burgundy);
-    border-color: var(--brand-burgundy);
+    background: #2b1810;
+    border-color: #2b1810;
     color: #f0d080;
   }
+  .section-tab {
+    border-color: #f0d08044;
+    color: #5a4a3a;
+  }
+
+  /* ── SECTION FEATURE CARDS (Image 1 style) ── */
+  .feature-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    margin: 0 auto 40px;
+    max-width: 1000px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  }
+  .fc-top { padding: 40px; }
+  .fc-kicker-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .fc-kicker {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-primary);
+    opacity: 0.8;
+  }
+  .fc-badge {
+    background: #b8922a;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+  .fc-title { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.04em; margin-bottom: 12px; color: var(--text-primary); }
+  .fc-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; max-width: 800px; margin-bottom: 24px; }
+  .fc-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+  .fc-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #fdf8ed;
+    color: #5a4a3a;
+    border: 1px solid #f0d08044;
+  }
+  .fc-tag.dark { background: #2b1810; color: #f0d080; border: none; }
+  
+  .fc-foot {
+    background: rgba(0,0,0,0.02);
+    border-top: 1px solid var(--border-color);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .fc-foot-text { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); opacity: 0.7; }
+  .fc-btn {
+    background: #b8922a;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .fc-btn:hover { transform: scale(1.03); background: #a68121; }
   .tab-pane { display: none; }
   .tab-pane.active { display: block; }
   /* Operative Approach grid */
@@ -210,6 +279,28 @@
 
 <!-- ══ TAB 1: HIGH-YIELD NOTES ══ -->
 <div class="tab-pane active" id="pane-highjield">
+  
+  <!-- Section Feature Card -->
+  <div class="feature-card">
+    <div class="fc-top">
+      <div class="fc-kicker-row">
+        <div class="fc-kicker">Master Series</div>
+        <div class="fc-badge">Resident Core</div>
+      </div>
+      <h2 class="fc-title">Surgical High-Yield Notes</h2>
+      <p class="fc-desc">Dense, evidence-based study guides designed for rapid board review and clinical utility. From trauma algorithms to metabolic response, everything is filtered for absolute relevance.</p>
+      <div class="fc-tags">
+        <span class="fc-tag dark">ABSITE & MRCS</span>
+        <span class="fc-tag">Rapid Revision</span>
+        <span class="fc-tag">Guideline-Focused</span>
+      </div>
+    </div>
+    <div class="fc-foot">
+      <div class="fc-foot-text">Surgical Insight Hub Master Library</div>
+      <a href="https://t.me/sugicalInsightHub" target="_blank" class="fc-btn">Browse Full Library →</a>
+    </div>
+  </div>
+
 <div class="notes-body">
 
     <!-- ═══ WEB-ACCESSIBLE CARDS — Read directly on the site ═══ -->
@@ -447,6 +538,28 @@
 
 <!-- ══ TAB 2: OPERATIVE APPROACH ══ -->
 <div class="tab-pane" id="pane-operative">
+
+  <!-- Section Feature Card (Exactly like user image) -->
+  <div class="feature-card">
+    <div class="fc-top">
+      <div class="fc-kicker-row">
+        <div class="fc-kicker">Master Series</div>
+        <div class="fc-badge">New Section</div>
+      </div>
+      <h2 class="fc-title">Surgical Operative Approach</h2>
+      <p class="fc-desc">The "Operative Playbook" for surgical residents. Systematic task analysis for major procedures covering Pre-op preparation, the Intra-op "Game Plan", Technical Pearls, and Complication management.</p>
+      <div class="fc-tags">
+        <span class="fc-tag dark">Cognitive Task Analysis</span>
+        <span class="fc-tag">Bail-out Strategies</span>
+        <span class="fc-tag">Technical Pearls</span>
+      </div>
+    </div>
+    <div class="fc-foot">
+      <div class="fc-foot-text">Comprehensive Playbook</div>
+      <a href="notes/operative_approach.html" class="fc-btn">Open Playbook →</a>
+    </div>
+  </div>
+
   <div class="op-grid">
 
     <div class="op-card-sm" onclick="window.location.href='notes/Surgical Operative Approach/Open Inguinal Hernia Repair.html'">
