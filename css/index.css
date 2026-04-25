@@ -133,8 +133,8 @@
 
 /* STICKY NOTES & PINS */
 .sticky { position: absolute; z-index: 4; pointer-events: none; filter: drop-shadow(4px 10px 15px rgba(0,0,0,0.15)); will-change: transform; transition: all 0.3s ease; }
-.sticky-yellow { top: 68%; left: 8%; width: 140px; transform: rotate(-5deg); }
-.sticky-pink { top: 22%; right: 8%; width: 120px; transform: rotate(8deg); }
+.sticky-yellow { top: 58%; left: 22%; width: 140px; transform: rotate(-6deg); }
+.sticky-pink { top: 32%; right: 22%; width: 120px; transform: rotate(10deg); }
 .pin { position: absolute; z-index: 5; pointer-events: none; filter: drop-shadow(1px 3px 5px rgba(0,0,0,0.25)); will-change: transform; }
 .pin-1 { top: 106px; left: 225px; }
 .pin-2 { top: 90px; right: 222px; }
