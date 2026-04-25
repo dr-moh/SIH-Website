@@ -429,8 +429,14 @@
   </div>
 </section>
 
+<!-- WALL OF INSIGHT HEADER -->
+<div style="text-align: center; margin-bottom: 40px; margin-top: 80px;" class="observe-target">
+  <div class="feat-kicker">Wall of Insight</div>
+  <h2 style="font-size:2.2rem; font-weight:800; color:var(--text-primary); letter-spacing:-.03em;">Feedback from the Frontlines</h2>
+</div>
+
 <!-- PREMIUM TESTIMONIAL SLIDER -->
-<section class="testimonials-section observe-target" id="tmContainer" onclick="nextTestimonial()">
+<section class="testimonials-section observe-target" id="tmContainer" onclick="nextTestimonial()" style="min-height: 400px;">
   <div id="customCursor">Next</div>
   
   <div class="tm-indicator">
@@ -712,6 +718,7 @@ function getFallbackHTML(channel) {
 }
 
 // Testimonials Premium Slider Logic
+const TESTIMONIAL_URL = 'https://sxushsvvmyokoknnsbuj.supabase.co/rest/v1/testimonials?approved=eq.true&order=created_at.desc&limit=6';
 let testimonials = [];
 let activeIdx = 0;
 
